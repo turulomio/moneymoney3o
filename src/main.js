@@ -13,8 +13,10 @@ import { createApp } from 'vue'
 // Plugins
 import { registerPlugins } from '@/plugins'
 import vuetify from './plugins/vuetify'
+import i18n from './i18n'
 
 const app = createApp(App)
+app.use(i18n)
 
 registerPlugins(app)
 

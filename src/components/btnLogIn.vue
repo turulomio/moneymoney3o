@@ -38,10 +38,10 @@
         },
 
         computed: {
-            ...mapState(useStore, {token: 'token',logged:'logged',apiroot:'apiroot'})
+            ...mapState(useStore, {token: 'token',logged:'logged',apiroot:'apiroot',banks:'banks'})
         },
         methods: {
-            ...mapActions(useStore, ['setToken']),
+            ...mapActions(useStore, ['setToken','updateAll']),
 
             login(){
                 var start=new Date()
@@ -54,14 +54,17 @@
                         console.log("Authenticated");
                         this.setToken(response.data)
                         console.log(this.$i18n.locale)
-                        // this.$store.dispatch("getAll")
-                        // .then(()=>{
-                        //     this.$refs.form.reset()
-                        //     this.loading=false
-                        //     this.dialog=false;
-                        //     if (this.$router.history.current.name !== 'home' ) this.$router.push({name:'home'})
-                        //     console.log(`Login and catalogs load took ${new Date()-start} ms`)
-                        // })
+                        this.updateAll()
+                        .then(()=>{
+                            console.log("AHORA")
+                            console.log(this.banks[0].url)
+                            this.$refs.form.reset()
+                            this.loading=false
+                            this.dialog=false;
+                            //if (this.$router.history.current.name !== 'home' ) this.$router.push({name:'home'})
+                            console.log(`Login and catalogs load took ${new Date()-start} ms`)
+
+                        })
                     } else { //Response=false 
                         setTimeout(() => { //Delay of 1 second
                             this.$refs.form.reset()

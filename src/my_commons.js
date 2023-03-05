@@ -32,11 +32,11 @@ export function localtime(value){
 }   
 
 
-export function myheaders(store){
+export function myheaders(){
     return {
         headers:{
-            'Authorization': `Token ${store.token}`,
-            'Accept-Language': `${store.locale}-${store.locale}`,
+            'Authorization': `Token ${this.store().token}`,
+            'Accept-Language': `${this.$i18n.locale}-${this.$i18n.locale}`,
             'Content-Type':'application/json'
         }
     }
@@ -55,7 +55,7 @@ export function myheaders_noauth(){
 export function myheaders_formdata(){
     return {
         headers:{
-            'Authorization': `Token ${this.$store.state.token}`,
+            'Authorization': `Token ${this.store().token}`,
             'Accept-Language': `${this.$i18n.locale}-${this.$i18n.locale}`,
             'Content-Type': 'multipart/form-data'
         }
@@ -67,8 +67,8 @@ export function myheaders_formdata(){
 export function parseResponse(response){
     if (response.status==200){ //Good connection
         if (response.data == "Wrong credentials"){
-            this.$store.state.token=null
-            this.$store.state.logged=false
+            this.store().token=null
+            this.store().logged=false
             alert(this.$t("Wrong credentials"))
             return false
         }
@@ -91,8 +91,8 @@ export function parseResponseError(error){
 //       console.log(error.response.headers);
         if (error.response.status == 401){
             alert (this.$t("You aren't authorized to do this request"))
-            this.$store.state.token=null;
-            this.$store.state.logged=false;
+            this.store().token=null;
+            this.store().logged=false;
             if (this.$router.currentRoute.name != "home") this.$router.push("home")
             console.log(error.response)
         } else if (error.response.status == 400){ // Used for developer or app errors
@@ -223,7 +223,7 @@ export function ifnullempty(value){
 
 // Generate a hyperlinked_url (DRF hyperlinked url) from model and id uses $sotre for apiroot
 export function hyperlinked_url(model,id){
-    return `${this.$store.state.apiroot}/api/${model}/${id}/`
+    return `${this.store().apiroot}/api/${model}/${id}/`
 }
 
 //Gets id (integer) from an hyperlinked_url(DRF hyperlinked ul)

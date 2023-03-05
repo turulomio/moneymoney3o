@@ -66,11 +66,11 @@ export default {
             }, (error) => {
                 this.parseResponseError(error,this.store())
             })
+        },
+        cancel(){
+            this.$refs.form.reset()
+            dialog = false
         }
     },
-    cancel(){
-        this.$refs.form.reset()
-        dialog = false
-    }
 }
 </script>

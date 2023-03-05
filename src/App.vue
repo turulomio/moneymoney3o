@@ -26,7 +26,7 @@
             <!-- <v-btn :to="{ name: 'currencies'}" v-if="store().logged"><v-icon icon="mdi-currency-eur" dark></v-icon></v-btn> -->
             <!-- <SwitchLanguages /> -->
             <btnLogIn v-show="!store().logged"/>
-            <!-- <btnLogOut v-show="this.logged"/> -->
+            <btnLogOut v-show="store().logged"/>
 
         </v-app-bar>
         <v-main>   
@@ -37,13 +37,13 @@
 
 <script>
 import btnLogIn from './components/btnLogIn';
-// import btnLogOut from './components/btnLogOut';
+import btnLogOut from './components/btnLogOut';
 // import SwitchLanguages from './components/SwitchLanguages.vue';
 export default {
     name: 'App',
     components: {
         btnLogIn,
-        // btnLogOut,
+        btnLogOut,
         // SwitchLanguages,
     },
     data () {

@@ -1,6 +1,6 @@
 <template>
-    <v-btn @click="dialog = true" color="primary">
-        <v-icon>mdi-account</v-icon>
+    <v-btn @click="dialog = true" color="primary" >
+        <v-icon icon="mdi-account"></v-icon>
         {{ $t("Log in") }}
     </v-btn>    
     <v-dialog v-model="dialog" max-width="600" persistent>

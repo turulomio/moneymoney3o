@@ -5,11 +5,9 @@
                 <v-list>
                 
                     <v-list-item>
-                        <v-list-item-content>
                             <v-list-item-title class="title">Money Money</v-list-item-title>
                             <v-list-item-subtitle>{{ this.version }} ({{ this.versiondate.toISOString().slice(0,10)}})</v-list-item-subtitle>
                             <v-list-item-subtitle class="boldred" v-if="this.catalog_manager"><span class="vuered">{{ $t("With catalog manager role") }}</span></v-list-item-subtitle>
-                        </v-list-item-content>
                     </v-list-item>
 
                     <v-divider></v-divider>
@@ -20,13 +18,13 @@
         
         <v-app-bar color="primary" dark  fixed fill-height app >
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-            <v-btn color="primary" :to="{ name: 'home'}"><v-icon dark>mdi-home</v-icon></v-btn>
-            <v-btn color="primary" :to="{ name: 'settings'}" v-if="this.logged"><v-icon dark>mdi-wrench</v-icon></v-btn>
-            <v-btn color="primary" :to="{ name: 'assetsreport'}" v-if="this.logged"><v-icon dark>mdi-book</v-icon></v-btn>
+            <v-btn color="primary" :to="{ name: 'home'}"><v-icon icon="mdi-home" dark></v-icon></v-btn>
+            <v-btn color="primary" :to="{ name: 'settings'}" v-if="this.logged"><v-icon icon="mdi-wrench" dark></v-icon></v-btn> 
+            <v-btn color="primary" :to="{ name: 'assetsreport'}" v-if="this.logged"><v-icon icon="mdi-book" dark></v-icon></v-btn>
             <v-spacer />
             <h1 class="font-weight-black text-no-wrap text-truncate" >{{ $t("Money Money. Another way to manage your finances") }}</h1>
             <v-spacer />            
-            <v-btn color="primary" :to="{ name: 'currencies'}" v-if="this.logged"><v-icon dark>mdi-currency-eur</v-icon></v-btn>
+            <v-btn color="primary" :to="{ name: 'currencies'}" v-if="this.logged"><v-icon icon="mdi-currency-eur" dark></v-icon></v-btn>
             <!-- <SwitchLanguages /> -->
             <btnLogIn v-show="!this.logged"/>
             <!-- <btnLogOut v-show="this.logged"/> -->
@@ -54,7 +52,6 @@ export default {
     },
     data () {
         return {
-            logged:false,
             drawer: false,
             height:22,
             width:22,

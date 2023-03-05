@@ -3,11 +3,10 @@
         <v-navigation-drawer v-model="drawer" absolute temporary app class="blue-grey lighten-5 " style="position:fixed; top:0; left:0" width="350">
             <v-card class="mx-auto" >
                 <v-list>
-                
                     <v-list-item>
                             <v-list-item-title class="title">Money Money</v-list-item-title>
-                            <v-list-item-subtitle>{{ this.version }} ({{ this.versiondate.toISOString().slice(0,10)}})</v-list-item-subtitle>
-                            <v-list-item-subtitle class="boldred" v-if="this.catalog_manager"><span class="vuered">{{ $t("With catalog manager role") }}</span></v-list-item-subtitle>
+                            <v-list-item-subtitle>{{ store().version }} ({{ store().versiondate.toISOString().slice(0,10)}})</v-list-item-subtitle>
+                            <v-list-item-subtitle class="boldred" v-if="store().catalog_manager"><span class="vuered">{{ t("With catalog manager role") }}</span></v-list-item-subtitle>
                     </v-list-item>
 
                     <v-divider></v-divider>
@@ -19,14 +18,14 @@
         <v-app-bar color="primary" dark  fixed fill-height app >
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
             <v-btn color="primary" :to="{ name: 'home'}"><v-icon icon="mdi-home" dark></v-icon></v-btn>
-            <v-btn color="primary" :to="{ name: 'settings'}" v-if="this.logged"><v-icon icon="mdi-wrench" dark></v-icon></v-btn> 
-            <v-btn color="primary" :to="{ name: 'assetsreport'}" v-if="this.logged"><v-icon icon="mdi-book" dark></v-icon></v-btn>
+            <!-- <v-btn color="primary" :to="{ name: 'settings'}" v-if="store().logged"><v-icon icon="mdi-wrench" dark></v-icon></v-btn>  -->
+            <!-- <v-btn color="primary" :to="{ name: 'assetsreport'}" v-if="store().logged"><v-icon icon="mdi-book" dark></v-icon></v-btn> -->
             <v-spacer />
-            <h1 class="font-weight-black text-no-wrap text-truncate" >{{ $t("Money Money. Another way to manage your finances") }}</h1>
+            <h1 class="font-weight-black text-no-wrap text-truncate" >{{ t("Money Money. Another way to manage your finances") }}</h1>
             <v-spacer />            
-            <v-btn color="primary" :to="{ name: 'currencies'}" v-if="this.logged"><v-icon icon="mdi-currency-eur" dark></v-icon></v-btn>
+            <!-- <v-btn color="primary" :to="{ name: 'currencies'}" v-if="store().logged"><v-icon icon="mdi-currency-eur" dark></v-icon></v-btn> -->
             <!-- <SwitchLanguages /> -->
-            <btnLogIn v-show="!this.logged"/>
+            <btnLogIn v-show="!store().logged"/>
             <!-- <btnLogOut v-show="this.logged"/> -->
 
         </v-app-bar>
@@ -36,34 +35,34 @@
     </v-app>
 </template>
 
-<script>
-import btnLogIn from './components/btnLogIn';
+<script setup>
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
+import {store,myheaders_noauth} from './mem.js'
+
 // import btnLogOut from './components/btnLogOut';
 // import SwitchLanguages from './components/SwitchLanguages.vue';    
-import { useStore } from './store.js'
 
-import { mapState,mapActions } from 'pinia'
-export default {
-    name: 'App',
-    components: {
-        btnLogIn,
-        // btnLogOut,
-        // SwitchLanguages,
-    },
-    data () {
-        return {
-            drawer: false,
-            height:22,
-            width:22,
-        }
-    },
-        computed: {
-            ...mapState(useStore, {token: 'token',logged:'logged',apiroot:'apiroot',banks:'banks', catalog_manager: 'catalog_manager', versiondate:'versiondate',version: 'version'})
-        },
-        methods: {
-            ...mapActions(useStore, ['setToken','updateAll']),
-        }
-};
+
+import btnLogIn from './components/btnLogIn';
+import { ref,onMounted} from 'vue'
+
+const drawer = ref(false)
+
+const height = ref(22)
+const width = ref(22)
+var render= ref(false)
+
+
+
+
+onMounted(() => {
+    render=true
+    console.log("About")
+    console.log(t("About"))
+    console.log(myheaders_noauth())
+});
 </script>
 <style >
 h1   {

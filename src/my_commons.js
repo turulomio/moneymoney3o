@@ -29,11 +29,11 @@ export function localtime(value){
 }   
 
 
-export function myheaders(){
+export function myheaders(store){
     return {
         headers:{
-            'Authorization': `Token ${this.$store.state.token}`,
-            'Accept-Language': `${this.$i18n.locale}-${this.$i18n.locale}`,
+            'Authorization': `Token ${store.token}`,
+            'Accept-Language': `${store.locale}-${store.locale}`,
             'Content-Type':'application/json'
         }
     }
@@ -43,7 +43,7 @@ export function myheaders(){
 export function myheaders_noauth(){
     return {
         headers:{
-            'Accept-Language': `${this.$i18n.locale}-${this.$i18n.locale}`,
+  //          'Accept-Language': `${this.$i18n.locale}-${this.$i18n.locale}`,
             'Content-Type':'application/json'
         }
     }
@@ -97,58 +97,6 @@ export function sortObjectsArray(objectsArray, sortKey)
     return retVal;
 }
 
-// returns true if everything is ok
-// return false if there is something wrong
-export function parseResponse(response){
-    if (response.status==200){ //Good connection
-        if (response.data == "Wrong credentials"){
-            this.$store.state.token=null
-            this.$store.state.logged=false
-            alert(this.$t("Wrong credentials"))
-            return false
-        }
-        return true
-    } else if (response.status==201){// Created
-        
-    } else if (response.status==204){// Deleted
-    } else {
-        alert (`${response.status}: ${response.data}`)
-        return false
-    }
-}
-
-export function parseResponseError(error){
-    if (error.response) {
-      // Request made and server responded
-        console.log("made and responded")
-//       console.log(error.response.data);
-//       console.log(error.response.status);
-//       console.log(error.response.headers);
-        if (error.response.status == 401){
-            alert (this.$t("You aren't authorized to do this request"))
-            this.$store.state.token=null;
-            this.$store.state.logged=false;
-            if (this.$router.currentRoute.name != "home") this.$router.push("home")
-            console.log(error.response)
-        } else if (error.response.status == 400){ // Used for developer or app errors
-            alert (this.$t("Something wrong with your request"))
-            console.log(error.response)
-        } else if (error.response.status == 500){
-            alert (this.$t("There is a server error"))
-            console.log(error.response)
-        }
-        
-    } else if (error.request) {
-        console.log("The request was made but no response was received")
-        alert (this.$t("Server couldn't answer this request"))
-      // The request was made but no response was received
-      console.log(error.request);
-    } else {
-      // Something happened in setting up the request that triggered an Error
-        console.log("OTROS")
-        console.log('Error', error.message);
-    }
-}
 
 export function arrayobjects_to_stringofstrings(l, key){
     var s=""

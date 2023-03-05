@@ -28,8 +28,10 @@ import json_es from './locales/es.json'
 
 // 2. Create i18n instance with options
 const i18n=createI18n({
+  legacy:false,
   locale: 'es', // set locale
   fallbackLocale: 'en', // set fallback locale
+  globalInjection: true,
   messages:{
     es:json_es,
   }

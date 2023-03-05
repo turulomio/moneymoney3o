@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import { myheaders } from './my_commons'
+import { myheaders } from '@/mem'
 
 
 export const useStore = defineStore('global', {
@@ -14,6 +14,7 @@ export const useStore = defineStore('global', {
         apiroot: import.meta.env.VITE_DJANGO_MONEYMONEY_URL,
         publicPath: import.meta.env.VUE_APP_PUBLIC_PATH,
         banks:[],
+        locale: 'en',
     }
   },
   // could also be defined as
@@ -30,19 +31,9 @@ export const useStore = defineStore('global', {
         this.logged=false
       }
     },
-    myheaders(){
-        return {
-            headers:{
-                'Authorization': `Token ${this.token}`,
-                //'Accept-Language': `${this.$i18n.locale}-${this.$i18n.locale}`,
-                'Content-Type':'application/json'
-            }
-        }
-    },
     updateBanks() {
-      console.log(this.myheaders())
         var start=new Date()
-        return axios.get(`${this.apiroot}/api/banks/`, this.myheaders())
+        return axios.get(`${this.apiroot}/api/banks/`, myheaders())
         .then((response)=>{
           this.banks = response.data
           console.log(`Updated ${response.data.length} banks in ${new Date()-start} ms`)

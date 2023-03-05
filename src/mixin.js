@@ -15,7 +15,8 @@ import {
     myheaders_formdata,
     percentage_generic_html,
     percentage_generic_string, 
-    my_round
+    my_round,
+    store,
 } from './my_commons.js'
   
 import {
@@ -75,6 +76,7 @@ const mixin = {
         RulesFloatGZ,
         RulesFloatGEZ,
         RulesFloatLEZ,
+        store,
   
   
         currency_string(num, currency, decimals=2){

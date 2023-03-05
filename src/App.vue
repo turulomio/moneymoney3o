@@ -6,7 +6,7 @@
                     <v-list-item>
                             <v-list-item-title class="title">Money Money</v-list-item-title>
                             <v-list-item-subtitle>{{ store().version }} ({{ store().versiondate.toISOString().slice(0,10)}})</v-list-item-subtitle>
-                            <v-list-item-subtitle class="boldred" v-if="store().catalog_manager"><span class="vuered">{{ t("With catalog manager role") }}</span></v-list-item-subtitle>
+                            <v-list-item-subtitle class="boldred" v-if="store().catalog_manager"><span class="vuered">{{ $t("With catalog manager role") }}</span></v-list-item-subtitle>
                     </v-list-item>
 
                     <v-divider></v-divider>
@@ -21,7 +21,7 @@
             <!-- <v-btn color="primary" :to="{ name: 'settings'}" v-if="store().logged"><v-icon icon="mdi-wrench" dark></v-icon></v-btn>  -->
             <!-- <v-btn color="primary" :to="{ name: 'assetsreport'}" v-if="store().logged"><v-icon icon="mdi-book" dark></v-icon></v-btn> -->
             <v-spacer />
-            <h1 class="font-weight-black text-no-wrap text-truncate" >{{ t("Money Money. Another way to manage your finances") }}</h1>
+            <h1 class="font-weight-black text-no-wrap text-truncate" >{{ $t("Money Money. Another way to manage your finances") }}</h1>
             <v-spacer />            
             <!-- <v-btn color="primary" :to="{ name: 'currencies'}" v-if="store().logged"><v-icon icon="mdi-currency-eur" dark></v-icon></v-btn> -->
             <!-- <SwitchLanguages /> -->
@@ -35,34 +35,29 @@
     </v-app>
 </template>
 
-<script setup>
-import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
-
-import {store,myheaders_noauth} from './mem.js'
-
-// import btnLogOut from './components/btnLogOut';
-// import SwitchLanguages from './components/SwitchLanguages.vue';    
-
-
+<script>
 import btnLogIn from './components/btnLogIn';
-import { ref,onMounted} from 'vue'
+// import btnLogOut from './components/btnLogOut';
+// import SwitchLanguages from './components/SwitchLanguages.vue';
+export default {
+    name: 'App',
+    components: {
+        btnLogIn,
+        // btnLogOut,
+        // SwitchLanguages,
+    },
+    data () {
+        return {
+            logged:false,
+            drawer: false,
+            height:22,
+            width:22,
+        }
+    },
+    mounted(){
 
-const drawer = ref(false)
-
-const height = ref(22)
-const width = ref(22)
-var render= ref(false)
-
-
-
-
-onMounted(() => {
-    render=true
-    console.log("About")
-    console.log(t("About"))
-    console.log(myheaders_noauth())
-});
+    }
+};
 </script>
 <style >
 h1   {

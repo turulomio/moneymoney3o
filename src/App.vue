@@ -17,13 +17,13 @@
         
         <v-app-bar color="primary" dark  fixed fill-height app >
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-            <v-btn color="primary" :to="{ name: 'home'}"><v-icon icon="mdi-home" dark></v-icon></v-btn>
-            <!-- <v-btn color="primary" :to="{ name: 'settings'}" v-if="store().logged"><v-icon icon="mdi-wrench" dark></v-icon></v-btn>  -->
-            <!-- <v-btn color="primary" :to="{ name: 'assetsreport'}" v-if="store().logged"><v-icon icon="mdi-book" dark></v-icon></v-btn> -->
+            <v-btn :to="{ name: 'home'}"><v-icon icon="mdi-home" dark></v-icon></v-btn>
+            <!-- <v-btn :to="{ name: 'settings'}" v-if="store().logged"><v-icon icon="mdi-wrench" dark></v-icon></v-btn>  -->
+            <!-- <v-btn :to="{ name: 'assetsreport'}" v-if="store().logged"><v-icon icon="mdi-book" dark></v-icon></v-btn> -->
             <v-spacer />
             <h1 class="font-weight-black text-no-wrap text-truncate" >{{ $t("Money Money. Another way to manage your finances") }}</h1>
             <v-spacer />            
-            <!-- <v-btn color="primary" :to="{ name: 'currencies'}" v-if="store().logged"><v-icon icon="mdi-currency-eur" dark></v-icon></v-btn> -->
+            <!-- <v-btn :to="{ name: 'currencies'}" v-if="store().logged"><v-icon icon="mdi-currency-eur" dark></v-icon></v-btn> -->
             <!-- <SwitchLanguages /> -->
             <btnLogIn v-show="!store().logged"/>
             <!-- <btnLogOut v-show="this.logged"/> -->

@@ -1,7 +1,6 @@
 <template>
     <div>
-    <v-btn @click="dialog = true" color="primary" >
-        <v-icon icon="mdi-account"></v-icon>
+    <v-btn @click="dialog = true"  prepend-icon="mdi-account" block>
         {{ $t("Log in") }}
     </v-btn>    
     <v-dialog v-model="dialog" max-width="600" persistent>
@@ -51,7 +50,7 @@ export default {
                         console.log(this.store().banks[0].url)
                         this.$refs.form.reset()
                         this.loading=false
-                        //if ($router.history.current.name !== 'home' ) $router.push({name:'home'})
+                        this.$router.push({name:'home'})
                         console.log(`Login and catalogs load took ${new Date()-start} ms`)
                         this.dialog=false
 
@@ -69,7 +68,7 @@ export default {
         },
         cancel(){
             this.$refs.form.reset()
-            dialog = false
+            this.dialog = false
         }
     },
 }

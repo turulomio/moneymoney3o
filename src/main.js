@@ -14,10 +14,13 @@ import { createApp } from 'vue'
 import { registerPlugins } from '@/plugins'
 import vuetify from './plugins/vuetify'
 import i18n from './i18n'
-
+import mixin from './mixin'
 const app = createApp(App)
+
 app.use(i18n)
 
+
+app.mixin(mixin)
 registerPlugins(app)
 
 app

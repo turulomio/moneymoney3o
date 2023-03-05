@@ -21,6 +21,10 @@
 
 <script>
     import axios from 'axios'
+
+    import { useStore } from '../store.js'
+    import { mapState,mapActions } from 'pinia'
+
     export default {
         data () {
             return {
@@ -32,27 +36,32 @@
                 form_valid:false,
             }
         },
+
+        computed: {
+            ...mapState(useStore, {token: 'token',logged:'logged',apiroot:'apiroot'})
+        },
         methods: {
-            login(){            
+            ...mapActions(useStore, ['setToken']),
+
+            login(){
                 var start=new Date()
                 if (this.$refs.form.validate()==false) return
                 if (this.loading==true) return
                 this.loading=true
-                axios.post(`${this.$store.state.apiroot}/login/`, {username: this.user, password:this.password}, this.myheaders_noauth())
+                axios.post(`${this.apiroot}/login/`, {username: this.user, password:this.password}, this.myheaders_noauth())
                 .then((response) => {
                     if (this.parseResponse(response)==true){
                         console.log("Authenticated");
-                        this.$store.state.token=response.data;
-                        this.$store.state.logged=true;
+                        this.setToken(response.data)
                         console.log(this.$i18n.locale)
-                        this.$store.dispatch("getAll")
-                        .then(()=>{
-                            this.$refs.form.reset()
-                            this.loading=false
-                            this.dialog=false;
-                            if (this.$router.history.current.name !== 'home' ) this.$router.push({name:'home'})
-                            console.log(`Login and catalogs load took ${new Date()-start} ms`)
-                        })
+                        // this.$store.dispatch("getAll")
+                        // .then(()=>{
+                        //     this.$refs.form.reset()
+                        //     this.loading=false
+                        //     this.dialog=false;
+                        //     if (this.$router.history.current.name !== 'home' ) this.$router.push({name:'home'})
+                        //     console.log(`Login and catalogs load took ${new Date()-start} ms`)
+                        // })
                     } else { //Response=false 
                         setTimeout(() => { //Delay of 1 second
                             this.$refs.form.reset()

@@ -13,12 +13,12 @@
 </template>
 <script>
     import axios from 'axios'
-    import TableAccountOperations from './TableAccountOperations.vue'
+    import { defineAsyncComponent } from 'vue'
     import TableCreditcardsOperations from './TableCreditcardsOperations.vue'
     export default {
         name: "ReportsConceptsHistoricalDetail",
         components:{
-            TableAccountOperations,
+            "TableAccountOperations": defineAsyncComponent(() => import('./TableAccountOperations.vue')), //To remove circular dependency
             TableCreditcardsOperations,
         },
         props:{

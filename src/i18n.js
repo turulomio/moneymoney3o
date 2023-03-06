@@ -1,7 +1,6 @@
 // import Vue from 'vue'
 import { createI18n } from 'vue-i18n'
 import json_es from './locales/es.json'
-import json_en from './locales/en.json'
 
 // Vue.use(VueI18n)
 
@@ -35,8 +34,7 @@ const i18n=createI18n({
   silentFallbackWarn: true,
 
   messages:{
-    es:json_es,
-    en:json_en,
+    es:json_es
   }
 })
 

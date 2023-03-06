@@ -3,32 +3,32 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import About from './components/About'
 import Home from './components/Home'
-// import AccountsList from './components/AccountsList'
-// import AssetsReport from './components/AssetsReport'
-// import BanksList from './components/BanksList'
-// import ConceptsCatalog from './components/ConceptsCatalog'
-// import Currencies from './components/Currencies'
-// import ChartEvolutionAssets from './components/ChartEvolutionAssets'
-// import InvestmentsList from './components/InvestmentsList'
-// import MaintenanceQuotes from './components/MaintenanceQuotes'
-// import OrdersList from './components/OrdersList'
-// import ProductsComparationList from './components/ProductsComparationList'
-// import ProductsRanges from './components/ProductsRanges'
-// import ProductsSearch from './components/ProductsSearch'
-// import ProductsUpdate from './components/ProductsUpdate'
-// import ProductsCatalogUpdate from './components/ProductsCatalogUpdate'
-// import ReportsAnnual from './components/ReportsAnnual'
-// import ReportsConcepts from './components/ReportsConcepts'
-// import ReportsDerivatives from './components/ReportsDerivatives'
-// import ReportsDividends from './components/ReportsDividends'
-// import ReportsEvolution from './components/ReportsEvolution'
-// import ReportsInvestmentsClasses from './components/ReportsInvestmentsClasses'
-// import ReportscurrentInvestmentsOperations from './components/ReportsCurrentInvestmentsOperations'
-// import ReportsInvestmentsLastOperation from './components/ReportsInvestmentsLastOperation'
-// import ReportsRanking from './components/ReportsRanking'
-// import Settings from './components/Settings'
-// import Statistics from './components/Statistics'
-// import StrategiesList from './components/StrategiesList'
+import AccountsList from './components/AccountsList'
+import AssetsReport from './components/AssetsReport'
+import BanksList from './components/BanksList'
+import ConceptsCatalog from './components/ConceptsCatalog'
+import Currencies from './components/Currencies'
+import ChartEvolutionAssets from './components/ChartEvolutionAssets'
+import InvestmentsList from './components/InvestmentsList'
+import MaintenanceQuotes from './components/MaintenanceQuotes'
+import OrdersList from './components/OrdersList'
+import ProductsComparationList from './components/ProductsComparationList'
+import ProductsRanges from './components/ProductsRanges'
+import ProductsSearch from './components/ProductsSearch'
+import ProductsUpdate from './components/ProductsUpdate'
+import ProductsCatalogUpdate from './components/ProductsCatalogUpdate'
+import ReportsAnnual from './components/ReportsAnnual'
+import ReportsConcepts from './components/ReportsConcepts'
+import ReportsDerivatives from './components/ReportsDerivatives'
+import ReportsDividends from './components/ReportsDividends'
+import ReportsEvolution from './components/ReportsEvolution'
+import ReportsInvestmentsClasses from './components/ReportsInvestmentsClasses'
+import ReportscurrentInvestmentsOperations from './components/ReportsCurrentInvestmentsOperations'
+import ReportsInvestmentsLastOperation from './components/ReportsInvestmentsLastOperation'
+import ReportsRanking from './components/ReportsRanking'
+import Settings from './components/Settings'
+import Statistics from './components/Statistics'
+import StrategiesList from './components/StrategiesList'
 
 
 
@@ -38,31 +38,31 @@ export const router = createRouter({
     { path: `${import.meta.env.BASE_URL}/`, redirect: `${import.meta.env.BASE_URL}/home/` }, 
     { path: `${import.meta.env.BASE_URL}/About/`, name: 'About', component: About },
     { path: `${import.meta.env.BASE_URL}/home/`, name: 'home', component: Home },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/accounts/list/`, name: 'accounts_list', component: AccountsList },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/assets/report/`, name: 'assetsreport', component: AssetsReport },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/banks/list/`, name: 'banks_list', component: BanksList },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/concepts/catalog/`, name: 'concepts_catalog', component: ConceptsCatalog },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/currencies/`, name: 'currencies', component: Currencies },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/investments/list/`, name: 'investments_list', component: InvestmentsList },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/orders/list/`, name: 'orders_list', component: OrdersList },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/maintenance/quotes/`, name: 'maintenance_quotes', component: MaintenanceQuotes },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/products/ranges/`, name: 'products_ranges', component: ProductsRanges },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/products/comparation/list/`, name: 'products_comparation_list', component: ProductsComparationList },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/products/search/`, name: 'products_search', component: ProductsSearch },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/products/catalog/update/`, name: 'products_catalog_update', component: ProductsCatalogUpdate },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/products/update/`, name: 'products_update', component: ProductsUpdate },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/reports/annual/`, name: 'reports_annual', component: ReportsAnnual },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/reports/concepts/`, name: 'reports_concepts', component: ReportsConcepts },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/reports/derivatives/`, name: 'reports_derivatives', component: ReportsDerivatives },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/reports/dividens/`, name: 'reports_dividends', component: ReportsDividends },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/reports/investmentsclasses/`, name: 'reports_investments_classes', component: ReportsInvestmentsClasses },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/reports/investments/lastoperation/`, name: 'reports_lastoperation', component: ReportsInvestmentsLastOperation },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/reports/investmentsoperations/current/`, name: 'reports_investmentsoperations_current', component: ReportscurrentInvestmentsOperations },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/reports/ranking/`, name: 'reports_ranking', component: ReportsRanking },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/reports/evolution/`, name: 'reports_evolution', component: ReportsEvolution },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/reports/evolution/chart/`, name: 'reports_evolution_chart', component: ChartEvolutionAssets },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/settings/`, name: 'settings', component: Settings },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/statistics/`, name: 'statistics', component: Statistics },
-    // { path: `${process.env.VUE_APP_PUBLIC_PATH}/strategies/list/`, name: 'strategies_list', component: StrategiesList },
+    { path: `${import.meta.env.BASE_URL}/accounts/list/`, name: 'accounts_list', component: AccountsList },
+    { path: `${import.meta.env.BASE_URL}/assets/report/`, name: 'assetsreport', component: AssetsReport },
+    { path: `${import.meta.env.BASE_URL}/banks/list/`, name: 'banks_list', component: BanksList },
+    { path: `${import.meta.env.BASE_URL}/concepts/catalog/`, name: 'concepts_catalog', component: ConceptsCatalog },
+    { path: `${import.meta.env.BASE_URL}/currencies/`, name: 'currencies', component: Currencies },
+    { path: `${import.meta.env.BASE_URL}/investments/list/`, name: 'investments_list', component: InvestmentsList },
+    { path: `${import.meta.env.BASE_URL}/orders/list/`, name: 'orders_list', component: OrdersList },
+    { path: `${import.meta.env.BASE_URL}/maintenance/quotes/`, name: 'maintenance_quotes', component: MaintenanceQuotes },
+    { path: `${import.meta.env.BASE_URL}/products/ranges/`, name: 'products_ranges', component: ProductsRanges },
+    { path: `${import.meta.env.BASE_URL}/products/comparation/list/`, name: 'products_comparation_list', component: ProductsComparationList },
+    { path: `${import.meta.env.BASE_URL}/products/search/`, name: 'products_search', component: ProductsSearch },
+    { path: `${import.meta.env.BASE_URL}/products/catalog/update/`, name: 'products_catalog_update', component: ProductsCatalogUpdate },
+    { path: `${import.meta.env.BASE_URL}/products/update/`, name: 'products_update', component: ProductsUpdate },
+    { path: `${import.meta.env.BASE_URL}/reports/annual/`, name: 'reports_annual', component: ReportsAnnual },
+    { path: `${import.meta.env.BASE_URL}/reports/concepts/`, name: 'reports_concepts', component: ReportsConcepts },
+    { path: `${import.meta.env.BASE_URL}/reports/derivatives/`, name: 'reports_derivatives', component: ReportsDerivatives },
+    { path: `${import.meta.env.BASE_URL}/reports/dividens/`, name: 'reports_dividends', component: ReportsDividends },
+    { path: `${import.meta.env.BASE_URL}/reports/investmentsclasses/`, name: 'reports_investments_classes', component: ReportsInvestmentsClasses },
+    { path: `${import.meta.env.BASE_URL}/reports/investments/lastoperation/`, name: 'reports_lastoperation', component: ReportsInvestmentsLastOperation },
+    { path: `${import.meta.env.BASE_URL}/reports/investmentsoperations/current/`, name: 'reports_investmentsoperations_current', component: ReportscurrentInvestmentsOperations },
+    { path: `${import.meta.env.BASE_URL}/reports/ranking/`, name: 'reports_ranking', component: ReportsRanking },
+    { path: `${import.meta.env.BASE_URL}/reports/evolution/`, name: 'reports_evolution', component: ReportsEvolution },
+    { path: `${import.meta.env.BASE_URL}/reports/evolution/chart/`, name: 'reports_evolution_chart', component: ChartEvolutionAssets },
+    { path: `${import.meta.env.BASE_URL}/settings/`, name: 'settings', component: Settings },
+    { path: `${import.meta.env.BASE_URL}/statistics/`, name: 'statistics', component: Statistics },
+    { path: `${import.meta.env.BASE_URL}/strategies/list/`, name: 'strategies_list', component: StrategiesList },
   ]
 })

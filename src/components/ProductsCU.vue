@@ -5,8 +5,8 @@
             <v-form ref="form" v-model="form_valid" lazy-validation>              
                 <v-text-field dense :readonly="mode=='D'" v-model="newproduct.name" :label="$t('Set product name')" :placeholder="$t('Set product name')" :rules="RulesString(200,true)" counter="200" autofocus/>
                 <v-text-field dense :readonly="mode=='D'" v-model="newproduct.isin" :label="$t('Set product isin')" :placeholder="$t('Set product isin')" :rules="RulesString(200,false)" counter="200" />
-                <v-autocomplete :items="$store.state.currencies" :readonly="mode=='D'" v-model="newproduct.currency" :label="$t('Select a currency')" item-text="fullname" item-value="code" :rules="RulesSelection(true)"></v-autocomplete>
-                <v-autocomplete :items="$store.state.productstypes" :readonly="mode=='D'" v-model="newproduct.productstypes" :label="$t('Select a product type')" item-text="name" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
+                <v-autocomplete :items="store().currencies" :readonly="mode=='D'" v-model="newproduct.currency" :label="$t('Select a currency')" item-text="fullname" item-value="code" :rules="RulesSelection(true)"></v-autocomplete>
+                <v-autocomplete :items="store().productstypes" :readonly="mode=='D'" v-model="newproduct.productstypes" :label="$t('Select a product type')" item-text="name" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
                 <v-text-field dense :readonly="mode=='D'" v-model="newproduct.agrupations" :label="$t('Set product agrupations')" :placeholder="$t('Set product agrupations')" :rules="RulesString(200,false)" counter="200"/>
                 <v-text-field dense :readonly="mode=='D'" v-model="newproduct.web" :label="$t('Set product web')" :placeholder="$t('Set product web')" :rules="RulesString(200,false)" counter="200"/>
                 <v-text-field dense :readonly="mode=='D'" v-model="newproduct.address" :label="$t('Set product address')" :placeholder="$t('Set product address')" :rules="RulesString(200,false)" counter="200"/>
@@ -15,8 +15,8 @@
                 <v-text-field dense :readonly="mode=='D'" v-model="newproduct.percentage" :label="$t('Set product percentage')" :placeholder="$t('Set product percentage')" :rules="RulesInteger(3,true)" counter="3" />
                 <v-text-field dense :readonly="mode=='D'" v-model="newproduct.pci"  :label="$t('Set product pci')" :placeholder="$t('Set product pci')" :rules="RulesString(true)" counter="200" />
 
-                <v-autocomplete :items="$store.state.leverages" :readonly="mode=='D'" v-model="newproduct.leverages" :label="$t('Select a product leverage')" item-text="localname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
-                <v-autocomplete :items="$store.state.stockmarkets" :readonly="mode=='D'" v-model="newproduct.stockmarkets" :label="$t('Select a product stock market')" item-text="localname" item-value="url" :rules="RulesSelection(true)">
+                <v-autocomplete :items="store().leverages" :readonly="mode=='D'" v-model="newproduct.leverages" :label="$t('Select a product leverage')" item-text="localname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
+                <v-autocomplete :items="store().stockmarkets" :readonly="mode=='D'" v-model="newproduct.stockmarkets" :label="$t('Select a product stock market')" item-text="localname" item-value="url" :rules="RulesSelection(true)">
                     <template v-slot:item="{ item }">
                         <v-icon :class="'mr-2 fi fib fi-'+item.country" color="primary"></v-icon>{{ item.localname }} 
                     </template>
@@ -104,7 +104,7 @@
                         this.parseResponseError(error)
                     })
                 } else if (this.mode=="C"){
-                    axios.post(`${this.$store.state.apiroot}/api/products/`, this.newproduct,  this.myheaders())
+                    axios.post(`${this.store().apiroot}/api/products/`, this.newproduct,  this.myheaders())
                     .then(() => {
                            this.$emit("cruded")
                     }, (error) => {

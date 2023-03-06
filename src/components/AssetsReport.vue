@@ -124,7 +124,7 @@
             },
             launch_report(){
                 this.loading=true
-                axios.get(`${this.$store.state.apiroot}/assets/report/?outputformat=${this.format}`, this.myheaders())
+                axios.get(`${this.store().apiroot}/assets/report/?outputformat=${this.format}`, this.myheaders())
                 .then((response) => {
                     this.loading=false      
                     var link = window.document.createElement('a');
@@ -141,7 +141,7 @@
 
             update_pies(){
                 this.loading=true
-                axios.get(`${this.$store.state.apiroot}/investments/classes/`, this.myheaders())
+                axios.get(`${this.store().apiroot}/investments/classes/`, this.myheaders())
                 .then((response) => {
                     this.data=response.data
                     this.loading=false
@@ -151,7 +151,7 @@
                 });
             },
             check_unogenerator_server(){
-                axios.get(`${this.$store.state.apiroot}/unogenerator/working/`, this.myheaders())
+                axios.get(`${this.store().apiroot}/unogenerator/working/`, this.myheaders())
                 .then((response) => {
                     this.unogenerator_working=response.data.success
                     if (this.unogenerator_working){

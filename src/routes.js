@@ -33,10 +33,10 @@ import StrategiesList from './components/StrategiesList'
 
 
 export const router = createRouter({
-    history: createWebHistory(),
+  history: createWebHistory(),
   routes: [
     { path: `${import.meta.env.BASE_URL}/`, redirect: `${import.meta.env.BASE_URL}/home/` }, 
-    { path: `${import.meta.env.BASE_URL}/About/`, name: 'About', component: About },
+    { path: `${import.meta.env.BASE_URL}/About/`, name: 'about', component: About },
     { path: `${import.meta.env.BASE_URL}/home/`, name: 'home', component: Home },
     { path: `${import.meta.env.BASE_URL}/accounts/list/`, name: 'accounts_list', component: AccountsList },
     { path: `${import.meta.env.BASE_URL}/assets/report/`, name: 'assetsreport', component: AssetsReport },

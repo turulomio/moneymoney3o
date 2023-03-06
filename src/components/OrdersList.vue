@@ -154,7 +154,7 @@
                 this.order=item
                 var investments_id=this.id_from_hyperlinked_url(item.investments)
                 var headers={...this.myheaders(),params:{investments:[investments_id,], mode:1}}
-                axios.get(`${this.$store.state.apiroot}/investmentsoperations/full/`, headers)
+                axios.get(`${this.store().apiroot}/investmentsoperations/full/`, headers)
                 .then((response)=>{
                     this.plio_id=response.data[investments_id]
                     this.key=this.key+1
@@ -175,11 +175,11 @@
                 this.loading_table=true
                 var url=""
                 if (this.state==0){//Active
-                    url=`${this.$store.state.apiroot}/api/orders/?active=true`
+                    url=`${this.store().apiroot}/api/orders/?active=true`
                 } else if (this.state==1) { //expired
-                    url=`${this.$store.state.apiroot}/api/orders/?expired=true`
+                    url=`${this.store().apiroot}/api/orders/?expired=true`
                 } else if (this.state==2) { //executed
-                    url=`${this.$store.state.apiroot}/api/orders/?executed=true`
+                    url=`${this.store().apiroot}/api/orders/?executed=true`
                 }
 
 
@@ -205,7 +205,7 @@
 
             products_autoupdate(){
                 this.products_updating=true
-                axios.post(`${this.$store.state.apiroot}/products/update/`, {auto:true,}, this.myheaders())
+                axios.post(`${this.store().apiroot}/products/update/`, {auto:true,}, this.myheaders())
                 .then((response) => {
                         this.update_errors=0
                         response.data.forEach(o=>{

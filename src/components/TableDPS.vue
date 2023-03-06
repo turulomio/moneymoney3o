@@ -68,7 +68,7 @@
             },
             refresh(){
                 this.loading=true
-                axios.get(`${this.$store.state.apiroot}/api/dps/?product=${this.product.url}`, this.myheaders())
+                axios.get(`${this.store().apiroot}/api/dps/?product=${this.product.url}`, this.myheaders())
                 .then((response) => {
                     this.items=response.data
                     this.loading=false

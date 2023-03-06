@@ -2,7 +2,7 @@
     <div class="pa-2">
         <h1 class="mb-4">{{ title() }}</h1>
         <v-form ref="form" v-model="form_valid_cc" lazy-validation>
-            <v-autocomplete :readonly="mode=='D'" :items="$store.state.accounts.filter(v =>v.active==true)" v-model="new_cc.accounts" :label="$t('Select an account')" item-text="name" item-value="url"  :rules="RulesSelection(true)"></v-autocomplete>
+            <v-autocomplete :readonly="mode=='D'" :items="store().accounts.filter(v =>v.active==true)" v-model="new_cc.accounts" :label="$t('Select an account')" item-text="name" item-value="url"  :rules="RulesSelection(true)"></v-autocomplete>
             <v-text-field :readonly="mode=='D'" v-model="new_cc.name" type="text" :label="$t('Credit card name')" :placeholder="$t('Credit card name')" autofocus  counter="200" :rules="RulesString(200,true)"/>
             <v-text-field :readonly="mode=='D'" v-model="new_cc.number" type="text" :label="$t('Credit card number')"  :placeholder="$t('Credit card number')" counter="30" :rules="RulesString(30,false)"/>
             <v-text-field :readonly="mode=='D'" v-model="new_cc.maximumbalance"  :label="$t('Credit card maximum balance')"  :placeholder="$t('Credit card maximum balance')" :rules="RulesInteger(10,true)" counter="10"/>
@@ -62,7 +62,7 @@
                         this.parseResponseError(error)
                     })
                 } else if (this.mode=="C") {
-                    axios.post(`${this.$store.state.apiroot}/api/creditcards/`, this.new_cc,  this.myheaders())
+                    axios.post(`${this.store().apiroot}/api/creditcards/`, this.new_cc,  this.myheaders())
                     .then(() => {
                         this.$store.dispatch("getCreditcards")
                         this.$emit("cruded")

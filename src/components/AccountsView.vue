@@ -202,7 +202,7 @@
                 });
             },
             refreshTableCC(){
-                axios.get(`${this.$store.state.apiroot}/api/creditcards/withbalance/?account=${this.account.id}&active=${this.showActiveCC}`, this.myheaders())                
+                axios.get(`${this.store().apiroot}/api/creditcards/withbalance/?account=${this.account.id}&active=${this.showActiveCC}`, this.myheaders())                
                 .then((response) => {
                     this.table_cc=response.data;
                 }) 

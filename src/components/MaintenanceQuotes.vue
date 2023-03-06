@@ -60,7 +60,7 @@
                 this.quotes=[]
                 this.loading=true
                 this.option=0
-                axios.get(`${this.$store.state.apiroot}/api/quotes/?future=true`,  this.myheaders())
+                axios.get(`${this.store().apiroot}/api/quotes/?future=true`,  this.myheaders())
                 .then((response) => {
                     this.quotes=response.data
                     this.loading=false
@@ -72,7 +72,7 @@
                 this.quotes=[]
                 this.loading=true
                 this.option=1
-                axios.get(`${this.$store.state.apiroot}/api/quotes/?last=true`,  this.myheaders())
+                axios.get(`${this.store().apiroot}/api/quotes/?last=true`,  this.myheaders())
                 .then((response) => {
                     this.quotes=response.data
                     this.loading=false

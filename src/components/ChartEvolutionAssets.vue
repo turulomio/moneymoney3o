@@ -151,7 +151,7 @@
             },
             refreshChart(){
                 this.loading=true
-                axios.get(`${this.$store.state.apiroot}/reports/evolutionassets/chart/?from=${this.from}`, this.myheaders())
+                axios.get(`${this.store().apiroot}/reports/evolutionassets/chart/?from=${this.from}`, this.myheaders())
                 .then((response) => {
                     this.balance=[]
                     this.accounts=[]
@@ -173,7 +173,7 @@
                 if (this.save_name!=null){
                     var filename=this.save_name
                     var data=this.$refs.chart.getDataURL({pixelRatio: 6, backgroundColor: '#fff', excludeComponents:['dataZoom']})
-                    axios.post(`${this.$store.state.apiroot}/storefile/`, {filename:filename,data:data,}, this.myheaders())
+                    axios.post(`${this.store().apiroot}/storefile/`, {filename:filename,data:data,}, this.myheaders())
                     .then(() => {
                         this.$emit("finished")
                     }, (error) => {

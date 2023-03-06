@@ -25,7 +25,7 @@
         methods:{
             refreshTable(){
                 this.loading=true
-                axios.get(`${this.$store.state.apiroot}/reports/investmentsoperations/current/` , this.myheaders())
+                axios.get(`${this.store().apiroot}/reports/investmentsoperations/current/` , this.myheaders())
                 .then( (response)=> {
                     this.list_io_current=response.data;
                     this.key=this.key+1;

@@ -64,7 +64,7 @@
                         this.parseResponseError(error)
                     })
                 } else if (this.mode=="C"){
-                    axios.post(`${this.$store.state.apiroot}/api/productspairs/`, this.newpc,  this.myheaders())
+                    axios.post(`${this.store().apiroot}/api/productspairs/`, this.newpc,  this.myheaders())
                     .then(() => {
                             this.$emit("cruded")
                     }, (error) => {

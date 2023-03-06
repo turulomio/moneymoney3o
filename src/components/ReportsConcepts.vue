@@ -112,7 +112,7 @@
         methods:{
             refreshTables(){
                 this.loading=true
-                axios.get(`${this.$store.state.apiroot}/reports/concepts/?year=${this.ym.year}&month=${this.ym.month}`, this.myheaders())
+                axios.get(`${this.store().apiroot}/reports/concepts/?year=${this.ym.year}&month=${this.ym.month}`, this.myheaders())
                 .then((response) => {
                     this.itemsPositive=response.data.positive
                     this.itemsNegative=response.data.negative

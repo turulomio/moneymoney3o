@@ -3,8 +3,8 @@
         <h1>{{ $t("Concepts migration") }}</h1>           
         <v-card class="pa-8 mt-2">
             <v-form ref="form" v-model="form_valid" lazy-validation>
-                <v-autocomplete dense v-model="from_url" readonly :items="$store.state.concepts" :label="$t('Select a concept')" item-text="name" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
-                <v-autocomplete dense v-model="to" :items="$store.state.concepts" :label="$t('Select a concept to migrate to')" item-text="name" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
+                <v-autocomplete dense v-model="from_url" readonly :items="store().concepts" :label="$t('Select a concept')" item-text="name" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
+                <v-autocomplete dense v-model="to" :items="store().concepts" :label="$t('Select a concept to migrate to')" item-text="name" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
             </v-form>
             <v-card-actions>
                 <v-spacer></v-spacer>

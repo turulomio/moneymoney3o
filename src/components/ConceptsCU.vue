@@ -63,7 +63,7 @@
                         this.parseResponseError(error)
                     })
                 } else{
-                    axios.post(`${this.$store.state.apiroot}/api/concepts/`, this.newconcept,  this.myheaders())
+                    axios.post(`${this.store().apiroot}/api/concepts/`, this.newconcept,  this.myheaders())
                     .then(() => {
                             this.$emit("cruded")
                     }, (error) => {

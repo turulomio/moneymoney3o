@@ -52,7 +52,7 @@ export default {
         submit() {
             if (this.$refs.form.validate() == false) return
             if (this.mode == "C") {
-                axios.post(`${this.$store.state.apiroot}/api/dps/`, this.newdps, this.myheaders())
+                axios.post(`${this.store().apiroot}/api/dps/`, this.newdps, this.myheaders())
                     .then(() => {
                     this.$emit("cruded");
                 }, (error) => {

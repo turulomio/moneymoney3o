@@ -159,7 +159,7 @@
             },
             strategy: function(item){
                 var pr=this.empty_products_ranges()
-                pr.product=`${this.$store.state.apiroot}/api/products/${item.additional1}/`
+                pr.product=`${this.store().apiroot}/api/products/${item.additional1}/`
                 pr.percentage_between_ranges=item.additional2
                 pr.percentage_gains=item.additional3
                 pr.amount_to_invest=item.additional4
@@ -167,7 +167,7 @@
                 pr.totalized_operations=item.additional6
                 pr.investments=[this.investment.id] // Is a string due tu uses api/strategies an in db is a string
                 var headers={...this.myheaders(),params:pr}
-                axios.get(`${this.$store.state.apiroot}/products/ranges/`, headers)
+                axios.get(`${this.store().apiroot}/products/ranges/`, headers)
                 .then((response) => {
                     this.strategy_ranges=[]
 
@@ -196,7 +196,7 @@
             investments_same_product(){
                 //Returns an array of integers
                 var r=[]
-                this.$store.state.investments.forEach(inv=>{
+                this.store().investments.forEach(inv=>{
                     if (inv.products==this.product.url && inv.active){
                         r.push(inv.id)
                     }
@@ -242,7 +242,7 @@
                     investments: s,
                     selling_price: this.my_round(this.selected_selling_price,  this.product.decimals),
                 }
-                axios.post(`${this.$store.state.apiroot}/investments/changesellingprice/`, p, this.myheaders())
+                axios.post(`${this.store().apiroot}/investments/changesellingprice/`, p, this.myheaders())
                 .then(() => {
                     this.$store.dispatch("getInvestments")
                     .then((a)=>{
@@ -268,7 +268,7 @@
                     investments: s,
                     selling_price: 0,
                 }
-                axios.post(`${this.$store.state.apiroot}/investments/changesellingprice/`, p, this.myheaders())
+                axios.post(`${this.store().apiroot}/investments/changesellingprice/`, p, this.myheaders())
                 .then(() => {
                     this.$store.dispatch("getInvestments")
                     .then(()=>{
@@ -302,7 +302,7 @@
             refreshInvestments(select_current){
                 this.loading_ios=true
                 var headers={...this.myheaders(),params:{investments: this.investments_same_product,mode:2}}
-                axios.get(`${this.$store.state.apiroot}/investmentsoperations/full/`, headers )
+                axios.get(`${this.store().apiroot}/investmentsoperations/full/`, headers )
                 .then((response) => {
                     this.plio=response.data
                     var o
@@ -338,7 +338,7 @@
                 });
             },
             refreshStrategies(){
-                axios.get(`${this.$store.state.apiroot}/api/strategies/?investment=${this.investment.url}&active=true&type=2`, this.myheaders())
+                axios.get(`${this.store().apiroot}/api/strategies/?investment=${this.investment.url}&active=true&type=2`, this.myheaders())
                 .then((response) => {
                     this.strategies=response.data
                 }, (error) => {

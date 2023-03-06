@@ -205,7 +205,7 @@
             refreshTables(){
                 this.loading_assets=true
                 this.loading_invested=true
-                axios.get(`${this.$store.state.apiroot}/reports/evolutionassets/${this.year}/`, this.myheaders())
+                axios.get(`${this.store().apiroot}/reports/evolutionassets/${this.year}/`, this.myheaders())
                 .then((response) => {
                     this.assetsData=response.data
                     this.loading_assets=false
@@ -213,7 +213,7 @@
                 }, (error) => {
                     this.parseResponseError(error)
                 });
-                axios.get(`${this.$store.state.apiroot}/reports/evolutioninvested/${this.year}/`, this.myheaders())
+                axios.get(`${this.store().apiroot}/reports/evolutioninvested/${this.year}/`, this.myheaders())
                 .then((response) => {
                     this.investedData=response.data
                     this.loading_invested=false

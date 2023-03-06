@@ -110,7 +110,7 @@
         methods:{
             update_table(){
                 this.loading=true
-                axios.get(`${this.$store.state.apiroot}/investments/classes/`, this.myheaders())
+                axios.get(`${this.store().apiroot}/investments/classes/`, this.myheaders())
                 .then((response) => {
                     this.data=response.data
                     this.loading=false

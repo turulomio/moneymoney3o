@@ -49,7 +49,7 @@
                 this.loading=true
                 let data=new FormData()
                 data.append('json_file1', this.filename)
-                axios.post(`${this.$store.state.apiroot}/products/catalog/update/`, data, this.myheaders_formdata())
+                axios.post(`${this.store().apiroot}/products/catalog/update/`, data, this.myheaders_formdata())
                 .then((response) => {
                         this.items=response.data.logs
                         this.message=this.$t("{0} system products have been readed from file").format(response.data.total)
@@ -66,7 +66,7 @@
                     return
                 }
                 this.loading=true
-                axios.post(`${this.$store.state.apiroot}/products/catalog/update/`, {auto:true,}, this.myheaders())
+                axios.post(`${this.store().apiroot}/products/catalog/update/`, {auto:true,}, this.myheaders())
                 .then((response) => {
                         this.items=response.data.logs
                         this.message=this.$t("{0} system products have been readed from MoneMoney Github repository").format(response.data.total)

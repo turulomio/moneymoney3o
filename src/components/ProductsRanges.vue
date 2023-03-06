@@ -11,7 +11,7 @@
                 <v-text-field  v-model="newpr.amount_to_invest"  :label="$t('Set the amount to invest')" :placeholder="$t('Set the amount to invest')" :rules="RulesInteger(10,true)" counter="10"/>
                 </v-row>
                 <v-row class="pl-5 pr-5">
-                <v-select class="mr-5" :items="$store.state.recomendation_methods" v-model="newpr.recomendation_methods" :label="$t('Set recomendation method')"  item-text="name" item-value="id" :rules="RulesSelection(true)"></v-select>  
+                <v-select class="mr-5" :items="store().recomendation_methods" v-model="newpr.recomendation_methods" :label="$t('Set recomendation method')"  item-text="name" item-value="id" :rules="RulesSelection(true)"></v-select>  
                 <v-text-field class="mr-5" v-model.number="newpr.additional_ranges"  :label="$t('Additional ranges to show')" :placeholder="$t('Additional ranges to show')" :rules="RulesInteger(2,true)" counter="2"/>
                 <v-checkbox class="mr-5" v-model="newpr.totalized_operations" :label="$t('Show totalized investments operations?')" ></v-checkbox>
                 <v-autocomplete :items="$store.getters.getInvestmentsByProduct(newpr.product)" v-model="newpr.investments" :label="$t('Select investments to include')" item-text="fullname" item-value="id" multiple :rules="RulesSelection(true)" chips></v-autocomplete>
@@ -148,7 +148,7 @@
             refreshTable(){
                 this.loading=true
                 var headers={...this.myheaders(),params:this.newpr}
-                axios.get(`${this.$store.state.apiroot}/products/ranges/`, headers)
+                axios.get(`${this.store().apiroot}/products/ranges/`, headers)
                 .then((response) => {
                     this.prdata=response.data
                     this.tableData=this.prdata.pr

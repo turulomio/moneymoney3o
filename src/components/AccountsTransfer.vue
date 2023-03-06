@@ -5,8 +5,8 @@
         <v-card class="pa-8 mt-2">
             <v-form ref="form" v-model="form_valid" lazy-validation>
                 <MyDateTimePicker :readonly="deleting" v-model="newat.datetime" :label="$t('Set transfer date and time')"></MyDateTimePicker>
-                <v-autocomplete :readonly="deleting" :items="$store.state.accounts.filter(v =>v.active==true)" v-model="newat.account_origin" :label="$t('Select an origin account')" item-text="localname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
-                <v-autocomplete :readonly="deleting" :items="$store.state.accounts.filter(v =>v.active==true)" v-model="newat.account_destiny" :label="$t('Select a destiny account')" item-text="localname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
+                <v-autocomplete :readonly="deleting" :items="store().accounts.filter(v =>v.active==true)" v-model="newat.account_origin" :label="$t('Select an origin account')" item-text="localname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
+                <v-autocomplete :readonly="deleting" :items="store().accounts.filter(v =>v.active==true)" v-model="newat.account_destiny" :label="$t('Select a destiny account')" item-text="localname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
                 <v-text-field :readonly="deleting" v-model.number="newat.amount"  :label="$t('Set transfer amount')" :placeholder="$t('Set transfer amount')" :rules="RulesFloatGZ(10,true,get_transfer_decimals())" counter="10"/>
                 <v-text-field :readonly="deleting" v-model.number="newat.commission"  :label="$t('Set transfer commission')" :placeholder="$t('Set transfer commission')" :rules="RulesFloatGEZ(10,true,get_transfer_decimals())" counter="10"/>
             </v-form>
@@ -67,7 +67,7 @@
                 }
 
                 if (this.mode=="C"){
-                    axios.post(`${this.$store.state.apiroot}/accounts/transfer/`, this.newat,  this.myheaders())
+                    axios.post(`${this.store().apiroot}/accounts/transfer/`, this.newat,  this.myheaders())
                     .then(() => {
                         this.$emit("cruded")
                     }, (error) => {
@@ -75,7 +75,7 @@
                     })
                 }
                 if (this.mode=="U"){
-                    axios.put(`${this.$store.state.apiroot}/accounts/transfer/`, this.newat,  this.myheaders())
+                    axios.put(`${this.store().apiroot}/accounts/transfer/`, this.newat,  this.myheaders())
                     .then(() => {
                         this.$emit("cruded")
                     }, (error) => {
@@ -86,7 +86,7 @@
                     var r = confirm(this.$t("Do you want to delete this transfer?"))
                     if(r == true) {
                         var headers={...this.myheaders(),data:this.newat}
-                        axios.delete(`${this.$store.state.apiroot}/accounts/transfer/`, headers)
+                        axios.delete(`${this.store().apiroot}/accounts/transfer/`, headers)
                         .then(() => {
                             this.$emit("cruded")
                         }, (error) => {

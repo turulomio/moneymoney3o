@@ -3,11 +3,11 @@
         <h1>{{ title() }}</h1>    
         <v-card class="pa-8 mt-2">
             <v-form ref="form" v-model="form_valid" lazy-validation>
-                <v-autocomplete :readonly="deleting" :items="$store.state.banks.filter(v =>v.active==true)" v-model="newaccount.banks" :label="$t('Select a bank')" item-text="name" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
+                <v-autocomplete :readonly="deleting" :items="store().banks.filter(v =>v.active==true)" v-model="newaccount.banks" :label="$t('Select a bank')" item-text="name" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
                 <v-text-field v-model="newaccount.name" :readonly="deleting" type="text" :label="$t('Account name')" :placeholder="$t('Account name')" autofocus :rules="RulesString(200,true)" counter="200"/>
                 <v-checkbox v-model="newaccount.active" :readonly="deleting" :label="$t('Is active?')" ></v-checkbox>
                 <v-text-field v-model="newaccount.number" :readonly="deleting" type="text" :label="$t('Account number')" :placeholder="$t('Account number')" :rules="RulesString(30,false)" counter="30"/>
-                <v-autocomplete :items="$store.state.currencies" :readonly="deleting" v-model="newaccount.currency" :label="$t('Select a currency')" item-text="fullname" item-value="code" :rules="RulesSelection(true)"></v-autocomplete>
+                <v-autocomplete :items="store().currencies" :readonly="deleting" v-model="newaccount.currency" :label="$t('Select a currency')" item-text="fullname" item-value="code" :rules="RulesSelection(true)"></v-autocomplete>
                 <v-text-field v-model.number="newaccount.decimals" :readonly="deleting" :label="$t('Account decimals')" :placeholder="$t('Account decimals')" autofocus :rules="RulesInteger(1,true)" counter="1"/>
 
            </v-form>   
@@ -67,7 +67,7 @@
                         this.parseResponseError(error)
                     })
                 } else{
-                    axios.post(`${this.$store.state.apiroot}/api/accounts/`, this.newaccount,  this.myheaders())
+                    axios.post(`${this.store().apiroot}/api/accounts/`, this.newaccount,  this.myheaders())
                     .then(() => {
                         this.$store.dispatch("getAccounts")
                         this.$emit("cruded")

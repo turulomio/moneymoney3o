@@ -206,7 +206,7 @@
                                 name:this.$t('Investment chart'),
                                 icon: "mdi-chart-areaspline",
                                 code: function(this_){
-                                    axios.get(`${this_.$store.state.apiroot}/products/quotes/ohcl?product=${this_.product.url}`, this_.myheaders())
+                                    axios.get(`${this_.store().apiroot}/products/quotes/ohcl?product=${this_.product.url}`, this_.myheaders())
                                     .then((response) => {
                                         this_.chart_data=this_.empty_investments_chart()
                                         this_.chart_data.ohcls=response.data
@@ -283,7 +283,7 @@
                                 code: function(this_){
                                     this_.product=this_.$store.getters.getObjectByUrl("products",this_.investment.products)
 
-                                    axios.post(`${this_.$store.state.apiroot}/api/products/${this_.product.id}/delete_last_quote/`, [], this_.myheaders())
+                                    axios.post(`${this_.store().apiroot}/api/products/${this_.product.id}/delete_last_quote/`, [], this_.myheaders())
                                     .then(() => {
                                         this_.key=this_.key+1
                                         this_.$emit("cruded") 
@@ -496,11 +496,11 @@
 
             update_investmentsoperations(){
                 var headers={...this.myheaders(),params:{investments:[this.investment_id,], mode:1}}
-                return axios.get(`${this.$store.state.apiroot}/investmentsoperations/full/`, headers)
+                return axios.get(`${this.store().apiroot}/investmentsoperations/full/`, headers)
             },
             update_dividends(){
                 var headers={...this.myheaders(),params:{investments:[this.investment_id,]}}
-                return axios.get(`${this.$store.state.apiroot}/api/dividends/`, headers)
+                return axios.get(`${this.store().apiroot}/api/dividends/`, headers)
             },
             update_all(){
                 this.loading=true

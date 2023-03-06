@@ -38,7 +38,7 @@
         },
         watch: {
             payment: function(){
-                axios.get(`${this.$store.state.apiroot}/api/creditcardsoperations/?accountsoperations_id=${this.payment}`, this.myheaders())
+                axios.get(`${this.store().apiroot}/api/creditcardsoperations/?accountsoperations_id=${this.payment}`, this.myheaders())
                 .then((response) => {
                     this.items_cco=response.data
                 }, (error) => {
@@ -48,7 +48,7 @@
         },
         methods: {
             refundPayment() {
-                axios.post(`${this.$store.state.apiroot}/api/accountsoperations/${this.payment}/ccpaymentrefund/`, {}, this.myheaders())
+                axios.post(`${this.store().apiroot}/api/accountsoperations/${this.payment}/ccpaymentrefund/`, {}, this.myheaders())
                 .then(() => {
                     this.items_cco=[]
                     this.updatePayments()

@@ -42,7 +42,6 @@
         },
         created(){
             this.check_time()
-            console.log(imgUrl)
         }
     }
 </script>

@@ -194,7 +194,7 @@
                             {
                                 name:this.$t('Add all active investments of the same product'),
                                 code: function(this_){
-                                    this_.$store.state.investments.forEach(o=>{
+                                    this_.store().investments.forEach(o=>{
                                         if (this_.product==o.products && o.active && !this_.newinvestments.includes(o.url)){
                                             this_.newinvestments.push(o.url)
                                         }
@@ -282,7 +282,7 @@
                 this.dialog_order_cu=false
             },
             refreshProductQuotes(){
-                return axios.get(`${this.$store.state.apiroot}/products/quotes/ohcl?product=${this.product.url}`, this.myheaders())
+                return axios.get(`${this.store().apiroot}/products/quotes/ohcl?product=${this.product.url}`, this.myheaders())
             },
             simulateOrderAfter(){
                 var simulation=this.empty_investments_operations_simulation()
@@ -293,7 +293,7 @@
                 operation.comment="Simulation 1"
                 operation.investments=this.plio_id.investments_id
                 simulation.operations.push(operation)
-                return axios.post(`${this.$store.state.apiroot}/investmentsoperations/full/simulation/`, simulation, this.myheaders())
+                return axios.post(`${this.store().apiroot}/investmentsoperations/full/simulation/`, simulation, this.myheaders())
                 
             },
             make_all_axios_before(){

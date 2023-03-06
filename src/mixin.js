@@ -92,10 +92,10 @@ const mixin = {
             return percentage_generic_html(num,localStorage.locale,decimals )
         },
         localcurrency_string(num, decimals=2){
-            return this.$store.getters.currency_generic_string(num, this.$store.state.profile.currency, localStorage.locale,decimals )
+            return this.$store.getters.currency_generic_string(num, this.store().profile.currency, localStorage.locale,decimals )
         },
         localcurrency_html(num, decimals=2){
-            return this.$store.getters.currency_generic_html(num, this.$store.state.profile.currency, localStorage.locale,decimals )
+            return this.$store.getters.currency_generic_html(num, this.store().profile.currency, localStorage.locale,decimals )
         },
     }
   }

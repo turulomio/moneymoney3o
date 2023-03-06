@@ -163,7 +163,7 @@
             detailedviewItem (item) {
                 if (item.type==2){//RANGES
                     this.pr=this.empty_products_ranges()
-                    this.pr.product=`${this.$store.state.apiroot}/api/products/${item.additional1}/`
+                    this.pr.product=`${this.store().apiroot}/api/products/${item.additional1}/`
                     this.pr.percentage_between_ranges=item.additional2
                     this.pr.percentage_gains=item.additional3
                     this.pr.amount_to_invest=item.additional4
@@ -178,7 +178,7 @@
             },
             update_table(){
                 this.loading_strategies=true
-                axios.get(`${this.$store.state.apiroot}/api/strategies/withbalance/?active=${this.showActive}`, this.myheaders())
+                axios.get(`${this.store().apiroot}/api/strategies/withbalance/?active=${this.showActive}`, this.myheaders())
                 .then((response) => {
                     this.strategies_items=response.data
                     this.loading_strategies=false

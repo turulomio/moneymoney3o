@@ -40,7 +40,7 @@
                     alert(this.$t("You must enter at least two characters"))
                     return
                 }
-                axios.get(`${this.$store.state.apiroot}/api/accountsoperations/?search=${this.search}`, this.myheaders())
+                axios.get(`${this.store().apiroot}/api/accountsoperations/?search=${this.search}`, this.myheaders())
                 .then((response) => {
                     this.items_ao=response.data
                     this.key=this.key+1

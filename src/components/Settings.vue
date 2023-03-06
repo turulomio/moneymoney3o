@@ -1,5 +1,5 @@
 <template>
-    <div v-show="this.$store.state.logged" class="mx-auto px-5">
+    <div v-show="this.store().logged" class="mx-auto px-5">
             <h1 class="mb-4">{{ $t("Settings") }}</h1>
             
             <v-form ref="form" v-model="form_valid">
@@ -40,7 +40,7 @@
                 <v-tab-item key="local_settings">
                     <v-card class="mx-auto pa-6" max-width="40%">
                         <v-card-title>{{ $t('Personal preferences') }}</v-card-title>
-                        <v-autocomplete :items="$store.state.currencies" v-model="new_profile.currency" :label="$t('Select your local currency')" item-text="fullname" item-value="code" :rules="RulesSelection(true)"></v-autocomplete>
+                        <v-autocomplete :items="store().currencies" v-model="new_profile.currency" :label="$t('Select your local currency')" item-text="fullname" item-value="code" :rules="RulesSelection(true)"></v-autocomplete>
                         <v-autocomplete :items="timezones" v-model="new_profile.zone" :label="$t('Select your localtime zone')" :rules="RulesSelection(true)"></v-autocomplete>
                     </v-card>
                 </v-tab-item>
@@ -91,7 +91,7 @@
                 }
 
                 if (this.$refs.form.validate()==false) return
-                axios.put(`${this.$store.state.apiroot}/profile/`, this.new_profile, this.myheaders())
+                axios.put(`${this.store().apiroot}/profile/`, this.new_profile, this.myheaders())
                 .then(() => {
                     alert(this.$t("Settings saved"))
                     this.new_profile.newp=""
@@ -103,7 +103,7 @@
                 });
             },
             promise_load_timezones(){
-                return axios.get(`${this.$store.state.apiroot}/timezones/`, this.myheaders())
+                return axios.get(`${this.store().apiroot}/timezones/`, this.myheaders())
             },
             make_all_axios(){
                 this.loading=true
@@ -116,7 +116,7 @@
         },
         created(){
             this.make_all_axios()
-            this.new_profile=Object.assign({},this.$store.state.profile)
+            this.new_profile=Object.assign({},this.store().profile)
             this.new_profile.newp=""
 
         }

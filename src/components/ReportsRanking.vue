@@ -105,7 +105,7 @@
             update_table(){
                 this.loading_table=true
 
-                axios.get(`${this.$store.state.apiroot}/reports/ranking/`, this.myheaders())
+                axios.get(`${this.store().apiroot}/reports/ranking/`, this.myheaders())
                 .then((response) => {
                     this.data=response.data
                     this.loading_table=false

@@ -87,7 +87,7 @@
                 this.dialog_quotescu=true
             },
             update_table(){
-                axios.get(`${this.$store.state.apiroot}/currencies/`, this.myheaders())
+                axios.get(`${this.store().apiroot}/currencies/`, this.myheaders())
                 .then((response) => {
                     this.items=response.data
                 }, (error) => {

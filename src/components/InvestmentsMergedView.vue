@@ -130,7 +130,7 @@
                                 name:this.$t('Investment chart'),
                                 icon: "mdi-chart-areaspline",
                                 code: function(this_){
-                                    axios.get(`${this_.$store.state.apiroot}/products/quotes/ohcl?product=${this_.ios.product.url}`, this_.myheaders())
+                                    axios.get(`${this_.store().apiroot}/products/quotes/ohcl?product=${this_.ios.product.url}`, this_.myheaders())
                                     .then((response) => {
                                         this_.chart_data=this_.empty_investments_chart()
                                         this_.chart_data.ohcls=response.data
@@ -239,7 +239,7 @@
                 var simulation=this.empty_investments_operations_simulation()
                 simulation.investments=this.investments
                 simulation.local_currency=this.product.currency
-                return axios.post(`${this.$store.state.apiroot}/investmentsoperations/full/simulation/`, simulation, this.myheaders())
+                return axios.post(`${this.store().apiroot}/investmentsoperations/full/simulation/`, simulation, this.myheaders())
             },
             update_dividends(){
                 //Convert this.investments to an array of ids
@@ -251,7 +251,7 @@
 
 
                 var headers={...this.myheaders(),params:{investments:investments_ids}}
-                return axios.get(`${this.$store.state.apiroot}/api/dividends/`, headers)
+                return axios.get(`${this.store().apiroot}/api/dividends/`, headers)
             },
             update_all(){
                 this.loading=true

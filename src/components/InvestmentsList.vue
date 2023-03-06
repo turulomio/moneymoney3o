@@ -255,7 +255,7 @@
             },
             update_table(){
                 this.loading_investments=true
-                axios.get(`${this.$store.state.apiroot}/api/investments/withbalance/?active=${this.showActive}`, this.myheaders())
+                axios.get(`${this.store().apiroot}/api/investments/withbalance/?active=${this.showActive}`, this.myheaders())
                 .then((response) => {
                     this.investments_items=response.data
                     this.update_foot()
@@ -273,7 +273,7 @@
 
             products_autoupdate(){
                 this.products_updating=true
-                axios.post(`${this.$store.state.apiroot}/products/update/`, {auto:true,}, this.myheaders())
+                axios.post(`${this.store().apiroot}/products/update/`, {auto:true,}, this.myheaders())
                 .then((response) => {
                         this.update_errors=0
                         response.data.forEach(o=>{

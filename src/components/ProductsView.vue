@@ -293,7 +293,7 @@
                 this.dialog_estimationdps=false
             },
             on_monthpicker_quotes_change(){
-                axios.get(`${this.$store.state.apiroot}/api/quotes/?product=${this.product.url}&year=${this.quotes_ym.year}&month=${this.quotes_ym.month}`, this.myheaders())                
+                axios.get(`${this.store().apiroot}/api/quotes/?product=${this.product.url}&year=${this.quotes_ym.year}&month=${this.quotes_ym.month}`, this.myheaders())                
                 .then((response) => {
                     this.quotes_month=response.data
                 }) 
@@ -302,7 +302,7 @@
                 });
             },
             on_monthpicker_ohcls_change(){
-                axios.get(`${this.$store.state.apiroot}/products/quotes/ohcl/?product=${this.product.url}&year=${this.ohcls_ym.year}&month=${this.ohcls_ym.month}`, this.myheaders())                
+                axios.get(`${this.store().apiroot}/products/quotes/ohcl/?product=${this.product.url}&year=${this.ohcls_ym.year}&month=${this.ohcls_ym.month}`, this.myheaders())                
                 .then((response) => {
                     this.ohcls_month=response.data
                 }) 
@@ -311,7 +311,7 @@
                 });
             },
             refreshProductOHCLDaily(){
-                return axios.get(`${this.$store.state.apiroot}/products/quotes/ohcl/?product=${this.product.url}`, this.myheaders())
+                return axios.get(`${this.store().apiroot}/products/quotes/ohcl/?product=${this.product.url}`, this.myheaders())
             },
             refreshInformation(){
                 return axios.get(`${this.product.url}historical_information/`, this.myheaders())

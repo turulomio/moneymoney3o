@@ -86,7 +86,7 @@
                                 name:this.$t('Investment chart'),
                                 icon: "mdi-chart-areaspline",
                                 code: function(this_){
-                                    axios.get(`${this_.$store.state.apiroot}/products/quotes/ohcl?product=${this_.product.url}`, this_.myheaders())
+                                    axios.get(`${this_.store().apiroot}/products/quotes/ohcl?product=${this_.product.url}`, this_.myheaders())
                                     .then((response) => {
                                         this_.chart_data=this_.empty_investments_chart()
                                         this_.chart_data.ohcls=response.data
@@ -163,7 +163,7 @@
             },
             update_dividends(){
                 var headers={...this.myheaders(),params:{investments:this.strategy.investments}}
-                return axios.get(`${this.$store.state.apiroot}/api/dividends/`, headers)
+                return axios.get(`${this.store().apiroot}/api/dividends/`, headers)
             },
             update_all(){
                 this.loading=true

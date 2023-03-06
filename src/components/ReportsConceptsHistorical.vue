@@ -4,7 +4,7 @@
  
         <v-layout style="justify-content: center;">
             <v-card  class="pa-6">
-                <v-select :label="$t('Select a concept')" v-model="selected_concept" :items="$store.state.concepts" item-value="url" item-text="localname"></v-select>
+                <v-select :label="$t('Select a concept')" v-model="selected_concept" :items="store().concepts" item-value="url" item-text="localname"></v-select>
             </v-card>
         </v-layout>
         <p></p>

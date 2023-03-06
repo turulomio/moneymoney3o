@@ -78,7 +78,7 @@
             },
             refresh(){
                 this.loading=true
-                axios.get(`${this.$store.state.apiroot}/api/estimationsdps/?product=${this.product.url}`, this.myheaders())
+                axios.get(`${this.store().apiroot}/api/estimationsdps/?product=${this.product.url}`, this.myheaders())
                 .then((response) => {
                     this.items=response.data
                     this.key=this.key+1

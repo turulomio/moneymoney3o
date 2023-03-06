@@ -121,7 +121,7 @@
             on_finished(){
                 if (this.save_name!=null){
                     var data=this.$refs.chart.getDataURL({pixelRatio: 6, backgroundColor: '#fff'})
-                    axios.post(`${this.$store.state.apiroot}/storefile/`, {filename:this.save_name,data:data,}, this.myheaders())
+                    axios.post(`${this.store().apiroot}/storefile/`, {filename:this.save_name,data:data,}, this.myheaders())
                     .then(() => {
                         this.$emit("finished")
                     }, (error) => {

@@ -70,7 +70,7 @@
         methods:{
             refreshTables(){
                 this.loading=true
-                axios.get(`${this.$store.state.apiroot}/derivatives/`, this.myheaders())
+                axios.get(`${this.store().apiroot}/derivatives/`, this.myheaders())
                 .then((response) => {
                     this.derivatives=response.data.data
                     this.loading=false

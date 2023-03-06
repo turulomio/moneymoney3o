@@ -96,7 +96,7 @@
             },
             refreshTable(){
                 this.loading_dividends=true
-                axios.get(`${this.$store.state.apiroot}/reports/dividends/`, this.myheaders())
+                axios.get(`${this.store().apiroot}/reports/dividends/`, this.myheaders())
                 .then((response) => {
                     this.items=response.data
                     this.loading_dividends=false

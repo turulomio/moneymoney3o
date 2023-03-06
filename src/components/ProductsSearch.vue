@@ -32,11 +32,11 @@
                     <div v-html="percentage_html(item.percentage_last_year )"></div>
                 </template>
                 <template v-slot:[`item.actions`]="{ item }">
-                    <v-icon small @click.stop="toggleFavorite(item)" :color="($store.state.profile.favorites.includes(item.url))? 'orange': '' " class="mr-1">mdi-star-outline</v-icon>
+                    <v-icon small @click.stop="toggleFavorite(item)" :color="(store().profile.favorites.includes(item.url))? 'orange': '' " class="mr-1">mdi-star-outline</v-icon>
                     <v-icon class="mr-1" small @click.stop="editPersonalProduct(item)" v-if="item.id<0">mdi-pencil</v-icon>
-                    <v-icon class="mr-1" small @click.stop="editSystemProduct(item)"  color="#AA0000" v-if="item.id>=0 && $store.state.catalog_manager">mdi-pencil</v-icon>
+                    <v-icon class="mr-1" small @click.stop="editSystemProduct(item)"  color="#AA0000" v-if="item.id>=0 && store().catalog_manager">mdi-pencil</v-icon>
                     <v-icon class="mr-1" small @click.stop="deletePersonalProduct(item)" v-if="item.id<0 && item.uses==0">mdi-delete</v-icon>
-                    <v-icon class="mr-1" small @click.stop="deleteSystemProduct(item)" color="#AA0000" v-if="item.id>=0 && $store.state.catalog_manager">mdi-delete</v-icon>
+                    <v-icon class="mr-1" small @click.stop="deleteSystemProduct(item)" color="#AA0000" v-if="item.id>=0 && store().catalog_manager">mdi-delete</v-icon>
                 </template>
             </v-data-table>   
         </v-card>
@@ -236,7 +236,7 @@
                         ]
                     },
                 ]
-                if (this.$store.state.catalog_manager==false){
+                if (this.store().catalog_manager==false){
                     r[0].children.splice(1, 1)
                 }
                 return r
@@ -292,7 +292,7 @@
                     this.loading=false
                 } else {
 
-                    axios.get(`${this.$store.state.apiroot}/api/products/search_with_quotes/?search=${this.search}`, this.myheaders())
+                    axios.get(`${this.store().apiroot}/api/products/search_with_quotes/?search=${this.search}`, this.myheaders())
                     .then((response) => {
                             response.data.data.forEach(o=>{
                                 var p=this.$store.getters.getObjectByUrl("products",o.product)
@@ -308,8 +308,8 @@
                 }
             },
             toggleFavorite(item){
-                this.$store.state.profile.toggle_favorite=item.url //Adds toggle_favorite
-                return axios.put(`${this.$store.state.apiroot}/profile/`, this.$store.state.profile, this.myheaders())
+                this.store().profile.toggle_favorite=item.url //Adds toggle_favorite
+                return axios.put(`${this.store().apiroot}/profile/`, this.store().profile, this.myheaders())
                 .then(() => {
                         this.$store.dispatch("getProfile").then(() => {
                             this.refreshSearch()

@@ -84,7 +84,7 @@
         methods: {
             refreshTable(){
                 this.loading=true
-                axios.get(`${this.$store.state.apiroot}/reports/annual/income/details/${this.year}/${this.month}/`, this.myheaders())
+                axios.get(`${this.store().apiroot}/reports/annual/income/details/${this.year}/${this.month}/`, this.myheaders())
                 .then((response) => {
                     this.expenses=response.data.expenses
                     this.gains=response.data.gains

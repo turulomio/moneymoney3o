@@ -62,7 +62,7 @@
                         this.parseResponseError(error)
                     })
                 } else{
-                    axios.post(`${this.$store.state.apiroot}/api/banks/`, this.newbank,  this.myheaders())
+                    axios.post(`${this.store().apiroot}/api/banks/`, this.newbank,  this.myheaders())
                     .then(() => {
                         this.$store.dispatch("getBanks")
                         this.$emit("cruded")

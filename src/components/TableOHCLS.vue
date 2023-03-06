@@ -47,7 +47,7 @@
                   return
                } 
                 var headers={...this.myheaders(),data:{product:this.product.url,date:item.date}}
-                axios.delete(`${this.$store.state.apiroot}/products/quotes/ohcl/`, headers)
+                axios.delete(`${this.store().apiroot}/products/quotes/ohcl/`, headers)
                 .then(() => {
                     this.$emit("cruded")
                 }, (error) => {

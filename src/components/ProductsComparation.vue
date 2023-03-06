@@ -148,7 +148,7 @@
 
             pairReport(){               
                 this.loading=true
-                axios.get(`${this.$store.state.apiroot}/products/pairs/?a=${this.pc.a}&b=${this.pc.b}&interval_minutes=${this.interval_minutes}`, this.myheaders())
+                axios.get(`${this.store().apiroot}/products/pairs/?a=${this.pc.a}&b=${this.pc.b}&interval_minutes=${this.interval_minutes}`, this.myheaders())
                 .then((response) => {
                     this.dbdata=response.data.data
                     this.product_a=response.data.product_a

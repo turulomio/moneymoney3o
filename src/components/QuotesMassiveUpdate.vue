@@ -52,7 +52,7 @@
                 data.append('csv_file1', this.filename)
                 data.append('product',this.product.url)
                 data.append('type',1)
-                axios.post(`${this.$store.state.apiroot}/quotes/massive_update/`, data, this.myheaders_formdata())
+                axios.post(`${this.store().apiroot}/quotes/massive_update/`, data, this.myheaders_formdata())
                 .then((response) => {
                         this.items=response.data.data
                         //this.filename=[]
@@ -63,7 +63,7 @@
             },
             submmit_auto(){
                 this.loading=true
-                axios.post(`${this.$store.state.apiroot}/quotes/massive_update/`, {auto:true,}, this.myheaders())
+                axios.post(`${this.store().apiroot}/quotes/massive_update/`, {auto:true,}, this.myheaders())
                 .then((response) => {
                         this.items=response.data.data
                         this.loading=false

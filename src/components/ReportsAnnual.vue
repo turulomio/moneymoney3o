@@ -342,7 +342,7 @@
 
                 // TARGET
                 form_valid:false,
-                target: this.$store.state.profile.annual_gains_target,
+                target: this.store().profile.annual_gains_target,
                 month_target: 0,
                 loading_target: false,
                 current_assets_gains_percentage_message:0,
@@ -443,9 +443,9 @@
                 if (this.$refs.form.validate()==false) return
                 this.loading_target=true
                 //Updates annual_gains_target in profile
-                var new_profile=Object.assign({},this.$store.state.profile)
+                var new_profile=Object.assign({},this.store().profile)
                 new_profile.annual_gains_target=this.target
-                axios.put(`${this.$store.state.apiroot}/profile/`, new_profile, this.myheaders())
+                axios.put(`${this.store().apiroot}/profile/`, new_profile, this.myheaders())
                 .then(() => {
                     this.$store.dispatch("getProfile").then(() =>{
                         this.total_target=[]
@@ -484,9 +484,9 @@
 
 
                 axios.all([
-                    axios.get(`${this.$store.state.apiroot}/reports/annual/${this.year}/`, this.myheaders()),
-                    axios.get(`${this.$store.state.apiroot}/reports/annual/income/${this.year}/`, this.myheaders()),
-                    axios.get(`${this.$store.state.apiroot}/reports/annual/gainsbyproductstypes/${this.year}/`, this.myheaders())
+                    axios.get(`${this.store().apiroot}/reports/annual/${this.year}/`, this.myheaders()),
+                    axios.get(`${this.store().apiroot}/reports/annual/income/${this.year}/`, this.myheaders()),
+                    axios.get(`${this.store().apiroot}/reports/annual/gainsbyproductstypes/${this.year}/`, this.myheaders())
                 ]).then(([resRA, resRAI, resRAG]) => {
                     this.last_year_balance=resRA.data.last_year_balance
                     this.last_year_balance_string=this.$t("Last year balance ({0}) is {1}").format(

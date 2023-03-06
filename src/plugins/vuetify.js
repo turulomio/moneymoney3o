@@ -8,6 +8,7 @@
 import '@mdi/font/css/materialdesignicons.css'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import 'vuetify/styles'
+import * as labs from 'vuetify/labs/components'
 
 // Composables
 import { createVuetify } from 'vuetify'
@@ -15,6 +16,9 @@ import { createVuetify } from 'vuetify'
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 const vuetify = createVuetify({
+  components: {
+    ...labs,
+  },
   icons: {
     defaultSet: 'mdi',
     aliases,

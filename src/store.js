@@ -14,11 +14,8 @@ export const useStore = defineStore('global', {
         apiroot: import.meta.env.VITE_DJANGO_MONEYMONEY_URL,
         publicPath: import.meta.env.VUE_APP_PUBLIC_PATH,
         banks:[],
-        locale: 'en',
     }
   },
-  // could also be defined as
-  // state: () => ({ count: 0 })
   actions: {
     increment() {
         this.count=this.count+1

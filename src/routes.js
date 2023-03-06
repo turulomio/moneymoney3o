@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 
-import About from './components/about'
+import About from './components/About'
 import Home from './components/Home'
 // import AccountsList from './components/AccountsList'
 // import AssetsReport from './components/AssetsReport'
@@ -36,7 +36,7 @@ export const router = createRouter({
     history: createWebHistory(),
   routes: [
     { path: `${import.meta.env.BASE_URL}/`, redirect: `${import.meta.env.BASE_URL}/home/` }, 
-    { path: `${import.meta.env.BASE_URL}/about/`, name: 'about', component: About },
+    { path: `${import.meta.env.BASE_URL}/About/`, name: 'About', component: About },
     { path: `${import.meta.env.BASE_URL}/home/`, name: 'home', component: Home },
     // { path: `${process.env.VUE_APP_PUBLIC_PATH}/accounts/list/`, name: 'accounts_list', component: AccountsList },
     // { path: `${process.env.VUE_APP_PUBLIC_PATH}/assets/report/`, name: 'assetsreport', component: AssetsReport },

@@ -64,7 +64,7 @@
                 }
             },
             first_day_of_week(){
-                if (this.$i18n.locale=="es"){
+                if (localStorage.locale=="es"){
                     return 1
                 } else {
                     return 0

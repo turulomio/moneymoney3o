@@ -24,9 +24,9 @@
             <h1 class="font-weight-black text-no-wrap text-truncate" >{{ $t("Money Money. Another way to manage your finances") }}</h1>
             <v-spacer />            
             <!-- <v-btn :to="{ name: 'currencies'}" v-if="store().logged"><v-icon icon="mdi-currency-eur" dark></v-icon></v-btn> -->
-            <!-- <SwitchLanguages /> -->
-            <btnLogIn v-show="!store().logged"/>
-            <btnLogOut v-show="store().logged"/>
+            <BtnSwitchLanguages />
+            <BtnLogIn v-show="!store().logged"/>
+            <BtnLogOut v-show="store().logged"/>
 
         </v-app-bar>
         <v-main>   
@@ -36,15 +36,15 @@
 </template>
 
 <script>
-import btnLogIn from './components/btnLogIn';
-import btnLogOut from './components/btnLogOut';
-// import SwitchLanguages from './components/SwitchLanguages.vue';
+import BtnLogIn from './components/BtnLogIn';
+import BtnLogOut from './components/BtnLogOut';
+import BtnSwitchLanguages from './components/BtnSwitchLanguages.vue';
 export default {
     name: 'App',
     components: {
-        btnLogIn,
-        btnLogOut,
-        // SwitchLanguages,
+        BtnLogIn,
+        BtnLogOut,
+        BtnSwitchLanguages,
     },
     data () {
         return {

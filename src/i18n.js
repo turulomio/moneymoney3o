@@ -1,6 +1,7 @@
 // import Vue from 'vue'
 import { createI18n } from 'vue-i18n'
 import json_es from './locales/es.json'
+import json_en from './locales/en.json'
 
 // Vue.use(VueI18n)
 
@@ -29,15 +30,14 @@ import json_es from './locales/es.json'
 // 2. Create i18n instance with options
 const i18n=createI18n({
   legacy:true,
-  locale: 'es', // set locale
+  locale: 'en', // set locale
   fallbackLocale: 'en', // set fallback locale
-  globalInjection: true,
+  silentFallbackWarn: true,
+
   messages:{
     es:json_es,
+    en:json_en,
   }
-  // messages:loadLocaleMessages(), // set locale messages
-  // If you need to specify other options, you can set other options
-  // ...
 })
 
 export default i18n

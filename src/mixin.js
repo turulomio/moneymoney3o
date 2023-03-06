@@ -80,22 +80,22 @@ const mixin = {
   
   
         currency_string(num, currency, decimals=2){
-            return this.$store.getters.currency_generic_string(num, currency, this.$i18n.locale,decimals )
+            return this.$store.getters.currency_generic_string(num, currency, localStorage.locale,decimals )
         },
         currency_html(num, currency, decimals=2){
-            return this.$store.getters.currency_generic_html(num, currency, this.$i18n.locale,decimals )
+            return this.$store.getters.currency_generic_html(num, currency, localStorage.locale,decimals )
         },
         percentage_string(num, decimals=2){
-            return percentage_generic_string(num,this.$i18n.locale,decimals )
+            return percentage_generic_string(num,localStorage.locale,decimals )
         },
         percentage_html(num, decimals=2){
-            return percentage_generic_html(num,this.$i18n.locale,decimals )
+            return percentage_generic_html(num,localStorage.locale,decimals )
         },
         localcurrency_string(num, decimals=2){
-            return this.$store.getters.currency_generic_string(num, this.$store.state.profile.currency, this.$i18n.locale,decimals )
+            return this.$store.getters.currency_generic_string(num, this.$store.state.profile.currency, localStorage.locale,decimals )
         },
         localcurrency_html(num, decimals=2){
-            return this.$store.getters.currency_generic_html(num, this.$store.state.profile.currency, this.$i18n.locale,decimals )
+            return this.$store.getters.currency_generic_html(num, this.$store.state.profile.currency, localStorage.locale,decimals )
         },
     }
   }

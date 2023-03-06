@@ -36,7 +36,7 @@ export function myheaders(){
     return {
         headers:{
             'Authorization': `Token ${this.store().token}`,
-            'Accept-Language': `${this.$i18n.locale}-${this.$i18n.locale}`,
+            'Accept-Language': `${localStorage.locale}-${localStorage.locale}`,
             'Content-Type':'application/json'
         }
     }
@@ -46,7 +46,7 @@ export function myheaders(){
 export function myheaders_noauth(){
     return {
         headers:{
-  //          'Accept-Language': `${this.$i18n.locale}-${this.$i18n.locale}`,
+  //          'Accept-Language': `${localStorage.locale}-${localStorage.locale}`,
             'Content-Type':'application/json'
         }
     }
@@ -56,7 +56,7 @@ export function myheaders_formdata(){
     return {
         headers:{
             'Authorization': `Token ${this.store().token}`,
-            'Accept-Language': `${this.$i18n.locale}-${this.$i18n.locale}`,
+            'Accept-Language': `${localStorage.locale}-${localStorage.locale}`,
             'Content-Type': 'multipart/form-data'
         }
     }

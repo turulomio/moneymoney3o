@@ -17,6 +17,19 @@ import {
     percentage_generic_string, 
     my_round,
     store,
+    getConceptsForDividends,
+    getInvestmentsActive,
+    getInvestmentsByProduct,
+    getOperationstypesForNewConcepts,
+    getOperationstypesForInvestmentsOperations,
+    getObjectByUrl,
+    getObjectById,
+    getObjectPropertyByUrl,
+    getObjectPropertyById,
+    getCurrencyByCode,
+    getCurrencyPropertyByCode,
+    currency_generic_string,
+    getCountryNameByCode,
 } from './my_commons.js'
   
 import {
@@ -77,13 +90,26 @@ const mixin = {
         RulesFloatGEZ,
         RulesFloatLEZ,
         store,
+        getConceptsForDividends,
+        getInvestmentsActive,
+        getInvestmentsByProduct,
+        getOperationstypesForNewConcepts,
+        getOperationstypesForInvestmentsOperations,
+        getObjectByUrl,
+        getObjectById,
+        getObjectPropertyByUrl,
+        getObjectPropertyById,
+        getCurrencyByCode,
+        getCurrencyPropertyByCode,
+        currency_generic_string,
+        getCountryNameByCode,
   
   
         currency_string(num, currency, decimals=2){
-            return this.$store.getters.currency_generic_string(num, currency, localStorage.locale,decimals )
+            return this.currency_generic_string(num, currency, localStorage.locale,decimals )
         },
         currency_html(num, currency, decimals=2){
-            return this.$store.getters.currency_generic_html(num, currency, localStorage.locale,decimals )
+            return this.currency_generic_html(num, currency, localStorage.locale,decimals )
         },
         percentage_string(num, decimals=2){
             return percentage_generic_string(num,localStorage.locale,decimals )
@@ -92,10 +118,10 @@ const mixin = {
             return percentage_generic_html(num,localStorage.locale,decimals )
         },
         localcurrency_string(num, decimals=2){
-            return this.$store.getters.currency_generic_string(num, this.store().profile.currency, localStorage.locale,decimals )
+            return this.currency_generic_string(num, this.store().profile.currency, localStorage.locale,decimals )
         },
         localcurrency_html(num, decimals=2){
-            return this.$store.getters.currency_generic_html(num, this.store().profile.currency, localStorage.locale,decimals )
+            return this.currency_generic_html(num, this.store().profile.currency, localStorage.locale,decimals )
         },
     }
   }

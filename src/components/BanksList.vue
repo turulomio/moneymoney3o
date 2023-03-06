@@ -26,14 +26,14 @@
                 <template v-slot:[`body.append`]="{headers}">
                     <tr class="totalrow">
                         <td v-for="(header,i) in headers" :key="i">
-                            <div v-if="header.value == 'name'">
+                            <div v-if="header.key == 'name'">
                                 Total
                             </div>
-                            <div v-if="header.value == 'balance_accounts'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(data,'balance_accounts'))">
+                            <div v-if="header.key == 'balance_accounts'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(data,'balance_accounts'))">
                             </div>
-                            <div v-if="header.value == 'balance_investments'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(data,'balance_investments'))">
+                            <div v-if="header.key == 'balance_investments'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(data,'balance_investments'))">
                             </div>
-                            <div v-if="header.value == 'balance_total'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(data,'balance_total'))">
+                            <div v-if="header.key == 'balance_total'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(data,'balance_total'))">
                             </div>
                         </td>
                     </tr>
@@ -69,12 +69,12 @@
             return{
                 showActive:true,
                 headers: [
-                    { text: this.$t('Name'), sortable: true, value: 'localname'},
-                    { text: this.$t('Active'), value: 'active',  width: "12%"},
-                    { text: this.$t('Accounts balance'), value: 'balance_accounts', align:'right',  width: "12%"},
-                    { text: this.$t('Investments balance'), value: 'balance_investments', align:'right',  width: "12%"},
-                    { text: this.$t('Total balance'), value: 'balance_total', align:'right',  width: "12%"},
-                    { text: this.$t('Actions'), value: 'actions', sortable: false , width: "7%"},
+                    { text: this.$t('Name'), sortable: true, key: 'localname'},
+                    { text: this.$t('Active'), key: 'active',  width: "12%"},
+                    { text: this.$t('Accounts balance'), key: 'balance_accounts', align:'right',  width: "12%"},
+                    { text: this.$t('Investments balance'), key: 'balance_investments', align:'right',  width: "12%"},
+                    { text: this.$t('Total balance'), key: 'balance_total', align:'right',  width: "12%"},
+                    { text: this.$t('Actions'), key: 'actions', sortable: false , width: "7%"},
                 ],
                 data:[],
                 menuinline_items: [

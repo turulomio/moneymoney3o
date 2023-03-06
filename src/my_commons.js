@@ -35,7 +35,7 @@ export function localtime(value){
 export function myheaders(){
     return {
         headers:{
-            'Authorization': `Token ${this.store().token}`,
+            'Authorization': `Token ${store().token}`,
             'Accept-Language': `${localStorage.locale}-${localStorage.locale}`,
             'Content-Type':'application/json'
         }
@@ -254,4 +254,100 @@ export function getBase64(file) {
         // Calls reader function
         reader.readAsDataURL(file);
     })
+}
+
+
+
+
+/// OLD GETTERS
+
+export function getConceptsForDividends() { 
+    return this.store().concepts.filter( o => [39,50,59,62,63,65,66,68,70,72,75,76,77].includes(o.id))
+}
+
+export function getInvestmentsActive() { 
+    return this.store().investments.filter(o => o.active==true)
+}
+export function getInvestmentsByProduct() { 
+    return this.store().investments.filter(o => o.products==product)
+}
+
+export function getOperationstypesForNewConcepts() { 
+    return this.store().operationstypes.filter( o => [1,2].includes(o.id))
+}
+
+export function getOperationstypesForInvestmentsOperations() { 
+    return this.store().operationstypes.filter( o => [4,5,6,8,9,10].includes(o.id))
+}
+export function getObjectByUrl(catalog,url,default_=null) { 
+    var r=this.store()[catalog].find(o => o.url==url)
+    if (r==null){
+        return default_
+    } else {
+        return r
+    }
+}
+
+export function getObjectById(catalog,id,default_=null) { 
+    var r=this.store()[catalog].find(o => o.id==id)
+    if (r==null){
+        return default_
+    } else {
+        return r
+    }
+}
+export function getObjectPropertyByUrl(catalog,url,property,default_=null) {
+    var r=this.getObjectByUrl(catalog,url)
+    if (r==null){
+        return default_
+    } else {
+        return r[property]
+    }
+}
+export function getObjectPropertyById(catalog,id,property,default_=null) {
+    var r=this.getObjectById(catalog,id)
+    if (r==null){
+        return default_
+    } else {
+        return r[property]
+    }
+}
+export function getCurrencyByCode(code,default_=null) {
+    var r=this.store()['currencies'].find(o => o.code==code)
+    if (r==null){
+        return default_
+    } else {
+        return r
+    }
+}
+export function getCurrencyPropertyByCode(code,property,default_="???") {
+    var r=this.getCurrencyByCode(code)
+    if (r==null){
+        if (code=='u') return "u"
+        return default_
+    } else {
+        return r[property]
+    }
+}
+export function currency_generic_string(num, currency, locale, decimals=2){
+    if (num ==null){
+        return `- - - ${this.getCurrencyPropertyByCode(currency,"symbol_native")}`
+    } else {
+        return `${my_round(num,decimals).toLocaleString(locale, { minimumFractionDigits: decimals,  })} ${this.getCurrencyPropertyByCode(currency,"symbol_native")}`
+    }
+}
+export function currency_generic_html(num, currency, locale, decimals=2){
+    if (num<0){
+        return `<span class='vuered'>${this.currency_generic_string(num, currency, locale, decimals)}</span>`
+    } else {
+        return this.currency_generic_string(num, currency, locale, decimals)
+    }
+}
+export function getCountryNameByCode(code) { 
+    var r=this.store()['countries'].find(o => o.code==code)
+    if (r==null){
+        return ""
+    } else {
+        return r.name
+    }
 }

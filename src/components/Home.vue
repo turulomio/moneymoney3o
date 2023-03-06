@@ -42,6 +42,7 @@
         },
         created(){
             this.check_time()
+            console.log(this.currency_string(10.12,'EUR',2))
         }
     }
 </script>

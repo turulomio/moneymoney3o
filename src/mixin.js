@@ -13,8 +13,6 @@ import {
     listobjects_average_ponderated,
     parseNumber,
     myheaders_formdata,
-    percentage_generic_html,
-    percentage_generic_string, 
     my_round,
     store,
     getConceptsForDividends,
@@ -30,6 +28,14 @@ import {
     getCurrencyPropertyByCode,
     currency_generic_string,
     getCountryNameByCode,
+    currency_string,
+    currency_html,
+    percentage_string,
+    percentage_generic_html,
+    percentage_generic_string, 
+    percentage_html,
+    localcurrency_string,
+    localcurrency_html
 } from './my_commons.js'
   
 import {
@@ -90,6 +96,7 @@ const mixin = {
         RulesFloatGEZ,
         RulesFloatLEZ,
         store,
+        currency_generic_string,
         getConceptsForDividends,
         getInvestmentsActive,
         getInvestmentsByProduct,
@@ -101,28 +108,16 @@ const mixin = {
         getObjectPropertyById,
         getCurrencyByCode,
         getCurrencyPropertyByCode,
-        currency_generic_string,
         getCountryNameByCode,
-  
-  
-        currency_string(num, currency, decimals=2){
-            return this.currency_generic_string(num, currency, localStorage.locale,decimals )
-        },
-        currency_html(num, currency, decimals=2){
-            return this.currency_generic_html(num, currency, localStorage.locale,decimals )
-        },
-        percentage_string(num, decimals=2){
-            return percentage_generic_string(num,localStorage.locale,decimals )
-        },
-        percentage_html(num, decimals=2){
-            return percentage_generic_html(num,localStorage.locale,decimals )
-        },
-        localcurrency_string(num, decimals=2){
-            return this.currency_generic_string(num, this.store().profile.currency, localStorage.locale,decimals )
-        },
-        localcurrency_html(num, decimals=2){
-            return this.currency_generic_html(num, this.store().profile.currency, localStorage.locale,decimals )
-        },
+        currency_string,
+        currency_html,
+        percentage_string,
+        percentage_generic_html,
+        percentage_generic_string, 
+        percentage_html,
+        localcurrency_string,
+        localcurrency_html
+
     }
   }
 

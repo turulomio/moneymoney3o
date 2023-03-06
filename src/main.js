@@ -16,8 +16,8 @@ const app = createApp(App)
 app.use(i18n)
 app.use(createPinia())
 app.use(router)
-app.mixin(mixin)
 app.use(vuetify)
+app.mixin(mixin)
 app.mount('#app')
 
 

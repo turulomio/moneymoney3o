@@ -3,19 +3,21 @@
         <h1>{{ $t("Wellcome to Money Money") }}</h1>
         <h2>{{ `${store().version} (${store().versiondate.toISOString().slice(0,10)})` }}</h2>
         <p>{{ ym  }}</p>
-        <v-img src="@/assets/moneymoney.png" height="200px" contain ></v-img>
+        <v-img :src="imgUrl" height="200px" contain ></v-img>
         <v-alert dense class="ma-15 px-10" outlined type="error" v-if="message.length>0"> {{message}}</v-alert>            
 
     </div>
 </template>
 <script>
     import axios from 'axios'
+    import imgUrl from '@/assets/moneymoney.png'
     export default {
         components:{
         },
         data(){
             return {
                 message:"",
+                imgUrl:imgUrl,
 
                 ym:null
             }
@@ -38,8 +40,9 @@
             }
 
         },
-        mounted(){
+        created(){
             this.check_time()
+            console.log(imgUrl)
         }
     }
 </script>

@@ -8,6 +8,9 @@ import { createPinia } from 'pinia';
 import {router} from './routes.js'
 import mixin from '@/mixin'
 
+
+document.title=import.meta.env.VITE_APP_TITLE
+
 loadFonts()
 const app = createApp(App)
 app.use(i18n)
@@ -16,3 +19,7 @@ app.use(router)
 app.mixin(mixin)
 app.use(vuetify)
 app.mount('#app')
+
+
+console.log(import.meta.env.MODE)
+console.log(import.meta.env.BASE_URL)

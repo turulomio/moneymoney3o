@@ -35,9 +35,9 @@ import Home from './components/Home'
 export const router = createRouter({
     history: createWebHistory(),
   routes: [
-    { path: `${import.meta.env.VITE_APP_PUBLIC_PATH}/`, redirect: `${import.meta.env.VITE_APP_PUBLIC_PATH}/home/` }, 
-    { path: `${import.meta.env.VITE_APP_PUBLIC_PATH}/about/`, name: 'about', component: About },
-    { path: `${import.meta.env.VITE_APP_PUBLIC_PATH}/home/`, name: 'home', component: Home },
+    { path: `${import.meta.env.BASE_URL}/`, redirect: `${import.meta.env.BASE_URL}/home/` }, 
+    { path: `${import.meta.env.BASE_URL}/about/`, name: 'about', component: About },
+    { path: `${import.meta.env.BASE_URL}/home/`, name: 'home', component: Home },
     // { path: `${process.env.VUE_APP_PUBLIC_PATH}/accounts/list/`, name: 'accounts_list', component: AccountsList },
     // { path: `${process.env.VUE_APP_PUBLIC_PATH}/assets/report/`, name: 'assetsreport', component: AssetsReport },
     // { path: `${process.env.VUE_APP_PUBLIC_PATH}/banks/list/`, name: 'banks_list', component: BanksList },

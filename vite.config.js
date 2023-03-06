@@ -6,6 +6,9 @@ import vuetify from 'vite-plugin-vuetify'
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 
+
+
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -16,6 +19,7 @@ export default defineConfig({
     }),
   ],
   define: { 'process.env': {} },
+  base: '/moneymoney3o',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -28,7 +32,6 @@ export default defineConfig({
       '.ts',
       '.tsx',
       '.vue',
-      '.css',
     ],
   },
   server: {

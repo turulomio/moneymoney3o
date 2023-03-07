@@ -13,7 +13,7 @@
     "flag-icons": "^6.6.6",
     "moment-timezone": "^0.5.41",
     "npm-check-updates": "^16.7.10",
-    "pinia": "^2.0.32",
+    "pinia": "^2.0.33",
     "roboto-fontface": "*",
     "vue": "^3.2.47",
     "vue-i18n": "^9.2.2",

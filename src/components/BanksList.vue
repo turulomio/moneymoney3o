@@ -6,15 +6,19 @@
         </h1>
         <v-card outlined class="ma-4 pa-4">
             <v-checkbox v-model="showActive" :label="setCheckboxLabel()" @click="on_chkActive()" />
-            <v-data-table dense :headers="headers" :items="data" :sort-by="['name']" class="elevation-1 cursorpointer" hide-default-footer :loading="loading_table" @click:row="viewItem">
+            <v-data-table dense :headers="headers" :items="data" class="elevation-1 cursorpointer" hide-default-footer :loading="loading_table" @click:row="viewItem" 
+    item-value="localname">
+                <template v-slot:[`item.localname`]="{ item }">
+                    {{ item.raw }}
+                </template>
                 <template v-slot:[`item.active`]="{ item }">
-                    <v-icon small v-if="item.active" >mdi-check-outline</v-icon>
+                    <v-icon small v-if="item.raw.active" >mdi-check-outline</v-icon>
                 </template>  
                 <template v-slot:[`item.balance_accounts`]="{ item }">
-                    <div v-html="localcurrency_html(item.balance_accounts )"></div>
+                    <div v-html="localcurrency_html(item.raw.balance_accounts )"></div>
                 </template>  
                 <template v-slot:[`item.balance_investments`]="{ item }">
-                    <div v-html="localcurrency_html(item.balance_investments )"></div>
+                    <div v-html="localcurrency_html(item.raw.balance_investments )"></div>
                 </template>  
                 <template v-slot:[`item.balance_total`]="{ item }">
                     <div v-html="localcurrency_html(item.balance_total )"></div>

@@ -58,6 +58,21 @@
                     <v-icon small class="ml-1" @click.stop="deleteItem(item.raw)" v-if="item.raw.is_deletable">mdi-delete</v-icon>
                     <v-icon small class="ml-1" v-if="(new Date().setHours(0,0,0,0)>new Date(item.raw.selling_expiration).setHours(0,0,0,0)) && item.raw.selling_expiration!=null" @click="changeSellingPrice(item.raw)" color="#9933ff" style="font-weight:bold">mdi-alarm</v-icon>     
                 </template>                
+                <template v-slot:[`tfoot`]>
+                    <tr class="totalrow" :id="headers" >
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                    </tr>
+                </template>             
                 <template v-slot:[`tbody`]>
                     <tr class="totalrow" :id="headers" >
                         <td>HOLA</td>

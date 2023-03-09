@@ -4,7 +4,7 @@
  
         <v-layout style="justify-content: center;">
             <v-card width="40%" class="pa-6">
-                <v-select :label="$t('Select the way to show results')" v-model="method" :items="method_results" item-value="id" item-text="name"></v-select>
+                <v-select :label="$t('Select the way to show results')" v-model="method" :items="method_results" item-value="id" item-title="name"></v-select>
                 <v-text-field v-model="limit"   :label="$t('Percentage gains of the last operation to highlight')"  :placeholder="$t('Enter a number')"></v-text-field>
             </v-card>
         </v-layout>

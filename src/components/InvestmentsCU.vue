@@ -2,7 +2,7 @@
   <div>
         <h1 class="mb-2">{{title()}}</h1>
         <v-form ref="form" v-model="form_valid" lazy-validation>
-            <v-autocomplete :readonly="mode=='D'" :items="store().accounts.filter(v =>v.active==true)" v-model="new_investment.accounts" :label="$t('Select an account')" item-text="name" item-value="url"  :rules="RulesSelection(true)"></v-autocomplete>
+            <v-autocomplete :readonly="mode=='D'" :items="store().accounts.filter(v =>v.active==true)" v-model="new_investment.accounts" :label="$t('Select an account')" item-title="name" item-value="url"  :rules="RulesSelection(true)"></v-autocomplete>
             <v-text-field :readonly="mode=='D'" v-model="new_investment.name" type="text" :label="$t('Investment name')"  :placeholder="$t('Investment name')" autofocus :rules="RulesString(200,true)"/>
             <AutocompleteProducts :readonly="mode=='D'" v-model="new_investment.products" :rules="RulesSelection(true)"  />
             <v-checkbox :readonly="mode=='D'" v-model="new_investment.active" :label="$t('Is active?')" ></v-checkbox>

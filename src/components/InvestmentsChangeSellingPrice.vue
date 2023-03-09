@@ -48,8 +48,8 @@
             </v-tab-item>
             <v-tab-item key="range">     
                 <v-card class="pa-3" outlined>
-                    <v-select :items="strategies" v-model="strategy" :label="$t('Set current investment strategy')"  item-text="name" return-object :rules="RulesSelection(true)"></v-select>  
-                    <v-select :items="strategy_ranges" v-model="strategy_range" :label="$t('Set a strategy range')"  item-text="name" item-value="value" :rules="RulesSelection(true)"></v-select>  
+                    <v-select :items="strategies" v-model="strategy" :label="$t('Set current investment strategy')"  item-title="name" return-object :rules="RulesSelection(true)"></v-select>  
+                    <v-select :items="strategy_ranges" v-model="strategy_range" :label="$t('Set a strategy range')"  item-title="name" item-value="value" :rules="RulesSelection(true)"></v-select>  
                 </v-card>
             </v-tab-item>
         </v-tabs-items>    

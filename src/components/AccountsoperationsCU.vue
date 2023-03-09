@@ -2,9 +2,9 @@
     <div>
         <h1>{{dialog_title_ao()}}</h1>
         <v-form ref="form_ao" v-model="form_valid_ao" lazy-validation>
-            <v-autocomplete :readonly="mode=='D'" autoindex="3" :items="store().accounts.filter(v =>v.active==true)" v-model="newao.accounts" :label="$t('Select an account')" item-text="localname" item-value="url" :rules="RulesSelection(true)" @change="on_account_change"></v-autocomplete>
+            <v-autocomplete :readonly="mode=='D'" autoindex="3" :items="store().accounts.filter(v =>v.active==true)" v-model="newao.accounts" :label="$t('Select an account')" item-title="localname" item-value="url" :rules="RulesSelection(true)" @change="on_account_change"></v-autocomplete>
             <MyDateTimePicker :readonly="mode=='D'" autoindex="4" label="Select operation date and time" v-model="newao.datetime" :rules="RulesDatetime(true)"></MyDateTimePicker>
-            <v-autocomplete :readonly="mode=='D'" autoindex="0" autofocus :items="store().concepts" v-model="newao.concepts" :label="$t('Select a concept')" item-text="localname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
+            <v-autocomplete :readonly="mode=='D'" autoindex="0" autofocus :items="store().concepts" v-model="newao.concepts" :label="$t('Select a concept')" item-title="localname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
             <v-text-field :readonly="mode=='D'" autoindex="1" v-model="newao.amount"  :label="$t('Operation amount')" :placeholder="$t('Account number')" :rules="RulesFloat(30,true,this.account.decimals)" counter="30"/>
             <v-text-field :readonly="mode=='D'" autoindex="2" v-model="newao.comment" type="text" :label="$t('Operation comment')" :placeholder="$t('Operation comment')" counter="200"/>
         </v-form>

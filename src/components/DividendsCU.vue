@@ -4,9 +4,9 @@
         <h1>{{ title() }}</h1>           
         <v-card class="pa-8 mt-2">
             <v-form ref="form" v-model="form_valid" lazy-validation>
-                <v-autocomplete :readonly="mode=='D'" :items="store().investments" v-model="newdividend.investments" :label="$t('Select an investment')" item-text="fullname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
+                <v-autocomplete :readonly="mode=='D'" :items="store().investments" v-model="newdividend.investments" :label="$t('Select an investment')" item-title="fullname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
                 <MyDateTimePicker :readonly="mode=='D'" v-model="newdividend.datetime" :label="$t('Set investment execution date and time')"></MyDateTimePicker>
-                <v-autocomplete :readonly="mode=='D'" :items="$store.getters.getConceptsForDividends()" v-model="newdividend.concepts" :label="$t('Select a concept')" item-text="localname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
+                <v-autocomplete :readonly="mode=='D'" :items="$store.getters.getConceptsForDividends()" v-model="newdividend.concepts" :label="$t('Select a concept')" item-title="localname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
                 <v-text-field :readonly="mode=='D'" v-model="newdividend.gross"  :label="$t('Set dividend gross balance')" :placeholder="$t('Set dividend gross balance')" :rules="RulesFloat(10,true,2)" counter="10"/>
                 <v-text-field :readonly="mode=='D'" v-model="newdividend.net"  :label="$t('Set dividend net balance')" :placeholder="$t('Set dividend net balance')" :rules="RulesFloat(10,true,2)" counter="10"/>
                 <v-text-field :readonly="mode=='D'" v-model="newdividend.taxes"  :label="$t('Set dividend taxes')" :placeholder="$t('Set dividend taxes')" :rules="RulesFloatGEZ(10,true,2)" counter="10"/>

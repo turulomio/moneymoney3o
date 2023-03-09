@@ -24,7 +24,7 @@
 
                 <template v-slot:[`item.actions`]="{ item }">
                     <v-icon small class="mr-2" @click.stop="editItem(item)">mdi-pencil</v-icon>
-                    <v-icon small @click.stop="deleteItem(item)" v-if="item.is_deletable">mdi-delete</v-icon>
+                    <v-icon small @click.stop="deleteItem(item)" v-if="item.raw.is_deletable">mdi-delete</v-icon>
                 </template>                  
                 <template v-slot:[`body.append`]="{headers}">
                     <tr class="totalrow">

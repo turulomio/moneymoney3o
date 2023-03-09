@@ -9,7 +9,7 @@
             <v-form ref="form" v-model="form_valid" :readonly="mode=='D'" lazy-validation v-if="snackbar_message==''">
                 <MyDatePicker v-model="neworder.date"  :readonly="mode=='D'" :label="$t('Set order date')" :rules="RulesDate(true)"></MyDatePicker>
                 <MyDatePicker v-model="neworder.expiration" :readonly="mode=='D'" :label="$t('Set order expiration date')" :rules="RulesDate(false)" />
-                <v-autocomplete :items="store().investments" :readonly="mode=='D'" v-model="neworder.investments" :label="$t('Select an investment')" item-text="fullname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
+                <v-autocomplete :items="store().investments" :readonly="mode=='D'" v-model="neworder.investments" :label="$t('Select an investment')" item-title="fullname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
                 <MyDateTimePicker v-model="neworder.executed" :readonly="mode=='D'" v-if="mode=='U'" :label="$t('Set order execution date and time')"></MyDateTimePicker>
                 <v-text-field v-model.number="neworder.shares" :readonly="mode=='D'" :label="$t('Set order shares')" :placeholder="$t('Set order shares')" :rules="RulesFloatGEZ(12,true,6)" counter="12"/>
                 <v-text-field v-model.number="neworder.price" :readonly="mode=='D'" :label="$t('Set order price')" :placeholder="$t('Set order price')" :rules="RulesFloatGEZ(12,true,product_decimals)" counter="12"/>

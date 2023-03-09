@@ -40,7 +40,7 @@
                 <v-tab-item key="local_settings">
                     <v-card class="mx-auto pa-6" max-width="40%">
                         <v-card-title>{{ $t('Personal preferences') }}</v-card-title>
-                        <v-autocomplete :items="store().currencies" v-model="new_profile.currency" :label="$t('Select your local currency')" item-text="fullname" item-value="code" :rules="RulesSelection(true)"></v-autocomplete>
+                        <v-autocomplete :items="store().currencies" v-model="new_profile.currency" :label="$t('Select your local currency')" item-title="fullname" item-value="code" :rules="RulesSelection(true)"></v-autocomplete>
                         <v-autocomplete :items="timezones" v-model="new_profile.zone" :label="$t('Select your localtime zone')" :rules="RulesSelection(true)"></v-autocomplete>
                     </v-card>
                 </v-tab-item>

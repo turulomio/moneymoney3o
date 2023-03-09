@@ -1,6 +1,6 @@
 <template>
     <v-card>   
-        <v-select :items="payments" v-model="payment" :label="$t('Select an old payment')"  item-text="name" item-value="id" :rules="RulesSelection(true)"></v-select>  
+        <v-select :items="payments" v-model="payment" :label="$t('Select an old payment')"  item-title="name" item-value="id" :rules="RulesSelection(true)"></v-select>  
 
         <TableCreditcardsOperations  showcc showtotal showbalance :items="items_cco" height="400" class=" flex-grow-1 flex-shrink-0" :key="key" />
 

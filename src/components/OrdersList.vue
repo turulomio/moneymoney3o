@@ -5,7 +5,7 @@
         </h1>
         <div class="d-flex justify-center mb-4">
             <v-card width="20%" class="pa-5">
-                <v-select dense :label="$t('Filter by order state')" v-model="state" :items="items_state" item-value="id" item-text="name" @change="update_table()" :sort-by="getSort()"></v-select>
+                <v-select dense :label="$t('Filter by order state')" v-model="state" :items="items_state" item-value="id" item-title="name" @change="update_table()" :sort-by="getSort()"></v-select>
             </v-card>
         </div>
         <v-card outlined class="ma-4 pa-4">

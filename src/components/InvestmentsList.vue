@@ -12,7 +12,7 @@
                 </v-btn>
                 
             </v-row>
-            <v-data-table dense :headers="investments_headers" :search="search" :items="investments_items" :sort-by="table_sort_by()" class="elevation-1 ma-4 cursorpointer" hide-default-footer disable-pagination :loading="loading_investments" fixed-header :key="key" @click:row="viewItem">
+            <v-data-table dense fixed-footer items-per-page="100" :headers="investments_headers" :search="search" :items="investments_items" :sort-by="table_sort_by()" class="elevation-1 ma-4 cursorpointer" hide-default-footer disable-pagination :loading="loading_investments" fixed-header :key="key" @click:row="viewItem">
                 <template v-slot:[`item.fullname`]="{ item }">
                     <v-icon :class="'mr-2 fi fib fi-'+item.raw.flag" small :title="this.getCountryNameByCode(item.raw.flag)"></v-icon>{{item.raw.fullname}}
                 </template>                  
@@ -58,25 +58,19 @@
                     <v-icon small class="ml-1" @click.stop="deleteItem(item.raw)" v-if="item.raw.is_deletable">mdi-delete</v-icon>
                     <v-icon small class="ml-1" v-if="(new Date().setHours(0,0,0,0)>new Date(item.raw.selling_expiration).setHours(0,0,0,0)) && item.raw.selling_expiration!=null" @click="changeSellingPrice(item.raw)" color="#9933ff" style="font-weight:bold">mdi-alarm</v-icon>     
                 </template>                
-                <template v-slot:[`body.append`]="{headers}">
-                    <tr class="totalrow" >
-                        <td v-for="(header,i) in headers" :key="i">
-                            <div v-if="header.value == 'fullname'">
-                                {{ $t("Total ({0}):").format(investments_items.length)}}
-                            </div>
-                            <div v-if="header.value == 'daily_difference'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(investments_items,'daily_difference'))">
-                            </div>
-                            <div v-if="header.value == 'daily_percentage'" class="d-flex justify-end" v-html="percentage_html(listobjects_sum(investments_items,'daily_difference')/listobjects_sum(investments_items,'balance_user'))">
-                            </div>
-                            <div v-if="header.value == 'balance_user'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(investments_items,'balance_user'))">
-                            </div>
-                            <div v-if="header.value == 'invested_user'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(investments_items,'invested_user'))">
-                            </div>
-                            <div v-if="header.value == 'gains_user'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(investments_items,'gains_user'))">
-                            </div>
-                            <div v-if="header.value == 'percentage_invested'" class="d-flex justify-end" v-html="percentage_html(listobjects_sum(investments_items,'gains_user')/listobjects_sum(investments_items,'invested_user'))">
-                            </div>
-                        </td>
+                <template v-slot:[`tbody`]>
+                    <tr class="totalrow" :id="headers" >
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
+                        <td>HOLA</td>
                     </tr>
                 </template>
             </v-data-table>

@@ -93,9 +93,7 @@
             },
         },
         created(){
-            console.log(this.bank)
             this.new_bank=Object.assign({},this.bank)
-            console.log(this.new_bank)
         }
     }
 </script>

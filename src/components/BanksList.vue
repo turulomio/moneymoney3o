@@ -109,16 +109,12 @@
             }
         },
         watch:{
-            showActive (value) {
-                console.log(value)
+            showActive () {
                 this.update_table()
             },
         },
         methods: {
-            deleteItem (item,b,c) {
-                console.log(item)
-                console.log(b)
-                console.log(c)
+            deleteItem (item) {
                 this.bank=item.raw
                 this.bank_mode="D"
                 this.key=this.key+1

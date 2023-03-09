@@ -12,13 +12,13 @@
     "currency-list": "^1.0.8",
     "flag-icons": "^6.6.6",
     "moment-timezone": "^0.5.41",
-    "npm-check-updates": "^16.7.10",
+    "npm-check-updates": "^16.7.12",
     "pinia": "^2.0.33",
     "roboto-fontface": "*",
     "vue": "^3.2.47",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.6",
-    "vuetify": "^3.1.7",
+    "vuetify": "^3.1.8",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {

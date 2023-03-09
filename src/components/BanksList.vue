@@ -5,9 +5,8 @@
             <MyMenuInline :items="menuinline_items" :context="this"></MyMenuInline>
         </h1>
         <v-card outlined class="ma-4 pa-4">
-            <v-checkbox v-model="showActive" :label="setCheckboxLabel()" @click="on_chkActive()" />
-            <v-data-table :headers="headers" :items="data" class="elevation-1 cursorpointer" :loading="loading_table" 
-    disable-pagination :sort-by="[{key:'localname', order: 'asc'}]" @click:row="viewItem" item-value="localname">
+            <v-checkbox v-model="showActive" :label="chkLabel" />
+            <v-data-table :headers="headers" :items="data" class="elevation-1 cursorpointer" :loading="loading_table" :sort-by="[{key:'localname', order: 'asc'}]" @click:row="viewItem" >
                 <template v-slot:[`item.localname`]="{ item }">
                     {{ item.raw.localname }}
                 </template>
@@ -24,8 +23,8 @@
                     <div v-html="localcurrency_html(item.raw.balance_total )"></div>
                 </template>  
                 <template v-slot:[`item.actions`]="{ item }">
-                    <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
-                    <v-icon small @click="deleteItem(item)" v-if="item.is_deletable">mdi-delete</v-icon>
+                    <v-icon small class="mr-2" @click.stop="editItem(item)">mdi-pencil</v-icon>
+                    <v-icon small @click.stop="deleteItem(item)" v-if="item.raw.is_deletable">mdi-delete</v-icon>
                 </template>                            
                 <template v-slot:[`body.append`]="{headers}">
                     <tr class="totalrow">
@@ -46,7 +45,7 @@
         </v-card>
         <v-dialog v-model="dialog" width="35%">
             <v-card class="pa-4">
-                <BanksCU :bank="bank" :deleting="bank_deleting" :key="key" @cruded="on_BanksCU_cruded()"></BanksCU>
+                <BanksCU :bank="bank" :mode="bank_mode" :key="key" @cruded="on_BanksCU_cruded"></BanksCU>
             </v-card>
         </v-dialog>
         <v-dialog v-model="dialog_view">
@@ -72,6 +71,7 @@
         data(){ 
             return{
                 showActive:true,
+                chkLabel:"",
                 headers: [
                     { title: this.$t('Name'), sortable: true, key: 'localname'},
                     { title: this.$t('Active'), key: 'active',  width: "12%"},
@@ -90,7 +90,7 @@
                                 icon: "mdi-pencil",
                                 code: function(this_){
                                     this_.editing=false
-                                    this_.bank_deleting=false
+                                    this_.bank_mode="C"
                                     this_.bank=this_.empty_bank()
                                     this_.key=this_.key+1
                                     this_.dialog=true
@@ -101,24 +101,33 @@
                 ],
                 dialog:false,
                 bank: null,
-                bank_deleting: false,
+                bank_mode:null,
                 loading_table:false,
 
                 dialog_view:false,
                 key:0,
             }
         },
+        watch:{
+            showActive (value) {
+                console.log(value)
+                this.update_table()
+            },
+        },
         methods: {
-            deleteItem (item) {
-                this.bank=item
-                this.bank_deleting=true
+            deleteItem (item,b,c) {
+                console.log(item)
+                console.log(b)
+                console.log(c)
+                this.bank=item.raw
+                this.bank_mode="D"
                 this.key=this.key+1
                 this.dialog=true
             },
             empty_bank,
             editItem (item) {
-                this.bank=item
-                this.bank_deleting=false
+                this.bank=item.raw
+                this.bank_mode="U"
                 this.key=this.key+1
                 this.dialog=true
             },
@@ -130,6 +139,11 @@
 
             update_table(){
                 this.loading_table=true
+                if (this.showActive){
+                    this.chkLabel=this.$t("Uncheck to see inactive banks")
+                } else {
+                    this.chkLabel=this.$t("Check to see active banks")
+                }
                 axios.get(`${this.store().apiroot}/api/banks/withbalance/?active=${this.showActive}`, this.myheaders())
                 .then((response) => {
                     this.data=response.data
@@ -141,16 +155,6 @@
             on_BanksCU_cruded(){
                 this.dialog=false
                 this.update_table()
-            },
-            on_chkActive(){
-                this.update_table()
-            },
-            setCheckboxLabel(){
-                if (this.showActive== true){
-                    return this.$t("Uncheck to see inactive banks")
-                } else {
-                    return this.$t("Check to see active banks")
-                }
             },
 
         },

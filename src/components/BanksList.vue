@@ -6,10 +6,10 @@
         </h1>
         <v-card outlined class="ma-4 pa-4">
             <v-checkbox v-model="showActive" :label="setCheckboxLabel()" @click="on_chkActive()" />
-            <v-data-table dense :headers="headers" :items="data" class="elevation-1 cursorpointer" hide-default-footer :loading="loading_table" @click:row="viewItem" 
-    item-value="localname">
+            <v-data-table :headers="headers" :items="data" class="elevation-1 cursorpointer" :loading="loading_table" 
+    disable-pagination :sort-by="[{key:'localname', order: 'asc'}]" @click:row="viewItem" item-value="localname">
                 <template v-slot:[`item.localname`]="{ item }">
-                    {{ item.raw }}
+                    {{ item.raw.localname }}
                 </template>
                 <template v-slot:[`item.active`]="{ item }">
                     <v-icon small v-if="item.raw.active" >mdi-check-outline</v-icon>
@@ -21,7 +21,7 @@
                     <div v-html="localcurrency_html(item.raw.balance_investments )"></div>
                 </template>  
                 <template v-slot:[`item.balance_total`]="{ item }">
-                    <div v-html="localcurrency_html(item.balance_total )"></div>
+                    <div v-html="localcurrency_html(item.raw.balance_total )"></div>
                 </template>  
                 <template v-slot:[`item.actions`]="{ item }">
                     <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
@@ -73,12 +73,12 @@
             return{
                 showActive:true,
                 headers: [
-                    { text: this.$t('Name'), sortable: true, key: 'localname'},
-                    { text: this.$t('Active'), key: 'active',  width: "12%"},
-                    { text: this.$t('Accounts balance'), key: 'balance_accounts', align:'right',  width: "12%"},
-                    { text: this.$t('Investments balance'), key: 'balance_investments', align:'right',  width: "12%"},
-                    { text: this.$t('Total balance'), key: 'balance_total', align:'right',  width: "12%"},
-                    { text: this.$t('Actions'), key: 'actions', sortable: false , width: "7%"},
+                    { title: this.$t('Name'), sortable: true, key: 'localname'},
+                    { title: this.$t('Active'), key: 'active',  width: "12%"},
+                    { title: this.$t('Accounts balance'), key: 'balance_accounts', align:'end',  width: "12%"},
+                    { title: this.$t('Investments balance'), key: 'balance_investments', align:'end',  width: "12%"},
+                    { title: this.$t('Total balance'), key: 'balance_total', align:'end',  width: "12%"},
+                    { title: this.$t('Actions'), key: 'actions', sortable: false , width: "7%"},
                 ],
                 data:[],
                 menuinline_items: [

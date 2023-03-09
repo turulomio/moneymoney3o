@@ -249,15 +249,15 @@
         },
         table_headers(){
             var r= [
-                { text: this.$t('Date and time'), value: 'datetime', sortable: true, width:"12%" },
-                { text: this.$t('Account'), value: 'accounts', sortable: true, width:"20%" },
-                { text: this.$t('Concept'), value: 'concepts', sortable: true, width:"20%"},
-                { text: this.$t('Amount'), value: 'amount', sortable: true, align:"right", width:"8%"},
-                { text: this.$t('Balance'), value: 'balance', sortable: false, align:"right", width:"8%"},
-                { text: this.$t('Comment'), value: 'comment_decoded', sortable: true},
+                { title: this.$t('Date and time'), key: 'datetime', sortable: true, width:"12%" },
+                { title: this.$t('Account'), key: 'accounts', sortable: true, width:"20%" },
+                { title: this.$t('Concept'), key: 'concepts', sortable: true, width:"20%"},
+                { title: this.$t('Amount'), key: 'amount', sortable: true, align:'end', width:"8%"},
+                { title: this.$t('Balance'), key: 'balance', sortable: false, align:'end', width:"8%"},
+                { title: this.$t('Comment'), key: 'comment_decoded', sortable: true},
             ]
             if (this.hideactions==false){
-                r.push({ text: this.$t('Actions'), value: 'actions', sortable: false , width:"6%"})
+                r.push({ title: this.$t('Actions'), key: 'actions', sortable: false , width:"6%"})
             }
             if (this.showbalance==false){
                 r.splice(4, 1);

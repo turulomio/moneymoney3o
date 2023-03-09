@@ -203,46 +203,46 @@
                 var r
                 if (this.output=="account"){
                     r= [
-                        { text: this.$t('Date and time'), value: 'datetime',sortable: true },
-                        { text: this.$t('Operation'), value: 'operationstypes',sortable: true },
-                        { text: this.$t('Shares'), value: 'shares',sortable: false, align:"right"},
-                        { text: this.$t('Price'), value: 'price_account',sortable: false, align:"right"},
-                        { text: this.$t('Invested'), value: 'invested_account',sortable: false, align:"right"},
-                        { text: this.$t('Balance'), value: 'balance_account',sortable: false, align:"right"},
-                        { text: this.$t('Gross gains'), value: 'gains_gross_account',sortable: false, align:"right"},
-                        { text: this.$t('% annual'), value: 'percentage_annual_account',sortable: false, align:"right"},
-                        { text: this.$t('% APR'), value: 'percentage_apr_account',sortable: false, align:"right"},
-                        { text: this.$t('% Total'), value: 'percentage_total_account',sortable: false, align:"right"},
+                        { title: this.$t('Date and time'), key: 'datetime',sortable: true },
+                        { title: this.$t('Operation'), key: 'operationstypes',sortable: true },
+                        { title: this.$t('Shares'), key: 'shares',sortable: false, align:'end'},
+                        { title: this.$t('Price'), key: 'price_account',sortable: false, align:'end'},
+                        { title: this.$t('Invested'), key: 'invested_account',sortable: false, align:'end'},
+                        { title: this.$t('Balance'), key: 'balance_account',sortable: false, align:'end'},
+                        { title: this.$t('Gross gains'), key: 'gains_gross_account',sortable: false, align:'end'},
+                        { title: this.$t('% annual'), key: 'percentage_annual_account',sortable: false, align:'end'},
+                        { title: this.$t('% APR'), key: 'percentage_apr_account',sortable: false, align:'end'},
+                        { title: this.$t('% Total'), key: 'percentage_total_account',sortable: false, align:'end'},
                     ]
                 } else if (this.output=="investment"){
                     r= [
-                        { text: this.$t('Date and time'), value: 'datetime',sortable: true },
-                        { text: this.$t('Operation'), value: 'operationstypes',sortable: true },
-                        { text: this.$t('Shares'), value: 'shares',sortable: false, align:"right"},
-                        { text: this.$t('Price'), value: 'price_investment',sortable: false, align:"right"},
-                        { text: this.$t('Invested'), value: 'invested_investment',sortable: false, align:"right"},
-                        { text: this.$t('Balance'), value: 'balance_investment',sortable: false, align:"right"},
-                        { text: this.$t('Gross gains'), value: 'gains_gross_investment',sortable: false, align:"right"},
-                        { text: this.$t('% annual'), value: 'percentage_annual_investment',sortable: false, align:"right"},
-                        { text: this.$t('% TAE'), value: 'percentage_apr_investment',sortable: false, align:"right"},
-                        { text: this.$t('% Total'), value: 'percentage_total_investment',sortable: false, align:"right"},
+                        { title: this.$t('Date and time'), key: 'datetime',sortable: true },
+                        { title: this.$t('Operation'), key: 'operationstypes',sortable: true },
+                        { title: this.$t('Shares'), key: 'shares',sortable: false, align:'end'},
+                        { title: this.$t('Price'), key: 'price_investment',sortable: false, align:'end'},
+                        { title: this.$t('Invested'), key: 'invested_investment',sortable: false, align:'end'},
+                        { title: this.$t('Balance'), key: 'balance_investment',sortable: false, align:'end'},
+                        { title: this.$t('Gross gains'), key: 'gains_gross_investment',sortable: false, align:'end'},
+                        { title: this.$t('% annual'), key: 'percentage_annual_investment',sortable: false, align:'end'},
+                        { title: this.$t('% TAE'), key: 'percentage_apr_investment',sortable: false, align:'end'},
+                        { title: this.$t('% Total'), key: 'percentage_total_investment',sortable: false, align:'end'},
                     ]
                 } else if (this.output=="user"){
                     r= [
-                        { text: this.$t('Date and time'), value: 'datetime',sortable: true },
-                        { text: this.$t('Operation'), value: 'operationstypes',sortable: true },
-                        { text: this.$t('Shares'), value: 'shares',sortable: false, align:"right"},
-                        { text: this.$t('Price'), value: 'price_user',sortable: false, align:"right"},
-                        { text: this.$t('Invested'), value: 'invested_user',sortable: false, align:"right"},
-                        { text: this.$t('Balance'), value: 'balance_user',sortable: false, align:"right"},
-                        { text: this.$t('Gross gains'), value: 'gains_gross_user',sortable: false, align:"right"},
-                        { text: this.$t('% annual'), value: 'percentage_annual_user',sortable: false, align:"right"},
-                        { text: this.$t('% TAE'), value: 'percentage_apr_user',sortable: false, align:"right"},
-                        { text: this.$t('% Total'), value: 'percentage_total_user',sortable: false, align:"right"},
+                        { title: this.$t('Date and time'), key: 'datetime',sortable: true },
+                        { title: this.$t('Operation'), key: 'operationstypes',sortable: true },
+                        { title: this.$t('Shares'), key: 'shares',sortable: false, align:'end'},
+                        { title: this.$t('Price'), key: 'price_user',sortable: false, align:'end'},
+                        { title: this.$t('Invested'), key: 'invested_user',sortable: false, align:'end'},
+                        { title: this.$t('Balance'), key: 'balance_user',sortable: false, align:'end'},
+                        { title: this.$t('Gross gains'), key: 'gains_gross_user',sortable: false, align:'end'},
+                        { title: this.$t('% annual'), key: 'percentage_annual_user',sortable: false, align:'end'},
+                        { title: this.$t('% TAE'), key: 'percentage_apr_user',sortable: false, align:'end'},
+                        { title: this.$t('% Total'), key: 'percentage_total_user',sortable: false, align:'end'},
                     ]
                 }            
                 if (this.showinvestment==true){
-                    r.splice(1, 0, { text: this.$t('Name'), value: 'investments', sortable: true });
+                    r.splice(1, 0, { title: this.$t('Name'), key: 'investments', sortable: true });
                 }
                 return r
             },

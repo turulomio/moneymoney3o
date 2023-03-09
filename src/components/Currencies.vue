@@ -37,12 +37,12 @@
         data(){ 
             return{
                 headers: [
-                    { text: this.$t('From'), sortable: true, value: 'from'},
-                    { text: this.$t('To'), sortable: true, value: 'to'},
-                    { text: this.$t('Supported'), sortable: true, value: 'supported'},
-                    { text: this.$t('Date and time'), sortable: true, value: 'datetime'},
-                    { text: this.$t('Factor'), value: 'quote'},
-                    { text: this.$t('Actions'), value: 'actions', sortable: false , width: "10%"},
+                    { title: this.$t('From'), sortable: true, key: 'from'},
+                    { title: this.$t('To'), sortable: true, key: 'to'},
+                    { title: this.$t('Supported'), sortable: true, key: 'supported'},
+                    { title: this.$t('Date and time'), sortable: true, key: 'datetime'},
+                    { title: this.$t('Factor'), key: 'quote'},
+                    { title: this.$t('Actions'), key: 'actions', sortable: false , width: "10%"},
                 ],
                 items:[],
                 dialog_quotescu:false,

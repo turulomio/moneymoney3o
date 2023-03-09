@@ -146,15 +146,15 @@
             displayvalues(){
                 var r= []
 
-                r.push({title:this.$t('From'), value: this.localtime(this.strategy.dt_from)})
-                r.push({title:this.$t('To'), value: this.localtime(this.strategy.dt_to)})
-                r.push({title:this.$t('Type'), value: this.$store.getters.getObjectPropertyById("strategiestypes", this.strategy.type, "name")})
-                r.push({title:this.$t('Investments'), value: this.strategy.investments.length})                
+                r.push({title:this.$t('From'), key: this.localtime(this.strategy.dt_from)})
+                r.push({title:this.$t('To'), key: this.localtime(this.strategy.dt_to)})
+                r.push({title:this.$t('Type'), key: this.$store.getters.getObjectPropertyById("strategiestypes", this.strategy.type, "name")})
+                r.push({title:this.$t('Investments'), key: this.strategy.investments.length})                
                 if (this.strategy.additional1){//That means it has a product property
                     this.leverage_message= this.$t("{0} (Real: {1})").format(this.product.leverage_multiplier, this.product.leverage_real_multiplier )
-                    r.push({title:this.$t('Currency'), value: this.product.currency})
-                    r.push({title:this.$t('Product'), value: this.product.name})
-                    r.push({title:this.$t('Leverage'), value: this.leverage_message})
+                    r.push({title:this.$t('Currency'), key: this.product.currency})
+                    r.push({title:this.$t('Product'), key: this.product.name})
+                    r.push({title:this.$t('Leverage'), key: this.leverage_message})
                 }
                 return r
             },

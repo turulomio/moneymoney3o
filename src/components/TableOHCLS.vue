@@ -56,12 +56,12 @@
             },
             table_headers(){
                 var r= [
-                    { text: this.$t('Date and time'), value: 'date', sortable: true },
-                    { text: this.$t('Open'), value: 'open', sortable: true },
-                    { text: this.$t('High'), value: 'high', sortable: true },
-                    { text: this.$t('Close'), value: 'close', sortable: true },
-                    { text: this.$t('Low'), value: 'low', sortable: true },
-                    { text: this.$t('Actions'), value: 'actions', sortable: false },
+                    { title: this.$t('Date and time'), key: 'date', sortable: true },
+                    { title: this.$t('Open'), key: 'open', sortable: true },
+                    { title: this.$t('High'), key: 'high', sortable: true },
+                    { title: this.$t('Close'), key: 'close', sortable: true },
+                    { title: this.$t('Low'), key: 'low', sortable: true },
+                    { title: this.$t('Actions'), key: 'actions', sortable: false },
                 ]
                 return r
             },

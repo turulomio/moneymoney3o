@@ -36,10 +36,10 @@
                 dps: null,
 
                 table_headers: [
-                    { text: this.$t('Date'), value: 'date', sortable: true, width:"25%"},
-                    { text: this.$t('Pay date'), value: 'paydate', sortable: false, width:"25%"},
-                    { text: this.$t('DPS'), value: 'gross', sortable: true, align:"right" , width:"25%"},
-                    { text: this.$t('Actions'), value: 'actions', sortable: false , width:"25%"},
+                    { title: this.$t('Date'), key: 'date', sortable: true, width:"25%"},
+                    { title: this.$t('Pay date'), key: 'paydate', sortable: false, width:"25%"},
+                    { title: this.$t('DPS'), key: 'gross', sortable: true, align:'end' , width:"25%"},
+                    { title: this.$t('Actions'), key: 'actions', sortable: false , width:"25%"},
                 ],
                 items:[],
                 key: 0,

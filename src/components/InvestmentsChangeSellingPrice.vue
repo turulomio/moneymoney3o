@@ -101,14 +101,14 @@
                 data:[],
                 selected:[],
                 tableHeaders: [
-                    { text: this.$t('Id'), value: 'id', sortable: true },
-                    { text: this.$t('Name'), value: 'fullname', sortable: true},
-                    { text: this.$t('Shares'), value: 'shares', sortable: true, align: 'right'},
-                    { text: this.$t('Selling price'), value: 'selling_price', sortable: true, align: 'right'},
-                    { text: this.$t('Selling expiration'), value: 'selling_expiration', sortable: true, align: 'right'},
-                    { text: this.$t('Average price'), value: 'average_price', sortable: true, align: 'right'},
-                    { text: this.$t('Invested'), value: 'invested_investment', sortable: true, align: 'right'},
-                    { text: this.$t('Balance'), value: 'balance_investment', sortable: true, align: 'right'},
+                    { title: this.$t('Id'), key: 'id', sortable: true },
+                    { title: this.$t('Name'), key: 'fullname', sortable: true},
+                    { title: this.$t('Shares'), key: 'shares', sortable: true, align: 'right'},
+                    { title: this.$t('Selling price'), key: 'selling_price', sortable: true, align: 'right'},
+                    { title: this.$t('Selling expiration'), key: 'selling_expiration', sortable: true, align: 'right'},
+                    { title: this.$t('Average price'), key: 'average_price', sortable: true, align: 'right'},
+                    { title: this.$t('Invested'), key: 'invested_investment', sortable: true, align: 'right'},
+                    { title: this.$t('Balance'), key: 'balance_investment', sortable: true, align: 'right'},
                 ],
                 selected_invested:0,
                 selling_expiration: new Date().toISOString().substring(0, 10),
@@ -180,7 +180,7 @@
                         })
 
 
-                        this.strategy_ranges.push({name:`${element.value} ${investments_string}`, value: element.value})
+                        this.strategy_ranges.push({name:`${element.value} ${investments_string}`, key: element.value})
                         
                     });
                 }, (error) => {
@@ -207,11 +207,11 @@
         methods:{
             displayvalues(){
                 return [
-                    {title:this.$t('Selected invested amount'), value: this.currency_string(this.selected_invested,this.product.currency)},
-                    {title:this.$t('Number of shares selected'), value: this.selected_shares},
-                    {title:this.$t('Average price of selected shares'), value: this.currency_string(this.selected_average_price,this.product.currency)},
-                    {title:this.$t('Product leverage'), value: this.getObjectPropertyByUrl("leverages", this.product.leverages, "multiplier") },
-                    {title:this.$t('Product real leverage'), value: this.product.real_leveraged_multiplier},
+                    {title:this.$t('Selected invested amount'), key: this.currency_string(this.selected_invested,this.product.currency)},
+                    {title:this.$t('Number of shares selected'), key: this.selected_shares},
+                    {title:this.$t('Average price of selected shares'), key: this.currency_string(this.selected_average_price,this.product.currency)},
+                    {title:this.$t('Product leverage'), key: this.getObjectPropertyByUrl("leverages", this.product.leverages, "multiplier") },
+                    {title:this.$t('Product real leverage'), key: this.product.real_leveraged_multiplier},
                 ]
             },
             empty_products_ranges,

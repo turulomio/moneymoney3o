@@ -2,12 +2,12 @@
     <v-autocomplete :readonly="readonly" :items="store().products" v-model="new_value" :label="mylabel" :return-object="returnObject" item-value="url" :rules="$attrs.rules" @change="on_change">
 
         <template slot="item" slot-scope="{ item }">
-            <div><v-icon :class="'mr-3 fi fib fi-'+item.flag" small :title="$store.getters.getCountryNameByCode(item.flag)"></v-icon>
+            <div><v-icon :class="'mr-3 fi fib fi-'+item.flag" small :title="this.getCountryNameByCode(item.flag)"></v-icon>
                 {{item.fullname}}</div>
         </template>
 
         <template slot="selection" slot-scope="{ item }">       
-            <div><v-icon :class="'mr-3 fi fib fi-'+item.flag" small :title="$store.getters.getCountryNameByCode(item.flag)"></v-icon>
+            <div><v-icon :class="'mr-3 fi fib fi-'+item.flag" small :title="this.getCountryNameByCode(item.flag)"></v-icon>
                 {{item.fullname}}</div>
       </template>
 

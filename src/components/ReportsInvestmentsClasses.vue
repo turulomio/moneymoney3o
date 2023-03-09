@@ -54,9 +54,9 @@
                 var products= this.data.by_product
                 var adapted
                 if (this.method=="Current"){
-                    adapted= products.map(el => ({name: el.name, value: this.my_round(el.balance, 2)}))
+                    adapted= products.map(el => ({name: el.name, key: this.my_round(el.balance, 2)}))
                 } else {//Invested
-                    adapted= products.map(el => ({name: el.name, value: this.my_round(el.invested,2)}))
+                    adapted= products.map(el => ({name: el.name, key: this.my_round(el.invested,2)}))
                 }
                 adapted=adapted.filter(o => o.value!=0)
                 return adapted
@@ -65,9 +65,9 @@
                 var products= this.data.by_pci
                 var adapted
                 if (this.method=="Current"){
-                    adapted= products.map(el => ({name: el.name, value: this.my_round(el.balance, 2)}))
+                    adapted= products.map(el => ({name: el.name, key: this.my_round(el.balance, 2)}))
                 } else {//Invested
-                    adapted= products.map(el => ({name: el.name, value: this.my_round(el.invested,2)}))
+                    adapted= products.map(el => ({name: el.name, key: this.my_round(el.invested,2)}))
                 }
                 adapted=adapted.filter(o => o.value!=0)
                 return adapted
@@ -77,9 +77,9 @@
                 var adapted
 
                 if (this.method=="Current"){
-                    adapted= products.map(el => ({name: el.name, value: this.my_round(el.balance, 2)}))
+                    adapted= products.map(el => ({name: el.name, key: this.my_round(el.balance, 2)}))
                 } else {//Invested
-                    adapted= products.map(el => ({name: el.name, value: this.my_round(el.invested,2)}))
+                    adapted= products.map(el => ({name: el.name, key: this.my_round(el.invested,2)}))
                 }
                 adapted=adapted.filter(o => o.value!=0)
                 return adapted
@@ -88,9 +88,9 @@
                 var products= this.data.by_producttype
                 var adapted
                 if (this.method=="Current"){
-                    adapted= products.map(el => ({name: el.name, value: this.my_round(el.balance, 2)}))
+                    adapted= products.map(el => ({name: el.name, key: this.my_round(el.balance, 2)}))
                 } else {//Invested
-                    adapted= products.map(el => ({name: el.name, value: this.my_round(el.invested,2)}))
+                    adapted= products.map(el => ({name: el.name, key: this.my_round(el.invested,2)}))
                 }
                 adapted=adapted.filter(o => o.value!=0)
                 return adapted
@@ -99,9 +99,9 @@
                 var products= this.data.by_leverage
                 var adapted
                 if (this.method=="Current"){
-                    adapted= products.map(el => ({name: el.name, value: this.my_round(el.balance, 2)}))
+                    adapted= products.map(el => ({name: el.name, key: this.my_round(el.balance, 2)}))
                 } else {//Invested
-                    adapted= products.map(el => ({name: el.name, value: this.my_round(el.invested,2)}))
+                    adapted= products.map(el => ({name: el.name, key: this.my_round(el.invested,2)}))
                 }
                 adapted=adapted.filter(o => o.value!=0)
                 return adapted

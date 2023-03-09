@@ -65,10 +65,10 @@
                 dialog_cu:false,
                 items:[],
                 headers:[
-                    { text: this.$t('Name'), sortable: true, value: 'name'},
-                    { text: this.$t('Product A'), value: 'a',  width: "30%"},
-                    { text: this.$t('Product B'), value: 'b',  width: "30%"},
-                    { text: this.$t('Actions'), value: 'actions', sortable: false , width:"7%"},
+                    { title: this.$t('Name'), sortable: true, key: 'name'},
+                    { title: this.$t('Product A'), key: 'a',  width: "30%"},
+                    { title: this.$t('Product B'), key: 'b',  width: "30%"},
+                    { title: this.$t('Actions'), key: 'actions', sortable: false , width:"7%"},
 
                 ],
 

@@ -64,9 +64,9 @@
         data(){ 
             return{
                 headers: [
-                    { text: this.$t('Ranking'), sortable: true, value: 'ranking',  width: "3%"},
-                    { text: this.$t('Name'), value: 'name'},
-                    { text: this.$t('Current net gains'), value: 'current_net_gains', align:'right',  width: "10%", 
+                    { title: this.$t('Ranking'), sortable: true, key: 'ranking',  width: "3%"},
+                    { title: this.$t('Name'), key: 'name'},
+                    { title: this.$t('Current net gains'), key: 'current_net_gains', align:'end',  width: "10%", 
                         filter: value => {
                             if (this.only_current_investments){
                                 if ( value!=0){
@@ -79,10 +79,10 @@
                             }
                         }
                     },
-                    { text: this.$t('Historical net gains'), value: 'historical_net_gains', align:'right',  width: "10%"},
-                    { text: this.$t('Net dividends'), value: 'dividends', align:'right',  width: "10%"},
-                    { text: this.$t('Total'), value: 'total', align:'right',  width: "10%"},
-                    { text: this.$t('Actions'), value: 'actions', sortable: false , width: "7%"},
+                    { title: this.$t('Historical net gains'), key: 'historical_net_gains', align:'end',  width: "10%"},
+                    { title: this.$t('Net dividends'), key: 'dividends', align:'end',  width: "10%"},
+                    { title: this.$t('Total'), key: 'total', align:'end',  width: "10%"},
+                    { title: this.$t('Actions'), key: 'actions', sortable: false , width: "7%"},
                 ],
                 data:[
                 ],

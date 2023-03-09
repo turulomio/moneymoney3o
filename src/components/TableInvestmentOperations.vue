@@ -105,54 +105,54 @@
                 var r
                 if (this.output=="account"){
                     r= [
-                        { text: this.$t('Date and time'), value: 'datetime',sortable: true },
-                        { text: this.$t('Operation'), value: 'operationstypes',sortable: true },
-                        { text: this.$t('Shares'), value: 'shares',sortable: false, align:"right"},
-                        { text: this.$t('Price'), value: 'price',sortable: false, align:"right"},
-                        { text: this.$t('Gross'), value: 'gross_account',sortable: false, align:"right"},
-                        { text: this.$t('Commission'), value: 'commission',sortable: false, align:"right"},
-                        { text: this.$t('Taxes'), value: 'taxes',sortable: false, align:"right"},
-                        { text: this.$t('Net'), value: 'net_account',sortable: false, align:"right"},
-                        { text: this.$t('Currency factor'), value: 'currency_conversion',sortable: false, align:"right"},
-                        { text: this.$t('Comment'), value: 'comment',sortable: false},
+                        { title: this.$t('Date and time'), key: 'datetime',sortable: true },
+                        { title: this.$t('Operation'), key: 'operationstypes',sortable: true },
+                        { title: this.$t('Shares'), key: 'shares',sortable: false, align:'end'},
+                        { title: this.$t('Price'), key: 'price',sortable: false, align:'end'},
+                        { title: this.$t('Gross'), key: 'gross_account',sortable: false, align:'end'},
+                        { title: this.$t('Commission'), key: 'commission',sortable: false, align:'end'},
+                        { title: this.$t('Taxes'), key: 'taxes',sortable: false, align:'end'},
+                        { title: this.$t('Net'), key: 'net_account',sortable: false, align:'end'},
+                        { title: this.$t('Currency factor'), key: 'currency_conversion',sortable: false, align:'end'},
+                        { title: this.$t('Comment'), key: 'comment',sortable: false},
                     ]
                 } else if (this.output=="investment"){                
                     r= [
-                        { text: this.$t('Date and time'), value: 'datetime',sortable: true },
-                        { text: this.$t('Operation'), value: 'operationstypes',sortable: true },
-                        { text: this.$t('Shares'), value: 'shares',sortable: false, align:"right"},
-                        { text: this.$t('Price'), value: 'price',sortable: false, align:"right"},
-                        { text: this.$t('Gross'), value: 'gross_investment',sortable: false, align:"right"},
-                        { text: this.$t('Commission'), value: 'commission',sortable: false, align:"right"},
-                        { text: this.$t('Taxes'), value: 'taxes',sortable: false, align:"right"},
-                        { text: this.$t('Net'), value: 'net_investment',sortable: false, align:"right"},
-                        { text: this.$t('Currency factor'), value: 'currency_conversion',sortable: false, align:"right"},
-                        { text: this.$t('Comment'), value: 'comment',sortable: false},
+                        { title: this.$t('Date and time'), key: 'datetime',sortable: true },
+                        { title: this.$t('Operation'), key: 'operationstypes',sortable: true },
+                        { title: this.$t('Shares'), key: 'shares',sortable: false, align:'end'},
+                        { title: this.$t('Price'), key: 'price',sortable: false, align:'end'},
+                        { title: this.$t('Gross'), key: 'gross_investment',sortable: false, align:'end'},
+                        { title: this.$t('Commission'), key: 'commission',sortable: false, align:'end'},
+                        { title: this.$t('Taxes'), key: 'taxes',sortable: false, align:'end'},
+                        { title: this.$t('Net'), key: 'net_investment',sortable: false, align:'end'},
+                        { title: this.$t('Currency factor'), key: 'currency_conversion',sortable: false, align:'end'},
+                        { title: this.$t('Comment'), key: 'comment',sortable: false},
                     ]
                 } else if (this.output=="user"){
                     r= [
-                        { text: this.$t('Date and time'), value: 'datetime',sortable: true },
-                        { text: this.$t('Operation'), value: 'operationstypes',sortable: true },
-                        { text: this.$t('Shares'), value: 'shares',sortable: false, align:"right"},
-                        { text: this.$t('Price'), value: 'price',sortable: false, align:"right"},
-                        { text: this.$t('Gross'), value: 'gross_user',sortable: false, align:"right"},
-                        { text: this.$t('Commission'), value: 'commission',sortable: false, align:"right"},
-                        { text: this.$t('Taxes'), value: 'taxes',sortable: false, align:"right"},
-                        { text: this.$t('Net'), value: 'net_user',sortable: false, align:"right"},
-                        { text: this.$t('Currency factor'), value: 'currency_conversion',sortable: false, align:"right"},
-                        { text: this.$t('Comment'), value: 'comment',sortable: false},
+                        { title: this.$t('Date and time'), key: 'datetime',sortable: true },
+                        { title: this.$t('Operation'), key: 'operationstypes',sortable: true },
+                        { title: this.$t('Shares'), key: 'shares',sortable: false, align:'end'},
+                        { title: this.$t('Price'), key: 'price',sortable: false, align:'end'},
+                        { title: this.$t('Gross'), key: 'gross_user',sortable: false, align:'end'},
+                        { title: this.$t('Commission'), key: 'commission',sortable: false, align:'end'},
+                        { title: this.$t('Taxes'), key: 'taxes',sortable: false, align:'end'},
+                        { title: this.$t('Net'), key: 'net_user',sortable: false, align:'end'},
+                        { title: this.$t('Currency factor'), key: 'currency_conversion',sortable: false, align:'end'},
+                        { title: this.$t('Comment'), key: 'comment',sortable: false},
                     ]
                 }
 
                 if (this.showactions==true){
-                    r.push({ text: this.$t('Actions'), value: 'actions', sortable: false })
+                    r.push({ title: this.$t('Actions'), key: 'actions', sortable: false })
                 }
                 
                 if (this.currency_product==this.currency_account){
                     r.splice(8,1)
                 }
                 if (this.showinvestment==true){
-                    r.splice(1, 0, { text: this.$t('Name'), value: 'name',sortable: true });
+                    r.splice(1, 0, { title: this.$t('Name'), key: 'name',sortable: true });
                 }
                 return r
             },

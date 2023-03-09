@@ -52,12 +52,12 @@
             return{
                 showActive:true,
                 investments_headers: [
-                    { text: this.$t('Id'), sortable: true, value: 'id',width:"3%"},
-                    { text: this.$t('Editable'), value: 'editable',  width: "3%", align:'right'},
-                    { text: this.$t('Name'), value: 'name'},
-                    { text: this.$t('Operation type'), value: 'operationstypes'},
-                    { text: this.$t('Used'), value: 'used'},
-                    { text: this.$t('Actions'), value: 'actions', sortable: false , width: "10%"},
+                    { title: this.$t('Id'), sortable: true, key: 'id',width:"3%"},
+                    { title: this.$t('Editable'), key: 'editable',  width: "3%", align:'end'},
+                    { title: this.$t('Name'), key: 'name'},
+                    { title: this.$t('Operation type'), key: 'operationstypes'},
+                    { title: this.$t('Used'), key: 'used'},
+                    { title: this.$t('Actions'), key: 'actions', sortable: false , width: "10%"},
                 ],
                 concepts:[],
                 menuinline_items: [

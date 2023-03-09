@@ -39,9 +39,9 @@
                 loading:false,
                 items: [],
                 headers: [
-                    { text: this.$t('Code'), sortable: true, value: 'code'},
-                    { text: this.$t('Product'), sortable: true, value: 'product'},
-                    { text: this.$t('Log'), sortable: true, value: 'log'},
+                    { title: this.$t('Code'), sortable: true, key: 'code'},
+                    { title: this.$t('Product'), sortable: true, key: 'product'},
+                    { title: this.$t('Log'), sortable: true, key: 'log'},
                 ],
             }
         },

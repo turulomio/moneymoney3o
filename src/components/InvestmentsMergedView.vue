@@ -193,9 +193,9 @@
                     this.getObjectPropertyByUrl("leverages",this.product.leverages,"multiplier"),
                     this.product.real_leveraged_multiplier
                     )
-                r.push({title:this.$t('Currency'), value: this.product.currency})
-                r.push({title:this.$t('Product'), value: this.product.name})
-                r.push({title:this.$t('Leverage'), value: this.leverage_message})
+                r.push({title:this.$t('Currency'), key: this.product.currency})
+                r.push({title:this.$t('Product'), key: this.product.name})
+                r.push({title:this.$t('Leverage'), key: this.leverage_message})
                 return r
             },
             setChkDividendsLabel(){

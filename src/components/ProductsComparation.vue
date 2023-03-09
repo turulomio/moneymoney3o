@@ -98,12 +98,12 @@
                 product_b: null,
                 dbdata:[],
                 data_price_ratio_headers:[
-                    { text: this.$t('Date and time'), sortable: true, value: 'datetime'},
-                    { text: this.$t('Date and time seconds diff'), sortable: true, value: 'diff', align:'right'},
-                    { text: this.$t('Better price'), value: 'price_better', align:'right'},
-                    { text: this.$t('Worse price'), value: 'price_worse', align:'right'},
-                    { text: this.$t('Price ratio'), value: 'price_ratio', align:'right'},
-                    { text: this.$t('Percentage from start'), value: 'price_ratio_percentage_from_start', align:'right'},
+                    { title: this.$t('Date and time'), sortable: true, key: 'datetime'},
+                    { title: this.$t('Date and time seconds diff'), sortable: true, key: 'diff', align:'end'},
+                    { title: this.$t('Better price'), key: 'price_better', align:'end'},
+                    { title: this.$t('Worse price'), key: 'price_worse', align:'end'},
+                    { title: this.$t('Price ratio'), key: 'price_ratio', align:'end'},
+                    { title: this.$t('Percentage from start'), key: 'price_ratio_percentage_from_start', align:'end'},
                 ],
                 
                 data_price_ratio_chart:[],
@@ -116,12 +116,12 @@
                 quote_better_from: 0,
                 quote_better_to:0,
                 comparation_by_quote_headers:[
-                    { text: this.$t('Better date and time'), sortable: true, value: 'better_datetime'},
-                    { text: this.$t('Better quote'), value: 'better_quote',   align:'right'},
-                    { text: this.$t('Worse date and time'), sortable: true, value: 'worse_datetime'},
-                    { text: this.$t('Worse quote'), value: 'worse_quote', align:'right'},
+                    { title: this.$t('Better date and time'), sortable: true, key: 'better_datetime'},
+                    { title: this.$t('Better quote'), key: 'better_quote',   align:'end'},
+                    { title: this.$t('Worse date and time'), sortable: true, key: 'worse_datetime'},
+                    { title: this.$t('Worse quote'), key: 'worse_quote', align:'end'},
 
-                    { text: this.$t('Minutes apart'), value: 'minutes_apart',align:'right'},
+                    { title: this.$t('Minutes apart'), key: 'minutes_apart',align:'end'},
 
                     
                 ],
@@ -137,8 +137,8 @@
             empty_chart_scatter_pair_prices,
             display_values(){
                 return [
-                    {title:this.$t('Better product'), value: this.product_a.name},
-                    {title:this.$t('Worse product'), value: this.product_b.name},
+                    {title:this.$t('Better product'), key: this.product_a.name},
+                    {title:this.$t('Worse product'), key: this.product_b.name},
                 ]
             },
             compare_by_quote(){

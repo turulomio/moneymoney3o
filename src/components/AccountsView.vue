@@ -95,11 +95,11 @@
         data () {
             return {
                 displayvalues:[
-                    {title:this.$t('Bank'), value: this.getObjectPropertyByUrl("banks",this.account.banks,"name")},
-                    {title:this.$t('Number'), value: this.account.number},
-                    {title:this.$t('Currency'), value: this.account.currency},
-                    {title:this.$t('Active'), value: this.account.active},
-                    {title:this.$t('Id'), value: this.account.id},
+                    {title:this.$t('Bank'), key: this.getObjectPropertyByUrl("banks",this.account.banks,"name")},
+                    {title:this.$t('Number'), key: this.account.number},
+                    {title:this.$t('Currency'), key: this.account.currency},
+                    {title:this.$t('Active'), key: this.account.active},
+                    {title:this.$t('Id'), key: this.account.id},
                 ],
                 ym: null,
                 tab:0,
@@ -152,12 +152,12 @@
                 ],
                 // DIALOG CREDIT CARDS
                 table_cc_headers:[
-                    { text: this.$t('Name'), value: 'name',sortable: true },
-                    { text: this.$t('Number'), value: 'number',sortable: false},
-                    { text: this.$t('Deferred'), value: 'deferred',sortable: false},
-                    { text: this.$t('Maximum balance'), value: 'maximumbalance',sortable: false, align:"right"},
-                    { text: this.$t('Balance'), value: 'balance',sortable: true ,align:"right"},
-                    { text: this.$t('Actions'), value: 'actions', sortable: false },
+                    { title: this.$t('Name'), key: 'name',sortable: true },
+                    { title: this.$t('Number'), key: 'number',sortable: false},
+                    { title: this.$t('Deferred'), key: 'deferred',sortable: false},
+                    { title: this.$t('Maximum balance'), key: 'maximumbalance',sortable: false, align:'end'},
+                    { title: this.$t('Balance'), key: 'balance',sortable: true ,align:'end'},
+                    { title: this.$t('Actions'), key: 'actions', sortable: false },
                 ],
                 table_cc:[],
                 showActiveCC:true,

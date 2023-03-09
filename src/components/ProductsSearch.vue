@@ -20,7 +20,7 @@
                     <v-icon :class="'mr-2 fi fib fi-'+item.flag" small :title="$store.getters.getCountryNameByCode(item.flag)"></v-icon><span :class="class_name(item)">{{item.name}}</span>
                 </template>  
                 <template v-slot:[`item.type`]="{ item }">
-                    {{ $store.getters.getObjectPropertyByUrl("productstypes",item.productstypes,"localname")}}
+                    {{ getObjectPropertyByUrl("productstypes",item.productstypes,"localname")}}
                 </template>                                    
                 <template v-slot:[`item.last_datetime`]="{ item }">
                     {{localtime(item.last_datetime)}}

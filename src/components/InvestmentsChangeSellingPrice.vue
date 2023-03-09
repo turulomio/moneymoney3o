@@ -4,7 +4,7 @@
         <div v-html="$t('Table with all investments with the same product as current investment:')"></div>
         <v-data-table ref="table" v-model="selected" :headers="tableHeaders" :items="data" :single-select="false" item-key="id" show-select class="elevation-1 mt-2" :disable-pagination="true" dense >
             <template v-slot:[`item.fullname`]="{ item }">
-                {{ $store.getters.getObjectPropertyByUrl("investments",item.url,"fullname") }}
+                {{ getObjectPropertyByUrl("investments",item.url,"fullname") }}
             </template>            
             <template v-slot:[`item.selling_price`]="{ item }">
                 {{ currency_string(item.selling_price, item.currency)}}
@@ -210,7 +210,7 @@
                     {title:this.$t('Selected invested amount'), value: this.currency_string(this.selected_invested,this.product.currency)},
                     {title:this.$t('Number of shares selected'), value: this.selected_shares},
                     {title:this.$t('Average price of selected shares'), value: this.currency_string(this.selected_average_price,this.product.currency)},
-                    {title:this.$t('Product leverage'), value: this.$store.getters.getObjectPropertyByUrl("leverages", this.product.leverages, "multiplier") },
+                    {title:this.$t('Product leverage'), value: this.getObjectPropertyByUrl("leverages", this.product.leverages, "multiplier") },
                     {title:this.$t('Product real leverage'), value: this.product.real_leveraged_multiplier},
                 ]
             },

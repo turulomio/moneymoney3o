@@ -5,10 +5,10 @@
                 <div>{{ localtime(item.datetime)}}</div>
             </template>         
            <template v-slot:[`item.concepts`]="{ item }">
-               <div v-html="$store.getters.getObjectPropertyByUrl('concepts',item.concepts,'localname')"></div>
+               <div v-html="getObjectPropertyByUrl('concepts',item.concepts,'localname')"></div>
            </template>       
            <template v-slot:[`item.investments`]="{ item }">
-               <div v-html="$store.getters.getObjectPropertyByUrl('investments',item.investments,'fullname')"></div>
+               <div v-html="getObjectPropertyByUrl('investments',item.investments,'fullname')"></div>
            </template> 
             <template v-slot:[`item.gross`]="{ item }">
                 <div v-html="currency_html(item.gross,item.currency)"></div>

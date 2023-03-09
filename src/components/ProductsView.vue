@@ -154,7 +154,7 @@
         data () {
             return {
                 displayvalues:[
-                    {title:this.$t('Leverage'), value: this.$store.getters.getObjectPropertyByUrl("leverages",this.product.leverages,"localname")},
+                    {title:this.$t('Leverage'), value: this.getObjectPropertyByUrl("leverages",this.product.leverages,"localname")},
                     {title:this.$t('Currency'), value: this.product.currency},
                     {title:this.$t('Obsolete'), value: this.product.obsolete},
                     {title:this.$t('Id'), value: this.product.id},

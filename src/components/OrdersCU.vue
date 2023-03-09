@@ -94,8 +94,8 @@
         computed:{
             product_decimals: function(){
                 return 6
-                // var product=this.$store.getters.getObjectPropertyByUrl("investments",this.neworder.investments,"products")
-                // return this.$store.getters.getObjectPropertyByUrl("products",product,"decimals")
+                // var product=this.getObjectPropertyByUrl("investments",this.neworder.investments,"products")
+                // return this.getObjectPropertyByUrl("products",product,"decimals")
             },
         },
         methods: {
@@ -179,7 +179,7 @@
                 r=r + stw
                 r=r +"<ul>"
                 r=r+"<li>" + this.$t("Expiration") + `: ${this.neworder.expiration}</li>`
-                r=r+"<li>" + this.$t("Investment") + `: ${this.$store.getters.getObjectPropertyByUrl("investments", this.neworder.investments,"fullname")}</li>`
+                r=r+"<li>" + this.$t("Investment") + `: ${this.getObjectPropertyByUrl("investments", this.neworder.investments,"fullname")}</li>`
                 r=r+"<li>" + this.$t("Shares") + `: ${this.neworder.shares}</li>`
                 r=r+"<li>" + this.$t("Price") + `: ${this.neworder.price}</li>`
 

@@ -5,14 +5,14 @@
               <div :ref="index">{{ localtime(item.datetime)}}</div>
             </template>           
            <template v-slot:[`item.operationstypes`]="{ item }">
-               <div v-html="$store.getters.getObjectPropertyByUrl('operationstypes',item.operationstypes,'localname')"></div>
+               <div v-html="getObjectPropertyByUrl('operationstypes',item.operationstypes,'localname')"></div>
            </template>
             <template v-slot:[`item.price`]="{ item }">
             {{ currency_string(item.price, currency(item))}}
             </template>
                          
             <template v-slot:[`item.name`]="{ item }">
-                <div v-html="$store.getters.getObjectPropertyByUrl('investments', item.investments,'fullname')"></div>
+                <div v-html="getObjectPropertyByUrl('investments', item.investments,'fullname')"></div>
             </template>  
             <template v-slot:[`item.gross_account`]="{ item }">
             {{ currency_string(item.gross_account, currency(item))}}

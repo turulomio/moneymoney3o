@@ -4,27 +4,27 @@
             <MyMenuInline :items="menuinline_items" :context="this"></MyMenuInline>
         </h1>
         <v-card outlined class="ma-4 pa-4">
-            <v-checkbox v-model="showActive" :label="setCheckboxLabel()" @click="on_chkActive()" ></v-checkbox>
-            <v-data-table dense :headers="accounts_headers" :items="accounts_items" sort-by="percentage_selling_point" class="elevation-1 cursorpointer" hide-default-footer disable-pagination :loading="loading_accounts" :key="key"  @click:row="viewItem">
+            <v-checkbox v-model="showActive" :label="chkLabel" ></v-checkbox>
+            <v-data-table dense :headers="accounts_headers" :items="accounts_items" :sort-by="[{key:'localname', order: 'asc'}]" class="elevation-1 cursorpointer" hide-default-footer disable-pagination :loading="loading_accounts" :key="key"  @click:row="viewItem">
                 <template v-slot:[`item.last_datetime`]="{ item }">
-                    {{localtime(item.last_datetime)}}
+                    {{localtime(item.raw.last_datetime)}}
                 </template>             
                 <template v-slot:[`item.banks`]="{ item }">
-                    <div v-html="$store.getters.getObjectPropertyByUrl('banks',item.banks,'localname')"></div>
+                    <div v-html="getObjectPropertyByUrl('banks',item.raw.banks,'localname')"></div>
                 </template>     
                 <template v-slot:[`item.balance_user`]="{ item }">
-                    <div v-html="localcurrency_html(item.balance_user)"></div>
+                    <div v-html="localcurrency_html(item.raw.balance_user)"></div>
                 </template>     
                 <template v-slot:[`item.balance_account`]="{ item }">
-                    <div v-html="currency_html(item.balance_account, item.currency )"></div>
+                    <div v-html="currency_html(item.raw.balance_account, item.raw.currency )"></div>
                 </template>                   
                 <template v-slot:[`item.active`]="{ item }">
-                    <v-icon small v-if="item.active" >mdi-check-outline</v-icon>
+                    <v-icon small v-if="item.raw.active" >mdi-check-outline</v-icon>
                 </template>         
 
                 <template v-slot:[`item.actions`]="{ item }">
-                    <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
-                    <v-icon small @click="deleteItem(item)" v-if="item.is_deletable">mdi-delete</v-icon>
+                    <v-icon small class="mr-2" @click.stop="editItem(item)">mdi-pencil</v-icon>
+                    <v-icon small @click.stop="deleteItem(item)" v-if="item.is_deletable">mdi-delete</v-icon>
                 </template>                  
                 <template v-slot:[`body.append`]="{headers}">
                     <tr class="totalrow">
@@ -84,15 +84,16 @@
         data(){ 
             return{
                 showActive:true,
+                chkLabel:"",
                 accounts_headers: [
-                    { text: this.$t('Name'), sortable: true, value: 'localname', width:"21%"},
-                    { text: this.$t('Bank'), sortable: true, value: 'banks', width:"21%"},
-                    { text: this.$t('Active'), value: 'active',  width: "8%"},
-                    { text: this.$t('Currency'), value: 'currency',  width: "8%"},
-                    { text: this.$t('Number'), value: 'number',  width: "10%", align:'right'},
-                    { text: this.$t('Balance'), value: 'balance_account',  width: "12%", align:'right'},
-                    { text: this.$t('Balance user currency'), value: 'balance_user', width: "12%", align:'right'},
-                    { text: this.$t('Actions'), value: 'actions', sortable: false , width: "7%"},
+                    { title: this.$t('Name'), sortable: true, key: 'localname', width:"21%"},
+                    { title: this.$t('Bank'), sortable: true, key: 'banks', width:"21%"},
+                    { title: this.$t('Active'), key: 'active',  width: "8%"},
+                    { title: this.$t('Currency'), key: 'currency',  width: "8%"},
+                    { title: this.$t('Number'), key: 'number',  width: "10%", align:'end'},
+                    { title: this.$t('Balance'), key: 'balance_account',  width: "12%", align:'end'},
+                    { title: this.$t('Balance user currency'), key: 'balance_user', width: "12%", align:'end'},
+                    { title: this.$t('Actions'), key: 'actions', sortable: false , width: "7%"},
                 ],
                 accounts_items:[],
                 menuinline_items: [
@@ -150,27 +151,37 @@
                 dialog_transfer:false,
             }
         },
+        watch:{
+            showActive () {
+                this.update_table()
+            },
+        },
         methods: {
             empty_account,
             empty_account_transfer,
             editItem (item) {
-                this.account=item
+                this.account=item.raw
                 this.account_deleting=false
                 this.key=this.key+1
                 this.dialog=true
             },
             viewItem (item) {
                 this.key=this.key+1
-                this.account=item
+                this.account=item.raw
                 this.dialog_view=true
             },
             deleteItem (item) {
-                this.account=item
+                this.account=item.raw
                 this.key=this.key+1
                 this.account_deleting=true
                 this.dialog=true
             },
             update_table(){
+                if (this.showActive== true){
+                    this.chkLabel=this.$t("Uncheck to see inactive accounts")
+                } else {
+                    this.chkLabel=this.$t("Check to see active accounts")
+                }
                 this.loading_accounts=true
                 axios.get(`${this.store().apiroot}/api/accounts/withbalance/?active=${this.showActive}`, this.myheaders())
                 .then((response) => {
@@ -180,17 +191,6 @@
                     this.parseResponseError(error)
                 });
             },
-            on_chkActive(){
-                this.update_table()
-            },
-            setCheckboxLabel(){
-                if (this.showActive== true){
-                    return this.$t("Uncheck to see inactive accounts")
-                } else {
-                    return this.$t("Check to see active accounts")
-                }
-            },
-
             on_AccountsoperationsSearch_cruded(){
                 this.update_table()
             },

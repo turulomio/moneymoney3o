@@ -190,7 +190,7 @@
             displayvalues(){
                 var r= []       
                 this.leverage_message= this.$t("{0} (Real: {1})").format(
-                    this.$store.getters.getObjectPropertyByUrl("leverages",this.product.leverages,"multiplier"),
+                    this.getObjectPropertyByUrl("leverages",this.product.leverages,"multiplier"),
                     this.product.real_leveraged_multiplier
                     )
                 r.push({title:this.$t('Currency'), value: this.product.currency})
@@ -245,7 +245,7 @@
                 //Convert this.investments to an array of ids
                 var investments_ids=[]
                 this.investments.forEach(o => {
-                    investments_ids.push(this.$store.getters.getObjectPropertyByUrl("investments", o,"id"))
+                    investments_ids.push(this.getObjectPropertyByUrl("investments", o,"id"))
                 });
 
 

@@ -8,7 +8,7 @@
                 <v-icon small v-if="item.editable" >mdi-check-outline</v-icon>
             </template>             
            <template v-slot:[`item.operationstypes`]="{ item }">
-               <div v-html="$store.getters.getObjectPropertyByUrl('operationstypes',item.operationstypes,'localname')"></div>
+               <div v-html="getObjectPropertyByUrl('operationstypes',item.operationstypes,'localname')"></div>
            </template>           
            <template v-slot:[`item.name`]="{ item }">
                <div v-html="item.name" :class="(item.editable==true && item.id<1000) ? 'boldred' : ''"></div>

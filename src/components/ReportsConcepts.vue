@@ -15,7 +15,7 @@
                     <v-card outlined>
                         <v-data-table dense :headers="itemsHeaders" :items="itemsPositive"  class="elevation-1 cursorpointer" disable-pagination  hide-default-footer :loading="loading" height="300" @click:row="viewHistoricalReport">
                             <template v-slot:[`item.concept`]="{ item }">
-                                <div v-html="$store.getters.getObjectPropertyByUrl('concepts',item.concept,'name')"></div>
+                                <div v-html="getObjectPropertyByUrl('concepts',item.concept,'name')"></div>
                             </template> 
                             <template v-slot:[`item.total`]="{ item }">
                                 <div v-html="localcurrency_html(item.total)"></div>
@@ -45,7 +45,7 @@
                     <v-card outlined>
                         <v-data-table dense :headers="itemsHeaders" :items="itemsNegative"  class="elevation-1 cursorpointer" disable-pagination  hide-default-footer :sort-by="['year']" :loading="loading" @click:row="viewHistoricalReport">
                             <template v-slot:[`item.concept`]="{ item }">
-                                <div v-html="$store.getters.getObjectPropertyByUrl('concepts',item.concept,'name')"></div>
+                                <div v-html="getObjectPropertyByUrl('concepts',item.concept,'name')"></div>
                             </template> 
                             <template v-slot:[`item.total`]="{ item }">
                                 <div v-html="localcurrency_html(item.total)"></div>

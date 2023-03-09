@@ -69,10 +69,10 @@
         computed:{
             product_decimals: function(){
                 return 6
-                //return this.$store.getters.getObjectPropertyByUrl("products",this.investment.products,"decimals")
+                //return this.getObjectPropertyByUrl("products",this.investment.products,"decimals")
             },
             accounts_decimals: function(){
-                return this.$store.getters.getObjectPropertyByUrl("accounts",this.investment.accounts,"decimals")
+                return this.getObjectPropertyByUrl("accounts",this.investment.accounts,"decimals")
             },
             investment: function(){
                 return this.$store.getters.getObjectByUrl("investments",this.new_io.investments)

@@ -4,10 +4,10 @@
                 {{ localtime(item.dt_end)}}
             </template>                  
             <template v-slot:[`item.investments`]="{ item }">
-                <div v-html="$store.getters.getObjectPropertyByUrl('investments', item.investments,'fullname')"></div>
+                <div v-html="getObjectPropertyByUrl('investments', item.investments,'fullname')"></div>
             </template>  
             <template v-slot:[`item.operationstypes`]="{ item }">
-                <div v-html="$store.getters.getObjectPropertyByUrl('operationstypes',item.operationstypes,'localname')"></div>
+                <div v-html="getObjectPropertyByUrl('operationstypes',item.operationstypes,'localname')"></div>
             </template>
             <template v-slot:[`item.gross_start_user`]="{ item }">
                 <div v-html="currency_html(item.gross_start_user, item.currency_user)"></div>

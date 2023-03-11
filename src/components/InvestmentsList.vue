@@ -4,7 +4,7 @@
             <MyMenuInline :items="menuinline_items" :context="this"></MyMenuInline>
         </h1>
             <v-row class="pa-4">
-                <v-checkbox class="ml-6 mr-10" v-model="showActive" :label="setCheckboxLabel()" @click="on_chkActive()" ></v-checkbox>
+                <v-checkbox class="ml-6 mr-10" v-model="showActive" :label="setCheckboxLabel()" />
                 <v-text-field class="ml-10 mr-6" v-model="search" append-icon="mdi-magnify" :label="$t('Filter')" single-line hide-details :placeholder="$t('Add a string to filter table')"></v-text-field>
 
                 <v-btn color="primary" class="mr-4" @click="products_autoupdate()" :loading="products_updating">{{ $t("Products autoupdate")}}
@@ -45,11 +45,10 @@
                     <div v-html="percentage_html(item.raw.percentage_invested )"></div>
                 </template>  
                 <template v-slot:[`item.percentage_selling_point`]="{ item }">  
-                        <v-tooltip left>
-                        <template v-slot:activator="{ on }">
-                            <div v-on="on" :class="item.raw.percentage_selling_point<0.05 ? 'boldgreen' : ''" v-html="percentage_html(item.raw.percentage_selling_point)"></div>
+                    <v-tooltip left :text="tooltip_selling_percentage(item.raw)">
+                        <template v-slot:activator="{ props }">
+                            <div v-bind="props" :class="item.raw.percentage_selling_point<0.05 ? 'boldgreen' : ''" v-html="percentage_html(item.raw.percentage_selling_point)"></div>
                         </template>
-                        <span><div v-html="tooltip_selling_percentage(item.raw)"></div></span>
                     </v-tooltip>   
                 </template>              
                 <template v-slot:[`item.actions`]="{ item }">
@@ -57,35 +56,20 @@
                     <v-icon small class="ml-1" @click.stop="editItem(item.raw)">mdi-pencil</v-icon>
                     <v-icon small class="ml-1" @click.stop="deleteItem(item.raw)" v-if="item.raw.is_deletable">mdi-delete</v-icon>
                     <v-icon small class="ml-1" v-if="(new Date().setHours(0,0,0,0)>new Date(item.raw.selling_expiration).setHours(0,0,0,0)) && item.raw.selling_expiration!=null" @click="changeSellingPrice(item.raw)" color="#9933ff" style="font-weight:bold">mdi-alarm</v-icon>     
-                </template>                
-                <template v-slot:[`tfoot`]>
-                    <tr class="totalrow" :id="headers" >
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                    </tr>
-                </template>             
+                </template>         
                 <template v-slot:[`tbody`]>
-                    <tr class="totalrow" :id="headers" >
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
-                        <td>HOLA</td>
+                    <tr class="totalrow pa-6">
+                        <td>{{ $t("Total ({0}):", [investments_items.length])}}</td>
+                        <td></td>
+                        <td></td>
+                        <td class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'daily_difference'))"></td>
+                        <td class="right" v-html="percentage_html(listobjects_sum(investments_items,'daily_difference')/listobjects_sum(investments_items,'balance_user'))"></td>
+                        <td class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'invested_user'))"></td>
+                        <td class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'gains_user'))"></td>
+                        <td class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'balance_user'))"></td>
+                        <td class="right" v-html="percentage_html(listobjects_sum(investments_items,'gains_user')/listobjects_sum(investments_items,'invested_user'))"></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </template>
             </v-data-table>
@@ -192,6 +176,11 @@
                 update_errors:0,
             }
         },
+        watch:{
+            showActive () {
+                this.update_table()
+            },
+        },
         methods: { 
             addQuote(item){
                 this.quote=this.empty_quote()
@@ -240,11 +229,11 @@
                 this.update_table()
             },
             tooltip_selling_percentage(item){
-                return this.$t("Selling price: {0}.<br>Selling point gains {1}.<br>Order valid until {2}.").format(
+                return this.$t("Selling price: {0}.<br>Selling point gains {1}.<br>Order valid until {2}.",[
                     this.currency_string(item.selling_price,item.currency),
                     this.currency_string(item.gains_at_selling_point_investment,item.currency),
                     item.selling_expiration
-                    )
+                ])
             },
             setCheckboxLabel(){
                 if (this.showActive== true){
@@ -256,11 +245,11 @@
             update_foot(){
                 var positives=this.listobjects_sum(this.investments_items.filter((o) => o.gains_user >=0), "gains_user")
                 var negatives=this.listobjects_sum(this.investments_items.filter((o) => o.gains_user <0), "gains_user")
-                this.foot= "<p>" + this.$t("Positive gains - Negative gains = {0} {1} = {2}").format(
+                this.foot= "<p>" + this.$t("Positive gains - Negative gains = {0} {1} = {2}", [
                     this.localcurrency_html(positives),
                     this.localcurrency_html(negatives),
                     this.localcurrency_html(positives+negatives)
-                 ) + "</p>"
+                ]) + "</p>"
             },
             update_table(){
                 this.loading_investments=true

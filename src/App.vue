@@ -206,6 +206,11 @@ span.vuered{
     text-align: center;
 }
 
+.right{
+    text-align: right;
+
+}
+
 .v-application .inform {
     margin-bottom: 1px;
     background-color: white !important;

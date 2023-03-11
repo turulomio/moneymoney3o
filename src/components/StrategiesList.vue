@@ -5,57 +5,56 @@
         </h1>
         <v-card outlined class="ma-4 pa-4">
             <v-checkbox v-model="showActive" :label="setCheckboxLabel()" @click="on_chkActive()" ></v-checkbox>
-            <v-data-table dense :headers="strategies_headers" :items="strategies_items" sort-by="percentage_selling_point" class="elevation-1 cursorpointer" hide-default-footer disable-pagination :loading="loading_strategies" :key="key" @click:row="detailedviewItem">
-                <template v-slot:[`item.name`]="{ item }">
+            <EasyDataTable alternating  :headers="strategies_headers" :items="strategies_items" sort-by="percentage_selling_point" class="elevation-1 cursorpointer" hide-default-footer disable-pagination :loading="loading_strategies" :key="key" @click:row="detailedviewItem">
+                <!-- <template v-slot:[`item.name`]="{ item }">
                     <v-tooltip right>
                         <template v-slot:activator="{ on }">
                             <div v-on="on">{{ item.name }}</div>
                         </template>
                         <span>{{ item.comment }}</span>
                     </v-tooltip>
-                </template>
-                <template v-slot:[`item.dt_from`]="{ item }">
-                    {{localtime(item.dt_from)}}
-                </template>                  
-                <template v-slot:[`item.dt_to`]="{ item }">
-                    {{localtime(item.dt_to)}}
-                </template>  
-                <template v-slot:[`item.invested`]="{ item }">
-                    <div v-html="localcurrency_html(item.invested)"></div>
+                </template> -->  
+                <template #item-dt_from="item">
+                    <div v-html="localtime(item.dt_from )"></div>
+                </template>        
+                <template #item-dt_to="item">
+                    <div v-html="localtime(item.dt_to )"></div>
+                </template>   
+                <template #item-invested="item">
+                    <div class="right" v-html="localcurrency_html(item.invested)"></div>
                 </template>    
-                <template v-slot:[`item.gains_current_net_user`]="{ item }">
-                    <div v-html="localcurrency_html(item.gains_current_net_user)"></div>
+                <template #item-gains_current_net_user="item">
+                    <div class="right" v-html="localcurrency_html(item.gains_current_net_user)"></div>
                 </template>    
-                <template v-slot:[`item.gains_historical_net_user`]="{ item }">
-                    <div v-html="localcurrency_html(item.gains_historical_net_user)"></div>
+                <template #item-gains_historical_net_user="item">
+                    <div class="right" v-html="localcurrency_html(item.gains_historical_net_user)"></div>
                 </template>    
-                <template v-slot:[`item.dividends_net_user`]="{ item }">
-                    <div v-html="localcurrency_html(item.dividends_net_user)"></div>
+                <template #item-dividends_net_user="item">
+                    <div class="right" v-html="localcurrency_html(item.dividends_net_user)"></div>
                 </template>    
-                <template v-slot:[`item.total_net_user`]="{ item }">
-                    <div v-html="localcurrency_html(item.total_net_user)"></div>
+                <template #item-total_net_user="item">
+                    <div class="right" v-html="localcurrency_html(item.total_net_user)"></div>
                 </template>           
 
-                <template v-slot:[`item.actions`]="{ item }">
+                <template #item-actions="item">
                     <v-icon small class="mr-2" @click.stop="viewItem(item)">mdi-eye</v-icon>
                     <v-icon small class="mr-2" @click.stop="editItem(item)">mdi-pencil</v-icon>
                     <v-icon small @click.stop="deleteItem(item)">mdi-delete</v-icon>
                 </template>                  
-                <template v-slot:[`body.append`]="{headers}">
+                <template #body-append>
                     <tr class="totalrow">
-                        <td v-for="(header,i) in headers" :key="i">
-                            <div v-if="header.value == 'name'">
-                                {{$t("Total ({0} strategies)").format(strategies_items.length) }}
-                            </div>
-                            <div v-if="header.value == 'invested'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(strategies_items,'invested'))"></div>
-                            <div v-if="header.value == 'gains_current_net_user'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(strategies_items,'gains_current_net_user'))"></div>
-                            <div v-if="header.value == 'gains_historical_net_user'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(strategies_items,'gains_historical_net_user'))"></div>
-                            <div v-if="header.value == 'dividends_net_user'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(strategies_items,'dividends_net_user'))"></div>
-                            <div v-if="header.value == 'total_net_user'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(strategies_items,'total_net_user'))"></div>
-                        </td>
+                        <td>{{$t("Total ({0} strategies)", [strategies_items.length]) }}</td>
+                        <td></td>
+                        <td></td>
+                        <td class="right" v-html="localcurrency_html(listobjects_sum(strategies_items,'invested'))"></td>
+                        <td class="right" v-html="localcurrency_html(listobjects_sum(strategies_items,'gains_current_net_user'))"></td>
+                        <td class="right" v-html="localcurrency_html(listobjects_sum(strategies_items,'gains_historical_net_user'))"></td>
+                        <td class="right" v-html="localcurrency_html(listobjects_sum(strategies_items,'dividends_net_user'))"></td>
+                        <td class="right" v-html="localcurrency_html(listobjects_sum(strategies_items,'total_net_user'))"></td>
+                        <td></td>
                     </tr>
                 </template>
-            </v-data-table>
+            </EasyDataTable>
         </v-card>
 
         <!-- Strategy CU -->
@@ -98,15 +97,15 @@
             return{
                 showActive:true,
                 strategies_headers: [
-                    { title: this.$t('Name'), sortable: true, key: 'name'},
-                    { title: this.$t('Date and time from'), sortable: true, key: 'dt_from',  width: "10%"},
-                    { title: this.$t('Date and time to'), key: 'dt_to',  width: "10%"},
-                    { title: this.$t('Invested'), key: 'invested',  width: "7%", align:'end'},
-                    { title: this.$t('Current net gains'), key: 'gains_current_net_user',  width: "7%", align:'end'},
-                    { title: this.$t('Historical net gains'), key: 'gains_historical_net_user',  width: "7%", align:'end'},
-                    { title: this.$t('Net dividends'), key: 'dividends_net_user',  width: "7%", align:'end'},
-                    { title: this.$t('Total'), key: 'total_net_user',  width: "7%", align:'end'},
-                    { title: this.$t('Actions'), key: 'actions', sortable: false , width: "7%"},
+                    { text: this.$t('Name'), sortable: true, value: 'name'},
+                    { text: this.$t('Date and time from'), sortable: true, value: 'dt_from',  width: "10%"},
+                    { text: this.$t('Date and time to'), value: 'dt_to',  width: "10%"},
+                    { text: this.$t('Invested'), value: 'invested',  width: "7%", align:'right'},
+                    { text: this.$t('Current net gains'), value: 'gains_current_net_user',  width: "7%", align:'right'},
+                    { text: this.$t('Historical net gains'), value: 'gains_historical_net_user',  width: "7%", align:'right'},
+                    { text: this.$t('Net dividends'), value: 'dividends_net_user',  width: "7%", align:'right'},
+                    { text: this.$t('Total'), value: 'total_net_user',  width: "7%", align:'right'},
+                    { text: this.$t('Actions'), value: 'actions', sortable: false , width: "7%"},
                 ],
                 strategies_items:[],
                 menuinline_items: [

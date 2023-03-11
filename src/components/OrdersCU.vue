@@ -10,7 +10,7 @@
                 <MyDatePicker v-model="new_order.date"  :readonly="mode=='D'" :label="$t('Set order date')" :rules="RulesDate(true)" />
                 <MyDatePicker v-model="new_order.expiration" :readonly="mode=='D'" :label="$t('Set order expiration date')" :rules="RulesDate(false)" />
                 <v-autocomplete :items="store().investments" :readonly="mode=='D'" v-model="new_order.investments" :label="$t('Select an investment')" item-title="fullname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
-                <MyDateTimePicker v-model="new_order.executed" :readonly="mode=='D'"  :label="$t('Set order execution date and time')"></MyDateTimePicker>
+                <MyDateTimePicker v-model="new_order.executed" :readonly="mode=='D'" v-if="mode=='U'" :label="$t('Set order execution date and time')"></MyDateTimePicker>
                 <v-text-field v-model.number="new_order.shares" :readonly="mode=='D'" :label="$t('Set order shares')" :placeholder="$t('Set order shares')" :rules="RulesFloatGEZ(12,true,6)" counter="12"/>
                 <v-text-field v-model.number="new_order.price" :readonly="mode=='D'" :label="$t('Set order price')" :placeholder="$t('Set order price')" :rules="RulesFloatGEZ(12,true,product_decimals)" counter="12"/>
             </v-form>

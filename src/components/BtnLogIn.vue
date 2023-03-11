@@ -46,8 +46,6 @@ export default {
                     this.store().setToken(response.data)
                     this.store().updateAll()
                     .then(()=>{
-                        console.log("AHORA")
-                        console.log(this.store().banks[0].url)
                         this.$refs.form.reset()
                         this.loading=false
                         this.$router.push({name:'home'})

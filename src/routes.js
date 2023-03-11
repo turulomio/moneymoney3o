@@ -31,7 +31,6 @@ import Statistics from './components/Statistics'
 import StrategiesList from './components/StrategiesList'
 
 
-
 export const router = createRouter({
   history: createWebHistory(),
   routes: [

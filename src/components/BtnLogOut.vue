@@ -15,6 +15,7 @@
                 .then(() => {
                     this.store().token=null;
                     this.store().logged=false;
+                    this.$router.push({name:'home'})
                 }, (error) => {
                     this.parseResponseError(error)
                     });

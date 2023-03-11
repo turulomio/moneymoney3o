@@ -24,6 +24,7 @@
         },
         methods:{
             check_time(){
+                if (!this.store().logged) return
                 axios.get(`${this.store().apiroot}/time/`, this.myheaders())
                 .then((response) => {
                     let local=new Date()
@@ -42,7 +43,6 @@
         },
         created(){
             this.check_time()
-            console.log(this.currency_string(10.12,'EUR',2))
         }
     }
 </script>

@@ -1,15 +1,15 @@
 <template>
-    <v-autocomplete :readonly="readonly" :items="store().products" v-model="new_value" :label="mylabel" :return-object="returnObject" item-value="url" :rules="$attrs.rules" @change="on_change">
-
-        <template slot="item" slot-scope="{ item }">
-            <div><v-icon :class="'mr-3 fi fib fi-'+item.flag" small :title="this.getCountryNameByCode(item.flag)"></v-icon>
-                {{item.fullname}}</div>
+    <v-autocomplete :readonly="readonly" :items="store().products" v-model="new_value" :label="mylabel" item-title="fullname" :return-object="returnObject" item-value="url" :rules="$attrs.rules" @change="on_change">
+        <!-- <template v-slot:item="{ props, item }">
+            <v-list-item v-bind="props"><v-icon :class="'mr-3 fi fib fi-'+item.flag" small :title="this.getCountryNameByCode(item.flag)"></v-icon>
+                {{item.fullname}}
+            </v-list-item>
         </template>
 
-        <template slot="selection" slot-scope="{ item }">       
-            <div><v-icon :class="'mr-3 fi fib fi-'+item.flag" small :title="this.getCountryNameByCode(item.flag)"></v-icon>
-                {{item.fullname}}</div>
-      </template>
+        <template v-slot:selection="{ props, item }">    
+            <v-list-item v-bind="props" :title="item.fullname"><v-icon :class="'mr-3 fi fib fi-'+item.flag" small :title="this.getCountryNameByCode(item.flag)"></v-icon>
+            </v-list-item>
+      </template> -->
 
     </v-autocomplete>
 </template>
@@ -18,9 +18,9 @@
 export default {
     name: "AutocompleteProducts",
     props:{
-        value: { 
-            required: true,
-        },
+        // value: { 
+        //     required: true,
+        // },
         returnObject:{
             type: Boolean,
             required:false,

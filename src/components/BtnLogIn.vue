@@ -69,5 +69,8 @@ export default {
             this.dialog = false
         }
     },
+    mounted(){
+        this.$router.push({name:'home'}) //On reload F5 browser always in home
+    }
 }
 </script>

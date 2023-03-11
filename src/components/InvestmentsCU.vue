@@ -2,7 +2,7 @@
   <div>
         <h1 class="mb-2">{{title()}}</h1>
         <v-form ref="form" v-model="form_valid" lazy-validation>
-            <v-autocomplete :readonly="mode=='D'" :items="store().accounts.filter(v =>v.active==true)" v-model="new_investment.accounts" :label="$t('Select an account')" item-title="name" item-value="url"  :rules="RulesSelection(true)"></v-autocomplete>
+            <v-autocomplete :readonly="mode=='D'" :items="store().accounts.filter(v =>v.active==true)" v-model="new_investment.accounts" :label="$t('Select an account')" item-title="name" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
             <v-text-field :readonly="mode=='D'" v-model="new_investment.name" type="text" :label="$t('Investment name')"  :placeholder="$t('Investment name')" autofocus :rules="RulesString(200,true)"/>
             <AutocompleteProducts :readonly="mode=='D'" v-model="new_investment.products" :rules="RulesSelection(true)"  />
             <v-checkbox :readonly="mode=='D'" v-model="new_investment.active" :label="$t('Is active?')" ></v-checkbox>
@@ -10,7 +10,7 @@
         </v-form>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="acceptDialog()" :disabled="!form_valid">{{ button() }}</v-btn>
+            <v-btn color="primary" @click="acceptDialog()">{{ button() }}</v-btn>
         </v-card-actions>
   </div>
 </template>
@@ -61,16 +61,22 @@
                 if (this.mode=="U"){        
                     axios.put(this.new_investment.url, this.new_investment, this.myheaders())
                     .then(() => {
-                        this.$store.dispatch("getInvestments")
-                        this.$emit("cruded")
+                        this.store().updateInvestments()
+                        .then(()=>{
+                            this.$emit("cruded")
+
+                        })
                     }, (error) => {
                         this.parseResponseError(error)
                     })
                 } else if (this.mode=="C") {
                     axios.post(`${this.store().apiroot}/api/investments/`, this.new_investment,  this.myheaders())
                     .then(() => {
-                        this.$store.dispatch("getInvestments")
-                        this.$emit("cruded")
+                        this.store().updateInvestments()
+                        .then(()=>{
+                            this.$emit("cruded")
+
+                        })
                     }, (error) => {
                         this.parseResponseError(error)
                     })
@@ -81,8 +87,11 @@
                     } 
                     axios.delete(this.new_investment.url, this.myheaders())
                     .then(() => {
-                        this.$store.dispatch("getInvestments")
-                        this.$emit("cruded")
+                        this.store().updateInvestments()
+                        .then(()=>{
+                            this.$emit("cruded")
+
+                        })
                     }, (error) => {
                         this.parseResponseError(error)
                     });

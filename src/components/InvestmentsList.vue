@@ -262,8 +262,12 @@
                     this.parseResponseError(error)
                 });
             },
-            viewItem (item) {
-                this.investment=item
+            viewItem (event,item) {
+                console.log(event)
+                console.log(item.value)
+                console.log(item.raw.url.value)
+                event
+                this.investment=item.value.raw.url
                 this.key=this.key+1
                 this.dialog_view=true
             },

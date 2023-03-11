@@ -5,29 +5,43 @@
         </h1>
         <div class="d-flex justify-center mb-4">
             <v-card width="20%" class="pa-5">
-                <v-select dense :label="$t('Filter by order state')" v-model="state" :items="items_state" item-value="id" item-title="name" @change="update_table()" :sort-by="getSort()"></v-select>
+                <v-select dense :label="$t('Filter by order state')" v-model="state" :items="items_state" item-value="id" item-title="name" />
             </v-card>
         </div>
         <v-card outlined class="ma-4 pa-4">
-            <v-data-table dense :headers="headers" :items="data" :sort-by="getSort()" :sort-desc="getSortDesc()" class="elevation-1 cursorpointer" hide-default-footer disable-pagination :loading="loading_table"  @click:row="orderView">
-                <template v-slot:[`item.price`]="{ item }">
-                    <div v-html="currency_html(item.price, item.currency )"></div>
+
+            <EasyDataTable alternating :headers="headers" hide-footer :items="data" class="elevation-1 cursorpointer" :sort-by="getSort()" :sort-type="getSortDesc()" :loading="loading_table"  @click:row="orderView">
+                <template #item-price="{ price,currency }">
+                    <div class="right" v-html="currency_html(price, currency )"></div>
                 </template>  
-                <template v-slot:[`item.amount`]="{ item }">
-                    <div v-html="currency_html(item.amount, item.currency )"></div>
+                <template #item-amount="{ amount, currency }">
+                    <div class="right" v-html="currency_html(amount, currency )"></div>
                 </template>  
-                <template v-slot:[`item.percentage_from_price`]="{ item }">
-                    <div v-html="percentage_html(item.percentage_from_price )"></div>
+                <template #item-percentage_from_price="{ percentage_from_price }">
+                    <div class="right" v-html="percentage_html(percentage_from_price )"></div>
                 </template>  
-                <template v-slot:[`item.executed`]="{ item }">
-                    <div v-html="localtime(item.executed )"></div>
+                <template #item-executed="{ executed }">
+                    <div v-html="localtime(executed )"></div>
                 </template>  
-                <template v-slot:[`item.actions`]="{ item }">
+                <template #item-actions="{ item }">
                     <v-icon small class="mr-2" @click.stop="executeOrder(item)">mdi-play</v-icon>
                     <v-icon small class="mr-2" @click.stop="editItem(item)">mdi-pencil</v-icon>
                     <v-icon small @click.stop="deleteItem(item)">mdi-delete</v-icon>
-                </template>                            
-            </v-data-table>
+                </template>          
+                <template #body-append>
+                    <tr class="totalrow pa-6">
+                        <td>{{ $t("Total ({0} registers)", [data.length,]) }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </template>                         
+            </EasyDataTable>
         </v-card>
         <div class="d-flex justify-center mb-4">
                 <v-btn color="primary" class="mr-4" @click="products_autoupdate" :loading="products_updating">{{ $t("Products autoupdate")}}
@@ -71,15 +85,15 @@
                 ],
                 state: 0,
                 headers: [
-                    { title: this.$t('Date'), sortable: true, key: 'date',  width: "6%"},
-                    { title: this.$t('Expiration'), key: 'expiration',  width: "6%"},
-                    { title: this.$t('Investment'), key: 'investmentsname'},
-                    { title: this.$t('Shares'), key: 'shares', align:'end',  width: "7%"},
-                    { title: this.$t('Price'), key: 'price', align:'end',  width: "7%"},
-                    { title: this.$t('Amount'), key: 'amount', align:'end',  width: "7%"},
-                    { title: this.$t('% from price'), key: 'percentage_from_price', align:'end',  width: "7%"},
-                    { title: this.$t('Executed'), key: 'executed', align:'end',  width: "10%"},
-                    { title: this.$t('Actions'), key: 'actions', sortable: false , width: "10%"},
+                    { text: this.$t('Date'), sortable: true, value: 'date',  width: "6%"},
+                    { text: this.$t('Expiration'), value: 'expiration',  width: "6%"},
+                    { text: this.$t('Investment'), value: 'investmentsname'},
+                    { text: this.$t('Shares'), value: 'shares', align:'right',  width: "7%"},
+                    { text: this.$t('Price'), value: 'price', align:'right',  width: "7%"},
+                    { text: this.$t('Amount'), value: 'amount', align:'right',  width: "7%"},
+                    { text: this.$t('% from price'), value: 'percentage_from_price', align:'end', sortable:"true",  width: "7%"},
+                    { text: this.$t('Executed'), value: 'executed', align:'right',  width: "10%"},
+                    { text: this.$t('Actions'), value: 'actions', sortable: false , width: "10%"},
                 ],
                 data:[],
                 menuinline_items: [
@@ -112,31 +126,17 @@
                 update_errors:0,
             }
         },
+        watch:{
+            state () {
+                this.update_table()
+            },
+        },
         methods: {
             empty_order,
             empty_investments_operations_simulation,
             on_OrdersCU_cruded(){
                 this.dialog_cu=false
                 this.update_table()
-            },
-            getSort(){
-                if (this.state==0){//Active
-                    return "percentage_from_price"
-                } else if (this.state==1) { //expired
-                    return "expiration"
-                } else if (this.state==2) { //executed
-                    return "executed"
-                }
-            },
-            getSortDesc(){
-                
-                if (this.state==0){//Active
-                    return true 
-                } else if (this.state==1) { //expired
-                    return true
-                } else if (this.state==2) { //executed
-                    return true
-                }
             },
             editItem (item) {
                 this.order=item
@@ -170,6 +170,25 @@
                 this.key=this.key+1
                 this.dialog_cu=true
 
+            },            
+            getSort(){
+                if (this.state==0){//Active
+                    return "percentage_from_price"
+                } else if (this.state==1) { //expired
+                    return "expiration"
+                } else if (this.state==2) { //executed
+                    return "executed"
+                }
+            },
+            getSortDesc(){
+                
+                if (this.state==0){//Active
+                    return "desc" 
+                } else if (this.state==1) { //expired
+                    return "desc"
+                } else if (this.state==2) { //executed
+                    return "desc"
+                }
             },
             update_table(){
                 this.loading_table=true
@@ -191,10 +210,6 @@
                     this.parseResponseError(error)
                 });
             },
-            on_chkActive(){
-                this.update_table()
-            },
-
             setCheckboxLabel(){
                 if (this.showActive== true){
                     return this.$t("Uncheck to see inactive orders")

@@ -9,6 +9,8 @@ import {router} from './routes.js'
 import mixin from '@/mixin'
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 import 'vue3-easy-data-table/dist/style.css';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 document.title=import.meta.env.VITE_APP_TITLE
 
@@ -19,6 +21,7 @@ app.use(createPinia())
 app.use(router)
 app.use(vuetify)
 app.component('EasyDataTable', Vue3EasyDataTable);
+app.component('VueDatePicker', VueDatePicker);
 app.mixin(mixin)
 app.mount('#app')
 

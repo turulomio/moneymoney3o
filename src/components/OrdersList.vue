@@ -10,7 +10,7 @@
         </div>
         <v-card outlined class="ma-4 pa-4">
 
-            <EasyDataTable alternating :headers="headers" hide-footer :items="data" class="elevation-1 cursorpointer" :sort-by="getSort()" :sort-type="getSortDesc()" :loading="loading_table"  @click:row="orderView">
+            <EasyDataTable alternating :headers="headers" hide-footer :items="data" class="elevation-1 cursorpointer" :sort-by="getSort()" :sort-type="getSortDesc()" :loading="loading_table"  @click-row="orderView">
                 <template #item-price="{ price,currency }">
                     <div class="right" v-html="currency_html(price, currency )"></div>
                 </template>  
@@ -23,7 +23,7 @@
                 <template #item-executed="{ executed }">
                     <div v-html="localtime(executed )"></div>
                 </template>  
-                <template #item-actions="{ item }">
+                <template #item-actions="item">
                     <v-icon small class="mr-2" @click.stop="executeOrder(item)">mdi-play</v-icon>
                     <v-icon small class="mr-2" @click.stop="editItem(item)">mdi-pencil</v-icon>
                     <v-icon small @click.stop="deleteItem(item)">mdi-delete</v-icon>
@@ -105,6 +105,8 @@
                                 icon: "mdi-pencil",
                                 code: function(this_){
                                     this_.order=this_.empty_order()
+                                    console.log("BEFORE")
+                                    console.log(this_.order)
                                     this_.order_mode="C"
                                     this_.dialog_cu=true
                                     this_.key=this_.key+1
@@ -139,6 +141,8 @@
                 this.update_table()
             },
             editItem (item) {
+                console.log("EDIR")
+                console.log(item)
                 this.order=item
                 this.order_mode="U"
                 this.key=this.key+1

@@ -247,7 +247,7 @@
                 return r
             },
             gotoLastRow(){
-                if (this.$refs.table_oc) this.$vuetify.goTo(1000000, { container:  this.$refs.table_oc.$el.childNodes[0] }) 
+                //if (this.$refs.table_oc) this.$vuetify.goTo(1000000, { container:  this.$refs.table_oc.$el.childNodes[0] }) 
             },
         },
         mounted(){

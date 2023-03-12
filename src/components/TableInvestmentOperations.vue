@@ -1,47 +1,48 @@
 <template>
     <div>
         <EasyDataTable dense v-model="selected" :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="datetime" fixed-header :height="$attrs.height" ref="table_o" :key="$attrs.key" :loading="$attrs.loading">
-            <template v-slot:[`item.datetime`]="{ item,index }">
-              <div :ref="index">{{ localtime(item.datetime)}}</div>
+
+            <template #item-datetime="item">
+              <div>{{ localtime(item.datetime)}}</div>
             </template>           
-           <template v-slot:[`item.operationstypes`]="{ item }">
+            <template #item-operationstypes="item">
                <div v-html="getObjectPropertyByUrl('operationstypes',item.operationstypes,'localname')"></div>
            </template>
-            <template v-slot:[`item.price`]="{ item }">
+            <template #item-price="item">
             {{ currency_string(item.price, currency(item))}}
             </template>
                          
-            <template v-slot:[`item.name`]="{ item }">
+            <template #item-investments="item">
                 <div v-html="getObjectPropertyByUrl('investments', item.investments,'fullname')"></div>
             </template>  
-            <template v-slot:[`item.gross_account`]="{ item }">
+            <template #item-gross_account="item">
             {{ currency_string(item.gross_account, currency(item))}}
             </template>
-            <template v-slot:[`item.gross_investment`]="{ item }">
+            <template #item-gross_investment="item">
             {{ currency_string(item.gross_investment, currency(item))}}
             </template>
-            <template v-slot:[`item.gross_user`]="{ item }">
+            <template #item-gross_user="item">
             {{ currency_string(item.gross_user, currency(item))}}
             </template>
             
-            <template v-slot:[`item.commission`]="{ item }">
+            <template #item-commission="item">
             {{ currency_string(item.commission, currency(item))}}
             </template>
-            <template v-slot:[`item.taxes`]="{ item }">
+            <template #item-taxes="item">
             {{ currency_string(item.taxes, currency(item))}}
             </template>
             
-            <template v-slot:[`item.net_account`]="{ item }">
+            <template #item-net_account="item">
             {{ currency_string(item.net_account, currency(item))}}
             </template>
-            <template v-slot:[`item.net_investment`]="{ item }">
+            <template #item-net_investment="item">
             {{ currency_string(item.net_investment, currency(item))}}
             </template>
-            <template v-slot:[`item.net_user`]="{ item }">
+            <template #item-net_user="item">
             {{ currency_string(item.net_user, currency(item))}}
             </template>
             
-            <template v-slot:[`item.actions`]="{ item }">
+            <template #item-actions="item">
                 <v-icon small class="mr-2" @click="editIO(item)">mdi-pencil</v-icon>
                 <v-icon small class="mr-2" @click="deleteIO(item)">mdi-delete</v-icon>
             </template>
@@ -148,9 +149,9 @@
                     r.push({ text: this.$t('Actions'), value: 'actions', sortable: false })
                 }
                 
-                if (this.currency_product==this.currency_account){
-                    r.splice(8,1)
-                }
+                // if (this.currency_product==this.currency_account){
+                //     r.splice(8,1)
+                // }
                 if (this.showinvestment==true){
                     r.splice(1, 0, { text: this.$t('Name'), value: 'name',sortable: true });
                 }
@@ -169,7 +170,7 @@
                 this.dialog_io=true
             },
             gotoLastRow(){
-                this.$vuetify.goTo(this.$refs[this.items.length-1], { container:  this.$refs.table_o.$el.childNodes[0] }) 
+                //this.$vuetify.goTo(this.$refs[this.items.length-1], { container:  this.$refs.table_o.$el.childNodes[0] }) 
             },
             on_InvestmentsoperationsCU_cruded(){
                 this.dialog_io=false

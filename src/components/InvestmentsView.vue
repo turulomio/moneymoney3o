@@ -10,7 +10,6 @@
             <v-tab key="operations">{{ $t('Investment operations') }}</v-tab>
             <v-tab key="historical">{{ $t('Historical investment operations') }}</v-tab>
             <v-tab key="dividends">{{ $t('Dividends') }}</v-tab>
-            <v-tabs-slider color="yellow"></v-tabs-slider>
         </v-tabs>
         <v-window v-model="tab">
             <v-window-item key="current">      

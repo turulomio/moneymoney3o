@@ -10,8 +10,8 @@
         </v-form>
         <v-card-actions>
             <v-spacer></v-spacer> 
-            <v-btn color="primary" @click="following_ao=false;acceptDialogAO()" :disabled="!form_valid_ao">{{ button() }}</v-btn>
-            <v-btn v-if="mode=='C'" color="primary" @click="following_ao=true;acceptDialogAO()" :disabled="!form_valid_ao" >{{ $t("Add and follow") }}</v-btn>
+            <v-btn color="primary" @click="following_ao=false;acceptDialogAO()">{{ button() }}</v-btn>
+            <v-btn v-if="mode=='C'" color="primary" @click="following_ao=true;acceptDialogAO()">{{ $t("Add and follow") }}</v-btn>
         </v-card-actions>
     </div>
 </template>
@@ -43,8 +43,8 @@
             acceptDialogAO(){
                 //Validation
                 if( this.$refs.form_ao.validate()==false) return
-                var concept=this.$store.getters.getObjectByUrl("concepts",this.newao.concepts)
-                var operationtype=this.$store.getters.getObjectByUrl("operationstypes", concept.operationstypes)
+                var concept=this.getObjectByUrl("concepts",this.newao.concepts)
+                var operationtype=this.getObjectByUrl("operationstypes", concept.operationstypes)
                 this.newao.operationstypes=operationtype.url
                 if (operationtype.id==1 && this.newao.amount>0){
                      alert(this.$t("Amount must be negative"))
@@ -110,7 +110,7 @@
                 }
             },
             on_account_change(){
-                this.account=this.$store.getters.getObjectByUrl("accounts",this.newao.accounts)
+                this.account=this.getObjectByUrl("accounts",this.newao.accounts)
 
             }
         },

@@ -7,7 +7,7 @@
             <v-form ref="form" v-model="form_valid" lazy-validation>
                 <v-autocomplete :readonly="mode=='D'" dense :items="store().investments" v-model="new_io.investments" :label="$t('Select an investment')" item-title="fullname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
                 <MyDateTimePicker :readonly="mode=='D'" v-model="new_io.datetime" :label="$t('Set investment operation date and time')"></MyDateTimePicker>
-                <v-autocomplete :readonly="mode=='D'" dense :items="$store.getters.getOperationstypesForInvestmentsOperations()" v-model="new_io.operationstypes" :label="$t('Select an operation type')" item-title="name" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
+                <v-autocomplete :readonly="mode=='D'" dense :items="store().getOperationstypesForInvestmentsOperations()" v-model="new_io.operationstypes" :label="$t('Select an operation type')" item-title="name" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
                 <v-text-field :readonly="mode=='D'" dense v-model.number="new_io.shares"  :label="$t('Set investment operation shares')" :placeholder="$t('Set investment operation shares')" :rules="RulesFloat(12,true,6)" counter="12"/>
                 <v-text-field :readonly="mode=='D'" dense v-model.number="new_io.price"  :label="$t('Set investment operation price')" :placeholder="$t('Set investment operation price')" :rules="RulesFloatGEZ(12,true,product_decimals)" counter="12"/>
                 <v-text-field :readonly="mode=='D'" dense v-model.number="new_io.taxes"  :label="$t('Set investment operation taxes')" :placeholder="$t('Set investment operation taxes')" :rules="RulesFloatGEZ(12,true,accounts_decimals)" counter="12"/>
@@ -75,7 +75,7 @@
                 return this.getObjectPropertyByUrl("accounts",this.investment.accounts,"decimals")
             },
             investment: function(){
-                return this.$store.getters.getObjectByUrl("investments",this.new_io.investments)
+                return this.getObjectByUrl("investments",this.new_io.investments)
             }
         },
         methods: {
@@ -147,9 +147,9 @@
         created(){
             this.new_io=Object.assign({},this.io)
             if ("investments" in this.new_io==false){//Plio misses investments.url
-                this.new_io.investments=this.$store.getters.getObjectPropertyById("investments", this.new_io.investments_id,"url")
+                this.new_io.investments=this.getObjectPropertyById("investments", this.new_io.investments_id,"url")
                 this.new_io.url=this.hyperlinked_url("investmentsoperations",this.new_io.id)
-                this.new_io.operationstypes=this.$store.getters.getObjectPropertyById("operationstypes", this.new_io.operationstypes_id,"url")
+                this.new_io.operationstypes=this.getObjectPropertyById("operationstypes", this.new_io.operationstypes_id,"url")
             }
             
         }

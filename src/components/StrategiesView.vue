@@ -131,7 +131,7 @@
         computed:{
             product: function (){
                 if (this.strategy.additional1!=null){
-                    return this.$store.getters.getObjectById("products", this.strategy.additional1)
+                    return this.getObjectById("products", this.strategy.additional1)
                 }
                 return null
             }
@@ -148,7 +148,7 @@
 
                 r.push({title:this.$t('From'), value: this.localtime(this.strategy.dt_from)})
                 r.push({title:this.$t('To'), value: this.localtime(this.strategy.dt_to)})
-                r.push({title:this.$t('Type'), value: this.$store.getters.getObjectPropertyById("strategiestypes", this.strategy.type, "name")})
+                r.push({title:this.$t('Type'), value: this.getObjectPropertyById("strategiestypes", this.strategy.type, "name")})
                 r.push({title:this.$t('Investments'), value: this.strategy.investments.length})                
                 if (this.strategy.additional1){//That means it has a product property
                     this.leverage_message= this.$t("{0} (Real: {1})").format(this.product.leverage_multiplier, this.product.leverage_real_multiplier )

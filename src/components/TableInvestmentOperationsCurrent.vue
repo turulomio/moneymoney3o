@@ -4,7 +4,7 @@
             <div>{{ localtime(item.datetime)}}</div>
         </template>             
         <template v-slot:[`item.investments`]="{ item }" >
-            <div>{{ $store.getters.getObjectPropertyById("investments",item.investments_id,"fullname")}}</div>
+            <div>{{ store().getObjectPropertyById("investments",item.investments_id,"fullname")}}</div>
         </template>                    
         <template v-slot:[`item.operationstypes`]="{ item }">
             <div v-html="getObjectPropertyByUrl('operationstypes',item.operationstypes,'localname')"></div>
@@ -159,11 +159,11 @@
             // To sum shares and average price
             all_items_have_same_product: function(){           
                 if (this.items.length==0) return false
-                var first_investment=this.$store.getters.getObjectById("investments", this.items[0].investments_id)
+                var first_investment=this.getObjectById("investments", this.items[0].investments_id)
                 var first_product_url=this.getObjectPropertyByUrl("products", first_investment.products,"url")
                 var r=true
                 this.items.forEach(item => {//For Each doesn't allow to return false
-                    var investment=this.$store.getters.getObjectById("investments", item.investments_id)
+                    var investment=this.getObjectById("investments", item.investments_id)
                     var product_url=this.getObjectPropertyByUrl("products", investment.products,"url")
                     if (product_url!=first_product_url)  {
                         r=false

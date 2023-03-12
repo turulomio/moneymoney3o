@@ -30,7 +30,7 @@
         },
         computed:{
             product: function(){
-                return this.$store.getters.getObjectById("products",this.data.plio_id.data.products_id)
+                return this.getObjectById("products",this.data.plio_id.data.products_id)
             }
         },
         methods: {

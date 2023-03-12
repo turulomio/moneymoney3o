@@ -78,8 +78,8 @@
             acceptDialog(){
                 //Validation
                 if( this.$refs.form_cco.validate()==false) return
-                var concept=this.$store.getters.getObjectByUrl("concepts",this.newcco.concepts)
-                var operationtype=this.$store.getters.getObjectByUrl("operationstypes", concept.operationstypes)
+                var concept=this.getObjectByUrl("concepts",this.newcco.concepts)
+                var operationtype=this.getObjectByUrl("operationstypes", concept.operationstypes)
                 this.newcco.operationstypes=operationtype.url
                 if (operationtype.id==1 && this.newcco.amount>0){
                      alert(this.$t("Amount must be negative"))
@@ -117,8 +117,8 @@
 
             get_account_decimals(){
                 var r
-                var cc=this.$store.getters.getObjectByUrl("creditcards",this.newcco.creditcards)
-                var account=this.$store.getters.getObjectByUrl("accounts", cc.accounts)
+                var cc=this.getObjectByUrl("creditcards",this.newcco.creditcards)
+                var account=this.getObjectByUrl("accounts", cc.accounts)
                 r=account.decimals
                 return r
             }

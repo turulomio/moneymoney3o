@@ -42,7 +42,7 @@
         },
         computed:{
             title: function(){
-                var concept=this.$store.getters.getObjectByUrl("concepts",this.concept)
+                var concept=this.getObjectByUrl("concepts",this.concept)
                 if (this.month==null){
                     return this.$t("'{0}' operations at year {1}").format(concept.localname,this.year)
                 } else {

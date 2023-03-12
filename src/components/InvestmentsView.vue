@@ -172,10 +172,10 @@
         },
         computed:{
             account: function(){
-                return this.$store.getters.getObjectByUrl("accounts",this.investment.accounts)
+                return this.getObjectByUrl("accounts",this.investment.accounts)
             },
             product: function(){
-                return this.$store.getters.getObjectByUrl("products",this.investment.products)
+                return this.getObjectByUrl("products",this.investment.products)
 
             }
         },
@@ -272,7 +272,7 @@
                             {
                                 name:this.$t('View product'),
                                 code: function(this_){
-                                    this_.product=this_.$store.getters.getObjectByUrl("products",this_.investment.products)
+                                    this_.product=this_.store().getObjectByUrl("products",this_.investment.products)
                                     this_.key=this_.key+1
                                     this_.dialog_productview=true
                                 },
@@ -281,7 +281,7 @@
                             {
                                 name:this.$t('Delete last quote'),
                                 code: function(this_){
-                                    this_.product=this_.$store.getters.getObjectByUrl("products",this_.investment.products)
+                                    this_.product=this_.store().getObjectByUrl("products",this_.investment.products)
 
                                     axios.post(`${this_.store().apiroot}/api/products/${this_.product.id}/delete_last_quote/`, [], this_.myheaders())
                                     .then(() => {
@@ -344,9 +344,9 @@
                                     this_.io.price=this_.investment.selling_price
                                     this_.io_mode="C"
                                     if (shares>=0){
-                                        this_.io.operationstypes=this_.$store.getters.getObjectById("operationstypes",5).url//Sales
+                                        this_.io.operationstypes=this_.store().getObjectById("operationstypes",5).url//Sales
                                     } else {
-                                        this_.io.operationstypes=this_.$store.getters.getObjectById("operationstypes",4).url//Buy
+                                        this_.io.operationstypes=this_.store().getObjectById("operationstypes",4).url//Buy
                                     }
                                      
                                     this_.dialog_io=true
@@ -504,7 +504,7 @@
             },
             update_all(){
                 this.loading=true
-                this.investment=this.$store.getters.getObjectById("investments",this.investment_id)
+                this.investment=this.getObjectById("investments",this.investment_id)
                 console.log("UPDATED")
                 console.log(this.investment.selling_expiration)
                 console.log(this.investment.selling_price)
@@ -541,7 +541,7 @@
         },
         created(){
             console.log(this.investment_id)
-            var inv=this.$store.getters.getObjectById("investments",this.investment_id)
+            var inv=this.getObjectById("investments",this.investment_id)
             console.log("CREATED")
             console.log(inv.selling_expiration)
             console.log(inv.selling_price)

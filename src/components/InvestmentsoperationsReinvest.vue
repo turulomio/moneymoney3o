@@ -383,7 +383,7 @@
             //This components
             this.newshares=this.shares
             this.newprice=this.price
-            this.product=this.$store.getters.getObjectById("products", this.plio_id_current.data.products_id)
+            this.product=this.getObjectById("products", this.plio_id_current.data.products_id)
             this.make_all_axios_before()
         }
         

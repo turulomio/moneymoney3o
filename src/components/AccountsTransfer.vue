@@ -12,7 +12,7 @@
             </v-form>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="acceptTransfer()" :disabled="!form_valid">{{ button() }}</v-btn>
+                <v-btn color="primary" @click="acceptTransfer()">{{ button() }}</v-btn>
             </v-card-actions>
         </v-card>
     </div>
@@ -129,8 +129,8 @@
                 //Must be the lowest decimals from both accounts
                 var r
 
-                var ao=this.$store.getters.getObjectByUrl("accounts",this.newat.account_origin)
-                var ad=this.$store.getters.getObjectByUrl("accounts",this.newat.account_destiny)
+                var ao=this.getObjectByUrl("accounts",this.newat.account_origin)
+                var ad=this.getObjectByUrl("accounts",this.newat.account_destiny)
                 if (ad==null || ao==null){
                     r=6
                 } else {

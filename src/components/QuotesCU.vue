@@ -39,10 +39,10 @@
         },
         computed:{
             product_object: function(){
-                return this.$store.getters.getObjectByUrl("products",this.new_quote.products)
+                return this.getObjectByUrl("products",this.new_quote.products)
             },
             product_stockmarket: function(){
-                return this.$store.getters.getObjectByUrl("stockmarkets",this.product_object.stockmarkets)
+                return this.getObjectByUrl("stockmarkets",this.product_object.stockmarkets)
             },
         },
         data(){ 

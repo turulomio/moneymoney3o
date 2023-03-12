@@ -34,8 +34,8 @@
         methods: {
             migrate(){
                 if( this.$refs.form.validate()==false) return
-                var concept_from=this.$store.getters.getObjectByUrl("concepts",this.from_url)
-                var concept_to=this.$store.getters.getObjectByUrl("concepts",this.to)
+                var concept_from=this.getObjectByUrl("concepts",this.from_url)
+                var concept_to=this.getObjectByUrl("concepts",this.to)
                 if (concept_from.operationstypes!=concept_to.operationstypes){
                     alert(this.$t("I can't migrate this concepts due to they have different operation types."))
                     return

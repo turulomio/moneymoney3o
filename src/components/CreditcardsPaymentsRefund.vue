@@ -77,7 +77,7 @@
             },
         },
         created(){
-            this.account=this.$store.getters.getObjectByUrl("accounts",this.cc.accounts)
+            this.account=this.getObjectByUrl("accounts",this.cc.accounts)
             this.updatePayments()
         }
     }

@@ -248,7 +248,7 @@
                     .then((a)=>{
                         console.log(a)
                         this.key=this.key+1
-                        var after=this.$store.getters.getObjectByUrl("investments",this.investment.url)
+                        var after=this.getObjectByUrl("investments",this.investment.url)
                         console.log("after")
                         console.log(after.selling_expiration)
                         console.log(after.selling_price)
@@ -310,7 +310,7 @@
 
                     this.investments_same_product.forEach( investments_id => {
                         plio_id=this.plio[investments_id.toString()]
-                        var inv=this.$store.getters.getObjectById("investments",investments_id)
+                        var inv=this.getObjectById("investments",investments_id)
                         o={
                             id: investments_id,
                             url: inv.url,
@@ -347,7 +347,7 @@
             },
         },
         created(){
-            this.product=this.$store.getters.getObjectByUrl("products",this.investment.products)
+            this.product=this.getObjectByUrl("products",this.investment.products)
             this.refreshStrategies()
             this.refreshInvestments(true)
             this.selling_expiration=this.investment.selling_expiration

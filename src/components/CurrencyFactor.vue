@@ -11,7 +11,7 @@
         <v-menu v-model="menu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
             <template v-slot:activator="{ on, attrs }">
                 <v-row justify="center" align="center">
-                    <v-text-field  class="ma-3" prepend-icon="mdi-ab-testing" v-model="newvalue" :name="$attrs.name" :label="$attrs.label" readonly v-bind="attrs" v-on="on" @click="on_click()"></v-text-field>
+                    <v-text-field  class="ma-3" prepend-icon="mdi-ab-testing" v-model="new_value" :name="$attrs.name" :label="$attrs.label" readonly v-bind="attrs" v-on="on" @click="on_click()"></v-text-field>
                 </v-row>
             </template>
             <v-card class="pa-6">
@@ -27,7 +27,7 @@
 <script>
     export default {    
         props: {
-            value: {
+            modelValue: {
                 required: true
             },
             currency_from: {
@@ -42,10 +42,11 @@
             }
             
         },
+        emits: ['update:modelValue'],
         data: function(){
             return {
                 menu: false,
-                newvalue: null,
+                new_value: null,
                 currency_from_value: 1,
                 currency_to_value: 1,
                 representation:"",
@@ -61,8 +62,9 @@
         },
         methods: {
             update_value(){
-                this.newvalue=this.my_round(this.currency_to_value/this.currency_from_value, this.decimals)
-                this.$emit('input', this.newvalue)
+                this.new_value=this.my_round(this.currency_to_value/this.currency_from_value, this.decimals)
+
+                this.$emit('update:modelValue', this.new_value)
             },
             on_click(){
                 this.update_internal_values()
@@ -72,11 +74,11 @@
             },
             update_internal_values(){
                 this.currency_to_value=1
-                this.currency_from_value=this.my_round(1/this.newvalue, this.decimals)
+                this.currency_from_value=this.my_round(1/this.new_value, this.decimals)
             },
         },
         created(){
-            this.newvalue=this.value
+            this.new_value=this.modelValue
             this.update_internal_values()
         },
     }

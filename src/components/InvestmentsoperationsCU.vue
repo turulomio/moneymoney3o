@@ -7,7 +7,7 @@
             <v-form ref="form" v-model="form_valid" lazy-validation>
                 <v-autocomplete :readonly="mode=='D'" dense :items="store().investments" v-model="new_io.investments" :label="$t('Select an investment')" item-title="fullname" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
                 <MyDateTimePicker :readonly="mode=='D'" v-model="new_io.datetime" :label="$t('Set investment operation date and time')"></MyDateTimePicker>
-                <v-autocomplete :readonly="mode=='D'" dense :items="store().getOperationstypesForInvestmentsOperations()" v-model="new_io.operationstypes" :label="$t('Select an operation type')" item-title="name" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
+                <v-autocomplete :readonly="mode=='D'" dense :items="this.getOperationstypesForInvestmentsOperations()" v-model="new_io.operationstypes" :label="$t('Select an operation type')" item-title="name" item-value="url" :rules="RulesSelection(true)"></v-autocomplete>
                 <v-text-field :readonly="mode=='D'" dense v-model.number="new_io.shares"  :label="$t('Set investment operation shares')" :placeholder="$t('Set investment operation shares')" :rules="RulesFloat(12,true,6)" counter="12"/>
                 <v-text-field :readonly="mode=='D'" dense v-model.number="new_io.price"  :label="$t('Set investment operation price')" :placeholder="$t('Set investment operation price')" :rules="RulesFloatGEZ(12,true,product_decimals)" counter="12"/>
                 <v-text-field :readonly="mode=='D'" dense v-model.number="new_io.taxes"  :label="$t('Set investment operation taxes')" :placeholder="$t('Set investment operation taxes')" :rules="RulesFloatGEZ(12,true,accounts_decimals)" counter="12"/>

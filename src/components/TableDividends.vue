@@ -1,32 +1,33 @@
 <template>
     <div>
-        <EasyDataTable dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="datetime" fixed-header :height="$attrs.height" :ref="$vnode.tag">
-            <template v-slot:[`item.datetime`]="{ item }" >
+        <EasyDataTable dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="datetime" fixed-header :height="$attrs.height">
+
+            <template #item-datetime="item">
                 <div>{{ localtime(item.datetime)}}</div>
             </template>         
-           <template v-slot:[`item.concepts`]="{ item }">
+            <template #item-concepts="item">
                <div v-html="getObjectPropertyByUrl('concepts',item.concepts,'localname')"></div>
            </template>       
-           <template v-slot:[`item.investments`]="{ item }">
+            <template #item-investments="item">
                <div v-html="getObjectPropertyByUrl('investments',item.investments,'fullname')"></div>
            </template> 
-            <template v-slot:[`item.gross`]="{ item }">
+            <template #item-gross="item">
                 <div v-html="currency_html(item.gross,item.currency)"></div>
             </template>   
-            <template v-slot:[`item.net`]="{ item }">
+            <template #item-net="item">
                 <div v-html="currency_html(item.net,item.currency)"></div>
             </template>   
-            <template v-slot:[`item.commission`]="{ item }">
+            <template #item-commission="item">
                 <div v-html="currency_html(item.commission,item.currency)"></div>
             </template>   
-            <template v-slot:[`item.taxes`]="{ item }">
+            <template #item-taxes="item">
                 <div v-html="currency_html(item.taxes,item.currency)"></div>
             </template>   
-            <template v-slot:[`item.actions`]="{ item }">
+            <template #item-actions="item">
                 <v-icon small class="mr-2" @click="editDividend(item)">mdi-pencil</v-icon>
                 <v-icon small class="mr-2" @click="deleteDividend(item)">mdi-delete</v-icon>
             </template>
-            <template v-slot:[`body.append`]="{headers}">
+            <template #body-append="{headers}">
                 <tr class="totalrow" v-if="items.length>0">
                     <td v-for="(header,i) in headers" :key="i" >
                         <div v-if="header.value == 'datetime'">
@@ -129,7 +130,7 @@
                 return r
             },
             gotoLastRow(){
-                if (this.$refs[this.$vnode.tag]) this.$vuetify.goTo(1000000, { container:  this.$refs[this.$vnode.tag].$el.childNodes[0] }) 
+                //if (this.$refs[this.$vnode.tag]) this.$vuetify.goTo(1000000, { container:  this.$refs[this.$vnode.tag].$el.childNodes[0] }) 
             },
             on_DividendsCU_cruded(){
                 this.$emit("cruded")

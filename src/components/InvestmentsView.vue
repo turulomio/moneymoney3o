@@ -278,7 +278,7 @@
                             {
                                 name:this.$t('View product'),
                                 code: function(this_){
-                                    this_.product=this_.store().getObjectByUrl("products",this_.investment.products)
+                                    this_.product=this_.this.getObjectByUrl("products",this_.investment.products)
                                     this_.key=this_.key+1
                                     this_.dialog_productview=true
                                 },
@@ -287,7 +287,7 @@
                             {
                                 name:this.$t('Delete last quote'),
                                 code: function(this_){
-                                    this_.product=this_.store().getObjectByUrl("products",this_.investment.products)
+                                    this_.product=this_.this.getObjectByUrl("products",this_.investment.products)
 
                                     axios.post(`${this_.store().apiroot}/api/products/${this_.product.id}/delete_last_quote/`, [], this_.myheaders())
                                     .then(() => {
@@ -350,9 +350,9 @@
                                     this_.io.price=this_.investment.selling_price
                                     this_.io_mode="C"
                                     if (shares>=0){
-                                        this_.io.operationstypes=this_.store().getObjectById("operationstypes",5).url//Sales
+                                        this_.io.operationstypes=this_.this.getObjectById("operationstypes",5).url//Sales
                                     } else {
-                                        this_.io.operationstypes=this_.store().getObjectById("operationstypes",4).url//Buy
+                                        this_.io.operationstypes=this_.this.getObjectById("operationstypes",4).url//Buy
                                     }
                                      
                                     this_.dialog_io=true

@@ -4,7 +4,7 @@
             <div>{{ localtime(item.datetime)}}</div>
         </template>             
         <template #item-investments="item">
-            <div>{{ store().getObjectPropertyById("investments",item.investments_id,"fullname")}}</div>
+            <div>{{ this.getObjectPropertyById("investments",item.investments_id,"fullname")}}</div>
         </template>                    
         <template #item-operationstypes="item">
             <div v-html="getObjectPropertyByUrl('operationstypes',item.operationstypes,'localname')"></div>

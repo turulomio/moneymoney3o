@@ -9,7 +9,7 @@
                 <v-tab key="local_settings"><v-icon left>mdi-map-marker</v-icon>{{ $t('Local preferences') }}</v-tab>
                 <v-tab key="investing_com"><v-icon left>mdi-domain</v-icon>{{ $t('Investing.com') }}</v-tab>
             </v-tabs>
-            <v-tabs-items v-model="tab">
+            <v-window v-model="tab">
                 <v-window-item key="profile" >
                     <v-card class="mx-auto pa-6 mt-3" max-width="40%">
                         <v-card-title>{{ $t('Profile settings') }}</v-card-title>                    
@@ -52,7 +52,7 @@
                         <v-textarea v-model="new_profile.investing_com_url" :label="$t('Select your Investing.com url')" :rules="RulesString(2000, false)"></v-textarea>
                     </v-card>
                 </v-window-item>
-            </v-tabs-items>
+            </v-window>
             <div class="mx-auto pa-5" align="center">
                 <v-btn color="error" @click="save_settings()" :disabled="!form_valid">{{ $t("Save settings")}}</v-btn>
             </div>

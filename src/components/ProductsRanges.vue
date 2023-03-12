@@ -25,7 +25,7 @@
                 <v-tab key="0">{{ $t('Product ranges table') }}</v-tab>
                 <v-tab key="1">{{ $t('Product ranges chart') }}</v-tab>
             </v-tabs>
-            <v-tabs-items v-model="tab">
+            <v-window v-model="tab">
             <v-window-item key="0">
                 <v-card flat>
                     <v-container >{{ currentpricelabel }}</v-container>
@@ -53,7 +53,7 @@
                         <ChartProductsRanges :prdata="prdata" autoresize />
                     </div>
                 </v-window-item>
-            </v-tabs-items>
+            </v-window>
         </v-card>
         <!-- Order CU dialog -->
         <v-dialog v-model="dialog_ordercu" max-width="550">

@@ -10,7 +10,7 @@
             <v-tab key="cco">{{ $t('Current credit card operations') }}</v-tab>
             <v-tab key="oldpayments">{{ $t('Old payments') }}</v-tab>
         </v-tabs>
-        <v-tabs-items v-model="tab">
+        <v-window v-model="tab">
             <v-window-item key="cco">      
                 <div>
                     <v-card outlined class="ma-4 pa-4">
@@ -28,7 +28,7 @@
                     <CreditcardsPaymentsRefund :cc="cc" @cruded="on_CreditcardsPaymentsRefund_cruded()" :key="key"></CreditcardsPaymentsRefund>
                 </div>
             </v-window-item>
-        </v-tabs-items> 
+        </v-window> 
 
         <!-- CCCO CU -->
         <v-dialog v-model="dialog" max-width="650" class="pa-4" >

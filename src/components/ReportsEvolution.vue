@@ -12,7 +12,7 @@
                 <v-tab key="1">{{ $t("Invested assets evolution report") }}</v-tab>
                 <v-tabs-slider color="yellow"></v-tabs-slider>
             </v-tabs>
-            <v-tabs-items v-model="tab">
+            <v-window v-model="tab">
                 <v-window-item key="0">
                     <v-card outlined>
                         <EasyDataTable dense :headers="assetsHeaders" :items="assetsData"  class="elevation-1" disable-pagination  hide-default-footer :sort-by="['year']" :loading="loading_assets">
@@ -120,7 +120,7 @@
                         <div class="ma-3" v-html="report()" v-if="investedData.length>0"></div>
                     </v-card>
                 </v-window-item>
-            </v-tabs-items>    
+            </v-window>    
         </div>
     </div>
 </template>

@@ -57,19 +57,25 @@
                     <v-icon small class="ml-1" @click.stop="deleteItem(item)" v-if="item.is_deletable">mdi-delete</v-icon>
                     <v-icon small class="ml-1" v-if="(new Date().setHours(0,0,0,0)>new Date(item.selling_expiration).setHours(0,0,0,0)) && item.selling_expiration!=null" @click="changeSellingPrice(item)" color="#9933ff" style="font-weight:bold">mdi-alarm</v-icon>     
                 </template>         
-                <template #body-append>
-                    <tr class="totalrow pa-6">
-                        <td>{{ $t("Total ({0}):", [investments_items.length])}}</td>
-                        <td></td>
-                        <td></td>
-                        <td class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'daily_difference'))"></td>
-                        <td class="right" v-html="percentage_html(listobjects_sum(investments_items,'daily_difference')/listobjects_sum(investments_items,'balance_user'))"></td>
-                        <td class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'invested_user'))"></td>
-                        <td class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'gains_user'))"></td>
-                        <td class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'balance_user'))"></td>
-                        <td class="right" v-html="percentage_html(listobjects_sum(investments_items,'gains_user')/listobjects_sum(investments_items,'invested_user'))"></td>
-                        <td></td>
-                        <td></td>
+                <template #body-append="{headers}">
+                    <tr class="totalrow" >
+                        <td v-for="(header,i) in headers" :key="i">
+                            <div v-if="header.value == 'fullname'">
+                                {{ $t("Total ({0}):").format(investments_items.length)}}
+                            </div>
+                            <div v-if="header.value == 'daily_difference'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(investments_items,'daily_difference'))">
+                            </div>
+                            <div v-if="header.value == 'daily_percentage'" class="d-flex justify-end" v-html="percentage_html(listobjects_sum(investments_items,'daily_difference')/listobjects_sum(investments_items,'balance_user'))">
+                            </div>
+                            <div v-if="header.value == 'balance_user'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(investments_items,'balance_user'))">
+                            </div>
+                            <div v-if="header.value == 'invested_user'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(investments_items,'invested_user'))">
+                            </div>
+                            <div v-if="header.value == 'gains_user'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(investments_items,'gains_user'))">
+                            </div>
+                            <div v-if="header.value == 'percentage_invested'" class="d-flex justify-end" v-html="percentage_html(listobjects_sum(investments_items,'gains_user')/listobjects_sum(investments_items,'invested_user'))">
+                            </div>
+                        </td>
                     </tr>
                 </template>
             </EasyDataTable>
@@ -262,12 +268,9 @@
                     this.parseResponseError(error)
                 });
             },
-            viewItem (event,item) {
-                console.log(event)
-                console.log(item.value)
-                console.log(item.url.value)
-                event
-                this.investment=item.value.raw.url
+            viewItem (item) {
+                console.log(item)
+                this.investment=item
                 this.key=this.key+1
                 this.dialog_view=true
             },

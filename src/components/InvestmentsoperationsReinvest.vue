@@ -33,7 +33,7 @@
             <v-tab key="chart">{{ $t('Investment chart') }}</v-tab>
             <v-tabs-slider color="yellow"></v-tabs-slider>
         </v-tabs>
-        <v-tabs-items v-if="plio_id_current" v-model="tab">
+        <v-window v-if="plio_id_current" v-model="tab">
             <v-window-item key="current">      
                 <div>
                     <v-card>
@@ -62,7 +62,7 @@
                     </v-card>
                 </div>
             </v-window-item>
-        </v-tabs-items> 
+        </v-window> 
 
         <!-- Order CU dialog -->
         <v-dialog v-model="dialog_order_cu" max-width="550">

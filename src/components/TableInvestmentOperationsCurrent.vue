@@ -1,76 +1,76 @@
 <template>
     <EasyDataTable ref="table_oc" dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="datetime" fixed-header :height="$attrs.height" :loading="$attrs.loading">
-        <template v-slot:[`item.datetime`]="{ item }" >
+        <template #item-datetime="item">
             <div>{{ localtime(item.datetime)}}</div>
         </template>             
-        <template v-slot:[`item.investments`]="{ item }" >
+        <template #item-investments="item">
             <div>{{ store().getObjectPropertyById("investments",item.investments_id,"fullname")}}</div>
         </template>                    
-        <template v-slot:[`item.operationstypes`]="{ item }">
+        <template #item-operationstypes="item">
             <div v-html="getObjectPropertyByUrl('operationstypes',item.operationstypes,'localname')"></div>
         </template>
-        <template v-slot:[`item.price_account`]="{ item }">
+        <template #item-price_account="item">
             <div v-html="currency_html(item.price_account, item.currency_account)"></div>
         </template>        
-        <template v-slot:[`item.price_investment`]="{ item }" >
+        <template #item-price_investment="item">
             <div v-html="currency_html(item.price_investment, item.currency_product)"></div>
         </template>  
-        <template v-slot:[`item.price_user`]="{ item }">
+        <template #item-price_user="item">
             <div v-html="currency_html(item.price_user, currency(item))"></div>
         </template>  
-        <template v-slot:[`item.gains_gross_account`]="{ item }">
+        <template #item-gains_gross_account="item">
             <div v-html="currency_html(item.gains_gross_account, currency(item))"></div>
         </template>  
-        <template v-slot:[`item.gains_gross_investment`]="{ item }">
+        <template #item-gains_gross_investment="item">
             <div v-html="currency_html(item.gains_gross_investment, currency(item))"></div>
         </template>  
-        <template v-slot:[`item.gains_gross_user`]="{ item }">
+        <template #item-gains_gross_user="item">
             <div v-html="currency_html(item.gains_gross_user, currency(item))"></div>
         </template>  
         
 
          
-        <template v-slot:[`item.invested_account`]="{ item }">
+        <template #item-invested_account="item">
             <div v-html="currency_html(item.invested_account, currency(item))"></div>
         </template>  
-        <template v-slot:[`item.invested_investment`]="{ item }">
+        <template #item-invested_investment="item">
             <div v-html="currency_html(item.invested_investment, currency(item))"></div>
         </template>
-        <template v-slot:[`item.invested_user`]="{ item }">
+        <template #item-invested_user="item">
             <div v-html="currency_html(item.invested_user, currency(item))"></div>
         </template> 
         
-        <template v-slot:[`item.balance_account`]="{ item }">
+        <template #item-balance_account="item">
             <div v-html="currency_html(item.balance_account, currency(item))"></div>
         </template>  
-        <template v-slot:[`item.balance_investment`]="{ item }">
+        <template #item-balance_investment="item">
             <div v-html="currency_html(item.balance_investment, currency(item))"></div>
         </template>  
-        <template v-slot:[`item.balance_user`]="{ item }">
+        <template #item-balance_user="item">
             <div v-html="currency_html(item.balance_user, currency(item))"></div>
         </template> 
 
-        <template v-slot:[`item.percentage_annual_investment`]="{ item }">
+        <template #item-percentage_annual_investment="item">
             <div v-html="percentage_html(item.percentage_annual_investment)"></div>
         </template>
-        <template v-slot:[`item.percentage_apr_investment`]="{ item }">
+        <template #item-percentage_apr_investment="item">
             <div v-html="percentage_html(item.percentage_apr_investment)"></div>
         </template>
-        <template v-slot:[`item.percentage_total_investment`]="{ item }">
+        <template #item-percentage_total_investment="item">
             <div v-html="percentage_html(item.percentage_total_investment)"></div>
         </template>   
         
-        <template v-slot:[`item.percentage_annual_user`]="{ item }">
+        <template #item-percentage_annual_user="item">
             <div v-html="percentage_html(item.percentage_annual_user)"></div>
         </template>
-        <template v-slot:[`item.percentage_apr_user`]="{ item }">
+        <template #item-percentage_apr_user="item">
             <div v-html="percentage_html(item.percentage_apr_user)"></div>
         </template>
-        <template v-slot:[`item.percentage_total_user`]="{ item }">
+        <template #item-percentage_total_user="item">
             <div v-html="percentage_html(item.percentage_total_user)"></div>
         </template>   
 
-        <template v-slot:[`body.append`]="{headers}">
+        <template #body-append="{headers}">
             <tr class="totalrow" v-if="items.length>0 && showtotal">
                 <td v-for="(header,i) in headers" :key="'ROW'+i" >
                     <div v-if="header.value == 'datetime'">

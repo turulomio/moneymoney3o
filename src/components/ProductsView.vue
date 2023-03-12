@@ -15,7 +15,7 @@
             <v-tab key="ohcls">{{ $t("Daily OHCL")}}</v-tab>
             <v-tab key="quotes">{{ $t("Quotes")}}</v-tab>
             <v-tab key="chart">{{ $t("Chart")}}</v-tab>
-            <v-tabs-items v-model="tab">
+            <v-window v-model="tab">
                 <v-window-item key="percentage_evolution">     
                     <v-card class="pa-1" outlined >
                         <EasyDataTable dense :headers="percentage_headers" :items="this.information.percentages" class="elevation-1" disable-pagination  hide-default-footer  fixed-header :loading="loading">
@@ -81,7 +81,7 @@
                         <ChartProduct :ohcls="ohcls" :product="product" :key="key"></ChartProduct>
                     </v-card>
                 </v-window-item>
-            </v-tabs-items>
+            </v-window>
         </v-tabs>  
 
         <!-- QUOTES CU -->

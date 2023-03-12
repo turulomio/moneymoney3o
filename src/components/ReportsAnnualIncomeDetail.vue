@@ -11,7 +11,7 @@
             <v-tab key="gains">{{ $t('Gains') }}</v-tab>
             <v-tab key="fast_operations">{{ $t('Fast operations') }}</v-tab>
             <v-tabs-slider color="yellow"></v-tabs-slider>
-            <v-tabs-items v-model="tab">
+            <v-window v-model="tab">
                 <v-window-item key="incomes">        
                     <v-card class="pa-4">
                         <TableAccountOperations :items="incomes" showtotal hideactions showaccount height="600" class=" flex-grow-1 flex-shrink-0" :key="key" />
@@ -43,7 +43,7 @@
                         <TableAccountOperations :items="fast_operations" showtotal hideactions showaccount height="600" class=" flex-grow-1 flex-shrink-0" :key="key" />
                     </v-card>
                 </v-window-item>
-            </v-tabs-items> 
+            </v-window> 
         </v-tabs>
     </div>  
 </template>

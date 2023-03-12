@@ -30,7 +30,7 @@
             <v-tab key="range" v-if="this.selected.length==1 && this.investment.id==this.selected[0].id">{{ $t("Set a range for current investment strategy") }}</v-tab>
             <v-tabs-slider color="yellow"></v-tabs-slider>
         </v-tabs>
-        <v-tabs-items v-model="tab">
+        <v-window v-model="tab">
             <v-window-item key="percentage">      
                 <v-card class="pa-3" outlined>
                     <v-text-field :name="this.$t('Set a gains percentage')" v-model.number="percentage" :counter="10" :label="this.$t('Set a gains percentage')" :placeholder="this.$t('Enter an amount')" :rules="this.RulesFloat(10,true,6)" autofocus></v-text-field>
@@ -52,7 +52,7 @@
                     <v-select :items="strategy_ranges" v-model="strategy_range" :label="$t('Set a strategy range')"  item-title="name" item-value="value" :rules="RulesSelection(true)"></v-select>  
                 </v-card>
             </v-window-item>
-        </v-tabs-items>    
+        </v-window>    
         <v-layout style="justify-content: center;" class="mt-3">
             <v-card class="pa-4" width="60%">
             <v-form ref="form" v-model="form_valid" lazy-validation>

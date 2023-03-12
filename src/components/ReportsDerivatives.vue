@@ -7,7 +7,7 @@
                 <v-tab key="0">{{ $t("Month evolution") }}</v-tab>
                 <v-tabs-slider color="yellow"></v-tabs-slider>
             </v-tabs>
-            <v-tabs-items v-model="tab">
+            <v-window v-model="tab">
                 <v-window-item key="0">    
                     <p class="boldcenter my-4">{{$t("This report sums the following accounts operations: 'Derivatives. Daily adjustment', 'Derivatives. Operation commission', 'Derivatives. Swaps' and 'Fast investment operations'")}}</p>
                     <v-card class="pa-4" outlined >
@@ -29,7 +29,7 @@
                     </v-card>
                     <p class="boldcenter my-4" v-html="$t('Total derivatives: {0}').format(localcurrency_html(this.listobjects_sum(derivatives,'total')))"></p>
                 </v-window-item>
-            </v-tabs-items>     
+            </v-window>     
         </div>
     </div>
 </template>

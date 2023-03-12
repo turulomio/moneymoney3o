@@ -19,7 +19,7 @@
                 <v-tab key="5">{{ $t("Make ends meet") }}</v-tab>
                 <v-tabs-slider color="yellow"></v-tabs-slider>
             </v-tabs>
-            <v-tabs-items v-model="tab">
+            <v-window v-model="tab">
                 <v-window-item key="0"> <!-- MONTH EVOLUTION -->
                     <v-card outlined>            
                         <EasyDataTable dense :headers="total_annual_headers" :items="total_annual"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_annual">      
@@ -257,7 +257,7 @@
 
                     </v-card>
                 </v-window-item>
-            </v-tabs-items>     
+            </v-window>     
         </div>
         <!-- REPORT ANNUAL INCOME DETAIL-->
         <v-dialog v-model="dialog_income_details">

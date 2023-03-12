@@ -10,7 +10,7 @@
                 <v-tab key="negative">{{ $t("Negative balance concepts") }}</v-tab>
                 <v-tabs-slider color="yellow"></v-tabs-slider>
             </v-tabs>
-            <v-tabs-items v-model="tab">
+            <v-window v-model="tab">
                 <v-window-item key="positive">
                     <v-card outlined>
                         <EasyDataTable dense :headers="itemsHeaders" :items="itemsPositive"  class="elevation-1 cursorpointer" disable-pagination  hide-default-footer :loading="loading" height="300" @click-row="viewHistoricalReport">
@@ -71,7 +71,7 @@
                         </EasyDataTable>  
                     </v-card>
                 </v-window-item>
-            </v-tabs-items>    
+            </v-window>    
         </div>
         <!-- VIEW HISTORICAL REPORT dialog -->
         <v-dialog v-model="dialog_historical">

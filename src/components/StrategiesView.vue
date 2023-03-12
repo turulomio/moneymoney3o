@@ -12,7 +12,7 @@
             <v-tab key="dividends">{{ $t('Dividends') }}</v-tab>
             <v-tabs-slider color="yellow"></v-tabs-slider>
         </v-tabs>
-        <v-tabs-items v-model="tab">
+        <v-window v-model="tab">
             <v-window-item key="current">      
                 <div>
                     <v-card v-if="!loading">
@@ -39,7 +39,7 @@
                     <TableDividends :items="dividends_filtered" height="300" showinvestment :key="key" @cruded="on_TableDividends_cruded" />
                 </v-card>
             </v-window-item>
-        </v-tabs-items> 
+        </v-window> 
 
     </div>  
 </template>

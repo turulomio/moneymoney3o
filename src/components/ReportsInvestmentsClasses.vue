@@ -12,7 +12,7 @@
                     <v-tab key="leverage">{{ $t("By leverage") }}</v-tab>
                     <v-tabs-slider color="yellow"></v-tabs-slider>
                 </v-tabs>
-                <v-tabs-items v-model="tab" v-if="data!=null">
+                <v-window v-model="tab" v-if="data!=null">
                     <v-window-item key="product">
                         <ChartPie name="Investments by product" :items="echart_products_items" save_name="prueba.png" :key="key"></ChartPie>
                     </v-window-item>
@@ -28,7 +28,7 @@
                     <v-window-item key="leverage">
                         <ChartPie name="Investments by leverage" :items="echart_leverage_items" :key="key"></ChartPie>
                     </v-window-item>
-                </v-tabs-items>
+                </v-window>
         </v-card>
     </div>
 </template>

@@ -12,7 +12,7 @@
                 </v-btn>
                 
             </v-row>
-            <EasyDataTable dense fixed-footer items-per-page="100" :headers="investments_headers" :search="search" :items="investments_items" :sort-by="table_sort_by()" class="elevation-1 ma-4 cursorpointer" hide-default-footer disable-pagination :loading="loading_investments" fixed-header :key="key" @click-row="viewItem">
+            <EasyDataTable dense fixed-footer items-per-page="100" :headers="investments_headers" :search="search" :items="investments_items" :sort-by="table_sort_by()" :sort-type="table_sort_type()" class="elevation-1 ma-4 cursorpointer" hide-default-footer disable-pagination :loading="loading_investments" fixed-header :key="key" @click-row="viewItem">
                 <template #item-fullname="item">
                     <v-icon :class="'mr-2 fi fib fi-'+item.flag" small :title="this.getCountryNameByCode(item.flag)"></v-icon>{{item.fullname}}
                 </template>                  
@@ -122,16 +122,16 @@
             return{
                 showActive:true,
                 investments_headers: [
-                    { text: this.$t('Name'), sortable: true, value: 'fullname'},
-                    { text: this.$t('Last datetime'), value: 'last_datetime',  width: "9%"},
-                    { text: this.$t('Last'), value: 'last',  width: "7%", align:'end'},
-                    { text: this.$t('Daily difference'), value: 'daily_difference',  width: "7%", align:'end'},
-                    { text: this.$t('Daily percentage'), value: 'daily_percentage',  width: "7%", align:'end'},
-                    { text: this.$t('Invested'), value: 'invested_user', align:'end',  width: "7%"},
-                    { text: this.$t('Gains'), value: 'gains_user', align:'end',  width: "7%"},
-                    { text: this.$t('Balance'), value: 'balance_user', align:'end',  width: "7%"},
-                    { text: this.$t('% Invested'), value: 'percentage_invested', align:'end',  width: "7%"},
-                    { text: this.$t('% Selling point'), value: 'percentage_selling_point', align:'end',  width: "7%"},
+                    { text: this.$t('Name'), sortable: true, value: 'fullname', sortable:true},
+                    { text: this.$t('Last datetime'), value: 'last_datetime',  width: "9%", sortable:true},
+                    { text: this.$t('Last'), value: 'last',  width: "7%", align:'end', sortable:true},
+                    { text: this.$t('Daily difference'), value: 'daily_difference',  width: "7%", align:'end', sortable:true},
+                    { text: this.$t('Daily percentage'), value: 'daily_percentage',  width: "7%", align:'end', sortable:true},
+                    { text: this.$t('Invested'), value: 'invested_user', align:'end',  width: "7%", sortable:true},
+                    { text: this.$t('Gains'), value: 'gains_user', align:'end',  width: "7%", sortable:true},
+                    { text: this.$t('Balance'), value: 'balance_user', align:'end',  width: "7%", sortable:true},
+                    { text: this.$t('% Invested'), value: 'percentage_invested', align:'end',  width: "7%", sortable:true},
+                    { text: this.$t('% Selling point'), value: 'percentage_selling_point', align:'end',  width: "7%", sortable:true},
                     { text: this.$t('Actions'), value: 'actions', sortable: false , width: "6%"},
                 ],
                 investments_items:[],
@@ -273,9 +273,16 @@
             },
             table_sort_by(){
                 if (this.showActive){
-                    return [{key:'percentage_selling_point', order: 'asc'}]
+                    return ['percentage_selling_point']
                 } else {
-                    return [{key:'fullname', order: 'asc'}]
+                    return ['fullname']
+                }
+            },
+            table_sort_type(){
+                if (this.showActive){
+                    return ['asc']
+                } else {
+                    return ['asc']
                 }
             },
             products_autoupdate(){

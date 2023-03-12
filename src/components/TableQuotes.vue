@@ -64,10 +64,10 @@
             },
             table_headers(){
                 var r= [
-                    { title: this.$t('Date and time'), key: 'datetime', sortable: true },
-                    { title: this.$t('Product'), key: 'name', sortable: true },
-                    { title: this.$t('Quote'), key: 'quote', sortable: true ,align:'end'},
-                    { title: this.$t('Actions'), key: 'actions', sortable: false },
+                    { text: this.$t('Date and time'), value: 'datetime', sortable: true },
+                    { text: this.$t('Product'), value: 'name', sortable: true },
+                    { text: this.$t('Quote'), value: 'quote', sortable: true ,align:'end'},
+                    { text: this.$t('Actions'), value: 'actions', sortable: false },
                 ]
                 return r
             },

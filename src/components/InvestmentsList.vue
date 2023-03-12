@@ -13,51 +13,51 @@
                 
             </v-row>
             <EasyDataTable dense fixed-footer items-per-page="100" :headers="investments_headers" :search="search" :items="investments_items" :sort-by="table_sort_by()" class="elevation-1 ma-4 cursorpointer" hide-default-footer disable-pagination :loading="loading_investments" fixed-header :key="key" @click-row="viewItem">
-                <template v-slot:[`item.fullname`]="{ item }">
-                    <v-icon :class="'mr-2 fi fib fi-'+item.raw.flag" small :title="this.getCountryNameByCode(item.raw.flag)"></v-icon>{{item.raw.fullname}}
+                <template #item-fullname="item">
+                    <v-icon :class="'mr-2 fi fib fi-'+item.flag" small :title="this.getCountryNameByCode(item.flag)"></v-icon>{{item.fullname}}
                 </template>                  
-                <template v-slot:[`item.last_datetime`]="{ item }">
-                    <div v-html="(item.raw.last_datetime) ? localtime(item.raw.last_datetime) : $t('Update product quotes')" :class="(item.raw.last_datetime) ? '' : 'boldred'"></div>
+                <template #item-last_datetime="item">
+                    <div v-html="(item.last_datetime) ? localtime(item.last_datetime) : $t('Update product quotes')" :class="(item.last_datetime) ? '' : 'boldred'"></div>
                 </template>  
-                <template v-slot:[`item.last`]="{ item }">
-                    <div v-html="currency_html(item.raw.last,item.raw.currency )"></div>
+                <template #item-last="item">
+                    <div v-html="currency_html(item.last,item.currency )"></div>
                 </template>   
-                <template v-slot:[`item.balance_user`]="{ item }">
-                    <div v-html="localcurrency_html(item.raw.balance_user )"></div>
+                <template #item-balance_user="item">
+                    <div v-html="localcurrency_html(item.balance_user )"></div>
                 </template>     
-                <template v-slot:[`item.invested_user`]="{ item }">
+                <template #item-invested_user="item">
                     <v-row class="text-nowrap" justify="end">
-                        <div v-html="localcurrency_html(item.raw.invested_user )"></div>
-                        <v-icon small class="ml-1" v-if="item.raw.shares>=0" color="blue" :title="$t('Long position')">mdi-arrow-up-circle-outline</v-icon>
-                        <v-icon small class="ml-1" v-if="item.raw.shares<0" color="orange" :title="$t('Short position')">mdi-arrow-down-circle-outline</v-icon>
+                        <div v-html="localcurrency_html(item.invested_user )"></div>
+                        <v-icon small class="ml-1" v-if="item.shares>=0" color="blue" :title="$t('Long position')">mdi-arrow-up-circle-outline</v-icon>
+                        <v-icon small class="ml-1" v-if="item.shares<0" color="orange" :title="$t('Short position')">mdi-arrow-down-circle-outline</v-icon>
                     </v-row>
                 </template>    
-                <template v-slot:[`item.gains_user`]="{ item }">
-                    <div v-html="localcurrency_html(item.raw.gains_user )"></div>
+                <template #item-gains_user="item">
+                    <div v-html="localcurrency_html(item.gains_user )"></div>
                 </template>     
-                <template v-slot:[`item.daily_difference`]="{ item }">
-                    <div v-html="localcurrency_html(item.raw.daily_difference )"></div>
+                <template #item-daily_difference="item">
+                    <div v-html="localcurrency_html(item.daily_difference )"></div>
                 </template>   
-                <template v-slot:[`item.daily_percentage`]="{ item }">
-                    <div v-html="percentage_html(item.raw.daily_percentage )"></div>
+                <template #item-daily_percentage="item">
+                    <div v-html="percentage_html(item.daily_percentage )"></div>
                 </template>  
-                <template v-slot:[`item.percentage_invested`]="{ item }">
-                    <div v-html="percentage_html(item.raw.percentage_invested )"></div>
+                <template #item-percentage_invested="item">
+                    <div v-html="percentage_html(item.percentage_invested )"></div>
                 </template>  
-                <template v-slot:[`item.percentage_selling_point`]="{ item }">  
-                    <v-tooltip left :text="tooltip_selling_percentage(item.raw)">
+                <template #item-percentage_selling_point="item">
+                    <v-tooltip left :text="tooltip_selling_percentage(item)">
                         <template v-slot:activator="{ props }">
-                            <div v-bind="props" :class="item.raw.percentage_selling_point<0.05 ? 'boldgreen' : ''" v-html="percentage_html(item.raw.percentage_selling_point)"></div>
+                            <div v-bind="props" :class="item.percentage_selling_point<0.05 ? 'boldgreen' : ''" v-html="percentage_html(item.percentage_selling_point)"></div>
                         </template>
                     </v-tooltip>   
                 </template>              
-                <template v-slot:[`item.actions`]="{ item }">
-                    <v-icon small class="ml-1" @click.stop="addQuote(item.raw)">mdi-plus</v-icon>
-                    <v-icon small class="ml-1" @click.stop="editItem(item.raw)">mdi-pencil</v-icon>
-                    <v-icon small class="ml-1" @click.stop="deleteItem(item.raw)" v-if="item.raw.is_deletable">mdi-delete</v-icon>
-                    <v-icon small class="ml-1" v-if="(new Date().setHours(0,0,0,0)>new Date(item.raw.selling_expiration).setHours(0,0,0,0)) && item.raw.selling_expiration!=null" @click="changeSellingPrice(item.raw)" color="#9933ff" style="font-weight:bold">mdi-alarm</v-icon>     
+                <template #item-actions="item">
+                    <v-icon small class="ml-1" @click.stop="addQuote(item)">mdi-plus</v-icon>
+                    <v-icon small class="ml-1" @click.stop="editItem(item)">mdi-pencil</v-icon>
+                    <v-icon small class="ml-1" @click.stop="deleteItem(item)" v-if="item.is_deletable">mdi-delete</v-icon>
+                    <v-icon small class="ml-1" v-if="(new Date().setHours(0,0,0,0)>new Date(item.selling_expiration).setHours(0,0,0,0)) && item.selling_expiration!=null" @click="changeSellingPrice(item)" color="#9933ff" style="font-weight:bold">mdi-alarm</v-icon>     
                 </template>         
-                <template v-slot:[`tbody`]>
+                <template #body-append>
                     <tr class="totalrow pa-6">
                         <td>{{ $t("Total ({0}):", [investments_items.length])}}</td>
                         <td></td>
@@ -122,17 +122,17 @@
             return{
                 showActive:true,
                 investments_headers: [
-                    { title: this.$t('Name'), sortable: true, key: 'fullname'},
-                    { title: this.$t('Last datetime'), key: 'last_datetime',  width: "9%"},
-                    { title: this.$t('Last'), key: 'last',  width: "7%", align:'end'},
-                    { title: this.$t('Daily difference'), key: 'daily_difference',  width: "7%", align:'end'},
-                    { title: this.$t('Daily percentage'), key: 'daily_percentage',  width: "7%", align:'end'},
-                    { title: this.$t('Invested'), key: 'invested_user', align:'end',  width: "7%"},
-                    { title: this.$t('Gains'), key: 'gains_user', align:'end',  width: "7%"},
-                    { title: this.$t('Balance'), key: 'balance_user', align:'end',  width: "7%"},
-                    { title: this.$t('% Invested'), key: 'percentage_invested', align:'end',  width: "7%"},
-                    { title: this.$t('% Selling point'), key: 'percentage_selling_point', align:'end',  width: "7%"},
-                    { title: this.$t('Actions'), key: 'actions', sortable: false , width: "6%"},
+                    { text: this.$t('Name'), sortable: true, value: 'fullname'},
+                    { text: this.$t('Last datetime'), value: 'last_datetime',  width: "9%"},
+                    { text: this.$t('Last'), value: 'last',  width: "7%", align:'end'},
+                    { text: this.$t('Daily difference'), value: 'daily_difference',  width: "7%", align:'end'},
+                    { text: this.$t('Daily percentage'), value: 'daily_percentage',  width: "7%", align:'end'},
+                    { text: this.$t('Invested'), value: 'invested_user', align:'end',  width: "7%"},
+                    { text: this.$t('Gains'), value: 'gains_user', align:'end',  width: "7%"},
+                    { text: this.$t('Balance'), value: 'balance_user', align:'end',  width: "7%"},
+                    { text: this.$t('% Invested'), value: 'percentage_invested', align:'end',  width: "7%"},
+                    { text: this.$t('% Selling point'), value: 'percentage_selling_point', align:'end',  width: "7%"},
+                    { text: this.$t('Actions'), value: 'actions', sortable: false , width: "6%"},
                 ],
                 investments_items:[],
                 menuinline_items: [
@@ -265,7 +265,7 @@
             viewItem (event,item) {
                 console.log(event)
                 console.log(item.value)
-                console.log(item.raw.url.value)
+                console.log(item.url.value)
                 event
                 this.investment=item.value.raw.url
                 this.key=this.key+1

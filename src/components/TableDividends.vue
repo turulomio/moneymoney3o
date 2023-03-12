@@ -113,15 +113,15 @@
             },
             table_headers(){
                 var r= [
-                    { title: this.$t('Date and time'), key: 'datetime', sortable: true },
-                    { title: this.$t('Investment'), key: 'investments',sortable: true },
-                    { title: this.$t('Concept'), key: 'concepts', sortable: true },
-                    { title: this.$t('Gross'), key: 'gross', sortable: false, align:'end'},
-                    { title: this.$t('Net'), key: 'net', sortable: false, align:'end'},
-                    { title: this.$t('Commission'), key: 'commission', sortable: true , align:'end'},
-                    { title: this.$t('Taxes'), key: 'taxes', sortable: true , align:'end'},
-                    { title: this.$t('DPS'), key: 'dps', sortable: true , align:'end'},
-                    { title: this.$t('Actions'), key: 'actions', sortable: false },
+                    { text: this.$t('Date and time'), value: 'datetime', sortable: true },
+                    { text: this.$t('Investment'), value: 'investments',sortable: true },
+                    { text: this.$t('Concept'), value: 'concepts', sortable: true },
+                    { text: this.$t('Gross'), value: 'gross', sortable: false, align:'end'},
+                    { text: this.$t('Net'), value: 'net', sortable: false, align:'end'},
+                    { text: this.$t('Commission'), value: 'commission', sortable: true , align:'end'},
+                    { text: this.$t('Taxes'), value: 'taxes', sortable: true , align:'end'},
+                    { text: this.$t('DPS'), value: 'dps', sortable: true , align:'end'},
+                    { text: this.$t('Actions'), value: 'actions', sortable: false },
                 ]
                 if (this.showinvestment==false){
                     r.splice(1, 1)

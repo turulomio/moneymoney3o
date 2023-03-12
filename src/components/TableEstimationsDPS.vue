@@ -60,12 +60,12 @@
             },
             table_headers(){
                 var r= [
-                    { title: this.$t('Year'), key: 'year', sortable: true },
-                    { title: this.$t('DPS estimation'), key: 'estimation', sortable: true,align:'end' },
-                    { title: this.$t('Estimation date'), key: 'date_estimation', sortable: false},
-                    { title: this.$t('Source'), key: 'source', sortable: false,},
-                    { title: this.$t('Manual'), key: 'manual', sortable: true },
-                    { title: this.$t('Actions'), key: 'actions', sortable: false },
+                    { text: this.$t('Year'), value: 'year', sortable: true },
+                    { text: this.$t('DPS estimation'), value: 'estimation', sortable: true,align:'end' },
+                    { text: this.$t('Estimation date'), value: 'date_estimation', sortable: false},
+                    { text: this.$t('Source'), value: 'source', sortable: false,},
+                    { text: this.$t('Manual'), value: 'manual', sortable: true },
+                    { text: this.$t('Actions'), value: 'actions', sortable: false },
                 ]
                 return r
             },

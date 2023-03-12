@@ -53,13 +53,13 @@
             return{
                 alertdays:90,
                 tableHeaders: [
-                    { title: this.$t('Investment'), key: 'name',sortable: true },
-                    { title: this.$t('Current price'), key: 'current_price',sortable: true, align: 'right'},
-                    { title: this.$t('DPS'), key: 'dps',sortable: false, align: 'right', cellClass: "text-nowrap"},
-                    { title: this.$t('Shares'), key: 'shares',sortable: false, align: 'right'},
-                    { title: this.$t('Estimated balance'), key: 'estimated',sortable: false, align: 'right'},
-                    { title: this.$t('Percentage'), key: 'percentage',sortable: false, align: 'right', },
-                    { title: this.$t('Actions'), key: 'actions',sortable: false, align: 'right'},
+                    { text: this.$t('Investment'), value: 'name',sortable: true },
+                    { text: this.$t('Current price'), value: 'current_price',sortable: true, align: 'right'},
+                    { text: this.$t('DPS'), value: 'dps',sortable: false, align: 'right', cellClass: "text-nowrap"},
+                    { text: this.$t('Shares'), value: 'shares',sortable: false, align: 'right'},
+                    { text: this.$t('Estimated balance'), value: 'estimated',sortable: false, align: 'right'},
+                    { text: this.$t('Percentage'), value: 'percentage',sortable: false, align: 'right', },
+                    { text: this.$t('Actions'), value: 'actions',sortable: false, align: 'right'},
                 ],
                 items:[],
                 

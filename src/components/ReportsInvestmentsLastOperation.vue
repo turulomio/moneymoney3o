@@ -67,16 +67,16 @@
         data(){ 
             return{
                 tableHeaders: [
-                    { title: this.$t('Name'), key: 'name', sortable: true},
-                    { title: this.$t('Date and time'), key: 'datetime', sortable: true, align:'end'},
-                    { title: this.$t('Last shares'), key: 'last_shares', sortable: true, align:'end', width:"7%" },
-                    { title: this.$t('Total shares'), key: 'shares', sortable: true, align:'end', width:"7%" },
-                    { title: this.$t('Balance'), key: 'balance', sortable: true, align:'end', width:"7%" },
-                    { title: this.$t('Gains'), key: 'gains', sortable: true, align:'end', width:"7%" },
-                    { title: this.$t('% last'), key: 'percentage_last', sortable: true, align:'end', width:"7%" },
-                    { title: this.$t('% invested'), key: 'percentage_invested', sortable: true, align:'end', width:"7%" },
-                    { title: this.$t('% selling point'), key: 'percentage_sellingpoint', sortable: true, align:'end', width:"7%" },
-                    { title: this.$t('Actions'), key: 'actions', sortable: true, cellClass: "text-nowrap" , width:"6%" },
+                    { text: this.$t('Name'), value: 'name', sortable: true},
+                    { text: this.$t('Date and time'), value: 'datetime', sortable: true, align:'end'},
+                    { text: this.$t('Last shares'), value: 'last_shares', sortable: true, align:'end', width:"7%" },
+                    { text: this.$t('Total shares'), value: 'shares', sortable: true, align:'end', width:"7%" },
+                    { text: this.$t('Balance'), value: 'balance', sortable: true, align:'end', width:"7%" },
+                    { text: this.$t('Gains'), value: 'gains', sortable: true, align:'end', width:"7%" },
+                    { text: this.$t('% last'), value: 'percentage_last', sortable: true, align:'end', width:"7%" },
+                    { text: this.$t('% invested'), value: 'percentage_invested', sortable: true, align:'end', width:"7%" },
+                    { text: this.$t('% selling point'), value: 'percentage_sellingpoint', sortable: true, align:'end', width:"7%" },
+                    { text: this.$t('Actions'), value: 'actions', sortable: true, cellClass: "text-nowrap" , width:"6%" },
                 ],   
                 tableData: [],
                 method_results: [

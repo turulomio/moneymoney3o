@@ -169,46 +169,46 @@
                 var r
                 if (this.output=="account"){
                     r= [
-                        { title: this.$t('Date and time'), key: 'dt_end',sortable: true },
-                        { title: this.$t('Years'), key: 'years',sortable: true },
-                        { title: this.$t('Operation'), key: 'operationstypes',sortable: true },
-                        { title: this.$t('Shares'), key: 'shares',sortable: false, align:'end'},
-                        { title: this.$t('Gross start'), key: 'gross_start_account',sortable: false, align:'end'},
-                        { title: this.$t('Gross end'), key: 'gross_end_account',sortable: false, align:'end'},
-                        { title: this.$t('Gains gross'), key: 'gains_gross_account',sortable: false, align:'end'},
-                        { title: this.$t('Commission'), key: 'commissions_account',sortable: false, align:'end'},
-                        { title: this.$t('Taxes'), key: 'taxes_account',sortable: false, align:'end'},
-                        { title: this.$t('Gains'), key: 'gains_net_account',sortable: false, align:'end'},
+                        { text: this.$t('Date and time'), value: 'dt_end',sortable: true },
+                        { text: this.$t('Years'), value: 'years',sortable: true },
+                        { text: this.$t('Operation'), value: 'operationstypes',sortable: true },
+                        { text: this.$t('Shares'), value: 'shares',sortable: false, align:'end'},
+                        { text: this.$t('Gross start'), value: 'gross_start_account',sortable: false, align:'end'},
+                        { text: this.$t('Gross end'), value: 'gross_end_account',sortable: false, align:'end'},
+                        { text: this.$t('Gains gross'), value: 'gains_gross_account',sortable: false, align:'end'},
+                        { text: this.$t('Commission'), value: 'commissions_account',sortable: false, align:'end'},
+                        { text: this.$t('Taxes'), value: 'taxes_account',sortable: false, align:'end'},
+                        { text: this.$t('Gains'), value: 'gains_net_account',sortable: false, align:'end'},
                     ]
                 } else if (this.output=="investment"){
                     r= [
-                        { title: this.$t('Date and time'), key: 'dt_end',sortable: true },
-                        { title: this.$t('Years'), key: 'years',sortable: true },
-                        { title: this.$t('Operation'), key: 'operationstypes',sortable: true },
-                        { title: this.$t('Shares'), key: 'shares',sortable: false, align:'end'},
-                        { title: this.$t('Gross start'), key: 'gross_start_investment',sortable: false, align:'end'},
-                        { title: this.$t('Gross end'), key: 'gross_end_investment',sortable: false, align:'end'},
-                        { title: this.$t('Gains gross'), key: 'gains_gross_investment',sortable: false, align:'end'},
-                        { title: this.$t('Commission'), key: 'commissions_investment',sortable: false, align:'end'},
-                        { title: this.$t('Taxes'), key: 'taxes_investment',sortable: false, align:'end'},
-                        { title: this.$t('Gains'), key: 'gains_net_investment',sortable: false, align:'end'},
+                        { text: this.$t('Date and time'), value: 'dt_end',sortable: true },
+                        { text: this.$t('Years'), value: 'years',sortable: true },
+                        { text: this.$t('Operation'), value: 'operationstypes',sortable: true },
+                        { text: this.$t('Shares'), value: 'shares',sortable: false, align:'end'},
+                        { text: this.$t('Gross start'), value: 'gross_start_investment',sortable: false, align:'end'},
+                        { text: this.$t('Gross end'), value: 'gross_end_investment',sortable: false, align:'end'},
+                        { text: this.$t('Gains gross'), value: 'gains_gross_investment',sortable: false, align:'end'},
+                        { text: this.$t('Commission'), value: 'commissions_investment',sortable: false, align:'end'},
+                        { text: this.$t('Taxes'), value: 'taxes_investment',sortable: false, align:'end'},
+                        { text: this.$t('Gains'), value: 'gains_net_investment',sortable: false, align:'end'},
                     ]
                 } else if (this.output=="user"){
                     r= [
-                        { title: this.$t('Date and time'), key: 'dt_end',sortable: true },
-                        { title: this.$t('Years'), key: 'years',sortable: true },
-                        { title: this.$t('Operation'), key: 'operationstypes',sortable: true },
-                        { title: this.$t('Shares'), key: 'shares',sortable: false, align:'end'},
-                        { title: this.$t('Gross start'), key: 'gross_start_user',sortable: false, align:'end'},
-                        { title: this.$t('Gross end'), key: 'gross_end_user',sortable: false, align:'end'},
-                        { title: this.$t('Gains gross'), key: 'gains_gross_user',sortable: false, align:'end'},
-                        { title: this.$t('Commission'), key: 'commissions_user',sortable: false, align:'end'},
-                        { title: this.$t('Taxes'), key: 'taxes_user',sortable: false, align:'end'},
-                        { title: this.$t('Gains'), key: 'gains_net_user',sortable: false, align:'end'},
+                        { text: this.$t('Date and time'), value: 'dt_end',sortable: true },
+                        { text: this.$t('Years'), value: 'years',sortable: true },
+                        { text: this.$t('Operation'), value: 'operationstypes',sortable: true },
+                        { text: this.$t('Shares'), value: 'shares',sortable: false, align:'end'},
+                        { text: this.$t('Gross start'), value: 'gross_start_user',sortable: false, align:'end'},
+                        { text: this.$t('Gross end'), value: 'gross_end_user',sortable: false, align:'end'},
+                        { text: this.$t('Gains gross'), value: 'gains_gross_user',sortable: false, align:'end'},
+                        { text: this.$t('Commission'), value: 'commissions_user',sortable: false, align:'end'},
+                        { text: this.$t('Taxes'), value: 'taxes_user',sortable: false, align:'end'},
+                        { text: this.$t('Gains'), value: 'gains_net_user',sortable: false, align:'end'},
                     ] 
                 }
                 if (this.showinvestment==true){
-                    r.splice(2, 0, { title: this.$t('Investment'), key: 'investments',sortable: true });
+                    r.splice(2, 0, { text: this.$t('Investment'), value: 'investments',sortable: true });
                 }
                 return r
             },

@@ -446,15 +446,15 @@
             displayvalues(){
 
                 return [
-                    {title:this.$t('Selling point'), key: this.selling_point_message},
-                    {title:this.$t('Selling expiration'), key: this.selling_expiration_message},
-                    {title:this.$t('Active'), key: this.investment.active},
-                    {title:this.$t('Currency'), key: this.plio_id.data.currency_product},
-                    {title:this.$t('Next reinvest amount'), key: this.plio_id.data.currency_product},
-                    {title:this.$t('Product'), key: this.product.fullname},
-                    {title:this.$t('Leverage'), key: this.leverage_message},
-                    {title:this.$t('Daily adjustment'), key: this.investment.daily_adjustment},
-                    {title:this.$t('Id'), key: this.investment.id},
+                    {title:this.$t('Selling point'), value: this.selling_point_message},
+                    {title:this.$t('Selling expiration'), value: this.selling_expiration_message},
+                    {title:this.$t('Active'), value: this.investment.active},
+                    {title:this.$t('Currency'), value: this.plio_id.data.currency_product},
+                    {title:this.$t('Next reinvest amount'), value: this.plio_id.data.currency_product},
+                    {title:this.$t('Product'), value: this.product.fullname},
+                    {title:this.$t('Leverage'), value: this.leverage_message},
+                    {title:this.$t('Daily adjustment'), value: this.investment.daily_adjustment},
+                    {title:this.$t('Id'), value: this.investment.id},
                 ]
             },
             setChkDividendsLabel(){

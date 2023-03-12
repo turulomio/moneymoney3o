@@ -39,8 +39,8 @@
                 items: [],
                 message:"",
                 headers: [
-                    { title: this.$t('Product'), sortable: true, value: 'product'},
-                    { title: this.$t('Log'), sortable: true, value: 'log'},
+                    { text: this.$t('Product'), sortable: true, value: 'product'},
+                    { text: this.$t('Log'), sortable: true, value: 'log'},
                 ],
             }
         },

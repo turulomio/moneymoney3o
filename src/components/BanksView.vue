@@ -67,14 +67,14 @@
             return{
                 showActive:true,
                 accounts_headers: [
-                    { title: this.$t('Name'), sortable: true, key: 'name'},
-                    { title: this.$t('Active'), key: 'active',  width: "12%"},
-                    { title: this.$t('Balance'), key: 'balance_user', align:'end',  width: "12%"},
+                    { text: this.$t('Name'), sortable: true, value: 'name'},
+                    { text: this.$t('Active'), value: 'active',  width: "12%"},
+                    { text: this.$t('Balance'), value: 'balance_user', align:'end',  width: "12%"},
                 ],
                 investments_headers: [
-                    { title: this.$t('Name'), sortable: true, key: 'name'},
-                    { title: this.$t('Active'), key: 'active',  width: "12%"},
-                    { title: this.$t('Balance'), key: 'balance_user', align:'end',  width: "12%"},
+                    { text: this.$t('Name'), sortable: true, value: 'name'},
+                    { text: this.$t('Active'), value: 'active',  width: "12%"},
+                    { text: this.$t('Balance'), value: 'balance_user', align:'end',  width: "12%"},
                 ],
                 accounts_items:[],
                 investments_items:[],
@@ -86,8 +86,8 @@
         methods: {            
             displayvalues(){
                 return [
-                    {title:this.$t('Active'), key: this.bank.active},
-                    {title:this.$t('Id'), key: this.bank.id},
+                    {title:this.$t('Active'), value: this.bank.active},
+                    {title:this.$t('Id'), value: this.bank.id},
                 ]
             },
             update_accounts(){

@@ -101,11 +101,11 @@
         data () {
             return {
                 displayvalues:[
-                    {title:this.$t('Bank'), key: this.getObjectPropertyByUrl("banks",this.account.banks,"name")},
-                    {title:this.$t('Number'), key: this.account.number},
-                    {title:this.$t('Currency'), key: this.account.currency},
-                    {title:this.$t('Active'), key: this.account.active},
-                    {title:this.$t('Id'), key: this.account.id},
+                    {title:this.$t('Bank'), value: this.getObjectPropertyByUrl("banks",this.account.banks,"name")},
+                    {title:this.$t('Number'), value: this.account.number},
+                    {title:this.$t('Currency'), value: this.account.currency},
+                    {title:this.$t('Active'), value: this.account.active},
+                    {title:this.$t('Id'), value: this.account.id},
                 ],
                 ym: null,
                 tab:0,

@@ -1,41 +1,37 @@
 <template>
     <div>
-        <v-data-table  ref="table_ao" :show-select="showselected" v-model="selected" dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="datetime" fixed-header :single-select="false" :height="$attrs.height">
-            <template v-slot:[`item.datetime`]="{ item,index }">
-                <div :ref="index">{{ localtime(item.datetime)}}</div>
+        <EasyDataTable  ref="table_ao" :show-select="showselected" v-model="selected" dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="datetime" fixed-header :single-select="false" :height="$attrs.height">
+
+            <template #item-datetime="item">
+                <div>{{ localtime(item.datetime)}}</div>
             </template>          
-            <template v-slot:[`item.amount`]="{ item }">
+            <template #item-amount="item">
                 <div v-html="currency_html(item.amount,item.currency)"></div>
             </template>   
-            <template v-slot:[`item.balance`]="{ item }">
+            <template #item-balance="item">
                 <div v-html="currency_html(item.balance, item.currency)"></div>
             </template>   
-            <template v-slot:[`item.accounts`]="{ item }">
+            <template #item-accounts="item">
                 <div v-html="getObjectPropertyByUrl('accounts', item.accounts, 'fullname')"></div>
             </template> 
-            <template v-slot:[`item.concepts`]="{ item }">
+            <template #item-concepts="item">
                 <div class="cursorpointer" v-html="getObjectPropertyByUrl('concepts', item.concepts, 'localname')" @click="viewHistoricalConcept(item)"></div>
             </template>
-            <template v-slot:[`item.actions`]="{ item }">
+            <template #item-actions="item">
                 <v-icon small class="mr-2" @click="editAO(item)">mdi-pencil</v-icon>
                 <v-icon small class="mr-2" @click="deleteAO(item)">mdi-delete</v-icon>
             </template>
-            <template v-slot:[`body.append`]="{headers}" v-if="showtotal && items.length>0">
+            <template #body-append v-if="showtotal && items.length>0">
                 <tr class="totalrow">
-                    <td v-for="(header,i) in headers" :key="`row${i}`" >
-                        <div v-if="header.value == 'datetime'">
-                            {{ $t("Total ({0} registers)").format(items.length)}}
-                        </div>
-                        <div v-if="header.value == 'amount'">
-                            <div v-if="all_items_has_same_currency" class="text-right" v-html="currency_html(listobjects_sum(items,'amount'),total_currency)"></div>
-                        </div>
-                        <div v-if="header.value == 'comment_decoded'">
-                            <div v-if="!all_items_has_same_currency" >{{ $t("Can't sum amounts due to they have different currencies") }}</div>
-                        </div>
-                    </td>
+                        <td>{{ $t("Total ({0} registers)").format(items.length)}}</td>
+                        <td></td>
+                        <td></td>
+                        <td><div v-if="all_items_has_same_currency" class="text-right" v-html="currency_html(listobjects_sum(items,'amount'),total_currency)"></div></td>
+                        <td><div v-if="!all_items_has_same_currency" >{{ $t("Can't sum amounts due to they have different currencies") }}</div></td>
+                        <td></td>
                 </tr>
             </template>
-        </v-data-table>   
+        </EasyDataTable>   
         
         <!-- DIALOG ACCOUNTSOPERATIONS ADD/UPDATE -->
         <v-dialog v-model="dialog_ao" max-width="550">
@@ -249,15 +245,15 @@
         },
         table_headers(){
             var r= [
-                { title: this.$t('Date and time'), key: 'datetime', sortable: true, width:"12%" },
-                { title: this.$t('Account'), key: 'accounts', sortable: true, width:"20%" },
-                { title: this.$t('Concept'), key: 'concepts', sortable: true, width:"20%"},
-                { title: this.$t('Amount'), key: 'amount', sortable: true, align:'end', width:"8%"},
-                { title: this.$t('Balance'), key: 'balance', sortable: false, align:'end', width:"8%"},
-                { title: this.$t('Comment'), key: 'comment_decoded', sortable: true},
+                { text: this.$t('Date and time'), value: 'datetime', sortable: true, width:"12%" },
+                { text: this.$t('Account'), value: 'accounts', sortable: true, width:"20%" },
+                { text: this.$t('Concept'), value: 'concepts', sortable: true, width:"20%"},
+                { text: this.$t('Amount'), value: 'amount', sortable: true, align:'end', width:"8%"},
+                { text: this.$t('Balance'), value: 'balance', sortable: false, align:'end', width:"8%"},
+                { text: this.$t('Comment'), value: 'comment_decoded', sortable: true},
             ]
             if (this.hideactions==false){
-                r.push({ title: this.$t('Actions'), key: 'actions', sortable: false , width:"6%"})
+                r.push({ text: this.$t('Actions'), value: 'actions', sortable: false , width:"6%"})
             }
             if (this.showbalance==false){
                 r.splice(4, 1);
@@ -268,7 +264,7 @@
             return r
         },
         gotoLastRow(){          
-            if(this.$refs.table_ao) this.$vuetify.goTo(100000, { container:  this.$refs.table_ao.$el.childNodes[0]}) 
+            //if(this.$refs.table_ao) this.$vuetify.goTo(100000, { container:  this.$refs.table_ao.$el.childNodes[0]}) 
         },
         on_AccountTransfer_cruded(){
             this.dialog_transfer=false

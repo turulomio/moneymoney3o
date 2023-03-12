@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-data-table dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer :sort-by="$attrs.sort_by" fixed-header :height="$attrs.height" :loading="$attrs.loading">
+        <EasyDataTable dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer :sort-by="$attrs.sort_by" fixed-header :height="$attrs.height" :loading="$attrs.loading">
             <template v-slot:[`item.datetime`]="{ item }" >
                 <div>{{ localtime(item.datetime)}}</div>
             </template>        
@@ -11,7 +11,7 @@
                 <v-icon small class="mr-2" @click="editQuote(item)">mdi-pencil</v-icon>
                 <v-icon small class="mr-2" @click="deleteQuote(item)">mdi-delete</v-icon>
             </template>
-        </v-data-table>   
+        </EasyDataTable>   
         <!-- QUOTES CU-->
         <v-dialog v-model="dialog_quotes_cu" width="65%">
             <v-card class="pa-3">

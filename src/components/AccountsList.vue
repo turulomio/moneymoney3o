@@ -5,28 +5,41 @@
         </h1>
         <v-card outlined class="ma-4 pa-4">
             <v-checkbox v-model="showActive" :label="chkLabel" ></v-checkbox>
-            <v-data-table dense :headers="accounts_headers" :items="accounts_items" :sort-by="[{key:'localname', order: 'asc'}]" class="elevation-1 cursorpointer" hide-default-footer disable-pagination :loading="loading_accounts" :key="key"  @click:row="viewItem">
-                <template v-slot:[`item.last_datetime`]="{ item }">
-                    {{localtime(item.raw.last_datetime)}}
+            <EasyDataTable dense :headers="accounts_headers" :items="accounts_items" sort-by="datetime" sort-type="asc" class="elevation-1 cursorpointer" hide-default-footer disable-pagination :loading="loading_accounts" :key="key" @click-row="viewItem">
+                <template #item-last_datetime="item">
+                    {{localtime(item.last_datetime)}}
                 </template>             
-                <template v-slot:[`item.banks`]="{ item }">
-                    <div v-html="getObjectPropertyByUrl('banks',item.raw.banks,'localname')"></div>
+                <template #item-banks="item">
+                    <div v-html="getObjectPropertyByUrl('banks',item.banks,'localname')"></div>
                 </template>     
-                <template v-slot:[`item.balance_user`]="{ item }">
-                    <div v-html="localcurrency_html(item.raw.balance_user)"></div>
+                <template #item-balance_user="item">
+                    <div class="right" v-html="localcurrency_html(item.balance_user)"></div>
                 </template>     
-                <template v-slot:[`item.balance_account`]="{ item }">
-                    <div v-html="currency_html(item.raw.balance_account, item.raw.currency )"></div>
+                <template #item-balance_account="item">
+                    <div class="right" v-html="currency_html(item.balance_account, item.currency )"></div>
                 </template>                   
-                <template v-slot:[`item.active`]="{ item }">
-                    <v-icon small v-if="item.raw.active" >mdi-check-outline</v-icon>
+                <template #item-active="item">
+                    <v-icon small v-if="item.active" >mdi-check-outline</v-icon>
                 </template>         
 
-                <template v-slot:[`item.actions`]="{ item }">
+                <template #item-actions="item">
                     <v-icon small class="mr-2" @click.stop="editItem(item)">mdi-pencil</v-icon>
-                    <v-icon small @click.stop="deleteItem(item)" v-if="item.raw.is_deletable">mdi-delete</v-icon>
-                </template>                  
-                <template v-slot:[`body.append`]="{headers}">
+                    <v-icon small @click.stop="deleteItem(item)" v-if="item.is_deletable">mdi-delete</v-icon>
+                </template>             
+                <template #body-append>
+                    <tr class="totalrow pa-6">
+                        <td>{{ $t("Total ({0} registers)", [accounts_items.length,]) }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </template>              
+                <!-- <template v-slot:[`body.append`]="{headers}">
                     <tr class="totalrow">
                         <td v-for="(header,i) in headers" :key="i">
                             <div v-if="header.value == 'localname'">
@@ -36,8 +49,8 @@
                             </div>
                         </td>
                     </tr>
-                </template>
-            </v-data-table>
+                </template> -->
+            </EasyDataTable>
         </v-card>
         <v-dialog v-model="dialog" width="35%">
             <v-card class="pa-4">
@@ -86,14 +99,14 @@
                 showActive:true,
                 chkLabel:"",
                 accounts_headers: [
-                    { title: this.$t('Name'), sortable: true, key: 'localname', width:"21%"},
-                    { title: this.$t('Bank'), sortable: true, key: 'banks', width:"21%"},
-                    { title: this.$t('Active'), key: 'active',  width: "8%"},
-                    { title: this.$t('Currency'), key: 'currency',  width: "8%"},
-                    { title: this.$t('Number'), key: 'number',  width: "10%", align:'end'},
-                    { title: this.$t('Balance'), key: 'balance_account',  width: "12%", align:'end'},
-                    { title: this.$t('Balance user currency'), key: 'balance_user', width: "12%", align:'end'},
-                    { title: this.$t('Actions'), key: 'actions', sortable: false , width: "7%"},
+                    { text: this.$t('Name'), sortable: true, value: 'localname', width:"21%"},
+                    { text: this.$t('Bank'), sortable: true, value: 'banks', width:"21%"},
+                    { text: this.$t('Active'), value: 'active',  width: "8%"},
+                    { text: this.$t('Currency'), value: 'currency',  width: "8%"},
+                    { text: this.$t('Number'), value: 'number',  width: "10%", align:'end'},
+                    { text: this.$t('Balance'), value: 'balance_account',  width: "12%", align:'end'},
+                    { text: this.$t('Balance user currency'), value: 'balance_user', width: "12%", align:'end'},
+                    { text: this.$t('Actions'), value: 'actions', sortable: false , width: "7%"},
                 ],
                 accounts_items:[],
                 menuinline_items: [
@@ -160,18 +173,19 @@
             empty_account,
             empty_account_transfer,
             editItem (item) {
-                this.account=item.raw
+                this.account=item
                 this.account_deleting=false
                 this.key=this.key+1
                 this.dialog=true
             },
             viewItem (item) {
+                console.log(item)
+                this.account=item
                 this.key=this.key+1
-                this.account=item.raw
                 this.dialog_view=true
             },
             deleteItem (item) {
-                this.account=item.raw
+                this.account=item
                 this.key=this.key+1
                 this.account_deleting=true
                 this.dialog=true

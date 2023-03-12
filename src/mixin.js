@@ -35,7 +35,8 @@ import {
     percentage_generic_string, 
     percentage_html,
     localcurrency_string,
-    localcurrency_html
+    localcurrency_html,
+    console_log
 } from './my_commons.js'
   
 import {
@@ -116,7 +117,8 @@ const mixin = {
         percentage_generic_string, 
         percentage_html,
         localcurrency_string,
-        localcurrency_html
+        localcurrency_html,
+        console_log,
 
     }
   }

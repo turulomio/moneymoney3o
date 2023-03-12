@@ -7,7 +7,7 @@
 
         <v-card outlined class="ma-4 pa-4">
             <v-card-title class="headline">{{$t('Accounts')}}</v-card-title>
-            <v-data-table dense :headers="accounts_headers" :items="accounts_items" sort-by="name" class="elevation-1" hide-default-footer :loading="loading_accounts" :key="key">
+            <EasyDataTable dense :headers="accounts_headers" :items="accounts_items" sort-by="name" class="elevation-1" hide-default-footer :loading="loading_accounts" :key="key">
                 <template v-slot:[`item.active`]="{ item }">
                     <v-icon small v-if="item.active" >mdi-check-outline</v-icon>
                 </template>  
@@ -25,11 +25,11 @@
                         </td>
                     </tr>
                 </template>
-            </v-data-table>
+            </EasyDataTable>
         </v-card>        
         <v-card outlined class="ma-4 pa-4">
             <v-card-title class="headline">{{$t('Investments')}}</v-card-title>
-            <v-data-table dense :headers="investments_headers" :items="investments_items" sort-by="name" class="elevation-1" hide-default-footer :loading="loading_investments" :key="key">
+            <EasyDataTable dense :headers="investments_headers" :items="investments_items" sort-by="name" class="elevation-1" hide-default-footer :loading="loading_investments" :key="key">
                 <template v-slot:[`item.active`]="{ item }">
                     <v-icon small v-if="item.active" >mdi-check-outline</v-icon>
                 </template>  
@@ -47,7 +47,7 @@
                         </td>
                     </tr>
                 </template>
-            </v-data-table>
+            </EasyDataTable>
         </v-card>
     </div>
 </template>

@@ -21,7 +21,7 @@
                     <v-card-subtitle>{{message}}</v-card-subtitle>
             </v-form>
         </v-card>   
-        <v-data-table dense :headers="headers" :items="items" sort-by="product" class="elevation-1 pt-6" hide-default-footer  disable-pagination :loading="loading"></v-data-table>
+        <EasyDataTable dense :headers="headers" :items="items" sort-by="product" class="elevation-1 pt-6" hide-default-footer  disable-pagination :loading="loading"></EasyDataTable>
     </div>
 </template>  
 <script>     

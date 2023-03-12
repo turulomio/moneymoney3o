@@ -9,7 +9,7 @@
             </v-card>
         </v-container>
         <div class="pa-6">
-            <v-data-table dense :headers="tableHeaders"  :items="items" class="elevation-1" disable-pagination  hide-default-footer :sort-by="['percentage']" :sort-desc="['percentage']">
+            <EasyDataTable dense :headers="tableHeaders"  :items="items" class="elevation-1" disable-pagination  hide-default-footer :sort-by="['percentage']" :sort-desc="['percentage']">
                 <template v-slot:[`item.dps`]="{item}" >
                     <div v-html="currency_html(item.dps,item.currency )"></div>
                 </template>    
@@ -26,7 +26,7 @@
                 <template v-slot:[`item.percentage`]="{ item }">
                     <div v-html="percentage_html(item.percentage )"></div>
                 </template>
-            </v-data-table>
+            </EasyDataTable>
             <p class="mt-4 ">{{ total() }}</p>
         </div>
         

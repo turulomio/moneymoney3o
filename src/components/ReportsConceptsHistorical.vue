@@ -8,7 +8,7 @@
             </v-card>
         </v-layout>
         <p></p>
-        <v-data-table dense :headers="tableHeaders" :items="tableData" class="elevation-1 ma-4" disable-pagination  hide-default-footer fixed-header :key="key"  height="500">        
+        <EasyDataTable dense :headers="tableHeaders" :items="tableData" class="elevation-1 ma-4" disable-pagination  hide-default-footer fixed-header :key="key"  height="500">        
             <template v-slot:[`item.m1`]="{ item }">
                 <div v-html="localcurrency_html(item.m1)" @click="showConceptsHistoricalDetail(item,1)"></div>
             </template> 
@@ -48,7 +48,7 @@
             <template v-slot:[`item.total`]="{ item }">
                 <div v-html="localcurrency_html(item.total)" @click="showConceptsHistoricalDetail(item)"></div>
             </template> 
-        </v-data-table>
+        </EasyDataTable>
 
         <!-- VIEW HISTORICAL REPORT DETAIL dialog -->
         <v-dialog v-model="dialog_historical_concepts_detail">

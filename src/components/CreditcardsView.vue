@@ -11,7 +11,7 @@
             <v-tab key="oldpayments">{{ $t('Old payments') }}</v-tab>
         </v-tabs>
         <v-tabs-items v-model="tab">
-            <v-tab-item key="cco">      
+            <v-window-item key="cco">      
                 <div>
                     <v-card outlined class="ma-4 pa-4">
                         <TableCreditcardsOperations :showselected="paying" showbalance showtotal :items="items_cco" height="400" ref="table_cc" class=" flex-grow-1 flex-shrink-0" :locale='localStorage.locale' @changeSelected="changeSelected" @cruded="on_TableCreditcardsOperations_cruded()" :key="key"></TableCreditcardsOperations>
@@ -22,12 +22,12 @@
                         <v-btn class="ml-2" color="error" @click="paying=false" >{{ $t("Close payment mode") }}</v-btn>
                     </v-card>
                 </div>
-            </v-tab-item>
-            <v-tab-item key="oldpayments">      
+            </v-window-item>
+            <v-window-item key="oldpayments">      
                 <div>
                     <CreditcardsPaymentsRefund :cc="cc" @cruded="on_CreditcardsPaymentsRefund_cruded()" :key="key"></CreditcardsPaymentsRefund>
                 </div>
-            </v-tab-item>
+            </v-window-item>
         </v-tabs-items> 
 
         <!-- CCCO CU -->

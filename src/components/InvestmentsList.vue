@@ -12,7 +12,7 @@
                 </v-btn>
                 
             </v-row>
-            <v-data-table dense fixed-footer items-per-page="100" :headers="investments_headers" :search="search" :items="investments_items" :sort-by="table_sort_by()" class="elevation-1 ma-4 cursorpointer" hide-default-footer disable-pagination :loading="loading_investments" fixed-header :key="key" @click:row="viewItem">
+            <EasyDataTable dense fixed-footer items-per-page="100" :headers="investments_headers" :search="search" :items="investments_items" :sort-by="table_sort_by()" class="elevation-1 ma-4 cursorpointer" hide-default-footer disable-pagination :loading="loading_investments" fixed-header :key="key" @click-row="viewItem">
                 <template v-slot:[`item.fullname`]="{ item }">
                     <v-icon :class="'mr-2 fi fib fi-'+item.raw.flag" small :title="this.getCountryNameByCode(item.raw.flag)"></v-icon>{{item.raw.fullname}}
                 </template>                  
@@ -72,7 +72,7 @@
                         <td></td>
                     </tr>
                 </template>
-            </v-data-table>
+            </EasyDataTable>
             <div v-html="foot" class="pa-4"></div>
         <!-- DIALOG CU INVESTMERNT -->
         <v-dialog v-model="dialog" max-width="550">

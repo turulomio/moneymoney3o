@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-data-table dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer :sort-by="['year']" fixed-header :height="$attrs.height" :ref="$vnode.tag">
+        <EasyDataTable dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer :sort-by="['year']" fixed-header :height="$attrs.height" :ref="$vnode.tag">
 
             <template v-slot:[`item.estimation`]="{ item }">
                 <div v-html="currency(item.estimation)"></div>
@@ -12,7 +12,7 @@
                 <v-icon small class="mr-2" @click="editEstimationDPS(item)">mdi-pencil</v-icon>
                 <v-icon small class="mr-2" @click="deleteEstimationDPS(item)">mdi-delete</v-icon>
             </template>
-        </v-data-table>   
+        </EasyDataTable>   
         <!-- DIVIDEND CU-->
         <v-dialog v-model="dialog_estimation_dps" width="35%">
             <v-card class="pa-3">

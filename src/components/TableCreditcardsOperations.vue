@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-data-table  ref="table_ao" :show-select="showselected" v-model="selected" dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="datetime" fixed-header v-bind="$attrs" :single-select="false">
+        <EasyDataTable  ref="table_ao" :show-select="showselected" v-model="selected" dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="datetime" fixed-header v-bind="$attrs" :single-select="false">
             <template v-slot:[`item.datetime`]="{ item,index }">
                 <div :ref="index">{{ localtime(item.datetime)}}</div>
             </template>          
@@ -29,7 +29,7 @@
                     </td>
                 </tr>
             </template>
-        </v-data-table>   
+        </EasyDataTable>   
 
         <!-- CCCO CU -->
         <v-dialog v-model="dialog" max-width="650" class="pa-4" >

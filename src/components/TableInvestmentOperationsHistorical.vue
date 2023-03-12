@@ -1,5 +1,5 @@
 <template>
-        <v-data-table dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="dt_end" fixed-header :height="$attrs.height" ref="table">
+        <EasyDataTable dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="dt_end" fixed-header :height="$attrs.height" ref="table">
             <template v-slot:[`item.dt_end`]="{ item }">
                 {{ localtime(item.dt_end)}}
             </template>                  
@@ -109,7 +109,7 @@
                     </td>
                 </tr>
             </template>
-        </v-data-table>  
+        </EasyDataTable>  
 </template>
 <script>    
     export default {

@@ -8,10 +8,10 @@
                 <v-tabs-slider color="yellow"></v-tabs-slider>
             </v-tabs>
             <v-tabs-items v-model="tab">
-                <v-tab-item key="0">    
+                <v-window-item key="0">    
                     <p class="boldcenter my-4">{{$t("This report sums the following accounts operations: 'Derivatives. Daily adjustment', 'Derivatives. Operation commission', 'Derivatives. Swaps' and 'Fast investment operations'")}}</p>
                     <v-card class="pa-4" outlined >
-                        <v-data-table dense :headers="derivatives_headers" :items="derivatives" class="elevation-1" disable-pagination  hide-default-footer  fixed-header :loading="loading">
+                        <EasyDataTable dense :headers="derivatives_headers" :items="derivatives" class="elevation-1" disable-pagination  hide-default-footer  fixed-header :loading="loading">
                             <template v-slot:[`item.m1`]="{ item }"><div v-html="localcurrency_html(item.m1 )"></div></template>  
                             <template v-slot:[`item.m2`]="{ item }"><div v-html="localcurrency_html(item.m2 )"></div></template>  
                             <template v-slot:[`item.m3`]="{ item }"><div v-html="localcurrency_html(item.m3 )"></div></template>  
@@ -25,10 +25,10 @@
                             <template v-slot:[`item.m11`]="{ item }"><div v-html="localcurrency_html(item.m11 )"></div></template>  
                             <template v-slot:[`item.m12`]="{ item }"><div v-html="localcurrency_html(item.m12 )"></div></template> 
                             <template v-slot:[`item.total`]="{ item }"><div v-html="localcurrency_html(item.total )"></div></template>  
-                        </v-data-table>   
+                        </EasyDataTable>   
                     </v-card>
                     <p class="boldcenter my-4" v-html="$t('Total derivatives: {0}').format(localcurrency_html(this.listobjects_sum(derivatives,'total')))"></p>
-                </v-tab-item>
+                </v-window-item>
             </v-tabs-items>     
         </div>
     </div>

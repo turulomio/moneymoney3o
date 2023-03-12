@@ -4,37 +4,43 @@
         <MyMenuInline :items="items"  :context="this"></MyMenuInline>  </h1>
         <DisplayValues :items="displayvalues"></DisplayValues>
 
-        <v-tabs v-model="tab"  background-color="primary" dark>
+        <v-tabs v-model="tab" color="primary" grow>
             <v-tab key="ao">{{ $t("Account operations")}}</v-tab>
             <v-tab key="cc">{{ $t("Credit cards")}}</v-tab>
-            <v-tab-item key="ao">     
+        </v-tabs>  
+        <v-window v-model="tab">
+            <v-window-item key="ao">     
                 <v-card class="d-flex justify-center flex-column" outlined>
-                    <MyMonthPicker v-model="ym" @input="refreshTable()"/>
+                    <MyMonthPicker v-model="ym" />
                     <TableAccountOperations ref="tao" showtotal showbalance :items="items_ao" :total_currency="account.currency" height="400" @cruded="on_TableAccountOperations_cruded()"></TableAccountOperations>
                 </v-card>
-            </v-tab-item>
-            <v-tab-item key="cc">
+            </v-window-item>
+            <v-window-item key="cc">
                 <v-card outlined>
                     <v-checkbox v-model="showActiveCC" :label="setCheckboxLabelCC()" @click="on_chkActive_cc()" ></v-checkbox>
-                    <v-data-table dense :headers="table_cc_headers" :items="table_cc"  class="elevation-1 cursorpointer" disable-pagination  hide-default-footer sort-by="name" fixed-header max-height="400" :key="key" @click:row="viewCC">
-                        <template v-slot:[`item.deferred`]="{ item }">
-                            <v-simple-checkbox v-model="item.deferred" disabled></v-simple-checkbox>
+                    <EasyDataTable dense :headers="table_cc_headers" :items="table_cc"  class="elevation-1 cursorpointer" disable-pagination  hide-default-footer sort-by="name" fixed-header max-height="400" :key="key" @click-row="viewCC">
+
+                        <template #item-deferred="item">
+                            <v-icon small v-if="item.deferred" >mdi-check-outline</v-icon>
                         </template>  
-                        <template v-slot:[`item.maximumbalance`]="{ item }">
+
+                        <template #item-maximumbalance="item">
                             <div v-html="currency_html(item.maximumbalance, item.account_currency )"></div>
                         </template>  
-                        <template v-slot:[`item.balance`]="{ item }">
+
+                        <template #item-balance="item">
                             <div v-html="currency_html(item.balance, item.account_currency )"></div>
                         </template>     
-                        <template v-slot:[`item.actions`]="{ item }">
+
+                        <template #item-actions="item">
                             <v-icon v-if="!item.deferred" small class="mr-2" @click="CCONotDeferred(item)">mdi-plus</v-icon>
                             <v-icon small class="mr-2" @click="editCC(item)">mdi-pencil</v-icon>
                             <v-icon small @click="deleteCC(item)" v-if="item.is_deletable">mdi-delete</v-icon>
                         </template>
-                    </v-data-table>   
+                    </EasyDataTable>   
                 </v-card>
-            </v-tab-item>
-        </v-tabs>  
+            </v-window-item>
+        </v-window>
         <!-- DIALOG ACCOUNTSOPERATIONS ADD/UPDATE -->
         <v-dialog v-model="dialog_ao" max-width="700">
             <v-card class="pa-8">
@@ -152,12 +158,12 @@
                 ],
                 // DIALOG CREDIT CARDS
                 table_cc_headers:[
-                    { title: this.$t('Name'), key: 'name',sortable: true },
-                    { title: this.$t('Number'), key: 'number',sortable: false},
-                    { title: this.$t('Deferred'), key: 'deferred',sortable: false},
-                    { title: this.$t('Maximum balance'), key: 'maximumbalance',sortable: false, align:'end'},
-                    { title: this.$t('Balance'), key: 'balance',sortable: true ,align:'end'},
-                    { title: this.$t('Actions'), key: 'actions', sortable: false },
+                    { text: this.$t('Name'), value: 'name',sortable: true },
+                    { text: this.$t('Number'), value: 'number',sortable: false},
+                    { text: this.$t('Deferred'), value: 'deferred',sortable: false},
+                    { text: this.$t('Maximum balance'), value: 'maximumbalance',sortable: false, align:'end'},
+                    { text: this.$t('Balance'), value: 'balance',sortable: true ,align:'end'},
+                    { text: this.$t('Actions'), value: 'actions', sortable: false },
                 ],
                 table_cc:[],
                 showActiveCC:true,
@@ -180,6 +186,11 @@
                 ao_mode: null,
             }  
         },
+        watch:{
+            ym () {
+                this.refreshTable()
+            },
+        },
         methods: {
             CCONotDeferred(item){
                 this.ao=this.empty_account_operation()
@@ -192,6 +203,7 @@
             empty_account_transfer,
             empty_credit_card,
             refreshTable(){
+                this.console_log("refreshTable",this.account)
                 axios.get(`${this.account.url}monthoperations/?year=${this.ym.year}&month=${this.ym.month}`, this.myheaders())                
                 .then((response) => {
                     this.items_ao=response.data;
@@ -268,7 +280,10 @@
         },
         mounted(){
             // this.refreshTable() Not needed due to a MyMonthPicker Input
+            this.console_log("AccountsView", this.account)
+            this.refreshTable()
             this.refreshTableCC()
+            console.log(this.account.name)
         }
     }
 </script>

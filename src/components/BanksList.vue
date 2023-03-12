@@ -6,7 +6,7 @@
         </h1>
         <v-card outlined class="ma-4 pa-4">
             <v-checkbox v-model="showActive" :label="chkLabel" />
-            <v-data-table :headers="headers" :items="data" class="elevation-1 cursorpointer" :loading="loading_table" :sort-by="[{key:'localname', order: 'asc'}]" @click:row="viewItem" >
+            <EasyDataTable :headers="headers" :items="data" class="elevation-1 cursorpointer" :loading="loading_table" :sort-by="[{key:'localname', order: 'asc'}]" @click-row="viewItem" >
                 <template v-slot:[`item.localname`]="{ item }">
                     {{ item.raw.localname }}
                 </template>
@@ -41,7 +41,7 @@
                         </td>
                     </tr>
                 </template>
-            </v-data-table>
+            </EasyDataTable>
         </v-card>
         <v-dialog v-model="dialog" width="35%">
             <v-card class="pa-4">

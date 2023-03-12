@@ -13,21 +13,21 @@
                     <v-tabs-slider color="yellow"></v-tabs-slider>
                 </v-tabs>
                 <v-tabs-items v-model="tab" v-if="data!=null">
-                    <v-tab-item key="product">
+                    <v-window-item key="product">
                         <ChartPie name="Investments by product" :items="echart_products_items" save_name="prueba.png" :key="key"></ChartPie>
-                    </v-tab-item>
-                    <v-tab-item key="pci">
+                    </v-window-item>
+                    <v-window-item key="pci">
                         <ChartPie name="Investments by pci" :items="echart_pci_items" :key="key"></ChartPie>
-                    </v-tab-item>
-                    <v-tab-item key="percentage">
+                    </v-window-item>
+                    <v-window-item key="percentage">
                         <ChartPie name="Investments by variable percentage" :items="echart_percentage_items" :key="key"></ChartPie>
-                    </v-tab-item>
-                    <v-tab-item key="type">
+                    </v-window-item>
+                    <v-window-item key="type">
                         <ChartPie name="Investments by product type" :items="echart_producttype_items" :key="key"></ChartPie>
-                    </v-tab-item>
-                    <v-tab-item key="leverage">
+                    </v-window-item>
+                    <v-window-item key="leverage">
                         <ChartPie name="Investments by leverage" :items="echart_leverage_items" :key="key"></ChartPie>
-                    </v-tab-item>
+                    </v-window-item>
                 </v-tabs-items>
         </v-card>
     </div>

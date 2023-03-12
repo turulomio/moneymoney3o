@@ -3,7 +3,7 @@
         <h1>{{ $t('Concepts catalog') }}
             <MyMenuInline :items="menuinline_items" :context="this"></MyMenuInline>
         </h1>
-        <v-data-table dense :headers="investments_headers" :search="search" :items="concepts" sort-by="id" class="elevation-1 ma-4" hide-default-footer disable-pagination :loading="loading" :key="key">
+        <EasyDataTable dense :headers="investments_headers" :search="search" :items="concepts" sort-by="id" class="elevation-1 ma-4" hide-default-footer disable-pagination :loading="loading" :key="key">
             <template v-slot:[`item.editable`]="{ item }">
                 <v-icon small v-if="item.editable" >mdi-check-outline</v-icon>
             </template>             
@@ -21,7 +21,7 @@
                 <v-icon v-if="item.editable && item.used==0" small class="ml-1" @click="deleteItem(item)">mdi-delete</v-icon>
                 <v-icon v-if="item.migrable" small class="ml-1" @click="migrateConcept(item)" color="#9933ff" style="font-weight:bold">mdi-folder-move-outline</v-icon>     
             </template>                
-        </v-data-table>
+        </EasyDataTable>
         <!-- DIALOG CONCEPTS ADD/UPDATE -->
         <v-dialog v-model="dialog_concepts_cu" max-width="550">
             <v-card class="pa-8">

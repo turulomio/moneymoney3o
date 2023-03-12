@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>{{ $t("Concepts report") }}</h1>
-        <MyMonthPicker v-model="ym" @input="refreshTables()"/>
+        <MyMonthPicker v-model="ym" @update:ModelValue="refreshTables()"/>
 
 
         <div class="mx-4">
@@ -11,9 +11,9 @@
                 <v-tabs-slider color="yellow"></v-tabs-slider>
             </v-tabs>
             <v-tabs-items v-model="tab">
-                <v-tab-item key="positive">
+                <v-window-item key="positive">
                     <v-card outlined>
-                        <v-data-table dense :headers="itemsHeaders" :items="itemsPositive"  class="elevation-1 cursorpointer" disable-pagination  hide-default-footer :loading="loading" height="300" @click:row="viewHistoricalReport">
+                        <EasyDataTable dense :headers="itemsHeaders" :items="itemsPositive"  class="elevation-1 cursorpointer" disable-pagination  hide-default-footer :loading="loading" height="300" @click-row="viewHistoricalReport">
                             <template v-slot:[`item.concept`]="{ item }">
                                 <div v-html="getObjectPropertyByUrl('concepts',item.concept,'name')"></div>
                             </template> 
@@ -38,12 +38,12 @@
                                     </td>
                                 </tr>
                             </template>
-                        </v-data-table>   
+                        </EasyDataTable>   
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="negative">     
+                </v-window-item>
+                <v-window-item key="negative">     
                     <v-card outlined>
-                        <v-data-table dense :headers="itemsHeaders" :items="itemsNegative"  class="elevation-1 cursorpointer" disable-pagination  hide-default-footer :sort-by="['year']" :loading="loading" @click:row="viewHistoricalReport">
+                        <EasyDataTable dense :headers="itemsHeaders" :items="itemsNegative"  class="elevation-1 cursorpointer" disable-pagination  hide-default-footer :sort-by="['year']" :loading="loading" @click-row="viewHistoricalReport">
                             <template v-slot:[`item.concept`]="{ item }">
                                 <div v-html="getObjectPropertyByUrl('concepts',item.concept,'name')"></div>
                             </template> 
@@ -68,9 +68,9 @@
                                     </td>
                                 </tr>
                             </template>
-                        </v-data-table>  
+                        </EasyDataTable>  
                     </v-card>
-                </v-tab-item>
+                </v-window-item>
             </v-tabs-items>    
         </div>
         <!-- VIEW HISTORICAL REPORT dialog -->

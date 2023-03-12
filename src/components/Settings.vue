@@ -10,7 +10,7 @@
                 <v-tab key="investing_com"><v-icon left>mdi-domain</v-icon>{{ $t('Investing.com') }}</v-tab>
             </v-tabs>
             <v-tabs-items v-model="tab">
-                <v-tab-item key="profile" >
+                <v-window-item key="profile" >
                     <v-card class="mx-auto pa-6 mt-3" max-width="40%">
                         <v-card-title>{{ $t('Profile settings') }}</v-card-title>                    
                         <v-text-field v-model="new_profile.first_name" :label="$t('Set your name')" :placeholder="$t('Set your name')" :rules="RulesString(200,true)" counter="200"/>
@@ -19,8 +19,8 @@
                         <v-text-field type="password" v-model="new_profile.newp" :label="$t(`Set your new password. Leave empty if you don't want to change it`)" :placeholder="$t('Set your password')" :rules="RulesPassword(40,false)" counter="40"/>
                         <v-text-field type="password" v-model="dupnewp" :label="$t(`Set your new password. Leave empty if you don't want to change it`)" :placeholder="$t('Set your password')" :rules="RulesPassword(40,false)" counter="40"/>
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="amounts" >
+                </v-window-item>
+                <v-window-item key="amounts" >
                     <v-card class="mx-auto pa-6 mt-3" max-width="40%">
                         <v-card-title>{{ $t('Amount to invest') }}</v-card-title>                    
                         <v-text-field v-model="new_profile.invest_amount_1"  :label="$t('First amount to invest')" :placeholder="$t('First amount to invest')" :rules="RulesInteger(10,true)" counter="10"/>
@@ -36,22 +36,22 @@
                             <v-text-field v-model="example_invested"  :step="1000" :label="$t('Example. Invested amount')" :placeholder="$t('Example. Invested amount')" :rules="RulesInteger(10,true)" counter="10"/>
                             <p>{{example_amount_to_invest}}</p>
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="local_settings">
+                </v-window-item>
+                <v-window-item key="local_settings">
                     <v-card class="mx-auto pa-6" max-width="40%">
                         <v-card-title>{{ $t('Personal preferences') }}</v-card-title>
                         <v-autocomplete :items="store().currencies" v-model="new_profile.currency" :label="$t('Select your local currency')" item-title="fullname" item-value="code" :rules="RulesSelection(true)"></v-autocomplete>
                         <v-autocomplete :items="timezones" v-model="new_profile.zone" :label="$t('Select your localtime zone')" :rules="RulesSelection(true)"></v-autocomplete>
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="investing_com" >                 
+                </v-window-item>
+                <v-window-item key="investing_com" >                 
                     <v-card class="mx-auto pa-6 mt-3" max-width="40%">
                         <v-card-title>{{ $t('Investing.com portfolio settings') }}</v-card-title>
                         <v-textarea v-model="new_profile.investing_com_referer" :label="$t('Select your Investing.com referer')" :rules="RulesString(2000, false)"></v-textarea>
                         <v-textarea v-model="new_profile.investing_com_cookie" :label="$t('Select your Investing.com cookie')" :rules="RulesString(10000, false)"></v-textarea>
                         <v-textarea v-model="new_profile.investing_com_url" :label="$t('Select your Investing.com url')" :rules="RulesString(2000, false)"></v-textarea>
                     </v-card>
-                </v-tab-item>
+                </v-window-item>
             </v-tabs-items>
             <div class="mx-auto pa-5" align="center">
                 <v-btn color="error" @click="save_settings()" :disabled="!form_valid">{{ $t("Save settings")}}</v-btn>

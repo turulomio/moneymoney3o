@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-data-table dense :headers="table_headers" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="date" fixed-header :height="$attrs.height" ref="table_dps">
+        <EasyDataTable dense :headers="table_headers" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="date" fixed-header :height="$attrs.height" ref="table_dps">
             <template v-slot:[`item.gross`]="{ item }">
                 <div v-html="currency_html(item.gross, product.currency)"></div>
             </template>       
@@ -8,7 +8,7 @@
                 <v-icon small class="mr-2" @click="editDPS(item)">mdi-pencil</v-icon>
                 <v-icon small class="mr-2" @click="deleteDPS(item)">mdi-delete</v-icon>
             </template>
-        </v-data-table>   
+        </EasyDataTable>   
         <!-- DPSCRUD DIALOG -->
         <v-dialog v-model="dps_crud_dialog" width="35%">
             <v-card class="pa-3">

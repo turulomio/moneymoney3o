@@ -15,6 +15,14 @@ String.prototype.format = function() {
     return formatted;
 };
 
+
+export function console_log(title, ...names){
+    console.log(`(START '${title}')`)
+    names.forEach(o=>{
+        console.log(o)
+    })
+    console.log(`(END '${title}')`)
+}
 export function my_round(num, decimals = 2) {
     return Math.round(num*Math.pow(10, decimals))/Math.pow(10, decimals)
 }

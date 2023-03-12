@@ -6,13 +6,13 @@
         <v-select v-model="new_value.month" dense  class="mr-2 " :items="months" :label="$t('Select a month')" style="max-width: 200px;"/>
         <v-btn @click="addMonth()" class="mr-2">&#62;</v-btn>
         <v-btn @click="addYear()" class="mr-2">&#62;&#62;</v-btn>
-        <v-btn @click="setCurrentMonth()"><v-icon color="#757575;">mdi-calendar</v-icon></v-btn>
+        <v-btn @click="setCurrentMonth()"><v-icon color="#757575">mdi-calendar</v-icon></v-btn>
     </v-card>
 </template>
 <script>
     export default {    
         props: {
-            value: { //object with year and month attribute
+            modelValue: { //object with year and month attribute
                 required: true
             },
             readonly: {
@@ -63,8 +63,6 @@
                 new_value:{year:null,month:null},
             }
         },
-        computed:{
-        },
         methods: {
             setCurrentMonth(){
                 var d=new Date()
@@ -72,8 +70,8 @@
             },
             setDate(year,month){
                 this.new_value={year:year,month:month}
-                this.$emit("input",this.new_value)
-
+                this.$emit('update:modelValue', this.new_value)
+                console.log(this.new_value)
             },
             substractYear(){
                 this.setDate(this.new_value.year-1,this.new_value.month)
@@ -93,20 +91,17 @@
                 } else {
                     this.setDate(this.new_value.year,this.new_value.month+1)
                 }
-
             },
             addYear(){
                 this.setDate(this.new_value.year+1,this.new_value.month)
-
             },
         },
         created(){
-            if (this.value){
-                this.new_value=Object.assign({},this.value)
+            if (this.modelValue){
+                this.new_value=Object.assign({},this.modelValue)
             } else {
                 this.setCurrentMonth()
             }
-            
         },
     }
 </script>

@@ -105,8 +105,6 @@
                                 icon: "mdi-pencil",
                                 code: function(this_){
                                     this_.order=this_.empty_order()
-                                    console.log("BEFORE")
-                                    console.log(this_.order)
                                     this_.order_mode="C"
                                     this_.dialog_cu=true
                                     this_.key=this_.key+1

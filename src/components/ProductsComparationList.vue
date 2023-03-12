@@ -4,7 +4,7 @@
             <MyMenuInline :items="menuinline_items" :context="this"></MyMenuInline>    
         </h1>
 
-        <v-data-table dense :headers="headers" :items="items" sort-by="name" class="elevation-1 ma-4 cursorpointer" hide-default-footer disable-pagination :loading="loading" :key="key"  @click:row="pairReportItem">
+        <EasyDataTable dense :headers="headers" :items="items" sort-by="name" class="elevation-1 ma-4 cursorpointer" hide-default-footer disable-pagination :loading="loading" :key="key"  @click-row="pairReportItem">
         
             <template v-slot:[`item.a`]="{ item }">
                 <div v-html="getObjectPropertyByUrl('products', item.a, 'name' )"></div>
@@ -16,7 +16,7 @@
                 <v-icon small class="mr-2" @click="editPair(item)">mdi-pencil</v-icon>
                 <v-icon small class="mr-2" @click="deletePair(item)">mdi-delete</v-icon>
             </template>
-        </v-data-table>
+        </EasyDataTable>
         <v-card class="pa-6">
             <v-card-title>{{ $t("Select two products") }}</v-card-title>
             <v-card-subtitle>{{ $t("Put in first place the one with better behaviour") }}</v-card-subtitle>

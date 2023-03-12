@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-data-table dense v-model="selected" :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="datetime" fixed-header :height="$attrs.height" ref="table_o" :key="$attrs.key" :loading="$attrs.loading">
+        <EasyDataTable dense v-model="selected" :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="datetime" fixed-header :height="$attrs.height" ref="table_o" :key="$attrs.key" :loading="$attrs.loading">
             <template v-slot:[`item.datetime`]="{ item,index }">
               <div :ref="index">{{ localtime(item.datetime)}}</div>
             </template>           
@@ -45,7 +45,7 @@
                 <v-icon small class="mr-2" @click="editIO(item)">mdi-pencil</v-icon>
                 <v-icon small class="mr-2" @click="deleteIO(item)">mdi-delete</v-icon>
             </template>
-        </v-data-table>
+        </EasyDataTable>
         <!-- IO CU-->
         <v-dialog v-model="dialog_io" width="65%">
             <v-card class="pa-3">

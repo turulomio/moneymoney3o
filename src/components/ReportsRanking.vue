@@ -6,7 +6,7 @@
                 <v-text-field class="ml-10 mr-6" v-model="search" append-icon="mdi-magnify" :label="$t('Filter')" single-line hide-details :placeholder="$t('Add a string to filter table')"></v-text-field>
                 <v-checkbox dense v-model="only_current_investments" :label="$t('Show only current investments?')" ></v-checkbox>
             </v-row>
-            <v-data-table dense :headers="headers" :search="search" :items="data" class="elevation-1" hide-default-footer disable-pagination :loading="loading_table">
+            <EasyDataTable dense :headers="headers" :search="search" :items="data" class="elevation-1" hide-default-footer disable-pagination :loading="loading_table">
                 <template v-slot:[`item.current_net_gains`]="{ item }">
                     <div v-html="localcurrency_html(item.current_net_gains )"></div>
                 </template>  
@@ -44,7 +44,7 @@
                         </td>
                     </tr>
                 </template>                        
-            </v-data-table>
+            </EasyDataTable>
         </v-card>
         <!-- Investments merged View dialog -->
         <v-dialog v-model="dialog_investments_merged_view">

@@ -5,7 +5,7 @@
         </h1>
         <v-card outlined class="ma-4 pa-4">
             <v-checkbox v-model="showActive" :label="setCheckboxLabel()" @click="on_chkActive()" ></v-checkbox>
-            <EasyDataTable alternating  :headers="strategies_headers" :items="strategies_items" sort-by="percentage_selling_point" class="elevation-1 cursorpointer" hide-default-footer disable-pagination :loading="loading_strategies" :key="key" @click:row="detailedviewItem">
+            <EasyDataTable alternating  :headers="strategies_headers" :items="strategies_items" sort-by="percentage_selling_point" class="elevation-1 cursorpointer" hide-default-footer disable-pagination :loading="loading_strategies" :key="key" @click-row="detailedviewItem">
                 <!-- <template v-slot:[`item.name`]="{ item }">
                     <v-tooltip right>
                         <template v-slot:activator="{ on }">

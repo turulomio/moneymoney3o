@@ -2,7 +2,7 @@
     <div>    
         <h1>{{ $t('Used currencies') }}</h1>
         <v-card outlined class="ma-4 pa-4">
-            <v-data-table dense :headers="headers" :items="items" sort-by="from" class="elevation-1 cursorpointer" hide-default-footer disable-pagination :key="key">
+            <EasyDataTable dense :headers="headers" :items="items" sort-by="from" class="elevation-1 cursorpointer" hide-default-footer disable-pagination :key="key">
                 <template v-slot:[`item.datetime`]="{ item }">
                     {{localtime(item.datetime)}}
                 </template>     
@@ -14,7 +14,7 @@
                     <v-icon v-if="item.can_rud" small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
                     <v-icon v-if="item.can_rud" small @click="deleteItem(item)">mdi-delete</v-icon>
                 </template>
-            </v-data-table>
+            </EasyDataTable>
         </v-card>
 
         <!-- QUOTES CU -->

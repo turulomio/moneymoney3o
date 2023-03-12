@@ -9,7 +9,7 @@
             </v-card>
         </v-layout>
         <p></p>
-        <v-data-table dense :headers="tableHeaders" :items="tableData" class="elevation-1 ma-4" disable-pagination  hide-default-footer item-key="id" :key="refreshKey"  :sort-by="['percentage_last']" :sort-desc="[true]" >        
+        <EasyDataTable dense :headers="tableHeaders" :items="tableData" class="elevation-1 ma-4" disable-pagination  hide-default-footer item-key="id" :key="refreshKey"  :sort-by="['percentage_last']" :sort-desc="[true]" >        
             <template v-slot:[`item.datetime`]="{ item}">
                     {{ localtime(item.datetime)  }} 
             </template>  
@@ -31,11 +31,11 @@
             <template v-slot:[`item.actions`]="{ item }">                    
                 <v-row class="text-nowrap" justify="center">
                     <v-icon small @click="orderAtPercentage(item)">mdi-cart</v-icon>   
-                    <div @click="reinvestAtPercentage(item)"> <v-img color="#757575;" src="@/assets/reinvest.png"  :height="16" :width="16"  ></v-img></div>
+                    <div @click="reinvestAtPercentage(item)"> <v-img color="#757575" src="@/assets/reinvest.png"  :height="16" :width="16"  ></v-img></div>
                 </v-row>
 
             </template>
-        </v-data-table>
+        </EasyDataTable>
 
         <!-- Order CU dialog -->
         <v-dialog v-model="dialog_cu" max-width="550">

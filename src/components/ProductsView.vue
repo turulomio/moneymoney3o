@@ -16,9 +16,9 @@
             <v-tab key="quotes">{{ $t("Quotes")}}</v-tab>
             <v-tab key="chart">{{ $t("Chart")}}</v-tab>
             <v-tabs-items v-model="tab">
-                <v-tab-item key="percentage_evolution">     
+                <v-window-item key="percentage_evolution">     
                     <v-card class="pa-1" outlined >
-                        <v-data-table dense :headers="percentage_headers" :items="this.information.percentages" class="elevation-1" disable-pagination  hide-default-footer  fixed-header :loading="loading">
+                        <EasyDataTable dense :headers="percentage_headers" :items="this.information.percentages" class="elevation-1" disable-pagination  hide-default-footer  fixed-header :loading="loading">
                             <template v-slot:[`item.m1`]="{ item }"><div v-html="percentage_html(item.m1 )"></div></template>  
                             <template v-slot:[`item.m2`]="{ item }"><div v-html="percentage_html(item.m2 )"></div></template>  
                             <template v-slot:[`item.m3`]="{ item }"><div v-html="percentage_html(item.m3 )"></div></template>  
@@ -32,12 +32,12 @@
                             <template v-slot:[`item.m11`]="{ item }"><div v-html="percentage_html(item.m11 )"></div></template>  
                             <template v-slot:[`item.m12`]="{ item }"><div v-html="percentage_html(item.m12 )"></div></template>  
                             <template v-slot:[`item.m13`]="{ item }"><div v-html="percentage_html(item.m13 )"></div></template>  
-                        </v-data-table>   
+                        </EasyDataTable>   
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="quotes_evolution">     
+                </v-window-item>
+                <v-window-item key="quotes_evolution">     
                     <v-card class="pa-1" outlined >
-                        <v-data-table dense :headers="quotes_headers" :items="this.information.quotes" class="elevation-1" disable-pagination  hide-default-footer  fixed-header :loading="loading">
+                        <EasyDataTable dense :headers="quotes_headers" :items="this.information.quotes" class="elevation-1" disable-pagination  hide-default-footer  fixed-header :loading="loading">
                             <template v-slot:[`item.m1`]="{ item }"><div v-html="currency_html(item.m1 , product.currency)"></div></template>  
                             <template v-slot:[`item.m2`]="{ item }"><div v-html="currency_html(item.m2 , product.currency)"></div></template>  
                             <template v-slot:[`item.m3`]="{ item }"><div v-html="currency_html(item.m3 , product.currency)"></div></template>  
@@ -50,37 +50,37 @@
                             <template v-slot:[`item.m10`]="{ item }"><div v-html="currency_html(item.m10 , product.currency)"></div></template>  
                             <template v-slot:[`item.m11`]="{ item }"><div v-html="currency_html(item.m11 , product.currency)"></div></template>  
                             <template v-slot:[`item.m12`]="{ item }"><div v-html="currency_html(item.m12 , product.currency)"></div></template>  
-                        </v-data-table>   
+                        </EasyDataTable>   
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="dps_estimations">     
+                </v-window-item>
+                <v-window-item key="dps_estimations">     
                     <v-card class="pa-1" outlined >
                         <TableEstimationsDPS :product="product" :key="key"></TableEstimationsDPS>
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="dps">     
+                </v-window-item>
+                <v-window-item key="dps">     
                     <v-card class="pa-1" outlined >
                         <TableDPS :product="product" :key="key" :height="400"></TableDPS>
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="ohcls">
+                </v-window-item>
+                <v-window-item key="ohcls">
                     <v-card class="pa-1 d-flex flex-column" outlined >                    
-                        <MyMonthPicker v-model="ohcls_ym" @input="on_monthpicker_ohcls_change()"/>
+                        <uer v-model="ohcls_ym" @update:ModelValue="on_monthpicker_ohcls_change()"/>
                         <TableOHCLS :product="product" :items="ohcls_month" :key="key" :height="400" @cruded="on_TableQuotes_cruded()"></TableOHCLS>
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="quotes">
+                </v-window-item>
+                <v-window-item key="quotes">
                     <v-card class="pa-1 d-flex flex-column" outlined >      
                             
-                        <MyMonthPicker v-model="quotes_ym" @input="on_monthpicker_quotes_change()"/>
+                        <MyMonthPicker v-model="quotes_ym" @update:ModelValue="on_monthpicker_quotes_change()"/>
                         <TableQuotes :product="product" :items="quotes_month" :key="key" :height="400" @cruded="on_TableQuotes_cruded()"></TableQuotes>
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="chart">     
+                </v-window-item>
+                <v-window-item key="chart">     
                     <v-card class="pa-4" outlined >
                         <ChartProduct :ohcls="ohcls" :product="product" :key="key"></ChartProduct>
                     </v-card>
-                </v-tab-item>
+                </v-window-item>
             </v-tabs-items>
         </v-tabs>  
 

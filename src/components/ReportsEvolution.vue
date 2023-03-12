@@ -13,9 +13,9 @@
                 <v-tabs-slider color="yellow"></v-tabs-slider>
             </v-tabs>
             <v-tabs-items v-model="tab">
-                <v-tab-item key="0">
+                <v-window-item key="0">
                     <v-card outlined>
-                        <v-data-table dense :headers="assetsHeaders" :items="assetsData"  class="elevation-1" disable-pagination  hide-default-footer :sort-by="['year']" :loading="loading_assets">
+                        <EasyDataTable dense :headers="assetsHeaders" :items="assetsData"  class="elevation-1" disable-pagination  hide-default-footer :sort-by="['year']" :loading="loading_assets">
                             <template v-slot:[`item.balance_start`]="{ item }">
                                 <div v-html="localcurrency_html(item.balance_start)"></div>
                             </template>   
@@ -64,12 +64,12 @@
                                     </td>
                                 </tr>
                             </template>
-                        </v-data-table>   
+                        </EasyDataTable>   
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="1">     
+                </v-window-item>
+                <v-window-item key="1">     
                     <v-card outlined>
-                        <v-data-table dense :headers="investedHeaders" :items="investedData"  class="elevation-1" disable-pagination  hide-default-footer :sort-by="['year']" :loading="loading_invested">
+                        <EasyDataTable dense :headers="investedHeaders" :items="investedData"  class="elevation-1" disable-pagination  hide-default-footer :sort-by="['year']" :loading="loading_invested">
                             <template v-slot:[`item.invested`]="{ item }">
                                 <div v-html="localcurrency_html(item.invested)"></div>
                             </template>   
@@ -116,10 +116,10 @@
                                 </tr>
                                 
                             </template>
-                        </v-data-table>  
+                        </EasyDataTable>  
                         <div class="ma-3" v-html="report()" v-if="investedData.length>0"></div>
                     </v-card>
-                </v-tab-item>
+                </v-window-item>
             </v-tabs-items>    
         </div>
     </div>

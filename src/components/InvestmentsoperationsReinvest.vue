@@ -34,34 +34,34 @@
             <v-tabs-slider color="yellow"></v-tabs-slider>
         </v-tabs>
         <v-tabs-items v-if="plio_id_current" v-model="tab">
-            <v-tab-item key="current">      
+            <v-window-item key="current">      
                 <div>
                     <v-card>
                         <TableInvestmentOperationsCurrent showtotal :items="plio_id_current.io_current" output="investment" height="400" :key="key" :loading="loading" />
                     </v-card>
                 </div>
-            </v-tab-item>
-            <v-tab-item key="operations">          
+            </v-window-item>
+            <v-window-item key="operations">          
                 <div>
                     <v-card>
                         <TableInvestmentOperations :items="plio_id_current.io" height="400" :key="key" output="investment" :loading="loading" />
                     </v-card>
                 </div>
-            </v-tab-item>
-            <v-tab-item key="historical">     
+            </v-window-item>
+            <v-window-item key="historical">     
                 <div>            
                     <v-card>
                         <TableInvestmentOperationsHistorical :items="plio_id_current.io_historical" height="400" output="investment" :key="key" :loading="loading" showtotal />
                     </v-card>
                 </div>
-            </v-tab-item>
-            <v-tab-item key="chart">     
+            </v-window-item>
+            <v-window-item key="chart">     
                 <div> 
                     <v-card>
                         <ChartInvestments :data="chart_data" height="400" :key="key" :loading="loading"></ChartInvestments>
                     </v-card>
                 </div>
-            </v-tab-item>
+            </v-window-item>
         </v-tabs-items> 
 
         <!-- Order CU dialog -->

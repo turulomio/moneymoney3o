@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-data-table dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="datetime" fixed-header :height="$attrs.height" :ref="$vnode.tag">
+        <EasyDataTable dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="datetime" fixed-header :height="$attrs.height" :ref="$vnode.tag">
             <template v-slot:[`item.datetime`]="{ item, index}" >
                 <div :ref="index">{{ localtime(item.datetime)}}</div>
             </template>        
@@ -19,7 +19,7 @@
             <template v-slot:[`item.actions`]="{ item }">
                 <v-icon small class="mr-2" @click="deleteOHCL(item)">mdi-delete</v-icon>
             </template>
-        </v-data-table>
+        </EasyDataTable>
     </div>
 </template>
 <script>    

@@ -13,67 +13,67 @@
             <v-tabs-slider color="yellow"></v-tabs-slider>
         </v-tabs>
         <v-tabs-items v-model="tab">
-            <v-tab-item key="current">      
+            <v-window-item key="current">      
                 <div>
                     <v-tabs vertical  v-model="tabcurrent">
                         <v-tab key="investment">{{ $t('Investment currency') }}</v-tab>
                         <v-tab key="account">{{ $t('Account currency') }}</v-tab>
-                        <v-tab-item key="investment">     
+                        <v-window-item key="investment">     
                             <v-card v-if="!loading">
                                 <TableInvestmentOperationsCurrent :items="plio_id.io_current" showtotal output="investment" height="500" :key="key" />
                             </v-card>
-                        </v-tab-item>
-                            <v-tab-item key="account">
+                        </v-window-item>
+                            <v-window-item key="account">
                                 <v-card v-if="!loading">
                                     <TableInvestmentOperationsCurrent :items="plio_id.io_current" showtotal output="account" height="400" :key="key" />
                                 </v-card>
-                            </v-tab-item>
+                            </v-window-item>
                     </v-tabs>
                 </div>
-            </v-tab-item>
-            <v-tab-item key="operations">          
+            </v-window-item>
+            <v-window-item key="operations">          
                 <div>
                     <v-checkbox v-model="chkShowAllIO" :label="set_chkShowAllIO_label()" @click="on_chkShowAllIO_click"></v-checkbox>
                     <v-tabs vertical  v-model="tabcurrent">
                         <v-tab key="investment">{{ $t('Investment currency') }}</v-tab>
                             <v-tab key="account">{{ $t('Account currency') }}</v-tab>
-                        <v-tab-item key="investment">     
+                        <v-window-item key="investment">     
                             <v-card v-if="!loading">
                                 <TableInvestmentOperations :items="io_filtered" height="500" :key="key" output="investment" @cruded="on_TableInvestmentsOperations_cruded" />
                             </v-card>
-                        </v-tab-item>
-                            <v-tab-item key="account">
+                        </v-window-item>
+                            <v-window-item key="account">
                                 <v-card v-if="!loading">
                                     <TableInvestmentOperations :items="io_filtered" height="500" :key="key" output="account" :showactions="false" />
                                 </v-card>
-                            </v-tab-item>
+                            </v-window-item>
                     </v-tabs>
                 </div>
-            </v-tab-item>
-            <v-tab-item key="historical">     
+            </v-window-item>
+            <v-window-item key="historical">     
                 <div>            
                     <v-tabs vertical  v-model="tabcurrent">
                         <v-tab key="investmenth">{{ $t('Investment currency') }}</v-tab>
                             <v-tab key="accounth">{{ $t('Account currency') }}</v-tab>
-                        <v-tab-item key="investmenth">     
+                        <v-window-item key="investmenth">     
                             <v-card  v-if="!loading">
                                 <TableInvestmentOperationsHistorical :items="plio_id.io_historical" showtotal height="500" output="investment" :key="key" />
                             </v-card>
-                        </v-tab-item>
-                            <v-tab-item key="accounth">
+                        </v-window-item>
+                            <v-window-item key="accounth">
                                 <v-card v-if="!loading">
                                     <TableInvestmentOperationsHistorical :items="plio_id.io_historical" showtotal height="500" output="account" :key="key" />
                                 </v-card>
-                            </v-tab-item>
+                            </v-window-item>
                     </v-tabs>
                 </div>
-            </v-tab-item>
-            <v-tab-item key="dividends">     
+            </v-window-item>
+            <v-window-item key="dividends">     
                 <v-card v-if="!loading">
                     <v-checkbox v-model="showAllDividends" :label="setChkDividendsLabel()" @click="on_chkDividends"></v-checkbox>
                     <TableDividends :items="dividends_filtered" height="500" :key="key" @cruded="on_TableDividends_cruded" />
                 </v-card>
-            </v-tab-item>
+            </v-window-item>
         </v-tabs-items>
 
         <!-- EVOLUTION CHART -->

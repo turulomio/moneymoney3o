@@ -15,7 +15,7 @@
         </v-card>
 
         <v-card >
-            <v-data-table dense :headers="tableHeaders" :items="filtered_products" class="elevation-1 cursorpointer" disable-pagination  hide-default-footer :sort-by="['name']" fixed-header height="650" :loading="loading"  @click:row="viewProduct">      
+            <EasyDataTable dense :headers="tableHeaders" :items="filtered_products" class="elevation-1 cursorpointer" disable-pagination  hide-default-footer :sort-by="['name']" fixed-header height="650" :loading="loading"  @click-row="viewProduct">      
                 <template v-slot:[`item.name`]="{ item }">
                     <v-icon :class="'mr-2 fi fib fi-'+item.flag" small :title="this.getCountryNameByCode(item.flag)"></v-icon><span :class="class_name(item)">{{item.name}}</span>
                 </template>  
@@ -38,7 +38,7 @@
                     <v-icon class="mr-1" small @click.stop="deletePersonalProduct(item)" v-if="item.id<0 && item.uses==0">mdi-delete</v-icon>
                     <v-icon class="mr-1" small @click.stop="deleteSystemProduct(item)" color="#AA0000" v-if="item.id>=0 && store().catalog_manager">mdi-delete</v-icon>
                 </template>
-            </v-data-table>   
+            </EasyDataTable>   
         </v-card>
         <!--  DIALOG PRODUCT VIEW -->
         <v-dialog v-model="dialog_productsview">

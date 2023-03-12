@@ -12,10 +12,10 @@
             <v-tab key="price_ratio_chart">{{ $t("Price ratio chart")}}</v-tab>
             <v-tab key="pairs_price_scatter">{{ $t("Price scatter chart")}}</v-tab>
             <v-tab key="pairs_comparation_by_quote">{{ $t("Comparation by quote")}}</v-tab>
-            <v-tab-item key="price_ratio">     
+            <v-window-item key="price_ratio">     
                 <v-card class="pa-4 d-flex justify-center flex-column" outlined >
 
-                    <v-data-table dense :headers="data_price_ratio_headers" :items="dbdata" sort-by="datetime" class="elevation-1 ma-4" hide-default-footer disable-pagination :loading="loading" :key="key" height="500" fixed-header> 
+                    <EasyDataTable dense :headers="data_price_ratio_headers" :items="dbdata" sort-by="datetime" class="elevation-1 ma-4" hide-default-footer disable-pagination :loading="loading" :key="key" height="500" fixed-header> 
                         <template v-slot:[`item.datetime`]="{ item }">
                             {{localtime(item.datetime)}}
                         </template>  
@@ -28,23 +28,23 @@
                         <template v-slot:[`item.price_ratio_percentage_from_start`]="{ item }">
                             <div v-html="percentage_html(item.price_ratio_percentage_from_start )"></div>
                         </template>
-                    </v-data-table>
+                    </EasyDataTable>
                 </v-card>
-            </v-tab-item>
-            <v-tab-item key="price_ratio_chart">
+            </v-window-item>
+            <v-window-item key="price_ratio_chart">
                 <v-card outlined>
                     <ChartPriceRatio notitle :product_a="product_a" :product_b="product_b" :data="data_price_ratio_chart"></ChartPriceRatio>
                     <p class="boldcenter">{{ $t("One product performs better than another if its price ratio increases") }}</p>
                 </v-card>
-            </v-tab-item>
-            <v-tab-item key="pairs_price_scatter">
+            </v-window-item>
+            <v-window-item key="pairs_price_scatter">
                 <v-card outlined>
                     <ChartScatterPairPrices notitle :data="cspp" />
                     <p class="boldcenter">{{ $t("If the red point is above the regression line, it means that last pair prices are performing better than its average.") }}</p>
 
                 </v-card>
-            </v-tab-item>
-            <v-tab-item key="pairs_comparation_by_quote">
+            </v-window-item>
+            <v-window-item key="pairs_comparation_by_quote">
                 <v-card outlined>
                     <v-row class="pa-8 mx-8">
                         <v-text-field  v-model.number="quote_better_from"  :label="$t('Quote better from (current price by default)')" :placeholder="$t('Quote better from')" autofocus :rules="RulesFloat(15,true,6)" counter="15"/>
@@ -52,7 +52,7 @@
                         <v-btn class="ml-4" vcolor="primary" @click="compare_by_quote()">{{ $t("Comparation by quote") }}</v-btn>
 
                     </v-row>
-                    <v-data-table dense :headers="data_price_ratio_headers" :items="comparation_by_quote" sort-by="datetime" class="elevation-1 ma-4" hide-default-footer disable-pagination :loading="loading" :key="key" height="500" fixed-header> 
+                    <EasyDataTable dense :headers="data_price_ratio_headers" :items="comparation_by_quote" sort-by="datetime" class="elevation-1 ma-4" hide-default-footer disable-pagination :loading="loading" :key="key" height="500" fixed-header> 
                         <template v-slot:[`item.datetime`]="{ item }">
                             {{localtime(item.datetime)}}
                         </template>  
@@ -65,9 +65,9 @@
                         <template v-slot:[`item.price_ratio_percentage_from_start`]="{ item }">
                             <div v-html="percentage_html(item.price_ratio_percentage_from_start )"></div>
                         </template>
-                    </v-data-table>
+                    </EasyDataTable>
                 </v-card>
-            </v-tab-item>
+            </v-window-item>
         </v-tabs>  
     </div>
 </template>

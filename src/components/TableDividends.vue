@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-data-table dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="datetime" fixed-header :height="$attrs.height" :ref="$vnode.tag">
+        <EasyDataTable dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="datetime" fixed-header :height="$attrs.height" :ref="$vnode.tag">
             <template v-slot:[`item.datetime`]="{ item }" >
                 <div>{{ localtime(item.datetime)}}</div>
             </template>         
@@ -47,7 +47,7 @@
                     </td>
                 </tr>
             </template>
-        </v-data-table>   
+        </EasyDataTable>   
         <!-- DIVIDEND CU-->
         <v-dialog v-model="dividends_cu_dialog" width="35%">
             <v-card class="pa-3">

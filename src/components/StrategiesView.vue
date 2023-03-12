@@ -13,32 +13,32 @@
             <v-tabs-slider color="yellow"></v-tabs-slider>
         </v-tabs>
         <v-tabs-items v-model="tab">
-            <v-tab-item key="current">      
+            <v-window-item key="current">      
                 <div>
                     <v-card v-if="!loading">
                         <TableInvestmentOperationsCurrent :items="plio_id.io_current" showinvestment showtotal output="user" height="400" :key="key" />
                     </v-card>
                 </div>
-            </v-tab-item>
-            <v-tab-item key="operations">          
+            </v-window-item>
+            <v-window-item key="operations">          
                 <div>
                     <v-card v-if="!loading">
                         <TableInvestmentOperations showinvestment :items="plio_id.io" height="400" :key="key" output="user" :showactions="false" />
                     </v-card>
                 </div>
-            </v-tab-item>
-            <v-tab-item key="historical">     
+            </v-window-item>
+            <v-window-item key="historical">     
                 <div>            
                     <v-card v-if="!loading">
                         <TableInvestmentOperationsHistorical :items="plio_id.io_historical" height="400" output="user" :key="key" showinvestment showtotal />
                     </v-card>
                 </div>
-            </v-tab-item>
-            <v-tab-item key="dividends">     
+            </v-window-item>
+            <v-window-item key="dividends">     
                 <v-card v-if="!loading">
                     <TableDividends :items="dividends_filtered" height="300" showinvestment :key="key" @cruded="on_TableDividends_cruded" />
                 </v-card>
-            </v-tab-item>
+            </v-window-item>
         </v-tabs-items> 
 
     </div>  

@@ -20,9 +20,9 @@
                 <v-tabs-slider color="yellow"></v-tabs-slider>
             </v-tabs>
             <v-tabs-items v-model="tab">
-                <v-tab-item key="0"> <!-- MONTH EVOLUTION -->
+                <v-window-item key="0"> <!-- MONTH EVOLUTION -->
                     <v-card outlined>            
-                        <v-data-table dense :headers="total_annual_headers" :items="total_annual"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_annual">      
+                        <EasyDataTable dense :headers="total_annual_headers" :items="total_annual"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_annual">      
                             <template v-slot:[`item.account_balance`]="{ item }">
                                 <div v-html="localcurrency_html(item.account_balance)"></div>
                             </template>      
@@ -54,12 +54,12 @@
                                 </tr>
                                 
                             </template>
-                        </v-data-table>   
+                        </EasyDataTable>   
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="1">     <!-- INCOME REPORT -->
+                </v-window-item>
+                <v-window-item key="1">     <!-- INCOME REPORT -->
                     <v-card outlined>            
-                        <v-data-table dense :headers="total_annual_incomes_headers" :items="total_annual_incomes"  class="elevation-1 cursorpointer" disable-pagination  hide-default-footer :loading="loading_annual_incomes" @click:row="incomeDetails">      
+                        <EasyDataTable dense :headers="total_annual_incomes_headers" :items="total_annual_incomes"  class="elevation-1 cursorpointer" disable-pagination  hide-default-footer :loading="loading_annual_incomes" @click-row="incomeDetails">      
                             <template v-slot:[`item.expenses`]="{ item }">
                                 <div v-html="localcurrency_html(item.expenses)"></div>
                             </template>      
@@ -106,12 +106,12 @@
                                 </tr>
                                 
                             </template>
-                        </v-data-table>
+                        </EasyDataTable>
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="2">     
+                </v-window-item>
+                <v-window-item key="2">     
                     <v-card outlined>
-                        <v-data-table dense :headers="total_annual_gainsbyproductstypes_headers" :items="total_annual_gainsbyproductstypes"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_annual_gainsbyproductstypes">      
+                        <EasyDataTable dense :headers="total_annual_gainsbyproductstypes_headers" :items="total_annual_gainsbyproductstypes"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_annual_gainsbyproductstypes">      
                             <template v-slot:[`item.dividends_gross`]="{ item }">
                                 <div v-html="localcurrency_html(item.dividends_gross)"></div>
                             </template>      
@@ -146,15 +146,15 @@
                                 </tr>
                                 
                             </template>
-                        </v-data-table>   
+                        </EasyDataTable>   
                         <div v-html="footer_gainsbyproductstypes()"></div>
                     
                     </v-card>
-                </v-tab-item>                
-                <v-tab-item key="3"><!-- ANNUAL TARGET -->
+                </v-window-item>                
+                <v-window-item key="3"><!-- ANNUAL TARGET -->
                     <v-card  outlined width="100%">
     
-                        <v-data-table dense :headers="total_target_headers" :items="total_target"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_target">      
+                        <EasyDataTable dense :headers="total_target_headers" :items="total_target"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_target">      
                             <template v-slot:[`item.month_target`]="{ item }">
                                 <div v-html="localcurrency_string(item.month_target)"></div>
                             </template>      
@@ -183,13 +183,13 @@
                                 </tr>
                                 
                             </template>
-                        </v-data-table>   
+                        </EasyDataTable>   
                         <div v-html="current_assets_gains_percentage_message" class="ma-4"></div>
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="4"><!-- INVEST OR WORK -->
+                </v-window-item>
+                <v-window-item key="4"><!-- INVEST OR WORK -->
                     <v-card  outlined width="100%">
-                        <v-data-table dense :headers="total_invest_or_work_headers" :items="total_invest_or_work"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_invest_or_work">      
+                        <EasyDataTable dense :headers="total_invest_or_work_headers" :items="total_invest_or_work"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_invest_or_work">      
                             <template v-slot:[`item.gains`]="{ item }">
                                 <div v-html="localcurrency_html(item.gains)"></div>
                             </template>      
@@ -217,14 +217,14 @@
                                     </td>
                                 </tr>
                             </template>
-                        </v-data-table>   
+                        </EasyDataTable>   
                         <div v-html="message_invest_or_work()" class="ma-4"></div>
 
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="5"><!-- MAKE ENDS MEET -->
+                </v-window-item>
+                <v-window-item key="5"><!-- MAKE ENDS MEET -->
                     <v-card  outlined width="100%">
-                        <v-data-table dense :headers="total_make_ends_meet_headers" :items="total_make_ends_meet"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_make_ends_meet">      
+                        <EasyDataTable dense :headers="total_make_ends_meet_headers" :items="total_make_ends_meet"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_make_ends_meet">      
                             <template v-slot:[`item.incomes`]="{ item }">
                                 <div v-html="localcurrency_html(item.incomes)"></div>
                             </template>      
@@ -252,11 +252,11 @@
                                     </td>
                                 </tr>
                             </template>
-                        </v-data-table>   
+                        </EasyDataTable>   
                         <div v-html="message_make_ends_meet()" class="ma-4"></div>
 
                     </v-card>
-                </v-tab-item>
+                </v-window-item>
             </v-tabs-items>     
         </div>
         <!-- REPORT ANNUAL INCOME DETAIL-->

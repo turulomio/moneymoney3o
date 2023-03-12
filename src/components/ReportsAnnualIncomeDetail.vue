@@ -12,22 +12,22 @@
             <v-tab key="fast_operations">{{ $t('Fast operations') }}</v-tab>
             <v-tabs-slider color="yellow"></v-tabs-slider>
             <v-tabs-items v-model="tab">
-                <v-tab-item key="incomes">        
+                <v-window-item key="incomes">        
                     <v-card class="pa-4">
                         <TableAccountOperations :items="incomes" showtotal hideactions showaccount height="600" class=" flex-grow-1 flex-shrink-0" :key="key" />
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="expenses">       
+                </v-window-item>
+                <v-window-item key="expenses">       
                     <v-card class="pa-4">
                         <TableAccountOperations :items="expenses" showtotal hideactions showaccount height="600" class=" flex-grow-1 flex-shrink-0" :key="key" />
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="dividends">     
+                </v-window-item>
+                <v-window-item key="dividends">     
                     <v-card class="pa-4">
                         <TableDividends :items="dividends" showinvestment height="600" :key="key" />
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="gains">       
+                </v-window-item>
+                <v-window-item key="gains">       
                     <v-card class="pa-4">
                         <TableInvestmentOperationsHistorical :items="gains" height="600" output="user" :key="key" showtotal showinvestment/>
                         <p class="bold my-4" style="text-align:center" v-html='$t("Final gains = Gains + Fast operations gains= {0} + {1} = {2}").format(
@@ -37,12 +37,12 @@
                         )'></p>
 
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="fast_operations">       
+                </v-window-item>
+                <v-window-item key="fast_operations">       
                     <v-card class="pa-4">
                         <TableAccountOperations :items="fast_operations" showtotal hideactions showaccount height="600" class=" flex-grow-1 flex-shrink-0" :key="key" />
                     </v-card>
-                </v-tab-item>
+                </v-window-item>
             </v-tabs-items> 
         </v-tabs>
     </div>  

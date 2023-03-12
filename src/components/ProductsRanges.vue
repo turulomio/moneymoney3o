@@ -26,10 +26,10 @@
                 <v-tab key="1">{{ $t('Product ranges chart') }}</v-tab>
             </v-tabs>
             <v-tabs-items v-model="tab">
-            <v-tab-item key="0">
+            <v-window-item key="0">
                 <v-card flat>
                     <v-container >{{ currentpricelabel }}</v-container>
-                    <v-data-table dense :headers="tableHeaders" :items="tableData" class="elevation-1" disable-pagination  hide-default-footer :sort-by="['value']" :sort-desc="[true]" fixed-header height="360">      
+                    <EasyDataTable dense :headers="tableHeaders" :items="tableData" class="elevation-1" disable-pagination  hide-default-footer :sort-by="['value']" :sort-desc="[true]" fixed-header height="360">      
                         <template v-slot:[`item.value`]="{ item }">
                             <div  @click="showLimits(item)" :class="item.current_in_range ? 'boldgreen' : ''">{{currency_string(item.value, prdata.product.currency) }}</div>
                         </template>    
@@ -45,14 +45,14 @@
                         <template v-slot:[`item.actions`]="{ item }">
                             <v-icon small class="mr-2" @click="addOrder(item)" :color="(item.recomendation_invest) ? '' : 'red'">mdi-cart</v-icon>
                         </template>
-                    </v-data-table>   
+                    </EasyDataTable>   
                     </v-card>
-                </v-tab-item>
-                <v-tab-item key="1" >
+                </v-window-item>
+                <v-window-item key="1" >
                     <div style="height: 600px;">
                         <ChartProductsRanges :prdata="prdata" autoresize />
                     </div>
-                </v-tab-item>
+                </v-window-item>
             </v-tabs-items>
         </v-card>
         <!-- Order CU dialog -->

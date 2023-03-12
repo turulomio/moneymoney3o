@@ -2,7 +2,7 @@
     <v-card flat>
         <h1 class="mb-2">{{ $t("Change selling price") }}</h1>
         <div v-html="$t('Table with all investments with the same product as current investment:')"></div>
-        <v-data-table ref="table" v-model="selected" :headers="tableHeaders" :items="data" :single-select="false" item-key="id" show-select class="elevation-1 mt-2" :disable-pagination="true" dense >
+        <EasyDataTable ref="table" v-model="selected" :headers="tableHeaders" :items="data" :single-select="false" item-key="id" show-select class="elevation-1 mt-2" :disable-pagination="true" dense >
             <template v-slot:[`item.fullname`]="{ item }">
                 {{ getObjectPropertyByUrl("investments",item.url,"fullname") }}
             </template>            
@@ -18,7 +18,7 @@
             <template v-slot:[`item.balance_investment`]="{ item }">
                 {{ currency_string(item.balance_investment, item.currency)}}
             </template>
-        </v-data-table>
+        </EasyDataTable>
         <p></p>
 
         <DisplayValues :items="displayvalues()" :minimized_items="5" :key="key"></DisplayValues>
@@ -31,27 +31,27 @@
             <v-tabs-slider color="yellow"></v-tabs-slider>
         </v-tabs>
         <v-tabs-items v-model="tab">
-            <v-tab-item key="percentage">      
+            <v-window-item key="percentage">      
                 <v-card class="pa-3" outlined>
                     <v-text-field :name="this.$t('Set a gains percentage')" v-model.number="percentage" :counter="10" :label="this.$t('Set a gains percentage')" :placeholder="this.$t('Enter an amount')" :rules="this.RulesFloat(10,true,6)" autofocus></v-text-field>
                 </v-card>
-            </v-tab-item>
-            <v-tab-item key="gain">     
+            </v-window-item>
+            <v-window-item key="gain">     
                 <v-card class="pa-3" outlined>
                     <v-text-field :name="this.$t('Set a gain')" v-model.number="gains" :counter="10" :label="this.$t('Set a gain')" :placeholder="this.$t('Enter an amount')" :rules="this.RulesFloat(10,true,6)"></v-text-field>
                 </v-card>
-            </v-tab-item>
-            <v-tab-item key="price">     
+            </v-window-item>
+            <v-window-item key="price">     
                 <v-card class="pa-3" outlined>
                     <v-text-field :name="this.$t('Set a price')" v-model.number="price" :counter="10" :label="this.$t('Set a price')" :placeholder="this.$t('Enter an amount')" :rules="this.RulesFloat(10,true,6)"></v-text-field>
                 </v-card>
-            </v-tab-item>
-            <v-tab-item key="range">     
+            </v-window-item>
+            <v-window-item key="range">     
                 <v-card class="pa-3" outlined>
                     <v-select :items="strategies" v-model="strategy" :label="$t('Set current investment strategy')"  item-title="name" return-object :rules="RulesSelection(true)"></v-select>  
                     <v-select :items="strategy_ranges" v-model="strategy_range" :label="$t('Set a strategy range')"  item-title="name" item-value="value" :rules="RulesSelection(true)"></v-select>  
                 </v-card>
-            </v-tab-item>
+            </v-window-item>
         </v-tabs-items>    
         <v-layout style="justify-content: center;" class="mt-3">
             <v-card class="pa-4" width="60%">

@@ -7,7 +7,7 @@
                     <v-chart ref="chart" autoresize :option="options" :key="key" @finished="on_finished"/>
                 </v-col>
                 <v-col v-if="new_show_data" >
-                    <v-data-table dense :headers="tableHeaders"  :items="items" class="elevation-1" disable-pagination  hide-default-footer :sort-by="['value']" :sort-desc="['value']">
+                    <EasyDataTable dense :headers="tableHeaders"  :items="items" class="elevation-1" disable-pagination  hide-default-footer :sort-by="['value']" :sort-desc="['value']">
                         <template v-slot:[`item.percentage`]="{ item }">
                             {{ getPercentage(item) }}
                         </template>
@@ -26,7 +26,7 @@
                                 </td>
                             </tr>
                         </template>
-                    </v-data-table>
+                    </EasyDataTable>
                 </v-col>
             </v-row>       
             <v-row>

@@ -2,7 +2,7 @@
     <div>
         <h1 class="mb-2">{{ $t("Change selling price") }}</h1>
         <div v-html="$t('Table with all investments with the same product as current investment:')"></div>
-        <EasyDataTable ref="table" v-model:items-selected="data_selected" :headers="tableHeaders" :items="data" class="elevation-1 mt-2" :disable-pagination="true" dense height="300">
+        <EasyDataTable ref="table" v-model:items-selected="data_selected" :headers="tableHeaders" :items="data" class="elevation-1 mt-2" :disable-pagination="true" dense height="300" @select-row="calculate()" @deselect-row="calculate()">
             <template #item-fullname="item">
                 {{ getObjectPropertyByUrl("investments",item.url,"fullname") }}
             </template>            
@@ -20,6 +20,7 @@
             </template>
         </EasyDataTable>
         <p>{{ data_selected }}</p>
+        <p>{{ button_text }}</p>
 
         <DisplayValues :items="displayvalues()" :minimized_items="5" :key="key"></DisplayValues>
 
@@ -130,17 +131,17 @@
             }
         },
         watch: {
-            data_selected: function(newValue) {
-                console.log("AHORA")
-                this.selected_shares=newValue.reduce((accum,item) => accum + item.shares, 0)
-                this.selected_invested=newValue.reduce((accum,item) => accum + item.invested_investment, 0)
-                if (this.selected_shares!=0){
-                    var selected_sharesbyaverage=newValue.reduce((accum,item) => accum + item.shares*item.average_price, 0)
-                    this.selected_average_price=selected_sharesbyaverage/this.selected_shares
-                } else {
-                    this.selected_average_price=0
-                }
-                this.console_log("Selected",this.selected_shares,this.selected_invested)
+            data_selected: function(newValue,oldValue) {
+                // this.console_log("DATA_SELECTED", newValue.length, this.data_selected.length, oldValue.length)
+                // this.selected_shares=newValue.reduce((accum,item) => accum + item.shares, 0)
+                // this.selected_invested=newValue.reduce((accum,item) => accum + item.invested_investment, 0)
+                // if (this.selected_shares!=0){
+                //     var selected_sharesbyaverage=newValue.reduce((accum,item) => accum + item.shares*item.average_price, 0)
+                //     this.selected_average_price=selected_sharesbyaverage/this.selected_shares
+                // } else {
+                //     this.selected_average_price=0
+                // }
+                // this.console_log("Selected",this.selected_shares,this.selected_invested)
                 this.calculate()
             },
             gains: function() {
@@ -280,6 +281,16 @@
                 });
             },
             calculate(){
+                // this.console_log("DATA_SELECTED", newValue.length, this.data_selected.length, oldValue.length)
+                this.selected_shares=this.data_selected.reduce((accum,item) => accum + item.shares, 0)
+                this.selected_invested=this.data_selected.reduce((accum,item) => accum + item.invested_investment, 0)
+                if (this.selected_shares!=0){
+                    var selected_sharesbyaverage=this.data_selected.reduce((accum,item) => accum + item.shares*item.average_price, 0)
+                    this.selected_average_price=selected_sharesbyaverage/this.selected_shares
+                } else {
+                    this.selected_average_price=0
+                }
+                this.console_log("Selected",this.selected_shares,this.selected_invested)
                 if (this.tab==0){
                     this.selected_selling_price=this.selling_price_to_gain_percentage_of_invested(this.percentage)
                 } else if (this.tab==1) {
@@ -327,6 +338,7 @@
                         if (select_current == true && o.url==this.investment.url){
                             this.data_selected.push(o)
                         }
+                        this.calculate()
 
                     })
                     this.loading_ios=false
@@ -346,10 +358,10 @@
         },
         created(){
             this.product=this.getObjectByUrl("products",this.investment.products)
-            this.refreshStrategies()
-            this.refreshInvestments(true)
             this.selling_expiration=this.investment.selling_expiration
             this.price=this.investment.selling_price
+            this.refreshStrategies()
+            this.refreshInvestments(true)
         }
     }
 </script>

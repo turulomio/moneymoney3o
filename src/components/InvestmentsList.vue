@@ -19,35 +19,35 @@
                 <template #item-last_datetime="item">
                     <div v-html="(item.last_datetime) ? localtime(item.last_datetime) : $t('Update product quotes')" :class="(item.last_datetime) ? '' : 'boldred'"></div>
                 </template>  
-                <template #item-last="item">
+                <template class="right" #item-last="item">
                     <div v-html="currency_html(item.last,item.currency )"></div>
                 </template>   
                 <template #item-balance_user="item">
-                    <div v-html="localcurrency_html(item.balance_user )"></div>
+                    <div class="right" v-html="localcurrency_html(item.balance_user )"></div>
                 </template>     
                 <template #item-invested_user="item">
                     <v-row class="text-nowrap" justify="end">
-                        <div v-html="localcurrency_html(item.invested_user )"></div>
+                        <div class="right" v-html="localcurrency_html(item.invested_user )"></div>
                         <v-icon small class="ml-1" v-if="item.shares>=0" color="blue" :title="$t('Long position')">mdi-arrow-up-circle-outline</v-icon>
                         <v-icon small class="ml-1" v-if="item.shares<0" color="orange" :title="$t('Short position')">mdi-arrow-down-circle-outline</v-icon>
                     </v-row>
                 </template>    
                 <template #item-gains_user="item">
-                    <div v-html="localcurrency_html(item.gains_user )"></div>
+                    <div class="right" v-html="localcurrency_html(item.gains_user )"></div>
                 </template>     
                 <template #item-daily_difference="item">
-                    <div v-html="localcurrency_html(item.daily_difference )"></div>
+                    <div class="right" v-html="localcurrency_html(item.daily_difference )"></div>
                 </template>   
                 <template #item-daily_percentage="item">
-                    <div v-html="percentage_html(item.daily_percentage )"></div>
+                    <div class="right" v-html="percentage_html(item.daily_percentage )"></div>
                 </template>  
                 <template #item-percentage_invested="item">
-                    <div v-html="percentage_html(item.percentage_invested )"></div>
+                    <div class="right" v-html="percentage_html(item.percentage_invested )"></div>
                 </template>  
                 <template #item-percentage_selling_point="item">
                     <v-tooltip left :text="tooltip_selling_percentage(item)">
                         <template v-slot:activator="{ props }">
-                            <div v-bind="props" :class="item.percentage_selling_point<0.05 ? 'boldgreen' : ''" v-html="percentage_html(item.percentage_selling_point)"></div>
+                            <div  class="right" v-bind="props" :class="item.percentage_selling_point<0.05 ? 'boldgreen' : ''" v-html="percentage_html(item.percentage_selling_point)"></div>
                         </template>
                     </v-tooltip>   
                 </template>              
@@ -63,7 +63,7 @@
                             <div v-if="header.value == 'fullname'">
                                 {{ $t("Total ({0}):").format(investments_items.length)}}
                             </div>
-                            <div v-if="header.value == 'daily_difference'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(investments_items,'daily_difference'))">
+                            <div v-if="header.value == 'daily_difference'" class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'daily_difference'))">
                             </div>
                             <div v-if="header.value == 'daily_percentage'" class="d-flex justify-end" v-html="percentage_html(listobjects_sum(investments_items,'daily_difference')/listobjects_sum(investments_items,'balance_user'))">
                             </div>

@@ -217,8 +217,15 @@ span.vuered{
 }
 
 .totalrow{
-    background-color: WhiteSmoke;
+    background-color: whitesmoke;
+    font-size: var(--easy-table-body-row-font-size);
     font-weight: 600;
+    height: var(--easy-table-body-row-height);
+    color: var(--easy-table-body-row-font-color);
+    font-size: var(--easy-table-body-row-font-size);
+    padding: var(--easy-table-body-item-padding);
+
+
 }
 
 </style>

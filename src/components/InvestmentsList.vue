@@ -102,7 +102,7 @@
         <!-- INVESTMENT change selling price-->
         <v-dialog v-model="dialog_change_selling_price">
             <v-card class="pa-3">
-                <InvestmentsChangeSellingPrice :investment="investment" :key="key" @cruded="on_InvestmentsChangeSellingPrice_cruded()"></InvestmentsChangeSellingPrice>
+                <InvestmentsChangeSellingPrice :investment="investment" :key="key" @cruded="on_InvestmentsChangeSellingPrice_cruded"></InvestmentsChangeSellingPrice>
             </v-card>
         </v-dialog>
 
@@ -264,6 +264,7 @@
                     this.investments_items=response.data
                     this.update_foot()
                     this.loading_investments=false
+                    this.key=this.key+1
                 }, (error) => {
                     this.parseResponseError(error)
                 });

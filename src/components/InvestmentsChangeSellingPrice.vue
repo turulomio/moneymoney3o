@@ -19,9 +19,6 @@
                 <div class="right">{{ currency_string(item.balance_investment, item.currency)}}</div>
             </template>
         </EasyDataTable>
-        <p>{{ data_selected }}</p>
-        <p>{{ button_text }}</p>
-
         <DisplayValues :items="displayvalues()" :minimized_items="5" :key="key"></DisplayValues>
 
         <v-tabs  background-color="primary" dark v-model="tab" grow>
@@ -131,19 +128,6 @@
             }
         },
         watch: {
-            data_selected: function(newValue,oldValue) {
-                // this.console_log("DATA_SELECTED", newValue.length, this.data_selected.length, oldValue.length)
-                // this.selected_shares=newValue.reduce((accum,item) => accum + item.shares, 0)
-                // this.selected_invested=newValue.reduce((accum,item) => accum + item.invested_investment, 0)
-                // if (this.selected_shares!=0){
-                //     var selected_sharesbyaverage=newValue.reduce((accum,item) => accum + item.shares*item.average_price, 0)
-                //     this.selected_average_price=selected_sharesbyaverage/this.selected_shares
-                // } else {
-                //     this.selected_average_price=0
-                // }
-                // this.console_log("Selected",this.selected_shares,this.selected_invested)
-                this.calculate()
-            },
             gains: function() {
                 this.calculate()
             },
@@ -243,16 +227,13 @@
                 }
                 axios.post(`${this.store().apiroot}/investments/changesellingprice/`, p, this.myheaders())
                 .then(() => {
-                    this.$store.dispatch("getInvestments")
-                    .then((a)=>{
-                        console.log(a)
-                        this.key=this.key+1
-                        var after=this.getObjectByUrl("investments",this.investment.url)
-                        console.log("after")
-                        console.log(after.selling_expiration)
-                        console.log(after.selling_price)
+                    console.log(this.getObjectById("investments", 456).selling_price)
+                    this.store().updateInvestments()
+                    .then(()=>{
                         this.loading_ios=false
+                        this.key=this.key+1
                         alert(this.$t("Remember to set your order in the bank"))
+                console.log(this.getObjectById("investments", 456).selling_price)
                         this.$emit("cruded")
                     })
                 }, (error) => {
@@ -269,9 +250,8 @@
                 }
                 axios.post(`${this.store().apiroot}/investments/changesellingprice/`, p, this.myheaders())
                 .then(() => {
-                    this.$store.dispatch("getInvestments")
+                    this.store().updateInvestments()
                     .then(()=>{
-                        this.refreshInvestments( false )
                         this.key=this.key+1
                         alert(this.$t("Remember to set your order in the bank"))
                         this.$emit("cruded")
@@ -290,7 +270,6 @@
                 } else {
                     this.selected_average_price=0
                 }
-                this.console_log("Selected",this.selected_shares,this.selected_invested)
                 if (this.tab==0){
                     this.selected_selling_price=this.selling_price_to_gain_percentage_of_invested(this.percentage)
                 } else if (this.tab==1) {

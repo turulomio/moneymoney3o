@@ -442,9 +442,9 @@
             },
             on_InvestmentsChangeSellingPrice_cruded(){
                 this.dialog_io_sameproduct=false
+                this.update_all()
                 this.$emit("cruded")
                 this.key=this.key+1
-                this.update_all()
             },
             on_TableInvestmentsOperations_cruded(){//Emited deleting IO
                 this.on_InvestmentsoperationsCU_cruded()
@@ -510,24 +510,19 @@
             },
             update_all(){
                 this.loading=true
-                this.investment=this.getObjectById("investments",this.investment_id)
-                console.log("UPDATED")
-                console.log(this.investment.selling_expiration)
-                console.log(this.investment.selling_price)
+                this.investment=this.getObjectById("investments",this.investment_id)                
 
                 axios.all([this.update_investmentsoperations(), this.update_dividends()])
                 .then(([resIO, resDividends]) => {
                     this.plio_id=resIO.data[this.investment_id]
-                    console.log(this.plio_id)
 
                     this.leverage_message= this.$t("{0} (Real: {1})").format(
                         this.plio_id.data.multiplier,
                         this.plio_id.data.real_leverages
                     )
 
-                    console.log(this.plio_id.data.real_leverages)
                     var gains_at_selling_point_investment=(this.investment.selling_price-this.plio_id.total_io_current.average_price_investment)*this.plio_id.total_io_current.shares*this.plio_id.data.real_leverages
-                    this.selling_point_message=this.selling_point_message+ this.$t("{0}, to gain {1}").format(
+                    this.selling_point_message=this.$t("{0}, to gain {1}").format(
                         this.currency_string(this.investment.selling_price, this.product.currency),
                         this.currency_string(gains_at_selling_point_investment, this.product.currency)
                     )
@@ -548,9 +543,6 @@
         created(){
             console.log(this.investment_id)
             var inv=this.getObjectById("investments",this.investment_id)
-            console.log("CREATED")
-            console.log(inv.selling_expiration)
-            console.log(inv.selling_price)
             this.update_all()
         }
     }

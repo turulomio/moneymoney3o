@@ -1,34 +1,33 @@
 <template>
-    <v-card flat>
+    <div>
         <h1 class="mb-2">{{ $t("Change selling price") }}</h1>
         <div v-html="$t('Table with all investments with the same product as current investment:')"></div>
-        <EasyDataTable ref="table" v-model="selected" :headers="tableHeaders" :items="data" :single-select="false" item-key="id" show-select class="elevation-1 mt-2" :disable-pagination="true" dense >
-            <template v-slot:[`item.fullname`]="{ item }">
+        <EasyDataTable ref="table" v-model:items-selected="data_selected" :headers="tableHeaders" :items="data" class="elevation-1 mt-2" :disable-pagination="true" dense height="300">
+            <template #item-fullname="item">
                 {{ getObjectPropertyByUrl("investments",item.url,"fullname") }}
             </template>            
-            <template v-slot:[`item.selling_price`]="{ item }">
-                {{ currency_string(item.selling_price, item.currency)}}
+            <template #item-selling_price="item">
+                <div class="right">{{ currency_string(item.selling_price, item.currency)}}</div>
             </template>
-            <template v-slot:[`item.average_price`]="{ item }">
-                {{ currency_string(item.average_price, item.currency)}}
+            <template #item-average_price="item">
+                <div class="right">{{ currency_string(item.average_price, item.currency)}}</div>
             </template>
-            <template v-slot:[`item.invested_investment`]="{ item }">
-                {{ currency_string(item.invested_investment, item.currency)}}
+            <template #item-invested_investment="item">
+                <div class="right">{{ currency_string(item.invested_investment, item.currency)}}</div>
             </template>
-            <template v-slot:[`item.balance_investment`]="{ item }">
-                {{ currency_string(item.balance_investment, item.currency)}}
+            <template #item-balance_investment="item">
+                <div class="right">{{ currency_string(item.balance_investment, item.currency)}}</div>
             </template>
         </EasyDataTable>
-        <p></p>
+        <p>{{ data_selected }}</p>
 
         <DisplayValues :items="displayvalues()" :minimized_items="5" :key="key"></DisplayValues>
 
-        <v-tabs  background-color="primary" dark v-model="tab" next-icon="mdi-arrow-right-bold-box-outline" prev-icon="mdi-arrow-left-bold-box-outline" show-arrows>
+        <v-tabs  background-color="primary" dark v-model="tab" grow>
             <v-tab key="percentage">{{ $t("Set a gains percentage") }}</v-tab>
             <v-tab key="gain">{{ $t("Set a gain") }}</v-tab>
             <v-tab key="price">{{ $t("Set a price") }}</v-tab>
-            <v-tab key="range" v-if="this.selected.length==1 && this.investment.id==this.selected[0].id">{{ $t("Set a range for current investment strategy") }}</v-tab>
-            <v-tabs-slider color="yellow"></v-tabs-slider>
+            <v-tab key="range" v-if="this.data_selected.length==1 && this.investment.id==this.data_selected[0].id">{{ $t("Set a range for current investment strategy") }}</v-tab>
         </v-tabs>
         <v-window v-model="tab">
             <v-window-item key="percentage">      
@@ -53,21 +52,18 @@
                 </v-card>
             </v-window-item>
         </v-window>    
-        <v-layout style="justify-content: center;" class="mt-3">
-            <v-card class="pa-4" width="60%">
+        <v-card class="pa-4" width="100%">
             <v-form ref="form" v-model="form_valid" lazy-validation>
                 <MyDatePicker v-model="selling_expiration" :label="$t('Selling expiration')"></MyDatePicker>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="primary" @click="submit()" :disabled="form_valid==false">{{ button_text }}</v-btn>
+                    <v-btn color="primary" @click="submit()">{{ button_text }}</v-btn>
                     <v-btn color="error" @click="submit_null()">{{ $t("Set null values") }}</v-btn>
-
                     <v-spacer></v-spacer>
                 </v-card-actions>
             </v-form>
-            </v-card>
-        </v-layout>
-    </v-card>
+        </v-card>
+    </div>
 </template>
 <script>
     import axios from 'axios'
@@ -99,7 +95,7 @@
                 form_valid:false,
                 plio:null,
                 data:[],
-                selected:[],
+                data_selected:[],
                 tableHeaders: [
                     { text: this.$t('Id'), value: 'id', sortable: true },
                     { text: this.$t('Name'), value: 'fullname', sortable: true},
@@ -134,15 +130,17 @@
             }
         },
         watch: {
-            selected: function() {
-                this.selected_shares=this.selected.reduce((accum,item) => accum + item.shares, 0)
-                this.selected_invested=this.selected.reduce((accum,item) => accum + item.invested_investment, 0)
+            data_selected: function(newValue) {
+                console.log("AHORA")
+                this.selected_shares=newValue.reduce((accum,item) => accum + item.shares, 0)
+                this.selected_invested=newValue.reduce((accum,item) => accum + item.invested_investment, 0)
                 if (this.selected_shares!=0){
-                    var selected_sharesbyaverage=this.selected.reduce((accum,item) => accum + item.shares*item.average_price, 0)
+                    var selected_sharesbyaverage=newValue.reduce((accum,item) => accum + item.shares*item.average_price, 0)
                     this.selected_average_price=selected_sharesbyaverage/this.selected_shares
                 } else {
                     this.selected_average_price=0
                 }
+                this.console_log("Selected",this.selected_shares,this.selected_invested)
                 this.calculate()
             },
             gains: function() {
@@ -236,7 +234,7 @@
                 }
 
                 var s= new Array()
-                this.selected.forEach(v=> s.push(v.url))
+                this.data_selected.forEach(v=> s.push(v.url))
                 var p={
                     selling_expiration:this.selling_expiration,
                     investments: s,
@@ -262,7 +260,7 @@
             },
             submit_null(){   
                 var s= new Array()
-                this.selected.forEach(v=> s.push(v.url))
+                this.data_selected.forEach(v=> s.push(v.url))
                 var p={
                     selling_expiration:null,
                     investments: s,
@@ -327,7 +325,7 @@
                         this.data.push(o)
                         //Adds current invesment to selection
                         if (select_current == true && o.url==this.investment.url){
-                            this.selected.push(o)
+                            this.data_selected.push(o)
                         }
 
                     })

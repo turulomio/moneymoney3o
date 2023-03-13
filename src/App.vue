@@ -115,8 +115,8 @@
             <v-spacer />            
             <!-- <v-btn :to="{ name: 'currencies'}" v-if="store().logged"><v-icon icon="mdi-currency-eur" dark></v-icon></v-btn> -->
             <BtnSwitchLanguages />
-            <BtnLogIn v-show="!store().logged"/>
-            <BtnLogOut v-show="store().logged"/>
+            <BtnLogIn v-show="!store().logged" class="mr-4"/>
+            <BtnLogOut v-show="store().logged" class="mr-4"/>
 
         </v-app-bar>
         <v-main>   

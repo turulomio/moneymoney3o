@@ -18,9 +18,9 @@
 export default {
     name: "AutocompleteProducts",
     props:{
-        // value: { 
-        //     required: true,
-        // },
+        modelValue: { 
+            required: true,
+        },
         returnObject:{
             type: Boolean,
             required:false,
@@ -46,7 +46,7 @@ export default {
     methods:{
         on_change(item){
             this.new_value=item
-            this.$emit("input", this.new_value)
+            this.$emit('update:modelValue', this.new_value)
         },
     },
     created(){

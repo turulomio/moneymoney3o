@@ -442,9 +442,9 @@
             },
             on_InvestmentsChangeSellingPrice_cruded(){
                 this.dialog_io_sameproduct=false
+                this.key=this.key+1
                 this.update_all()
                 this.$emit("cruded")
-                this.key=this.key+1
             },
             on_TableInvestmentsOperations_cruded(){//Emited deleting IO
                 this.on_InvestmentsoperationsCU_cruded()
@@ -512,10 +512,13 @@
                 this.loading=true
                 this.investment=this.getObjectById("investments",this.investment_id)                
 
+                console.log("THIS")
+                    console.log(this)
                 axios.all([this.update_investmentsoperations(), this.update_dividends()])
                 .then(([resIO, resDividends]) => {
                     this.plio_id=resIO.data[this.investment_id]
-
+                    console.log("THIS")
+                    console.log(this)
                     this.leverage_message= this.$t("{0} (Real: {1})").format(
                         this.plio_id.data.multiplier,
                         this.plio_id.data.real_leverages

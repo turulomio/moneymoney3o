@@ -228,4 +228,9 @@ span.vuered{
 
 }
 
+.totalrow > td{
+    padding: var(--easy-table-body-item-padding);
+
+}
+
 </style>

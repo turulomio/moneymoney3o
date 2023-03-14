@@ -19,7 +19,7 @@
             </v-form>
         </v-card>   
 
-        <EasyDataTable dense :headers="headers" :items="items" sort-by="product" class="elevation-1 pt-6" hide-default-footer  disable-pagination :loading="loading"></EasyDataTable>
+        <EasyDataTable alternating dense :headers="headers" :items="items" sort-by="product" class="elevation-1 pt-6" hide-default-footer  disable-pagination :loading="loading" />
     </div>
 </template>  
 <script>     

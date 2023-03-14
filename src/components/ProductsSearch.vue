@@ -15,28 +15,28 @@
         </v-card>
 
         <v-card >
-            <EasyDataTable dense :headers="tableHeaders" :items="filtered_products" class="elevation-1 cursorpointer" disable-pagination  hide-default-footer :sort-by="['name']" fixed-header height="650" :loading="loading"  @click-row="viewProduct">      
-                <template v-slot:[`item.name`]="{ item }">
+            <EasyDataTable alternating dense :headers="tableHeaders" :items="filtered_products" class="elevation-1 cursorpointer" disable-pagination  hide-default-footer :sort-by="['name']" fixed-header height="650" :loading="loading"  @click-row="viewProduct">
+                <template #item-name="item">
                     <v-icon :class="'mr-2 fi fib fi-'+item.flag" small :title="this.getCountryNameByCode(item.flag)"></v-icon><span :class="class_name(item)">{{item.name}}</span>
                 </template>  
-                <template v-slot:[`item.type`]="{ item }">
+            <template #item-type="item">
                     {{ getObjectPropertyByUrl("productstypes",item.productstypes,"localname")}}
                 </template>                                    
-                <template v-slot:[`item.last_datetime`]="{ item }">
+            <template #item-last_datetime="item">
                     {{localtime(item.last_datetime)}}
                 </template>     
-                <template v-slot:[`item.last`]="{ item }">
-                    <div v-html="currency_html(item.last, item.currency)"></div>
+            <template #item-last="item">
+                    <div class="right" v-html="currency_html(item.last, item.currency)"></div>
                 </template>     
-                <template v-slot:[`item.percentage_last_year`]="{ item }">
-                    <div v-html="percentage_html(item.percentage_last_year )"></div>
+            <template #item-percentage_last_year="item">
+                    <div class="right" v-html="percentage_html(item.percentage_last_year )"></div>
                 </template>
-                <template v-slot:[`item.actions`]="{ item }">
+            <template #item-actions="item">
                     <v-icon small @click.stop="toggleFavorite(item)" :color="(store().profile.favorites.includes(item.url))? 'orange': '' " class="mr-1">mdi-star-outline</v-icon>
-                    <v-icon class="mr-1" small @click.stop="editPersonalProduct(item)" v-if="item.id<0">mdi-pencil</v-icon>
-                    <v-icon class="mr-1" small @click.stop="editSystemProduct(item)"  color="#AA0000" v-if="item.id>=0 && store().catalog_manager">mdi-pencil</v-icon>
-                    <v-icon class="mr-1" small @click.stop="deletePersonalProduct(item)" v-if="item.id<0 && item.uses==0">mdi-delete</v-icon>
-                    <v-icon class="mr-1" small @click.stop="deleteSystemProduct(item)" color="#AA0000" v-if="item.id>=0 && store().catalog_manager">mdi-delete</v-icon>
+                    <v-icon class="mr-1" small @click.stop="editPersonalProduct(item)" v-if="item.id>0">mdi-pencil</v-icon>
+                    <v-icon class="mr-1" small @click.stop="editSystemProduct(item)"  color="#AA0000" v-if="item.id<=0 && store().catalog_manager">mdi-pencil</v-icon>
+                    <v-icon class="mr-1" small @click.stop="deletePersonalProduct(item)" v-if="item.id>0 && item.uses==0">mdi-delete</v-icon>
+                    <v-icon class="mr-1" small @click.stop="deleteSystemProduct(item)" color="#AA0000" v-if="item.id<=0 && store().catalog_manager">mdi-delete</v-icon>
                 </template>
             </EasyDataTable>   
         </v-card>
@@ -280,7 +280,8 @@
             on_ProductsCU_cruded(){
                 this.loading=true
                 this.dialog_products_cu=false,
-                this.$store.dispatch("getProducts").then(() => {
+                this.store().updateProducts
+                .then(() => {
                     this.refreshSearch()
                 })
             },
@@ -311,7 +312,8 @@
                 this.store().profile.toggle_favorite=item.url //Adds toggle_favorite
                 return axios.put(`${this.store().apiroot}/profile/`, this.store().profile, this.myheaders())
                 .then(() => {
-                        this.$store.dispatch("getProfile").then(() => {
+                        this.store().updateProfile()
+                        .then(() => {
                             this.refreshSearch()
                         })
                 }, (error) => {

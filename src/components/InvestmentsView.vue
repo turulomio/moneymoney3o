@@ -3,8 +3,7 @@
         <h1>{{ investment.fullname }}
             <MyMenuInline :items="items" :context="this"></MyMenuInline>
         </h1>
-        <DisplayValues v-if="plio_id" :items="displayvalues()" :key="key"></DisplayValues>
-
+        <DisplayValues v-if="plio_id" :items="displayvalues" :key="key" />
         <v-tabs  background-color="primary" dark v-model="tab" next-icon="mdi-arrow-right-bold-box-outline" prev-icon="mdi-arrow-left-bold-box-outline" show-arrows>
             <v-tab key="current">{{ $t('Current investment operations') }}</v-tab>
             <v-tab key="operations">{{ $t('Investment operations') }}</v-tab>
@@ -183,7 +182,46 @@
             product: function(){
                 return this.getObjectByUrl("products",this.investment.products)
 
-            }
+            },
+            leverage_message (){
+                if (!this.plio_id) return ""
+                return this.$t("{0} (Real: {1})").format(
+                        this.plio_id.data.multiplier,
+                        this.plio_id.data.real_leverages
+                )
+            },
+            selling_expiration_message(){
+                if (!this.product || !this.plio_id) return ""
+                var gains_at_selling_point_investment=(this.investment.selling_price-this.plio_id.total_io_current.average_price_investment)*this.plio_id.total_io_current.shares*this.plio_id.data.real_leverages
+                return this.$t("{0}, to gain {1}").format(
+                        this.currency_string(this.investment.selling_price, this.product.currency),
+                        this.currency_string(gains_at_selling_point_investment, this.product.currency)
+                )
+
+            },
+            selling_point_message(){
+                var r= `${this.investment.selling_expiration}`
+                if (new Date(this.investment.selling_expiration).setHours(0,0,0,0)<new Date().setHours(0,0,0,0)){
+                    r=r+ '.<span class="vuered"> '+ this.$t('You must set a new selling order.') + '</span>'
+                }
+                return r
+
+            },
+
+            displayvalues(){
+
+                return [
+                    {title:this.$t('Selling point'), value: this.selling_point_message},
+                    {title:this.$t('Selling expiration'), value: this.selling_expiration_message},
+                    {title:this.$t('Active'), value: this.investment.active},
+                    {title:this.$t('Currency'), value: this.plio_id.data.currency_product},
+                    {title:this.$t('Next reinvest amount'), value: this.plio_id.data.currency_product},
+                    {title:this.$t('Product'), value: this.product.fullname},
+                    {title:this.$t('Leverage'), value: this.leverage_message},
+                    {title:this.$t('Daily adjustment'), value: this.investment.daily_adjustment},
+                    {title:this.$t('Id'), value: this.investment.id},
+                ]
+            },
         },
         data () {
             return {
@@ -198,11 +236,8 @@
                 dividends: [],
                 dividends_filtered: [],
                 io_filtered:[],
-                selling_expiration_message:"",
-                selling_point_message:"",
                 showAllDividends:false,
                 chkShowAllIO:false,
-                leverage_message:"",
                 chart_data: null,
                 items: [
                     {
@@ -423,6 +458,7 @@
                 this.key=this.key+1
             }
         },
+
         methods: {
             empty_investments_chart,
             empty_investments_chart_limit_line,
@@ -448,20 +484,6 @@
             },
             on_TableInvestmentsOperations_cruded(){//Emited deleting IO
                 this.on_InvestmentsoperationsCU_cruded()
-            },
-            displayvalues(){
-
-                return [
-                    {title:this.$t('Selling point'), value: this.selling_point_message},
-                    {title:this.$t('Selling expiration'), value: this.selling_expiration_message},
-                    {title:this.$t('Active'), value: this.investment.active},
-                    {title:this.$t('Currency'), value: this.plio_id.data.currency_product},
-                    {title:this.$t('Next reinvest amount'), value: this.plio_id.data.currency_product},
-                    {title:this.$t('Product'), value: this.product.fullname},
-                    {title:this.$t('Leverage'), value: this.leverage_message},
-                    {title:this.$t('Daily adjustment'), value: this.investment.daily_adjustment},
-                    {title:this.$t('Id'), value: this.investment.id},
-                ]
             },
             setChkDividendsLabel(){
                 if (this.showAllDividends== true){
@@ -512,32 +534,14 @@
                 this.loading=true
                 this.investment=this.getObjectById("investments",this.investment_id)                
 
-                console.log("THIS")
-                    console.log(this)
                 axios.all([this.update_investmentsoperations(), this.update_dividends()])
                 .then(([resIO, resDividends]) => {
                     this.plio_id=resIO.data[this.investment_id]
-                    console.log("THIS")
-                    console.log(this)
-                    this.leverage_message= this.$t("{0} (Real: {1})").format(
-                        this.plio_id.data.multiplier,
-                        this.plio_id.data.real_leverages
-                    )
 
-                    var gains_at_selling_point_investment=(this.investment.selling_price-this.plio_id.total_io_current.average_price_investment)*this.plio_id.total_io_current.shares*this.plio_id.data.real_leverages
-                    this.selling_point_message=this.$t("{0}, to gain {1}").format(
-                        this.currency_string(this.investment.selling_price, this.product.currency),
-                        this.currency_string(gains_at_selling_point_investment, this.product.currency)
-                    )
-                    this.selling_expiration_message=`${this.investment.selling_expiration}`
-                    if (new Date(this.investment.selling_expiration).setHours(0,0,0,0)<new Date().setHours(0,0,0,0)){
-                        this.selling_expiration_message=this.selling_expiration_message+ '.<span class="vuered"> '+ this.$t('You must set a new selling order.') + '</span>'
-                    }
                     this.on_chkShowAllIO_click()
 
                     this.dividends=resDividends.data
                     this.on_chkDividends()
-                    this.displayvalues()
                     this.loading=false
                     this.key=this.key+1
                 });

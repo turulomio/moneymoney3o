@@ -28,21 +28,22 @@
             <v-window v-model="tab">
             <v-window-item key="0">
                 <v-card flat>
-                    <v-container >{{ currentpricelabel }}</v-container>
+                    <p >{{ currentpricelabel }}</p>
                     <EasyDataTable dense :headers="tableHeaders" :items="tableData" class="elevation-1" disable-pagination  hide-default-footer :sort-by="['value']" :sort-desc="[true]" fixed-header height="360">      
-                        <template v-slot:[`item.value`]="{ item }">
+
+                        <template #item-value="item">
                             <div  @click="showLimits(item)" :class="item.current_in_range ? 'boldgreen' : ''">{{currency_string(item.value, prdata.product.currency) }}</div>
                         </template>    
-                        <template v-slot:[`item.recomendation_invest`]="{ item }">
+                            <template #item-recomendation_invest="item">
                             <v-icon small v-if="item.recomendation_invest" >mdi-check-outline</v-icon>
                         </template>                        
-                         <template v-slot:[`item.investments_inside`]="{ item }">
+                            <template #item-investments_inside="item">
                             <div v-for="o in item.investments_inside" :key="o.name" @click="on_investments_inside_click(o)">{{ $t("{0}. Invested: {1}").format(o.name, currency_string(o.invested, prdata.product.currency)) }}<br></div>
                         </template>                      
-                        <template v-slot:[`item.orders_inside`]="{ item }">
+                            <template #item-orders_inside="item">
                             <div  v-for="o in item.orders_inside" :key="o.name" @click="on_orders_inside_click(o)">{{ $t("{0}. Amount: {1}").format(o.name, currency_string(o.amount, prdata.product.currency)) }}<br></div>
                         </template>
-                        <template v-slot:[`item.actions`]="{ item }">
+                            <template #item-actions="item">
                             <v-icon small class="mr-2" @click="addOrder(item)" :color="(item.recomendation_invest) ? '' : 'red'">mdi-cart</v-icon>
                         </template>
                     </EasyDataTable>   

@@ -276,7 +276,7 @@ export function getConceptsForDividends() {
 export function getInvestmentsActive() { 
     return store().investments.filter(o => o.active==true)
 }
-export function getInvestmentsByProduct() { 
+export function getInvestmentsByProduct(product) { 
     return store().investments.filter(o => o.products==product)
 }
 

@@ -12,6 +12,14 @@ import 'vue3-easy-data-table/dist/style.css';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
+
+
+import * as echarts from 'echarts';
+import ECharts from 'vue-echarts'
+
+import {transform} from 'echarts-stat'
+echarts.registerTransform(transform.regression);
+
 document.title=import.meta.env.VITE_APP_TITLE
 
 loadFonts()
@@ -22,6 +30,7 @@ app.use(router)
 app.use(vuetify)
 app.component('EasyDataTable', Vue3EasyDataTable);
 app.component('VueDatePicker', VueDatePicker);
+app.component('v-chart', ECharts)
 app.mixin(mixin)
 app.mount('#app')
 

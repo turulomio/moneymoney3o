@@ -6,13 +6,13 @@
 
         <EasyDataTable dense :headers="headers" :items="items" sort-by="name" class="elevation-1 ma-4 cursorpointer" hide-default-footer disable-pagination :loading="loading" :key="key"  @click-row="pairReportItem">
         
-            <template v-slot:[`item.a`]="{ item }">
+            <template #item-a="item">
                 <div v-html="getObjectPropertyByUrl('products', item.a, 'name' )"></div>
             </template> 
-            <template v-slot:[`item.b`]="{ item }">
+            <template #item-b="item">
                 <div v-html="getObjectPropertyByUrl('products', item.b, 'name' )"></div>
             </template>     
-            <template v-slot:[`item.actions`]="{ item }">
+            <template #item-actions="item">
                 <v-icon small class="mr-2" @click="editPair(item)">mdi-pencil</v-icon>
                 <v-icon small class="mr-2" @click="deletePair(item)">mdi-delete</v-icon>
             </template>

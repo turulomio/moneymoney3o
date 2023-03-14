@@ -12,20 +12,24 @@
             <v-tab key="price_ratio_chart">{{ $t("Price ratio chart")}}</v-tab>
             <v-tab key="pairs_price_scatter">{{ $t("Price scatter chart")}}</v-tab>
             <v-tab key="pairs_comparation_by_quote">{{ $t("Comparation by quote")}}</v-tab>
+        </v-tabs>
+        <v-window>
             <v-window-item key="price_ratio">     
                 <v-card class="pa-4 d-flex justify-center flex-column" outlined >
 
                     <EasyDataTable dense :headers="data_price_ratio_headers" :items="dbdata" sort-by="datetime" class="elevation-1 ma-4" hide-default-footer disable-pagination :loading="loading" :key="key" height="500" fixed-header> 
-                        <template v-slot:[`item.datetime`]="{ item }">
+
+                        <template #item-datetime="item">
                             {{localtime(item.datetime)}}
                         </template>  
-                        <template v-slot:[`item.price_better`]="{ item }">
+
+                        <template #item-price_better="item">
                             <div v-html="currency_html(item.price_better, product_a.currency)"></div>
                         </template>  
-                        <template v-slot:[`item.price_worse`]="{ item }">
+                        <template #item-price_worse="item">
                             <div v-html="currency_html(item.price_worse, product_b.currency)"></div>
                         </template>  
-                        <template v-slot:[`item.price_ratio_percentage_from_start`]="{ item }">
+                        <template #item-price_ratio_percentage_from_start="item">
                             <div v-html="percentage_html(item.price_ratio_percentage_from_start )"></div>
                         </template>
                     </EasyDataTable>
@@ -68,7 +72,7 @@
                     </EasyDataTable>
                 </v-card>
             </v-window-item>
-        </v-tabs>  
+        </v-window>  
     </div>
 </template>
 <script>

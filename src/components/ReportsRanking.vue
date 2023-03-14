@@ -6,23 +6,24 @@
                 <v-text-field class="ml-10 mr-6" v-model="search" append-icon="mdi-magnify" :label="$t('Filter')" single-line hide-details :placeholder="$t('Add a string to filter table')"></v-text-field>
                 <v-checkbox dense v-model="only_current_investments" :label="$t('Show only current investments?')" ></v-checkbox>
             </v-row>
-            <EasyDataTable dense :headers="headers" :search="search" :items="data" class="elevation-1" hide-default-footer disable-pagination :loading="loading_table">
-                <template v-slot:[`item.current_net_gains`]="{ item }">
-                    <div v-html="localcurrency_html(item.current_net_gains )"></div>
+            <EasyDataTable dense rows-per-page="10000" :headers="headers" :search="search" :items="data" class="elevation-1" hide-footer disable-pagination :loading="loading_table">
+
+                <template #item-current_net_gains="item">
+                    <div class="right" v-html="localcurrency_html(item.current_net_gains )"></div>
                 </template>  
-                <template v-slot:[`item.historical_net_gains`]="{ item }">
-                    <div v-html="localcurrency_html(item.historical_net_gains )"></div>
+                <template #item-historical_net_gains="item">
+                    <div class="right" v-html="localcurrency_html(item.historical_net_gains )"></div>
                 </template>  
-                <template v-slot:[`item.dividends`]="{ item }">
-                    <div v-html="localcurrency_html(item.dividends )"></div>
+                <template #item-dividends="item">
+                    <div class="right" v-html="localcurrency_html(item.dividends )"></div>
                 </template>  
-                <template v-slot:[`item.total`]="{ item }">
-                    <div v-html="localcurrency_html(item.total )"></div>
+                <template #item-total="item">
+                    <div class="right" v-html="localcurrency_html(item.total )"></div>
                 </template>  
-                <template v-slot:[`item.actions`]="{ item }">
+                <template #item-actions="item">
                     <v-icon small class="mr-2" @click="viewInvestmentsMerged(item)">mdi-eye</v-icon>
                 </template>    
-                <template v-slot:[`body.append`]="{headers}">
+                <template #body-append="{headers}">
                     <tr class="totalrow" ref="lr" v-if="search==''">
                         <td v-for="(header,i) in headers" :key="i" >
                             <div v-if="header.value == 'name'">
@@ -66,19 +67,8 @@
                 headers: [
                     { text: this.$t('Ranking'), sortable: true, value: 'ranking',  width: "3%"},
                     { text: this.$t('Name'), value: 'name'},
-                    { text: this.$t('Current net gains'), value: 'current_net_gains', align:'end',  width: "10%", 
-                        filter: value => {
-                            if (this.only_current_investments){
-                                if ( value!=0){
-                                    return true
-                                } else {
-                                    return false
-                                }
-                            } else {
-                                return true
-                            }
-                        }
-                    },
+                    { text: this.$t('Current net gains'), value: 'current_net_gains', align:'end',  width: "10%"},
+
                     { text: this.$t('Historical net gains'), value: 'historical_net_gains', align:'end',  width: "10%"},
                     { text: this.$t('Net dividends'), value: 'dividends', align:'end',  width: "10%"},
                     { text: this.$t('Total'), value: 'total', align:'end',  width: "10%"},
@@ -96,6 +86,11 @@
                 key:0,
             }
         },
+        watch: {
+            only_current_investments(){
+                this.update_table()
+            }
+        },
         methods: {
             viewInvestmentsMerged (item) {
                 this.investments=item.investments
@@ -107,7 +102,16 @@
 
                 axios.get(`${this.store().apiroot}/reports/ranking/`, this.myheaders())
                 .then((response) => {
-                    this.data=response.data
+                    this.data=[]
+                    response.data.forEach(o=>{
+                        if (this.only_current_investments){
+                            if (o.current_net_gains!=0){
+                                this.data.push(o)
+                            }
+                        } else {
+                            this.data.push(o)
+                        }
+                    })
                     this.loading_table=false
                 }, (error) => {
                     this.parseResponseError(error)

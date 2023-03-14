@@ -32,7 +32,7 @@
                                         <div v-if="header.value == 'concept'">
                                             Total
                                         </div>
-                                        <div v-if="header.value == 'total'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'total'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(itemsPositive,'total'))"></div>
                                         </div>
                                     </td>
@@ -62,7 +62,7 @@
                                         <div v-if="header.value == 'concept'">
                                             Total
                                         </div>
-                                        <div v-if="header.value == 'total'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'total'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(itemsNegative,'total'))"></div>
                                         </div>
                                     </td>

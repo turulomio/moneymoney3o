@@ -65,15 +65,15 @@
                             </div>
                             <div v-if="header.value == 'daily_difference'" class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'daily_difference'))">
                             </div>
-                            <div v-if="header.value == 'daily_percentage'" class="d-flex justify-end" v-html="percentage_html(listobjects_sum(investments_items,'daily_difference')/listobjects_sum(investments_items,'balance_user'))">
+                            <div v-if="header.value == 'daily_percentage'" class="right" v-html="percentage_html(listobjects_sum(investments_items,'daily_difference')/listobjects_sum(investments_items,'balance_user'))">
                             </div>
-                            <div v-if="header.value == 'balance_user'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(investments_items,'balance_user'))">
+                            <div v-if="header.value == 'balance_user'" class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'balance_user'))">
                             </div>
-                            <div v-if="header.value == 'invested_user'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(investments_items,'invested_user'))">
+                            <div v-if="header.value == 'invested_user'" class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'invested_user'))">
                             </div>
-                            <div v-if="header.value == 'gains_user'" class="d-flex justify-end" v-html="localcurrency_html(listobjects_sum(investments_items,'gains_user'))">
+                            <div v-if="header.value == 'gains_user'" class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'gains_user'))">
                             </div>
-                            <div v-if="header.value == 'percentage_invested'" class="d-flex justify-end" v-html="percentage_html(listobjects_sum(investments_items,'gains_user')/listobjects_sum(investments_items,'invested_user'))">
+                            <div v-if="header.value == 'percentage_invested'" class="right" v-html="percentage_html(listobjects_sum(investments_items,'gains_user')/listobjects_sum(investments_items,'invested_user'))">
                             </div>
                         </td>
                     </tr>

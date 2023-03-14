@@ -75,36 +75,36 @@
                             {{ $t("Total ({0} registers)").format(items.length)}}
                         </div>
                         
-                        <div v-if="header.value == 'gains_gross_investment' && all_items_has_same_currency" class="d-flex justify-end">
+                        <div v-if="header.value == 'gains_gross_investment' && all_items_has_same_currency" class="right">
                             <div v-html="currency_html(listobjects_sum(items,'gains_gross_investment'), total_currency)"></div>
                         </div>
-                        <div v-if="header.value == 'gains_gross_user' && all_items_has_same_currency" class="d-flex justify-end">
+                        <div v-if="header.value == 'gains_gross_user' && all_items_has_same_currency" class="right">
                             <div v-html="currency_html(listobjects_sum(items,'gains_gross_user'), total_currency)"></div>
                         </div>
                         
-                        <div v-if="header.value == 'gains_net_investment' && all_items_has_same_currency" class="d-flex justify-end">
+                        <div v-if="header.value == 'gains_net_investment' && all_items_has_same_currency" class="right">
                             <div v-html="currency_html(listobjects_sum(items,'gains_net_investment'), total_currency)"></div>
                         </div>
-                        <div v-if="header.value == 'gains_net_account' && all_items_has_same_currency" class="d-flex justify-end">
+                        <div v-if="header.value == 'gains_net_account' && all_items_has_same_currency" class="right">
                             <div v-html="currency_html(listobjects_sum(items,'gains_net_account'), total_currency)"></div>
                         </div>
-                        <div v-if="header.value == 'gains_net_user' && all_items_has_same_currency" class="d-flex justify-end">
+                        <div v-if="header.value == 'gains_net_user' && all_items_has_same_currency" class="right">
                             <div v-html="currency_html(listobjects_sum(items,'gains_net_user'), total_currency)"></div>
                         </div>
                         
                         
-                        <div v-if="header.value == 'commissions_investment' && all_items_has_same_currency" class="d-flex justify-end">
+                        <div v-if="header.value == 'commissions_investment' && all_items_has_same_currency" class="right">
                             <div v-html="currency_html(listobjects_sum(items,'commissions_investment'), total_currency)"></div>
                         </div>
-                        <div v-if="header.value == 'commissions_account' && all_items_has_same_currency" class="d-flex justify-end">
+                        <div v-if="header.value == 'commissions_account' && all_items_has_same_currency" class="right">
                             <div v-html="currency_html(listobjects_sum(items,'commissions_account'), total_currency)"></div>
                         </div>
                         
                         
-                        <div v-if="header.value == 'taxes_investment' && all_items_has_same_currency" class="d-flex justify-end">
+                        <div v-if="header.value == 'taxes_investment' && all_items_has_same_currency" class="right">
                             <div v-html="currency_html(listobjects_sum(items,'taxes_investment'), total_currency)"></div>
                         </div>
-                        <div v-if="header.value == 'taxes_account' && all_items_has_same_currency" class="d-flex justify-end">
+                        <div v-if="header.value == 'taxes_account' && all_items_has_same_currency" class="right">
                             <div v-html="currency_html(listobjects_sum(items,'taxes_account'), total_currency)"></div>
                         </div>
                     </td>

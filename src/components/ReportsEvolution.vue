@@ -46,19 +46,19 @@
                                         <div v-if="header.value == 'year'">
                                             Total
                                         </div>
-                                        <div v-if="header.value == 'dividends_net'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'dividends_net'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(assetsData,'dividends_net'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'gains_net'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'gains_net'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(assetsData,'gains_net'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'incomes'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'incomes'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(assetsData,'incomes'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'expenses'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'expenses'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(assetsData,'expenses'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'total'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'total'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(assetsData,'total'))"></div>
                                         </div>
                                     </td>
@@ -100,16 +100,16 @@
                                         <div v-if="header.value == 'year'">
                                             Total
                                         </div>
-                                        <div v-if="header.value == 'net_gains_plus_dividends'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'net_gains_plus_dividends'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(investedData,'net_gains_plus_dividends'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'custody_commissions'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'custody_commissions'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(investedData,'custody_commissions'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'taxes'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'taxes'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(investedData,'taxes'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'investment_commissions'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'investment_commissions'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(investedData,'investment_commissions'))"></div>
                                         </div>
                                     </td>

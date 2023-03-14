@@ -10,45 +10,44 @@
         <div class="pa-6">
             <p>{{ last_year_balance_string }}</p>
 
-            <v-tabs  background-color="primary" dark v-model="tab" next-icon="mdi-arrow-right-bold-box-outline" prev-icon="mdi-arrow-left-bold-box-outline" show-arrows>
+            <v-tabs background-color="primary" dark v-model="tab" next-icon="mdi-arrow-right-bold-box-outline" prev-icon="mdi-arrow-left-bold-box-outline" show-arrows>
                 <v-tab key="0">{{ $t("Month evolution") }}</v-tab>
                 <v-tab key="1">{{ $t("Income report") }}</v-tab>
                 <v-tab key="2">{{ $t("Gains by product type") }}</v-tab>
                 <v-tab key="3">{{ $t("Annual target") }}</v-tab>
                 <v-tab key="4">{{ $t("Invest or work") }}</v-tab>
                 <v-tab key="5">{{ $t("Make ends meet") }}</v-tab>
-                <v-tabs-slider color="yellow"></v-tabs-slider>
             </v-tabs>
             <v-window v-model="tab">
                 <v-window-item key="0"> <!-- MONTH EVOLUTION -->
                     <v-card outlined>            
                         <EasyDataTable dense :headers="total_annual_headers" :items="total_annual"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_annual">      
-                            <template v-slot:[`item.account_balance`]="{ item }">
-                                <div v-html="localcurrency_html(item.account_balance)"></div>
+                            <template #item-account_balance="item">
+                                <div class="right" v-html="localcurrency_html(item.account_balance)"></div>
                             </template>      
-                            <template v-slot:[`item.investment_balance`]="{ item }">
-                                <div v-html="localcurrency_html(item.investment_balance)"></div>
+                            <template #item-investment_balance="item">
+                                <div class="right" v-html="localcurrency_html(item.investment_balance)"></div>
                             </template>   
-                            <template v-slot:[`item.total`]="{ item }">
-                                <div v-html="localcurrency_html(item.total)"></div>
+                            <template #item-total="item">
+                                <div class="right" v-html="localcurrency_html(item.total)"></div>
                             </template>   
-                            <template v-slot:[`item.diff_lastmonth`]="{ item }">
-                                <div v-html="localcurrency_html(item.diff_lastmonth)"></div>
+                            <template #item-diff_lastmonth="item">
+                                <div class="right" v-html="localcurrency_html(item.diff_lastmonth)"></div>
                             </template>   
-                            <template v-slot:[`item.percentage_year`]="{ item }">
-                                <div v-html="percentage_html(item.percentage_year)"></div>
+                            <template #item-percentage_year="item">
+                                <div class="right" v-html="percentage_html(item.percentage_year)"></div>
                             </template>   
-                            <template v-slot:[`body.append`]="{headers}">
-                                <tr class="totalrow" ref="lr">
+                             <template #body-append="{headers}">
+                                <tr class="totalrow">
                                     <td v-for="(header,i) in headers" :key="i" >
                                         <div v-if="header.value == 'month'">
-                                            Total
+                                            {{ $t("Total") }}
                                         </div>
-                                        <div v-if="header.value == 'diff_lastmonth'" class="d-flex justify-end">
-                                            <div v-html="localcurrency_html(listobjects_sum(total_annual,'diff_lastmonth'))"></div>
+                                        <div v-if="header.value == 'diff_lastmonth'" class="right">
+                                            <div class="right" v-html="localcurrency_html(listobjects_sum(total_annual,'diff_lastmonth'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'percentage_year'" class="d-flex justify-end">
-                                            <div v-html="percentage_html(listobjects_sum(total_annual,'diff_lastmonth')/last_year_balance)"></div>
+                                        <div v-if="header.value == 'percentage_year'" class="right">
+                                            <div class="right" v-html="percentage_html(listobjects_sum(total_annual,'diff_lastmonth')/last_year_balance)"></div>
                                         </div>
                                     </td>
                                 </tr>
@@ -59,47 +58,47 @@
                 </v-window-item>
                 <v-window-item key="1">     <!-- INCOME REPORT -->
                     <v-card outlined>            
-                        <EasyDataTable dense :headers="total_annual_incomes_headers" :items="total_annual_incomes"  class="elevation-1 cursorpointer" disable-pagination  hide-default-footer :loading="loading_annual_incomes" @click-row="incomeDetails">      
-                            <template v-slot:[`item.expenses`]="{ item }">
-                                <div v-html="localcurrency_html(item.expenses)"></div>
+                        <EasyDataTable dense :headers="total_annual_incomes_headers" :items="total_annual_incomes"  class="elevation-1 cursorpointer" disable-pagination  hide-default-footer :loading="loading_annual_incomes" @click-row="incomeDetails">     
+                            <template #item-expenses="item">
+                                <div class="right" v-html="localcurrency_html(item.expenses)"></div>
                             </template>      
-                            <template v-slot:[`item.incomes`]="{ item }">
-                                <div v-html="localcurrency_html(item.incomes)"></div>
+                            <template #item-incomes="item">
+                                <div class="right" v-html="localcurrency_html(item.incomes)"></div>
                             </template>   
-                            <template v-slot:[`item.total`]="{ item }">
-                                <div v-html="localcurrency_html(item.total)"></div>
+                            <template #item-total="item">
+                                <div class="right" v-html="localcurrency_html(item.total)"></div>
                             </template>   
-                            <template v-slot:[`item.gains`]="{ item }">
-                                <div v-html="localcurrency_html(item.gains)"></div>
+                            <template #item-gains="item">
+                                <div class="right" v-html="localcurrency_html(item.gains)"></div>
                             </template>
-                            <template v-slot:[`item.fast_operations`]="{ item }">
-                                <div v-html="localcurrency_html(item.fast_operations)"></div>
+                            <template #item-fast_operations="item">
+                                <div class="right" v-html="localcurrency_html(item.fast_operations)"></div>
                             </template>
-                            <template v-slot:[`item.dividends`]="{ item }">
-                                <div v-html="localcurrency_html(item.dividends)"></div>
+                            <template #item-dividends="item">
+                                <div class="right" v-html="localcurrency_html(item.dividends)"></div>
                             </template>
-                            <template v-slot:[`body.append`]="{headers}">
+                             <template #body-append="{headers}">
                                 <tr class="totalrow" ref="lr">
                                     <td v-for="(header,i) in headers" :key="i" >
                                         <div v-if="header.value == 'month'">
                                             Total
                                         </div>
-                                        <div v-if="header.value == 'expenses'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'expenses'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(total_annual_incomes,'expenses'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'incomes'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'incomes'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(total_annual_incomes,'incomes'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'gains'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'gains'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(total_annual_incomes,'gains'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'fast_operations'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'fast_operations'" class="right">
                                             <div  v-html="localcurrency_html(listobjects_sum(total_annual_incomes,'fast_operations'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'dividends'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'dividends'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(total_annual_incomes,'dividends'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'total'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'total'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(total_annual_incomes,'total'))"></div>
                                         </div>
                                     </td>
@@ -112,34 +111,34 @@
                 <v-window-item key="2">     
                     <v-card outlined>
                         <EasyDataTable dense :headers="total_annual_gainsbyproductstypes_headers" :items="total_annual_gainsbyproductstypes"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_annual_gainsbyproductstypes">      
-                            <template v-slot:[`item.dividends_gross`]="{ item }">
-                                <div v-html="localcurrency_html(item.dividends_gross)"></div>
+                            <template #item-dividends_gross="item">
+                                <div class="right" v-html="localcurrency_html(item.dividends_gross)"></div>
                             </template>      
-                            <template v-slot:[`item.dividends_net`]="{ item }">
-                                <div v-html="localcurrency_html(item.dividends_net)"></div>
+                            <template #item-dividends_net="item">
+                                <div class="right" v-html="localcurrency_html(item.dividends_net)"></div>
                             </template>   
-                            <template v-slot:[`item.gains_gross`]="{ item }">
-                                <div v-html="localcurrency_html(item.gains_gross)"></div>
+                            <template #item-gains_gross="item">
+                                <div class="right" v-html="localcurrency_html(item.gains_gross)"></div>
                             </template>   
-                            <template v-slot:[`item.gains_net`]="{ item }">
-                                <div v-html="localcurrency_html(item.gains_net)"></div>
+                            <template #item-gains_net="item">
+                                <div class="right" v-html="localcurrency_html(item.gains_net)"></div>
                             </template>    
-                            <template v-slot:[`body.append`]="{headers}">
+                             <template #body-append="{headers}">
                                 <tr class="totalrow" ref="lr">
                                     <td v-for="(header,i) in headers" :key="i" >
                                         <div v-if="header.value == 'name'">
                                             Total
                                         </div>
-                                        <div v-if="header.value == 'dividends_gross'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'dividends_gross'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(total_annual_gainsbyproductstypes,'dividends_gross'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'dividends_net'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'dividends_net'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(total_annual_gainsbyproductstypes,'dividends_net'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'gains_gross'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'gains_gross'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(total_annual_gainsbyproductstypes,'gains_gross'))"></div>
                                         </div>
-                                        <div v-if="header.value == 'gains_net'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'gains_net'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(total_annual_gainsbyproductstypes,'gains_net'))"></div>
                                         </div>
                                     </td>
@@ -155,28 +154,28 @@
                     <v-card  outlined width="100%">
     
                         <EasyDataTable dense :headers="total_target_headers" :items="total_target"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_target">      
-                            <template v-slot:[`item.month_target`]="{ item }">
-                                <div v-html="localcurrency_string(item.month_target)"></div>
+                            <template #item-month_target="item">
+                                <div class="right" v-html="localcurrency_string(item.month_target)"></div>
                             </template>      
-                            <template v-slot:[`item.month_gains`]="{ item }">
-                                <div v-html="localcurrency_string(item.month_gains)" :class="item.color_month_gains"></div>
+                            <template #item-month_gains="item">
+                                <div class="right" v-html="localcurrency_string(item.month_gains)" :class="item.color_month_gains"></div>
                             </template>   
-                            <template v-slot:[`item.cumulative_target`]="{ item }">
-                                <div v-html="localcurrency_string(item.cumulative_target)"></div>
+                            <template #item-cumulative_target="item">
+                                <div class="right" v-html="localcurrency_string(item.cumulative_target)"></div>
                             </template>   
-                            <template v-slot:[`item.cumulative_gains`]="{ item }">
-                                <div v-html="localcurrency_string(item.cumulative_gains)" :class="item.color_month_cumulative_gains"></div>
+                            <template #item-cumulative_gains="item">
+                                <div class="right" v-html="localcurrency_string(item.cumulative_gains)" :class="item.color_month_cumulative_gains"></div>
                             </template>
-                            <template v-slot:[`body.append`]="{headers}">
+                             <template #body-append="{headers}">
                                 <tr class="totalrow" ref="lr">
                                     <td v-for="(header,i) in headers" :key="i" >
                                         <div v-if="header.value == 'month'">
                                             Total
                                         </div>
-                                        <div v-if="header.value == 'month_target'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'month_target'" class="right">
                                             <div v-html="localcurrency_string(listobjects_sum(total_target,'month_target'))" ></div>
                                         </div>
-                                        <div v-if="header.value == 'month_gains'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'month_gains'" class="right">
                                             <div v-html="localcurrency_string(listobjects_sum(total_target,'month_gains'))" :class="(month_target*12<listobjects_sum(total_target,'month_gains')) ? 'boldgreen' : 'boldred'"></div>
                                         </div>
                                     </td>
@@ -190,28 +189,28 @@
                 <v-window-item key="4"><!-- INVEST OR WORK -->
                     <v-card  outlined width="100%">
                         <EasyDataTable dense :headers="total_invest_or_work_headers" :items="total_invest_or_work"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_invest_or_work">      
-                            <template v-slot:[`item.gains`]="{ item }">
-                                <div v-html="localcurrency_html(item.gains)"></div>
+                            <template #item-gains="item">
+                                <div class="right" v-html="localcurrency_html(item.gains)"></div>
                             </template>      
-                            <template v-slot:[`item.expenses`]="{ item }">
-                                <div v-html="localcurrency_html(item.expenses)"></div>
+                            <template #item-expenses="item">
+                                <div class="right" v-html="localcurrency_html(item.expenses)"></div>
                             </template>   
-                            <template v-slot:[`item.diff`]="{ item }">
-                                <div v-html="localcurrency_string(item.diff)" :class="item.color_diff"></div>
+                            <template #item-diff="item">
+                                <div v-html="localcurrency_string(item.diff)" :class="item.color_diff + ' right'"></div>
                             </template>
-                            <template v-slot:[`body.append`]="{headers}">
+                             <template #body-append="{headers}">
                                 <tr class="totalrow" ref="lr">
                                     <td v-for="(header,i) in headers" :key="i" >
                                         <div v-if="header.value == 'month'">
                                             Total
                                         </div>
-                                        <div v-if="header.value == 'gains'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'gains'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(total_invest_or_work,'gains'))" ></div>
                                         </div>
-                                        <div v-if="header.value == 'expenses'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'expenses'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(total_invest_or_work,'expenses'))" ></div>
                                         </div>
-                                        <div v-if="header.value == 'diff'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'diff'" class="right">
                                             <div v-html="localcurrency_string(listobjects_sum(total_invest_or_work,'diff'))" :class="(listobjects_sum(total_invest_or_work,'diff')>0) ? 'boldgreen' : 'boldred'"></div>
                                         </div>
                                     </td>
@@ -225,28 +224,28 @@
                 <v-window-item key="5"><!-- MAKE ENDS MEET -->
                     <v-card  outlined width="100%">
                         <EasyDataTable dense :headers="total_make_ends_meet_headers" :items="total_make_ends_meet"  class="elevation-1" disable-pagination  hide-default-footer :loading="loading_make_ends_meet">      
-                            <template v-slot:[`item.incomes`]="{ item }">
-                                <div v-html="localcurrency_html(item.incomes)"></div>
+                            <template #item-incomes="item">
+                                <div class="right" v-html="localcurrency_html(item.incomes)"></div>
                             </template>      
-                            <template v-slot:[`item.expenses`]="{ item }">
-                                <div v-html="localcurrency_html(item.expenses)"></div>
+                            <template #item-expenses="item">
+                                <div class="right" v-html="localcurrency_html(item.expenses)"></div>
                             </template>   
-                            <template v-slot:[`item.diff`]="{ item }">
-                                <div v-html="localcurrency_string(item.diff)" :class="item.color_diff"></div>
+                            <template #item-diff="item">
+                                <div class="right" v-html="localcurrency_string(item.diff)" :class="item.color_diff"></div>
                             </template>
-                            <template v-slot:[`body.append`]="{headers}">
+                             <template #body-append="{headers}">
                                 <tr class="totalrow" ref="lr">
                                     <td v-for="(header,i) in headers" :key="i" >
                                         <div v-if="header.value == 'month'">
                                             Total
                                         </div>
-                                        <div v-if="header.value == 'incomes'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'incomes'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(total_make_ends_meet,'incomes'))" ></div>
                                         </div>
-                                        <div v-if="header.value == 'expenses'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'expenses'" class="right">
                                             <div v-html="localcurrency_html(listobjects_sum(total_make_ends_meet,'expenses'))" ></div>
                                         </div>
-                                        <div v-if="header.value == 'diff'" class="d-flex justify-end">
+                                        <div v-if="header.value == 'diff'" class="right">
                                             <div v-html="localcurrency_string(listobjects_sum(total_make_ends_meet,'diff'))" :class="(listobjects_sum(total_make_ends_meet,'diff')>0) ? 'boldgreen' : 'boldred'"></div>
                                         </div>
                                     </td>
@@ -447,7 +446,7 @@
                 new_profile.annual_gains_target=this.target
                 axios.put(`${this.store().apiroot}/profile/`, new_profile, this.myheaders())
                 .then(() => {
-                    this.$store.dispatch("getProfile").then(() =>{
+                    this.store().updateProfile().then(() =>{
                         this.total_target=[]
                         this.month_target=this.last_year_balance*(this.target/100)/12
                         var cumulative_target=0

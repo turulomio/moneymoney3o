@@ -179,7 +179,6 @@
                 this.dialog=true
             },
             viewItem (item) {
-                console.log(item)
                 this.account=item
                 this.key=this.key+1
                 this.dialog_view=true

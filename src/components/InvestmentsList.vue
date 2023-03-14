@@ -270,7 +270,6 @@
                 });
             },
             viewItem (item) {
-                console.log(item)
                 this.investment=item
                 this.key=this.key+1
                 this.dialog_view=true

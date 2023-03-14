@@ -139,8 +139,6 @@
                 this.update_table()
             },
             editItem (item) {
-                console.log("EDIR")
-                console.log(item)
                 this.order=item
                 this.order_mode="U"
                 this.key=this.key+1

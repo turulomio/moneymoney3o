@@ -106,7 +106,6 @@
                 this.editing=false
             }
             this.new_account=Object.assign({},this.account)
-            console.log(this.new_account)
         }
     }
 </script>

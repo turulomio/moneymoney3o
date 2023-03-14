@@ -205,11 +205,7 @@
             },
         },
         created(){
-            console.log("CREATED")
-            //this.new_order es un proxy
             this.new_order=Object.assign({},this.order)
-            console.log(this.new_order)
-            console.log(this.new_order.date)
         }
     }
 </script>

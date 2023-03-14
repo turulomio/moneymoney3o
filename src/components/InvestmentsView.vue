@@ -548,7 +548,6 @@
             }
         },
         created(){
-            console.log(this.investment_id)
             var inv=this.getObjectById("investments",this.investment_id)
             this.update_all()
         }

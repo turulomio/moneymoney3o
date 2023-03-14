@@ -1,15 +1,15 @@
 <template>
     <div>
-        <EasyDataTable  ref="table_ao" :show-select="showselected" v-model="selected" dense :headers="table_headers()" :items="items" class="elevation-1" disable-pagination  hide-default-footer sort-by="datetime" fixed-header :single-select="false" :height="$attrs.height">
+        <EasyDataTable  ref="table_ao" :show-select="showselected" v-model="selected" dense :headers="table_headers()" :items="items" class="elevation-1" items-per-page="10000" hide-footer sort-by="datetime" fixed-header :single-select="false" :height="$attrs.height">
 
             <template #item-datetime="item">
                 <div>{{ localtime(item.datetime)}}</div>
             </template>          
             <template #item-amount="item">
-                <div v-html="currency_html(item.amount,item.currency)"></div>
+                <div class="right" v-html="currency_html(item.amount,item.currency)"></div>
             </template>   
             <template #item-balance="item">
-                <div v-html="currency_html(item.balance, item.currency)"></div>
+                <div class="right" v-html="currency_html(item.balance, item.currency)"></div>
             </template>   
             <template #item-accounts="item">
                 <div v-html="getObjectPropertyByUrl('accounts', item.accounts, 'fullname')"></div>
@@ -25,9 +25,9 @@
                 <tr class="totalrow">
                         <td>{{ $t("Total ({0} registers)").format(items.length)}}</td>
                         <td></td>
-                        <td></td>
-                        <td><div v-if="all_items_has_same_currency" class="text-right" v-html="currency_html(listobjects_sum(items,'amount'),total_currency)"></div></td>
+                        <td><div v-if="all_items_has_same_currency" class="right" v-html="currency_html(listobjects_sum(items,'amount'),total_currency)"></div></td>
                         <td><div v-if="!all_items_has_same_currency" >{{ $t("Can't sum amounts due to they have different currencies") }}</div></td>
+                        <td></td>
                         <td></td>
                 </tr>
             </template>

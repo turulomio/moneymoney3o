@@ -6,7 +6,7 @@
         </h1>
         <v-card outlined class="ma-4 pa-4">
             <v-checkbox v-model="showActive" :label="chkLabel" />
-            <EasyDataTable :headers="headers" :items="data" class="elevation-1 cursorpointer" :loading="loading_table" :sort-by="[{key:'localname', order: 'asc'}]" @click-row="viewItem" >
+            <EasyDataTable :headers="headers" hide-footer header-text-direction="center" :items="data" class="elevation-1 cursorpointer" :loading="loading_table" :sort-by="[{key:'localname', order: 'asc'}]" @click-row="viewItem" >
                 <template #item-localname="item">
                     {{ item.localname }}
                 </template>
@@ -14,13 +14,13 @@
                     <v-icon small v-if="item.active" >mdi-check-outline</v-icon>
                 </template>  
                 <template #item-balance_accounts="item">
-                    <div v-html="localcurrency_html(item.balance_accounts )"></div>
+                    <div class="right" v-html="localcurrency_html(item.balance_accounts )"></div>
                 </template>  
                 <template #item-balance_investments="item">
-                    <div v-html="localcurrency_html(item.balance_investments )"></div>
+                    <div class="right" v-html="localcurrency_html(item.balance_investments )"></div>
                 </template>  
                 <template #item-balance_total="item">
-                    <div v-html="localcurrency_html(item.balance_total )"></div>
+                    <div class="right" v-html="localcurrency_html(item.balance_total )"></div>
                 </template>  
                 <template #item-actions="item">
                     <v-icon small class="mr-2" @click.stop="editItem(item)">mdi-pencil</v-icon>
@@ -28,11 +28,11 @@
                 </template>                            
                 <template #body-append>
                     <tr class="totalrow pa-6">
-                        <td>{{ $t("Total ([0] registers)", [data.length,]) }}</td>
+                        <td>{{ $t("Total ([0] registers)").format(data.length) }}</td>
                         <td></td>
-                        <td v-html="localcurrency_html(listobjects_sum(data,'balance_accounts'))"></td>
-                        <td v-html="localcurrency_html(listobjects_sum(data,'balance_investments'))"></td>
-                        <td v-html="localcurrency_html(listobjects_sum(data,'balance_total'))"></td>
+                        <td class="right" v-html="localcurrency_html(listobjects_sum(data,'balance_accounts'))"></td>
+                        <td class="right" v-html="localcurrency_html(listobjects_sum(data,'balance_investments'))"></td>
+                        <td class="right" v-html="localcurrency_html(listobjects_sum(data,'balance_total'))"></td>
                         <td></td>
                     </tr>
                 </template>
@@ -73,7 +73,7 @@
                     { text: this.$t('Accounts balance'), value: 'balance_accounts', align:'end',  width: "12%"},
                     { text: this.$t('Investments balance'), value: 'balance_investments', align:'end',  width: "12%"},
                     { text: this.$t('Total balance'), value: 'balance_total', align:'end',  width: "12%"},
-                    { text: this.$t('Actions'), value: 'actions', sortable: false , width: "7%"},
+                    { text: this.$t('Actions'), value: 'actions', sortable: false , width: "5%"},
                 ],
                 data:[],
                 menuinline_items: [

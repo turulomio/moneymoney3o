@@ -20,6 +20,7 @@
                 <template #item-percentage_from_price="{ percentage_from_price }">
                     <div class="right" v-html="percentage_html(percentage_from_price )"></div>
                 </template>  
+                <template #item-shares="item"><div class="right">{{ item.shares }}</div></template>
                 <template #item-executed="{ executed }">
                     <div v-html="localtime(executed )"></div>
                 </template>  
@@ -30,7 +31,7 @@
                 </template>          
                 <template #body-append>
                     <tr class="totalrow pa-6">
-                        <td>{{ $t("Total ([0] registers)", [data.length,]) }}</td>
+                        <td>{{ $t("Total ([0] registers)").format(data.length) }}</td>
                         <td></td>
                         <td></td>
                         <td></td>

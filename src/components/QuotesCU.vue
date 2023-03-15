@@ -11,7 +11,7 @@
             </v-form>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="accept()" :disabled="!form_valid">{{ button() }}</v-btn>
+                <v-btn color="primary" @click="accept()">{{ button() }}</v-btn>
             </v-card-actions>
         </v-card>
     </div>
@@ -100,6 +100,7 @@
                 if (this.mode=="D") return this.$t("Delete")
             },
             accept(){
+                if (this.$refs.form.validate()==false) return
                 if (this.mode=="U"){
                     axios.put(this.new_quote.url, this.new_quote,  this.myheaders())
                     .then(() => {

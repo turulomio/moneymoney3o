@@ -11,7 +11,7 @@
                 <v-badge inline v-show="update_errors>0" color="error" class="ml-2" :content="$t('[0] errors').format(update_errors)"/>
             </v-btn>
         </v-row>
-        <EasyDataTable dense fixed-footer items-per-page="100" hide-footer :headers="investments_headers" :search="search" :items="investments_items" :sort-by="table_sort_by()" :sort-type="table_sort_type()" class="elevation-1 ma-4 cursorpointer" hide-default-footer disable-pagination :loading="loading_investments" fixed-header :key="key" @click-row="viewItem">
+        <EasyDataTable dense items-per-page="1000" hide-footer :headers="investments_headers" :search="search" :items="investments_items" :sort-by="table_sort_by()" :sort-type="table_sort_type()" class="elevation-1 ma-4 cursorpointer" :loading="loading_investments" fixed-header :key="key" @click-row="viewItem">
             <template #item-fullname="item">
                 <v-icon :class="'mr-2 fi fib fi-'+item.flag" small :title="this.getCountryNameByCode(item.flag)"></v-icon>{{item.fullname}}
             </template>                  
@@ -60,7 +60,7 @@
                 <tr class="totalrow" >
                     <td v-for="(header,i) in headers" :key="i">
                         <div v-if="header.value == 'fullname'">
-                            {{ $t("Total ([0]):").format(investments_items.length)}}
+                            {{ $t("Total ([0] registers)").format(investments_items.length)}}
                         </div>
                         <div v-if="header.value == 'daily_difference'" class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'daily_difference'))">
                         </div>

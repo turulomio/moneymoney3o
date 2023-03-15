@@ -19,8 +19,8 @@
                 <template #item-last_datetime="item">
                     <div v-html="(item.last_datetime) ? localtime(item.last_datetime) : $t('Update product quotes')" :class="(item.last_datetime) ? '' : 'boldred'"></div>
                 </template>  
-                <template class="right" #item-last="item">
-                    <div v-html="currency_html(item.last,item.currency )"></div>
+                <template #item-last="item">
+                    <div class="right" v-html="currency_html(item.last,item.currency )"></div>
                 </template>   
                 <template #item-balance_user="item">
                     <div class="right" v-html="localcurrency_html(item.balance_user )"></div>

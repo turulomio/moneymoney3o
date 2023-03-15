@@ -7,10 +7,18 @@ export function store(){
 }
 // Function to use "{0} {1}".format(a, b) style
 String.prototype.format = function() {
+    console.log(arguments)
     var formatted = this;
     for (var i = 0; i < arguments.length; i++) {
-        var regexp = new RegExp('\\{'+i+'\\}', 'gi');
-        formatted = formatted.replace(regexp, arguments[i]);
+        // var regexp = new RegExp('\\{'+i+'\\}', 'gi');
+        // console.log(regexp)
+        console.log(formatted)
+        var search=`{${i}}`
+        var replace=`${arguments[i]}`
+        console.log(search)
+        console.log(replace)
+        formatted = formatted.replace(search, replace );
+        console.log(formatted)
     }
     return formatted;
 };

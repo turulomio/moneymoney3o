@@ -189,7 +189,7 @@
             },
             displayvalues(){
                 var r= []       
-                this.leverage_message= this.$t("{0} (Real: {1})").format(
+                this.leverage_message= this.$t("[0] (Real: [1])").format(
                     this.getObjectPropertyByUrl("leverages",this.product.leverages,"multiplier"),
                     this.product.real_leveraged_multiplier
                     )
@@ -277,7 +277,7 @@
             if (this.investments.length>0){
                 var investment_0=this.getObjectByUrl("investments", this.investments[0])
                 this.product=this.getObjectByUrl("products", investment_0.products, "name")
-                this.merged_name=this.$t("Merged investments of {0}").format(this.product.fullname)
+                this.merged_name=this.$t("Merged investments of [0]").format(this.product.fullname)
             }
             this.update_all()
         }

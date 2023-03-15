@@ -66,7 +66,7 @@
                     response.data.forEach(o=> {
                         this.payments.push({
                             id: o.accountsoperations_id,
-                            name:this.$t("{0} were paid {1} ({2} operations)").format(this.localtime(o.datetime), this.currency_string(o.amount, this.account.currency), o.count),
+                            name:this.$t("[0] were paid [1] ([2] operations)").format(this.localtime(o.datetime), this.currency_string(o.amount, this.account.currency), o.count),
                         })
                     });
                     this.loading=false

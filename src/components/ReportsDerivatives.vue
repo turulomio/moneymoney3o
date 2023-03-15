@@ -27,7 +27,7 @@
                             <template v-slot:[`item.total`]="{ item }"><div v-html="localcurrency_html(item.total )"></div></template>  
                         </EasyDataTable>   
                     </v-card>
-                    <p class="boldcenter my-4" v-html="$t('Total derivatives: {0}').format(localcurrency_html(this.listobjects_sum(derivatives,'total')))"></p>
+                    <p class="boldcenter my-4" v-html="$t('Total derivatives: [0]').format(localcurrency_html(this.listobjects_sum(derivatives,'total')))"></p>
                 </v-window-item>
             </v-window>     
         </div>

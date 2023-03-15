@@ -30,7 +30,7 @@
                 </template>          
                 <template #body-append>
                     <tr class="totalrow pa-6">
-                        <td>{{ $t("Total ({0} registers)", [data.length,]) }}</td>
+                        <td>{{ $t("Total ([0] registers)", [data.length,]) }}</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -45,7 +45,7 @@
         </v-card>
         <div class="d-flex justify-center mb-4">
                 <v-btn color="primary" class="mr-4" @click="products_autoupdate" :loading="products_updating">{{ $t("Products autoupdate")}}
-                    <v-badge inline v-show="update_errors>0" color="error" class="ml-2" :content="$t('{0} errors').format(update_errors)"/>
+                    <v-badge inline v-show="update_errors>0" color="error" class="ml-2" :content="$t('[0] errors').format(update_errors)"/>
                 </v-btn>
         </div>
         <!-- Order CU dialog -->

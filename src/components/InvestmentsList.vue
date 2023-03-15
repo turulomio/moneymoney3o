@@ -3,83 +3,82 @@
         <h1>{{ $t('Investments list') }}
             <MyMenuInline :items="menuinline_items" :context="this"></MyMenuInline>
         </h1>
-            <v-row class="pa-4">
-                <v-checkbox class="ml-6 mr-10" v-model="showActive" :label="setCheckboxLabel()" />
-                <v-text-field class="ml-10 mr-6" v-model="search" append-icon="mdi-magnify" :label="$t('Filter')" single-line hide-details :placeholder="$t('Add a string to filter table')"></v-text-field>
+        <v-row class="px-4 mt-2">
+            <v-checkbox dense class="ml-6 mr-2" v-model="showActive" :label="setCheckboxLabel()" />
+            <v-text-field dense class=" mr-6" v-model="search" append-icon="mdi-magnify" :label="$t('Filter')" :placeholder="$t('Add a string to filter table')" />
 
-                <v-btn color="primary" class="mr-4" @click="products_autoupdate()" :loading="products_updating">{{ $t("Products autoupdate")}}
-                    <v-badge inline v-show="update_errors>0" color="error" class="ml-2" :content="$t('{0} errors').format(update_errors)"/>
-                </v-btn>
-                
-            </v-row>
-            <EasyDataTable dense fixed-footer items-per-page="100" :headers="investments_headers" :search="search" :items="investments_items" :sort-by="table_sort_by()" :sort-type="table_sort_type()" class="elevation-1 ma-4 cursorpointer" hide-default-footer disable-pagination :loading="loading_investments" fixed-header :key="key" @click-row="viewItem">
-                <template #item-fullname="item">
-                    <v-icon :class="'mr-2 fi fib fi-'+item.flag" small :title="this.getCountryNameByCode(item.flag)"></v-icon>{{item.fullname}}
-                </template>                  
-                <template #item-last_datetime="item">
-                    <div v-html="(item.last_datetime) ? localtime(item.last_datetime) : $t('Update product quotes')" :class="(item.last_datetime) ? '' : 'boldred'"></div>
-                </template>  
-                <template #item-last="item">
-                    <div class="right" v-html="currency_html(item.last,item.currency )"></div>
-                </template>   
-                <template #item-balance_user="item">
-                    <div class="right" v-html="localcurrency_html(item.balance_user )"></div>
-                </template>     
-                <template #item-invested_user="item">
-                    <v-row class="text-nowrap" justify="end">
-                        <div class="right" v-html="localcurrency_html(item.invested_user )"></div>
-                        <v-icon small class="ml-1" v-if="item.shares>=0" color="blue" :title="$t('Long position')">mdi-arrow-up-circle-outline</v-icon>
-                        <v-icon small class="ml-1" v-if="item.shares<0" color="orange" :title="$t('Short position')">mdi-arrow-down-circle-outline</v-icon>
-                    </v-row>
-                </template>    
-                <template #item-gains_user="item">
-                    <div class="right" v-html="localcurrency_html(item.gains_user )"></div>
-                </template>     
-                <template #item-daily_difference="item">
-                    <div class="right" v-html="localcurrency_html(item.daily_difference )"></div>
-                </template>   
-                <template #item-daily_percentage="item">
-                    <div class="right" v-html="percentage_html(item.daily_percentage )"></div>
-                </template>  
-                <template #item-percentage_invested="item">
-                    <div class="right" v-html="percentage_html(item.percentage_invested )"></div>
-                </template>  
-                <template #item-percentage_selling_point="item">
-                    <v-tooltip left :text="tooltip_selling_percentage(item)">
-                        <template v-slot:activator="{ props }">
-                            <div  class="right" v-bind="props" :class="item.percentage_selling_point<0.05 ? 'boldgreen' : ''" v-html="percentage_html(item.percentage_selling_point)"></div>
-                        </template>
-                    </v-tooltip>   
-                </template>              
-                <template #item-actions="item">
-                    <v-icon small class="ml-1" @click.stop="addQuote(item)">mdi-plus</v-icon>
-                    <v-icon small class="ml-1" @click.stop="editItem(item)">mdi-pencil</v-icon>
-                    <v-icon small class="ml-1" @click.stop="deleteItem(item)" v-if="item.is_deletable">mdi-delete</v-icon>
-                    <v-icon small class="ml-1" v-if="(new Date().setHours(0,0,0,0)>new Date(item.selling_expiration).setHours(0,0,0,0)) && item.selling_expiration!=null" @click="changeSellingPrice(item)" color="#9933ff" style="font-weight:bold">mdi-alarm</v-icon>     
-                </template>         
-                <template #body-append="{headers}">
-                    <tr class="totalrow" >
-                        <td v-for="(header,i) in headers" :key="i">
-                            <div v-if="header.value == 'fullname'">
-                                {{ $t("Total ({0}):").format(investments_items.length)}}
-                            </div>
-                            <div v-if="header.value == 'daily_difference'" class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'daily_difference'))">
-                            </div>
-                            <div v-if="header.value == 'daily_percentage'" class="right" v-html="percentage_html(listobjects_sum(investments_items,'daily_difference')/listobjects_sum(investments_items,'balance_user'))">
-                            </div>
-                            <div v-if="header.value == 'balance_user'" class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'balance_user'))">
-                            </div>
-                            <div v-if="header.value == 'invested_user'" class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'invested_user'))">
-                            </div>
-                            <div v-if="header.value == 'gains_user'" class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'gains_user'))">
-                            </div>
-                            <div v-if="header.value == 'percentage_invested'" class="right" v-html="percentage_html(listobjects_sum(investments_items,'gains_user')/listobjects_sum(investments_items,'invested_user'))">
-                            </div>
-                        </td>
-                    </tr>
-                </template>
-            </EasyDataTable>
-            <div v-html="foot" class="pa-4"></div>
+            <v-btn color="primary" class="mr-4" @click="products_autoupdate()" :loading="products_updating">{{ $t("Products autoupdate")}}
+                <v-badge inline v-show="update_errors>0" color="error" class="ml-2" :content="$t('[0] errors').format(update_errors)"/>
+            </v-btn>
+        </v-row>
+        <EasyDataTable dense fixed-footer items-per-page="100" hide-footer :headers="investments_headers" :search="search" :items="investments_items" :sort-by="table_sort_by()" :sort-type="table_sort_type()" class="elevation-1 ma-4 cursorpointer" hide-default-footer disable-pagination :loading="loading_investments" fixed-header :key="key" @click-row="viewItem">
+            <template #item-fullname="item">
+                <v-icon :class="'mr-2 fi fib fi-'+item.flag" small :title="this.getCountryNameByCode(item.flag)"></v-icon>{{item.fullname}}
+            </template>                  
+            <template #item-last_datetime="item">
+                <div v-html="(item.last_datetime) ? localtime(item.last_datetime) : $t('Update product quotes')" :class="(item.last_datetime) ? '' : 'boldred'"></div>
+            </template>  
+            <template #item-last="item">
+                <div class="right" v-html="currency_html(item.last,item.currency )"></div>
+            </template>   
+            <template #item-balance_user="item">
+                <div class="right" v-html="localcurrency_html(item.balance_user )"></div>
+            </template>     
+            <template #item-invested_user="item">
+                <v-row class="text-nowrap" justify="end">
+                    <div class="right" v-html="localcurrency_html(item.invested_user )"></div>
+                    <v-icon small class="ml-1" v-if="item.shares>=0" color="blue" :title="$t('Long position')">mdi-arrow-up-circle-outline</v-icon>
+                    <v-icon small class="ml-1" v-if="item.shares<0" color="orange" :title="$t('Short position')">mdi-arrow-down-circle-outline</v-icon>
+                </v-row>
+            </template>    
+            <template #item-gains_user="item">
+                <div class="right" v-html="localcurrency_html(item.gains_user )"></div>
+            </template>     
+            <template #item-daily_difference="item">
+                <div class="right" v-html="localcurrency_html(item.daily_difference )"></div>
+            </template>   
+            <template #item-daily_percentage="item">
+                <div class="right" v-html="percentage_html(item.daily_percentage )"></div>
+            </template>  
+            <template #item-percentage_invested="item">
+                <div class="right" v-html="percentage_html(item.percentage_invested )"></div>
+            </template>  
+            <template #item-percentage_selling_point="item">
+                <v-tooltip left :text="tooltip_selling_percentage(item)">
+                    <template v-slot:activator="{ props }">
+                        <div  class="right" v-bind="props" :class="item.percentage_selling_point<0.05 ? 'boldgreen' : ''" v-html="percentage_html(item.percentage_selling_point)"></div>
+                    </template>
+                </v-tooltip>   
+            </template>              
+            <template #item-actions="item">
+                <v-icon small class="ml-1" @click.stop="addQuote(item)">mdi-plus</v-icon>
+                <v-icon small class="ml-1" @click.stop="editItem(item)">mdi-pencil</v-icon>
+                <v-icon small class="ml-1" @click.stop="deleteItem(item)" v-if="item.is_deletable">mdi-delete</v-icon>
+                <v-icon small class="ml-1" v-if="(new Date().setHours(0,0,0,0)>new Date(item.selling_expiration).setHours(0,0,0,0)) && item.selling_expiration!=null" @click="changeSellingPrice(item)" color="#9933ff" style="font-weight:bold">mdi-alarm</v-icon>     
+            </template>         
+            <template #body-append="{headers}">
+                <tr class="totalrow" >
+                    <td v-for="(header,i) in headers" :key="i">
+                        <div v-if="header.value == 'fullname'">
+                            {{ $t("Total ([0]):").format(investments_items.length)}}
+                        </div>
+                        <div v-if="header.value == 'daily_difference'" class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'daily_difference'))">
+                        </div>
+                        <div v-if="header.value == 'daily_percentage'" class="right" v-html="percentage_html(listobjects_sum(investments_items,'daily_difference')/listobjects_sum(investments_items,'balance_user'))">
+                        </div>
+                        <div v-if="header.value == 'balance_user'" class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'balance_user'))">
+                        </div>
+                        <div v-if="header.value == 'invested_user'" class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'invested_user'))">
+                        </div>
+                        <div v-if="header.value == 'gains_user'" class="right" v-html="localcurrency_html(listobjects_sum(investments_items,'gains_user'))">
+                        </div>
+                        <div v-if="header.value == 'percentage_invested'" class="right" v-html="percentage_html(listobjects_sum(investments_items,'gains_user')/listobjects_sum(investments_items,'invested_user'))">
+                        </div>
+                    </td>
+                </tr>
+            </template>
+        </EasyDataTable>
+        <div v-html="foot" class="pa-4"></div>
         <!-- DIALOG CU INVESTMERNT -->
         <v-dialog v-model="dialog" max-width="550">
             <v-card class="pa-6">
@@ -235,11 +234,11 @@
                 this.update_table()
             },
             tooltip_selling_percentage(item){
-                return this.$t("Selling price: {0}.<br>Selling point gains {1}.<br>Order valid until {2}.",[
+                return this.$t("Selling price: [0]. Selling point gains [1]. Order valid until [2].").format(
                     this.currency_string(item.selling_price,item.currency),
                     this.currency_string(item.gains_at_selling_point_investment,item.currency),
                     item.selling_expiration
-                ])
+                )
             },
             setCheckboxLabel(){
                 if (this.showActive== true){
@@ -251,11 +250,11 @@
             update_foot(){
                 var positives=this.listobjects_sum(this.investments_items.filter((o) => o.gains_user >=0), "gains_user")
                 var negatives=this.listobjects_sum(this.investments_items.filter((o) => o.gains_user <0), "gains_user")
-                this.foot= "<p>" + this.$t("Positive gains - Negative gains = {0} {1} = {2}", [
+                this.foot= "<p>" + this.$t("Positive gains - Negative gains = [0] [1] = [2]").format(
                     this.localcurrency_html(positives),
                     this.localcurrency_html(negatives),
                     this.localcurrency_html(positives+negatives)
-                ]) + "</p>"
+                ) + "</p>"
             },
             update_table(){
                 this.loading_investments=true

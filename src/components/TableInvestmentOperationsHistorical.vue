@@ -72,7 +72,7 @@
                 <tr class="totalrow" v-if="items.length>0 && showtotal">
                     <td v-for="(header,i) in headers" :key="i" >
                         <div v-if="header.value == 'dt_end'">
-                            {{ $t("Total ({0} registers)").format(items.length)}}
+                            {{ $t("Total ([0] registers)").format(items.length)}}
                         </div>
                         
                         <div v-if="header.value == 'gains_gross_investment' && all_items_has_same_currency" class="right">

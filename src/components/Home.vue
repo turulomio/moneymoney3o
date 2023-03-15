@@ -33,7 +33,7 @@
                     console.log(`Local time: ${local.toISOString()}`)
                     console.log(`Server time: ${server.toISOString()}`)
                     console.log(`Difference (ms): ${diff}`)
-                    if (diff>=Math.abs(1000)) this.message=this.$t("There is a time difference between the browser and the server of {0} ms. Please contact server administrator.").format(diff)
+                    if (diff>=Math.abs(1000)) this.message=this.$t("There is a time difference between the browser and the server of [0] ms. Please contact server administrator.").format(diff)
                 }, (error) => {
                     this.parseResponseError(error)
                 });

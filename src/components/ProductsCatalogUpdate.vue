@@ -52,7 +52,7 @@
                 axios.post(`${this.store().apiroot}/products/catalog/update/`, data, this.myheaders_formdata())
                 .then((response) => {
                         this.items=response.data.logs
-                        this.message=this.$t("{0} system products have been readed from file").format(response.data.total)
+                        this.message=this.$t("[0] system products have been readed from file").format(response.data.total)
                         this.filename=[]
                         this.$store.dispatch("getProducts")
                         this.loading=false
@@ -69,7 +69,7 @@
                 axios.post(`${this.store().apiroot}/products/catalog/update/`, {auto:true,}, this.myheaders())
                 .then((response) => {
                         this.items=response.data.logs
-                        this.message=this.$t("{0} system products have been readed from MoneMoney Github repository").format(response.data.total)
+                        this.message=this.$t("[0] system products have been readed from MoneMoney Github repository").format(response.data.total)
                         this.$store.dispatch("getProducts")
                         this.loading=false
                 }, (error) => {

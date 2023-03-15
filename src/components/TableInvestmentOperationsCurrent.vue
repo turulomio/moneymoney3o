@@ -74,7 +74,7 @@
             <tr class="totalrow" v-if="items.length>0 && showtotal">
                 <td v-for="(header,i) in headers" :key="'ROW'+i" >
                     <div v-if="header.value == 'datetime'">
-                        {{ $t("Total ({0} registers)").format(items.length)}}
+                        {{ $t("Total ([0] registers)").format(items.length)}}
                     </div>
                  
                     <div v-if="header.value == 'shares' && all_items_have_same_product" class="right">

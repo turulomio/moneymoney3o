@@ -43,7 +43,7 @@
                 </template>                  
                 <template #body-append>
                     <tr class="totalrow">
-                        <td>{{$t("Total ({0} strategies)", [strategies_items.length]) }}</td>
+                        <td>{{$t("Total ([0] strategies)", [strategies_items.length]) }}</td>
                         <td></td>
                         <td></td>
                         <td class="right" v-html="localcurrency_html(listobjects_sum(strategies_items,'invested'))"></td>

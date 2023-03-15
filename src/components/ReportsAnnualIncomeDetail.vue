@@ -3,7 +3,7 @@
 -->
 <template>
     <div>
-        <h1>{{ $t("Annual incomes detail ({0}-{1})").format(this.year, this.month) }}</h1>
+        <h1>{{ $t("Annual incomes detail ([0]-[1])").format(this.year, this.month) }}</h1>
         <v-tabs class="mt-4" v-model="tab" background-color="primary" dark next-icon="mdi-arrow-right-bold-box-outline" prev-icon="mdi-arrow-left-bold-box-outline" show-arrows>
             <v-tab key="incomes">{{ $t('Incomes') }}</v-tab>
             <v-tab key="expenses">{{ $t('Expenses') }}</v-tab>
@@ -30,7 +30,7 @@
             <v-window-item key="gains">       
                 <v-card class="pa-4">
                     <TableInvestmentOperationsHistorical :items="gains" height="600" output="user" :key="key" showtotal showinvestment/>
-                    <p class="bold my-4" style="text-align:center" v-html='$t("Final gains = Gains + Fast operations gains= {0} + {1} = {2}").format(
+                    <p class="bold my-4" style="text-align:center" v-html='$t("Final gains = Gains + Fast operations gains= [0] + [1] = [2]").format(
                         localcurrency_html(listobjects_sum(gains,"gains_net_user")),
                         localcurrency_html(listobjects_sum(fast_operations,"amount")),
                         localcurrency_html(listobjects_sum(gains,"gains_net_user") +listobjects_sum(fast_operations,"amount"))

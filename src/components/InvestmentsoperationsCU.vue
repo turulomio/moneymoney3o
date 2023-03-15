@@ -134,7 +134,7 @@
                 } else {
                     net=gross-this.new_io.taxes-this.new_io.commission
                 }
-                return this.$t("Gross balance: {0}. Net balance: {1}").format(
+                return this.$t("Gross balance: [0]. Net balance: [1]").format(
                     this.currency_html(gross, this.investment.currency),
                     this.currency_html(net, this.investment.currency)
                 )

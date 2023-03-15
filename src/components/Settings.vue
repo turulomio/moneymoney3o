@@ -78,7 +78,7 @@
         },
         watch:{
             example_invested: function (){
-                this.example_amount_to_invest=this.$t("Recomended amount to invest: {0}").format(this.amount_to_invest(this.example_invested))
+                this.example_amount_to_invest=this.$t("Recomended amount to invest: [0]").format(this.amount_to_invest(this.example_invested))
             }
         },
         methods: {

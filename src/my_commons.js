@@ -5,20 +5,16 @@ import { useStore } from './store.js'
 export function store(){
     return useStore()    
 }
-// Function to use "{0} {1}".format(a, b) style
+
+
+// Due to problems with translations I made this function to help i18n
+// Function to use "[0] [1]".format(a, b) style
 String.prototype.format = function() {
-    console.log(arguments)
-    var formatted = this;
+    var formatted = this
     for (var i = 0; i < arguments.length; i++) {
-        // var regexp = new RegExp('\\{'+i+'\\}', 'gi');
-        // console.log(regexp)
-        console.log(formatted)
-        var search=`{${i}}`
+        var search=`[${i}]`
         var replace=`${arguments[i]}`
-        console.log(search)
-        console.log(replace)
         formatted = formatted.replace(search, replace );
-        console.log(formatted)
     }
     return formatted;
 };

@@ -178,26 +178,26 @@
                 var sum_cc=this.listobjects_sum(this.investedData,'custody_commissions')
                 var sum_t=this.listobjects_sum(this.investedData,'taxes')
                 var s=""
-                s=s+"<br>"+this.$t("Difference between invested amount and current invesment balance is {0}.").replace('{0}', this.localcurrency_html(diff) )
+                s=s+"<br>"+this.$t("Difference between invested amount and current invesment balance is [0].").replace('[0]', this.localcurrency_html(diff) )
                 s=s+"<br>"
-                s=s+"<br>"+this.$t("From {0} I've generated {1} gains (investment commisions are included).").replace('{0}', this.year)
-                    .replace('{1}',this.localcurrency_html(sum_gd))
+                s=s+"<br>"+this.$t("From [0] I've generated [1] gains (investment commisions are included).").replace('[0]', this.year)
+                    .replace('[1]',this.localcurrency_html(sum_gd))
                 s=s+"<br>"
-                s=s+"<br>"+this.$t("Sum of taxes and custody commissions is {0}.")
-                    .replace('{0}', this.localcurrency_html(sum_cc+sum_t))
+                s=s+"<br>"+this.$t("Sum of taxes and custody commissions is [0].")
+                    .replace('[0]', this.localcurrency_html(sum_cc+sum_t))
                 s=s+"<br>"
-                s=s+"<br>"+this.$t("So, I've generated {0} gains.")
-                    .replace('{0}', this.localcurrency_html(sum_gd+sum_cc+sum_t))
+                s=s+"<br>"+this.$t("So, I've generated [0] gains.")
+                    .replace('[0]', this.localcurrency_html(sum_gd+sum_cc+sum_t))
                 s=s+"<br>"
                 var balance=diff+sum_gd+sum_t+sum_cc
                 if (balance>0){
-                    s=s+"<br>"+this.$t("So I'm wining {0} which is {1} per year.")
-                        .replace('{0}', this.localcurrency_html(balance))
-                        .replace('{1}', this.localcurrency_html(balance/(new Date().getFullYear()-this.year+1)))
+                    s=s+"<br>"+this.$t("So I'm wining [0] which is [1] per year.")
+                        .replace('[0]', this.localcurrency_html(balance))
+                        .replace('[1]', this.localcurrency_html(balance/(new Date().getFullYear()-this.year+1)))
                 } else {
-                    s=s+"<br>"+this.$t("So I'm losing {0} which is {1} per year.")
-                        .replace('{0}', this.localcurrency_html(balance))
-                        .replace('{1}', this.localcurrency_html(balance/(new Date().getFullYear()-this.year+1)))
+                    s=s+"<br>"+this.$t("So I'm losing [0] which is [1] per year.")
+                        .replace('[0]', this.localcurrency_html(balance))
+                        .replace('[1]', this.localcurrency_html(balance/(new Date().getFullYear()-this.year+1)))
                 }
                 return s
             },

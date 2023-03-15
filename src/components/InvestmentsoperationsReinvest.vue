@@ -323,7 +323,7 @@
                 }
 
                 if (Math.abs(this.newshares)>=shares_before && this.re_or_di==2){
-                    alert(this.$t("You're divesting the whole investment shares ({0})").format(Math.abs(this.newshares)))
+                    alert(this.$t("You're divesting the whole investment shares ([0])").format(Math.abs(this.newshares)))
                     return
                 }
                 this.viewoption=2

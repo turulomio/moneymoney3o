@@ -23,7 +23,7 @@
             </template>
             <template #body-append v-if="showtotal && items.length>0">
                 <tr class="totalrow">
-                        <td>{{ $t("Total ({0} registers)").format(items.length)}}</td>
+                        <td>{{ $t("Total ([0] registers)").format(items.length)}}</td>
                         <td></td>
                         <td><div v-if="all_items_has_same_currency" class="right" v-html="currency_html(listobjects_sum(items,'amount'),total_currency)"></div></td>
                         <td><div v-if="!all_items_has_same_currency" >{{ $t("Can't sum amounts due to they have different currencies") }}</div></td>

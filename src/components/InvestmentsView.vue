@@ -185,7 +185,7 @@
             },
             leverage_message (){
                 if (!this.plio_id) return ""
-                return this.$t("{0} (Real: {1})").format(
+                return this.$t("[0] (Real: [1])").format(
                         this.plio_id.data.multiplier,
                         this.plio_id.data.real_leverages
                 )
@@ -193,7 +193,7 @@
             selling_expiration_message(){
                 if (!this.product || !this.plio_id) return ""
                 var gains_at_selling_point_investment=(this.investment.selling_price-this.plio_id.total_io_current.average_price_investment)*this.plio_id.total_io_current.shares*this.plio_id.data.real_leverages
-                return this.$t("{0}, to gain {1}").format(
+                return this.$t("[0], to gain [1]").format(
                         this.currency_string(this.investment.selling_price, this.product.currency),
                         this.currency_string(gains_at_selling_point_investment, this.product.currency)
                 )

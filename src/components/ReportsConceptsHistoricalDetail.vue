@@ -44,14 +44,14 @@
             title: function(){
                 var concept=this.getObjectByUrl("concepts",this.concept)
                 if (this.month==null){
-                    return this.$t("'{0}' operations at year {1}").format(concept.localname,this.year)
+                    return this.$t("'[0]' operations at year [1]").format(concept.localname,this.year)
                 } else {
-                    return this.$t("'{0}' operations at {1}-{2}").format(concept.localname,this.year,this.month)
+                    return this.$t("'[0]' operations at [1]-[2]").format(concept.localname,this.year,this.month)
                 }
 
             },
             total: function(){
-                if (this.data) return this.$t("Total: {0}").format(this.localcurrency_html(this.listobjects_sum(this.data.ao,"amount")+this.listobjects_sum(this.data.cco,"amount")))
+                if (this.data) return this.$t("Total: [0]").format(this.localcurrency_html(this.listobjects_sum(this.data.ao,"amount")+this.listobjects_sum(this.data.cco,"amount")))
                 return ""
             }
         },

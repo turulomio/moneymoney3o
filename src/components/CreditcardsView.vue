@@ -1,7 +1,7 @@
 
 <template>
     <div>    
-        <h1 class="mb-4">{{ $t("Credit card details of '{0}'").format(cc.name) }}
+        <h1 class="mb-4">{{ $t("Credit card details of '[0]'").format(cc.name) }}
             <MyMenuInline :items="menuinline_items" :context="this"></MyMenuInline>
 
         </h1>
@@ -114,7 +114,7 @@
             empty_cco,
             changeSelected(selected_items){
                 this.selected_items=selected_items
-                this.paying_string=this.$t("Make a payment of {0} operations valued in {1}").format(
+                this.paying_string=this.$t("Make a payment of [0] operations valued in [1]").format(
                     selected_items.length,
                     this.currency_string(this.listobjects_sum(selected_items,"amount"), this.account.currency)
                 )

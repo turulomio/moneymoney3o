@@ -54,12 +54,12 @@ export function RulesInteger(maxdigits,required){
     var r
     if (required==false){
         r= [
-            v => (isNullOrEmpty(v) || isNumberMaxDigitsWithRequired(v,required,maxdigits)) || this.$t('Field can be empty or a number with {0} digits at most').format(maxdigits),
+            v => (isNullOrEmpty(v) || isNumberMaxDigitsWithRequired(v,required,maxdigits)) || this.$t('Field can be empty or a number with [0] digits at most').format(maxdigits),
             v => (isNullOrEmpty(v) || isNumber(v) && countDecimals(v)<=0) || this.$t('Must be an integer number'),
         ]
     } else { // required==true
         r= [
-            v => isNumberMaxDigitsWithRequired(v,required,maxdigits)|| this.$t('Field must be a number with at most {0} digits').format(maxdigits),
+            v => isNumberMaxDigitsWithRequired(v,required,maxdigits)|| this.$t('Field must be a number with at most [0] digits').format(maxdigits),
             v => countDecimals(v)<=0 || this.$t('Must be an integer number'),
         ]
     }
@@ -73,13 +73,13 @@ export function RulesFloat (maxdigits, required, maxdecimals){
     var r
     if (required==false){
         r= [
-            v => (isNullOrEmpty(v) || isNumberMaxDigitsWithRequired(v,required,maxdigits)) || this.$t('Field can be empty or a number with {0} digits at most').format(maxdigits),
-            v => (isNullOrEmpty(v) || isNumber(v) && countDecimals(v)<=maxdecimals) || this.$t('Must be a number with {0} decimal places at most').format(maxdecimals),
+            v => (isNullOrEmpty(v) || isNumberMaxDigitsWithRequired(v,required,maxdigits)) || this.$t('Field can be empty or a number with [0] digits at most').format(maxdigits),
+            v => (isNullOrEmpty(v) || isNumber(v) && countDecimals(v)<=maxdecimals) || this.$t('Must be a number with [0] decimal places at most').format(maxdecimals),
         ]
     } else { // required==true
         r= [
-            v => isNumberMaxDigitsWithRequired(v,required,maxdigits)|| this.$t('Field must be a number with at most {0} digits').format(maxdigits),
-            v => countDecimals(v)<=maxdecimals || this.$t('Must be a number with {0} decimal places at most').format(maxdecimals),
+            v => isNumberMaxDigitsWithRequired(v,required,maxdigits)|| this.$t('Field must be a number with at most [0] digits').format(maxdigits),
+            v => countDecimals(v)<=maxdecimals || this.$t('Must be a number with [0] decimal places at most').format(maxdecimals),
         ]
     }
     return r
@@ -89,15 +89,15 @@ export function RulesFloatGZ (maxdigits, required, maxdecimals){
     var r
     if (required==false){
         r= [
-            v => (isNullOrEmpty(v) || isNumberMaxDigitsWithRequired(v,required,maxdigits)) || this.$t('Field can be empty or a number with {0} digits at most').format(maxdigits),
+            v => (isNullOrEmpty(v) || isNumberMaxDigitsWithRequired(v,required,maxdigits)) || this.$t('Field can be empty or a number with [0] digits at most').format(maxdigits),
             v => (isNullOrEmpty(v) || isNumber(v) && v>0) || this.$t('Must be a number greater than zero'),
-            v => (isNullOrEmpty(v) || isNumber(v) && countDecimals(v)<=maxdecimals) || this.$t('Must be a number with {0} decimal places at most').format(maxdecimals),
+            v => (isNullOrEmpty(v) || isNumber(v) && countDecimals(v)<=maxdecimals) || this.$t('Must be a number with [0] decimal places at most').format(maxdecimals),
         ]
     } else { // required==true
         r= [
-            v => isNumberMaxDigitsWithRequired(v,required,maxdigits)|| this.$t('Field must be a number with at most {0} digits').format(maxdigits),
+            v => isNumberMaxDigitsWithRequired(v,required,maxdigits)|| this.$t('Field must be a number with at most [0] digits').format(maxdigits),
             v => v>0 || this.$t('Must be a number greater than zero'),
-            v => countDecimals(v)<=maxdecimals || this.$t('Must be a number with {0} decimal places at most').format(maxdecimals),
+            v => countDecimals(v)<=maxdecimals || this.$t('Must be a number with [0] decimal places at most').format(maxdecimals),
         ]
     }
     return r
@@ -107,15 +107,15 @@ export function RulesFloatGEZ (maxdigits, required, maxdecimals){
     var r
     if (required==false){
         r= [
-            v => (isNullOrEmpty(v) || isNumberMaxDigitsWithRequired(v,required,maxdigits)) || this.$t('Field can be empty or a number with {0} digits at most').format(maxdigits),
+            v => (isNullOrEmpty(v) || isNumberMaxDigitsWithRequired(v,required,maxdigits)) || this.$t('Field can be empty or a number with [0] digits at most').format(maxdigits),
             v => (isNullOrEmpty(v) || isNumber(v) && v>=0) || this.$t('Must be a number greater than zero'),
-            v => (isNullOrEmpty(v) || isNumber(v) && countDecimals(v)<=maxdecimals) || this.$t('Must be a number with {0} decimal places at most').format(maxdecimals),
+            v => (isNullOrEmpty(v) || isNumber(v) && countDecimals(v)<=maxdecimals) || this.$t('Must be a number with [0] decimal places at most').format(maxdecimals),
         ]
     } else { // required==true
         r= [
-            v => isNumberMaxDigitsWithRequired(v,required,maxdigits)|| this.$t('Field must be a number with at most {0} digits').format(maxdigits),
+            v => isNumberMaxDigitsWithRequired(v,required,maxdigits)|| this.$t('Field must be a number with at most [0] digits').format(maxdigits),
             v => v>=0 || this.$t('Must be a number greater than zero'),
-            v => countDecimals(v)<=maxdecimals || this.$t('Must be a number with {0} decimal places at most').format(maxdecimals),
+            v => countDecimals(v)<=maxdecimals || this.$t('Must be a number with [0] decimal places at most').format(maxdecimals),
         ]
     }
     return r
@@ -124,15 +124,15 @@ export function RulesFloatLEZ(maxdigits, required, maxdecimals){
     var r
     if (required==false){
         r= [
-            v => (isNullOrEmpty(v) || isNumberMaxDigitsWithRequired(v,required,maxdigits)) || this.$t('Field can be empty or a number with {0} digits at most').format(maxdigits),
+            v => (isNullOrEmpty(v) || isNumberMaxDigitsWithRequired(v,required,maxdigits)) || this.$t('Field can be empty or a number with [0] digits at most').format(maxdigits),
             v => (isNullOrEmpty(v) || isNumber(v) && v<=0) || this.$t('Must be a number greater than zero'),
-            v => (isNullOrEmpty(v) || isNumber(v) && countDecimals(v)<=maxdecimals) || this.$t('Must be a number with {0} decimal places at most').format(maxdecimals),
+            v => (isNullOrEmpty(v) || isNumber(v) && countDecimals(v)<=maxdecimals) || this.$t('Must be a number with [0] decimal places at most').format(maxdecimals),
         ]
     } else { // required==true
         r= [
-            v => isNumberMaxDigitsWithRequired(v,required,maxdigits)|| this.$t('Field must be a number with at most {0} digits').format(maxdigits),
+            v => isNumberMaxDigitsWithRequired(v,required,maxdigits)|| this.$t('Field must be a number with at most [0] digits').format(maxdigits),
             v => v<=0 || this.$t('Must be a number greater than zero'),
-            v => countDecimals(v)<=maxdecimals || this.$t('Must be a number with {0} decimal places at most').format(maxdecimals),
+            v => countDecimals(v)<=maxdecimals || this.$t('Must be a number with [0] decimal places at most').format(maxdecimals),
         ]
     }
     return r
@@ -164,12 +164,12 @@ export function RulesString(maxdigits,required){
     var r
     if (required==false){
         r= [
-            v => (v==null || v=="" || (v!=null && v.length>0 && v.length<= maxdigits)) ||  this.$t("String must be empty or at most {0} characters").format(maxdigits)
+            v => (v==null || v=="" || (v!=null && v.length>0 && v.length<= maxdigits)) ||  this.$t("String must be empty or at most [0] characters").format(maxdigits)
         ]
     } else { // required==true
         r= [
             v => (v!=null && v!="") || this.$t('String is required'),
-            v => (v!=null && v.length<= maxdigits) || this.$t("String must be at most {0} characters").format(maxdigits)
+            v => (v!=null && v.length<= maxdigits) || this.$t("String must be at most [0] characters").format(maxdigits)
         ]
     }
     return r
@@ -180,12 +180,12 @@ export function RulesPassword(maxdigits,required){
     var r
     if (required==false){
         r= [
-            v => (v==null || v=="" || (v!=null && v.length>=8 && v.length<= maxdigits)) || this.$t("String must have between 8 and {0} characters").format(maxdigits)
+            v => (v==null || v=="" || (v!=null && v.length>=8 && v.length<= maxdigits)) || this.$t("String must have between 8 and [0] characters").format(maxdigits)
         ]
     } else { // required==true
         r= [
             v => (v!=null && v!="") || this.$t('String is required'),
-            v => (v!=null && v.length>=8 && v.length<= maxdigits) || this.$t("String must have between 8 and {0} characters").format(maxdigits)
+            v => (v!=null && v.length>=8 && v.length<= maxdigits) || this.$t("String must have between 8 and [0] characters").format(maxdigits)
         ]
     }
 
